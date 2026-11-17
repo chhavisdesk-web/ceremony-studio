@@ -2261,12 +2261,84 @@ function field(label, bind, opts = {}) {
   return `<div class="${cls}"><label for="${id}">${label}</label><input id="${id}" data-bind="${bind}" type="${opts.type || 'text'}" value="${esc(v)}" placeholder="${esc(opts.ph || '')}" ${opts.type === 'number' ? 'inputmode="numeric" min="0"' : ''}></div>`;
 }
 
-/* 01 Brief */
+/* 01 Brief: ask for the inputs that drive the most calculations, missing ones first */
+// Ceremony types in reference/ceremonies.json that are comparable to each kind of brief.
+const CER_SIMILAR = {
+  final: ['Super Bowl halftime show', 'FIFA World Cup opening'],
+  opening: ['Olympic opening ceremony', 'FIFA World Cup opening', 'Multi-sport opening', 'Commonwealth Games ceremony', 'Asian Games ceremony', 'Cricket World Cup opening'],
+  celebration: ['State ceremony', 'Royal wedding', 'Olympic closing ceremony', 'Closing ceremony'],
+  festival: [], awards: [], launch: []
+};
+function similarFigures(p, metric, n = 3) {
+  const types = CER_SIMILAR[eventKind(p.brief)] || [];
+  if (!types.length || !CEREMONIES?.ceremonies) return [];
+  const out = [];
+  CEREMONIES.ceremonies.filter(c => types.includes(c.type)).sort((a, b) => b.year - a.year)
+    .forEach(c => c.statements.forEach(st => { if (st.metric === metric && st.scope !== 'context' && !st.otherEvent) out.push({ c, st }); }));
+  return out.slice(0, n);
+}
+function briefNeeds(p = plan) {
+  const b = p.brief, has = v => v != null && String(v).trim() !== '' && !(typeof v === 'number' && v <= 0) && String(v) !== '0';
+  const fx = REFDATA?.currency?.perUSD, grid = lookupCountry(REFDATA?.['grid-intensity']?.byCountry, b.country), hotel = lookupCountry(REFDATA?.['emission-factors']?.hotel?.byCountry, b.country);
+  const w = weeksUntil(b.date);
+  // Ordered by how many calculations each input feeds (see the "uses" lists).
+  const items = [
+    { key: 'country', label: 'Country', bind: 'brief.country',
+      uses: ['grid electricity factor', 'hotel-night factor', 'research and city profile'],
+      status: !has(b.country) ? 'missing' : refState === 'ready' && !grid ? 'check' : 'ok',
+      note: !has(b.country) ? 'Without it, grid electricity and hotel nights have no emission factor.'
+        : refState !== 'ready' ? '' : !grid ? `No published grid intensity for “${b.country}” in the reference data. Check the spelling, or enter a supplier factor on the Sustainability step.`
+        : `Grid ${grid.value} kg CO₂e/kWh (${grid.country}, ${grid.year}, Ember)${hotel ? `; hotel ${hotel.value} kg per room-night (DESNZ)` : '; no DESNZ hotel factor for this country, so hotel nights need the hotel\'s own figure'}.` },
+    { key: 'currency', label: 'Currency', bind: 'brief.currency',
+      uses: ['every cost', 'spend-based CO₂e', 'carbon price conversion'],
+      status: !has(b.currency) ? 'missing' : fx && fx[b.currency] == null ? 'check' : 'ok',
+      note: fx && has(b.currency) && fx[b.currency] == null ? `There is no published 2023 exchange rate for ${b.currency} in the reference data, so CO₂e cannot be calculated from quotes. Enter quotes in a currency with a rate, or get supplier CO₂e figures.` : '' },
+    { key: 'capacity', label: 'Capacity (expected guests)', bind: 'brief.capacity',
+      uses: ['audience travel CO₂e', 'CO₂e per guest', 'cost per seat', 'filling activity data from past close-outs'],
+      status: !has(b.capacity) ? 'missing' : 'ok', metric: 'attendance',
+      note: 'Use the venue\'s licensed capacity for this configuration, or ticketing data. It is the number of guests used for audience travel.' },
+    { key: 'date', label: 'Date', bind: 'brief.date',
+      uses: ['lead times against time left', 'production schedule'],
+      status: !has(b.date) ? 'missing' : w != null && w < 0 ? 'check' : 'ok',
+      note: has(b.date) && w != null ? (w < 0 ? 'This date is in the past.' : `${w} weeks until the event.`) : '' },
+    { key: 'budgetCap', label: 'Budget cap', bind: 'brief.budgetCap',
+      uses: ['fit to budget', 'use headroom', 'budget meter', 'how ambitious Claude makes each tier'],
+      status: !has(b.budgetCap) ? 'missing' : 'ok', metric: 'budget',
+      note: 'From the client contract or brief. The figures below are whole-ceremony budgets on record, for context only.' },
+    { key: 'eventType', label: 'Event type', bind: 'brief.eventType',
+      uses: ['research rules', 'concepts', 'which past ceremonies are compared'],
+      status: !has(b.eventType) ? 'missing' : 'ok' },
+    { key: 'showMinutes', label: 'Show length', bind: 'brief.showMinutes',
+      uses: ['run of show', 'storyboard', 'concept act lengths'],
+      status: !has(b.showMinutes) ? 'missing' : 'ok', metric: 'duration',
+      note: 'Set by the event schedule or broadcaster. The figures below are durations on record.' },
+    { key: 'city', label: 'City and venue', bind: 'brief.city',
+      uses: ['local profile', 'research', 'vendor search'],
+      status: !has(b.city) || !has(b.venue) ? 'missing' : 'ok' },
+  ];
+  return items;
+}
+function needsPanel() {
+  const items = briefNeeds(), open = items.filter(i => i.status !== 'ok');
+  const row = i => {
+    const ex = i.metric ? similarFigures(plan, i.metric) : [];
+    const pill = i.status === 'missing' ? '<span class="pill bad">Needed</span>' : i.status === 'check' ? '<span class="pill warn">Check</span>' : '<span class="pill ok">Set</span>';
+    return `<div class="risk" style="align-items:flex-start"><div style="min-width:0"><b>${esc(i.label)}</b> <span class="note">feeds ${i.uses.map(esc).join(', ')}</span>
+      ${i.note ? `<p class="note" style="margin-top:2px">${esc(i.note)}</p>` : ''}
+      ${ex.length ? `<details class="prompt" style="margin-top:6px"><summary>On record for similar ceremonies (${ex.length})</summary>${ex.map(({ c, st }) => `<p style="margin-top:6px;font-size:13px"><b>${esc(c.title)}</b>: “${esc(st.text)}” <span class="fsrc">${st.refs.map(cerRef).join('; ')}</span></p>`).join('')}</details>` : ''}</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">${pill}${i.status !== 'ok' ? `<button class="btn sm" data-act="focus-field" data-field="${esc(i.bind)}">${i.status === 'missing' ? 'Fill in' : 'Review'}</button>` : ''}</div></div>`;
+  };
+  return `<section class="panel" id="brief-needs"><div class="head2"><div><h2>${open.length ? `Inputs needed most · ${open.length} to go` : 'The key inputs are set'}</h2><p class="note" style="margin-top:4px">Ordered by how many calculations each input feeds. Ceremony Studio never fills these in for you: they come from the client, the venue or the contract.</p></div></div>
+    <div class="list" style="margin-top:10px">${(open.length ? open : []).map(row).join('')}</div>
+    ${items.length - open.length ? `<details class="prompt" style="margin-top:12px"><summary>Already set (${items.length - open.length})</summary><div class="list" style="margin-top:8px">${items.filter(i => i.status === 'ok').map(row).join('')}</div></details>` : ''}
+  </section>`;
+}
 function vBrief() {
   const pr = plan.priorities;
   const slider = (k, label) => `<div class="slider"><div class="row"><label for="p-${k}">${label}</label><span class="mono" id="pv-${k}">${pr[k]}/5</span></div><input type="range" id="p-${k}" min="1" max="5" step="1" value="${pr[k]}" data-prio="${k}"></div>`;
   const types = [...new Set([plan.brief.eventType, ...TEMPLATES.map(t => t.eventType)])];
   return `${head('The brief', 'Where, what and for whom. Everything downstream (research, concepts, show design and the sustainability review) is built from this.', `${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}`)}
+  ${needsPanel()}
   <p class="note">Buttons marked <b>Claude</b> use the Claude account of whoever is using the page. Buttons marked <b>Library</b> use the built-in show library and need no Claude account.</p>
   <section class="panel"><h2>Event</h2><div class="form">
     ${field('Event name', 'brief.eventName', { ph: 'e.g. Cup Final pre-match show' })}
@@ -3121,6 +3193,7 @@ const actions = {
   'new-concept': () => conceptModal(null),
   'save-concept': b => saveConcept(b.dataset.id || null),
   'del-concept': b => { const id = b.dataset.id; closeModal(); mutate(p => { p.concepts = p.concepts.filter(c => c.id !== id); if (p.conceptId === id) p.conceptId = null; }, { log: 'Concept deleted' }); toast('Concept deleted. Use Undo to bring it back.'); },
+  'focus-field': b => { const el = document.querySelector(`[data-bind="${b.dataset.field}"]`); if (!el) return; el.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); setTimeout(() => el.focus(), 250); },
   'cer-budgets': () => { cerFilter = { type: '', metric: 'budget', q: '', ctx: false }; go('research'); requestAnimationFrame(() => $('#ceremonies')?.scrollIntoView({ block: 'start' })); },
   'fill-closeout': () => mutate(p => {
     const f = closeoutFill(p); if (!f.length) return;
@@ -3220,6 +3293,7 @@ document.addEventListener('input', ev => {
 document.addEventListener('change', ev => {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
+  if (el.dataset.bind && $('#brief-needs')) { $('#brief-needs').outerHTML = needsPanel(); return; }
   if (el.dataset.cerctx != null) { cerFilter.ctx = el.checked; const y = scrollY; render(); scrollTo(0, y); return; }
   if (el.dataset.cerf && el.tagName === 'SELECT') { cerFilter[el.dataset.cerf] = el.value; const y = scrollY; render(); scrollTo(0, y); return; }
   if (el.dataset.src) { mutate(p => setSrc(p, el.dataset.src, el.dataset.k, el.dataset.k === 'r' ? el.value.trim() : el.value)); return; }
