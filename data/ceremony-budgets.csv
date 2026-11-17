@@ -1,0 +1,11 @@
+event,year,type,ceremony_budget_usd,total_event_cost_usd,status,note,source
+Beijing 2008 Olympics,2008,olympics_summer,100000000,42000000000,estimate,Opening ceremony only; total cost estimates range up to ~52.7B+,https://cfr.org/backgrounders/economics-hosting-olympic-games
+London 2012 Olympics,2012,olympics_summer,144000000,14600000000,reported,All ceremonies,https://www.inform.kz/en/olympics-tokyo-games-eye-sharp-rise-in-opening-closing-ceremony-budget_a3498710
+Tokyo 2020 Olympics,2021,olympics_summer,117000000,15900000000,budget,Ceremonies budget raised from JPY 9.1B to JPY 13B,https://www.inform.kz/en/olympics-tokyo-games-eye-sharp-rise-in-opening-closing-ceremony-budget_a3498710
+Paris 2024 Olympics,2024,olympics_summer,134000000,9800000000,reported,All ceremonies; total EUR 9B official estimate,https://www.inform.kz/en/olympics-tokyo-games-eye-sharp-rise-in-opening-closing-ceremony-budget_a3498710
+Super Bowl halftime show,2020,stadium_show,13000000,,estimate,NFL pays production; performers at union scale,https://www.cbsnews.com/news/do-super-bowl-halftime-performers-get-paid
+Eurovision Liverpool,2023,broadcast_show,,,estimate,Host city budget ~EUR 16M (excludes broadcaster),https://www.thejournal.ie/eurovision-brings-cash-to-host-cities-so-why-dont-broadcasters-want-to-organise-it-6694880-May2025
+Eurovision Basel,2025,broadcast_show,,,budget,Host canton up to CHF 37M (excludes broadcaster SRG),https://escxtra.com/2024/09/01/basel-stadt-canton-set-to-spend-up-to-37m-swiss-francs-for-eurovision/
+Oscars,2024,award_show,56900000,,estimate,WalletHub estimate; Academy statements show 42.7M for 2015,https://dc.fortune.com/2024/03/09/oscars-2024-cost-goodie-bag/
+Coronation of King Charles III,2023,state_ceremony,90700000,,official,GBP 72M taxpayer cost,https://www.irishtimes.com/world/uk/2024/11/21/coronation-of-king-charles-cost-at-least-72-million
+State funeral of Queen Elizabeth II,2022,state_ceremony,200000000,,official,GBP 161.7M incl. related events,https://scmp.com/news/world/europe/article/3221063/queen-elizabeths-funeral-cost-uk-government-us200-million

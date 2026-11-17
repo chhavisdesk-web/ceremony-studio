@@ -1,0 +1,18 @@
+event,year,type,total_tCO2e,low_tCO2e,high_tCO2e,status,boundary_note,key_share_note,source
+Paris 2024 Olympics+Paralympics (organiser),2024,olympics_summer,1590000,,,measured,Organiser figure; own data,~50% travel and accommodation (athletes officials spectators),https://en.wikipedia.org/wiki/Transport_during_the_2024_Summer_Olympics_and_Paralympics
+Paris 2024 Olympics+Paralympics (French govt / EY),2024,olympics_summer,2085000,,,measured,IOC method incl. permanent venue construction,,https://www.ecologie.gouv.fr/sites/default/files/publications/thema_essentiel_39_jo_games_2025.pdf
+Tokyo 2020 Olympics,2021,olympics_summer,2730000,1500000,3010000,estimate,Held without spectators; ~1.5 Mt from venues and infrastructure,,https://phys.org/news/2021-07-greener-games-tokyo-environmental-impact.html
+Rio 2016 Olympics,2016,olympics_summer,3600000,3600000,4500000,estimate,Construction ~1.59 Mt; spectators estimated separately,,https://www.climateaction.org/climate-leader-papers/delivering_a_low_carbon_olympic_games
+London 2012 Olympics+Paralympics,2012,olympics_summer,3300000,3300000,3400000,estimate,Incl. Paralympics,,https://rgs-ibg.onlinelibrary.wiley.com/doi/10.1111/geoj.70068
+Milano Cortina 2026 Winter Olympics,2026,olympics_winter,930000,,,projected,Campaigner estimate from official data; excludes sponsors (+~1.3 Mt),Spectator travel ~410000 t (44%),https://www.sgr.org.uk/resources/hidden-carbon-footprint-winter-olympics
+UEFA EURO 2024,2024,football_tournament,316912,,,measured,UEFA final incl. spectator travel; excludes aviation non-CO2,Transport ~80% (pre-tournament estimate),https://www.stadiaworld.com/news/89031/esg-report-on-uefa-euro-2024-published
+FIFA World Cup South Africa,2010,football_tournament,2750000,,,measured,FIFA narrower boundary (self-reported),,https://datahub.io/football/each-world-cups-carbon-footprint
+FIFA World Cup Brazil,2014,football_tournament,2270000,,,measured,FIFA narrower boundary (self-reported),,https://datahub.io/football/each-world-cups-carbon-footprint
+FIFA World Cup Russia,2018,football_tournament,2100000,2000000,2200000,measured,FIFA self-reported,,https://www.newstatesman.com/chart-of-the-day/2022/12/costs-emissions-qatar-2022-world-cup
+FIFA World Cup Qatar,2022,football_tournament,3600000,3600000,,projected,FIFA official projection; Carbon Market Watch says up to 8x higher,,https://www.newstatesman.com/chart-of-the-day/2022/12/costs-emissions-qatar-2022-world-cup
+FIFA World Cup USA/Canada/Mexico,2026,football_tournament,9000000,,,projected,Third-party model,Air travel ~86% (7.72 Mt),https://datahub.io/football/each-world-cups-carbon-footprint
+Commonwealth Games Birmingham,2022,multi_sport,201800,,,measured,Organiser figure,,https://www.birmingham2022.com/about-us/our-purpose/our-legacy/sustainability/carbon-neutral-legacy
+COP25 Madrid,2019,conference,51101,,,measured,,,https://www.scotsman.com/news/environment/cop26-carbon-footprint-of-cop26-in-glasgow-more-than-double-that-of-cop25-3453546
+COP26 Glasgow,2021,conference,131556,102500,,measured,COP26 Sustainability Report (102500 was the preliminary projection),Travel 70-80% typical for COPs,https://eciu.net/insights/2022/cop-context-the-carbon-footprint-of-a-cop
+Eurovision Song Contest (typical edition),2023,broadcast_show,65000,,,estimate,Third-party estimate (event:decision); whole contest,,https://www.prestigeeventsmagazineblog.com/?p=4957
+Average 3-day music festival,,festival,500,,,estimate,Loosely sourced generic figure,,https://www.tatlerasia.com/power-purpose/impact/coldplay-lollapalooza-concerts-sustainability-eco-friendliness-going-green
