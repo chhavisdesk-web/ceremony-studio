@@ -14,6 +14,7 @@ This folder holds everything the app relies on. The app loads `bundle.json` when
 | `currency.json` | 2023 average exchange rates, used only to bring costs into the multipliers' price basis | US Federal Reserve H.10 via FRED |
 | `events.json` | Published whole-event footprints (Olympics, World Cups, EURO 2024 and others) | Organiser reports and press, one or more sources per figure |
 | `ceremony-budgets.json` | Published ceremony and show budgets | Press and government reporting |
+| `catalog.json` | 155 real past and upcoming events (UEFA finals, Olympics and Paralympics, World Cups, EURO, Super Bowl, Eurovision, Commonwealth, Asian and Pan American Games and others) for Brief autocomplete. Each has its date, venue, city and country from the event's article, the venue's capacity from the venue's article (with its citation where given), and the country's currency from Wikidata. When Wikidata lists several currencies, or an event has several host countries, that field is left for the user | Wikipedia infoboxes and Wikidata, built by `scripts/build_catalog.py` |
 | `ceremonies.json` | Cited figures from past ceremonies since 2000: budget or cost, cast and volunteers, TV audience, duration and attendance. Each figure is stored with its sentence, the source the article cites, and the article revision | English Wikipedia (CC BY-SA 4.0), built by `scripts/build_ceremonies.py` |
 | `policy.json` | The internal carbon price (EUR 25/t) | UEFA EURO 2024 Climate Fund |
 | `closeouts/` | Close-out files exported from finished projects | Your own invoices, delivery dates and meter readings |
@@ -54,6 +55,9 @@ A sentence that names a different year is flagged as possibly about another even
 
 ```bash
 python3 scripts/build_ceremonies.py
+```
+```bash
+python3 scripts/build_catalog.py
 ```
 ```bash
 python3 scripts/build_reference.py closeouts

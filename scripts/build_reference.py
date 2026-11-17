@@ -433,6 +433,15 @@ def check():
             for i, st in enumerate(c['statements']):
                 if not any(r.get('url') or r.get('title') for r in st.get('refs', [])):
                     problems.append(f'ceremonies.{c["id"]}.statements[{i}]: no cited source')
+    cat = load('catalog.json')
+    if cat:
+        need('catalog.json', cat.get('source'))
+        for e in cat['events']:
+            if not (e.get('source') or {}).get('url'):
+                problems.append(f'catalog.{e.get("id")}: no article URL')
+            cap = e['fields'].get('capacity')
+            if cap and not (cap.get('from') or {}).get('url'):
+                problems.append(f'catalog.{e["id"]}.capacity: no venue article')
     if problems:
         print('Reference check FAILED:')
         for p in problems:

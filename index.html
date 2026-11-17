@@ -321,6 +321,15 @@ td a{color:var(--ink)}
 .srcrow select{max-width:200px}.srcrow input{flex:1;min-width:140px}
 .fsrc{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
 .fsrc a{color:inherit}
+.combo{position:relative}
+.sug{position:absolute;left:0;right:0;top:100%;z-index:30;margin:4px 0 0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.14);max-height:340px;overflow:auto}
+.sug li{padding:8px 10px;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;gap:1px}
+.sug li[aria-selected=true],.sug li:hover{background:var(--surface-2)}
+.sug .m{font-size:12px;color:var(--muted)}
+.sug mark{background:none;color:var(--tally);font-weight:600}
+.sug .h{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 10px 2px;cursor:default}
+.start-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px 18px}
+.start-steps .n{font-family:var(--font-mono);font-size:11px;color:var(--tally);margin-right:6px}
 </style>
 
 <div class="app">
@@ -410,16 +419,17 @@ function examplePlan() {
     lighting:'Daylight show: colour comes from fabric, cards, smoke and the LED ring, not beams.',
     costume:'Colour-blocked sun palette made by Madrid fashion students, loose and breathable for 30°C.' };
   return {
-    id: 'example-ucl-2027', example: true, v: 3, name: 'Champions League Final 2027 kickoff show, Madrid (independent concept)', updatedAt: Date.now(),
+    id: 'example-ucl-2027', example: true, v: 4, name: 'Champions League Final 2027 kickoff show, Madrid (independent concept)', updatedAt: Date.now(),
     brief: {
       eventName: 'UEFA Champions League Final 2027: kickoff show', eventType: 'Football final kickoff show', city: 'Madrid', country: 'Spain',
-      venue: 'Estadio Metropolitano', venueType: 'Stadium: fixed roof over the stands, open over the pitch', capacity: 70692, date: '2027-06-05', showMinutes: 12, showLight: 'Daylight',
+      venue: 'Estadio Metropolitano', venueType: 'Stadium: fixed roof over the stands, open over the pitch', capacity: 70813, date: '2027-06-05', showMinutes: 12, showLight: 'Daylight',
       broadcast: 'Global live audience. UEFA put the 2024 final at about 145M viewers. Kickoff is reported at 18:00 CEST, so the show runs from about 17:45 in daylight.',
       audience: 'About 70,000 fans of two clubs not yet known, most travelling from abroad; a global TV and social audience; partners and Madrid residents watching in the city.',
       goals: 'A 12-minute daylight show that feels unmistakably Madrid, stays neutral between the finalists, gives the main camera one image the world shares, and rolls off the pitch in under two minutes.',
       mustHaves: 'Anthem; trophy moment; pitch cleared before the walkout; stage rolled off in under 2 minutes on pitch-certified wheels',
       avoid: 'Symbols of either Madrid club; lights-off effects that fail in daylight; loud bangs given Madrid\'s noise enforcement; sponsor or competition marks in concept art',
-      currency: 'EUR', budgetCap: 3500000
+      currency: 'EUR', budgetCap: 3500000,
+      src: {"date": {"b": "published", "r": "Wikipedia: 2027 UEFA Champions League final", "url": "https://en.wikipedia.org/w/index.php?title=2027_UEFA_Champions_League_final&oldid=1382366452"}, "venue": {"b": "published", "r": "Wikipedia: 2027 UEFA Champions League final", "url": "https://en.wikipedia.org/w/index.php?title=2027_UEFA_Champions_League_final&oldid=1382366452"}, "city": {"b": "published", "r": "Wikipedia: 2027 UEFA Champions League final", "url": "https://en.wikipedia.org/w/index.php?title=2027_UEFA_Champions_League_final&oldid=1382366452"}, "country": {"b": "published", "r": "Wikipedia: 2027 UEFA Champions League final", "url": "https://en.wikipedia.org/w/index.php?title=2027_UEFA_Champions_League_final&oldid=1382366452"}, "capacity": {"b": "published", "r": "Wikipedia: Metropolitano Stadium (venue capacity)", "url": "https://en.wikipedia.org/w/index.php?title=Metropolitano_Stadium&oldid=1385994982", "cite": {"url": "https://www.atleticodemadrid.com/noticias/record-de-asistencia-al-riyadh-air-metropolitano", "title": "Club Atlético de Madrid - Récord de asistencia al Riyadh Air Metropolitano", "work": "Club Atlético de Madrid", "date": "2026-09-20", "archive": ""}}, "currency": {"b": "published", "r": "Wikidata: currency of Spain", "url": "https://www.wikidata.org/wiki/Property:P38"}}
     },
     priorities: { broadcast: 5, local: 4, global: 4, green: 3 },
     research: {
@@ -578,7 +588,7 @@ function blankPlan(t) {
   const tpl = t || TEMPLATES[1];
   return {
     id: uid(), example: false, name: 'New ' + tpl.label.toLowerCase(), updatedAt: Date.now(), v: 3,
-    brief: { eventName:'', eventType: tpl.eventType, city:'', country:'', venue:'', venueType: tpl.venueType, capacity: tpl.capacity, date:'', showMinutes: tpl.showMinutes, showLight:'Night', broadcast:'', audience:'', goals:'', mustHaves:'', avoid:'', currency:'EUR', budgetCap: tpl.budgetCap },
+    brief: { eventName:'', eventType: tpl.eventType, city:'', country:'', venue:'', venueType: tpl.venueType, capacity: tpl.capacity, date:'', showMinutes: tpl.showMinutes, showLight:'Night', broadcast:'', audience:'', goals:'', mustHaves:'', avoid:'', currency:'', budgetCap: tpl.budgetCap },
     priorities: { broadcast: 3, local: 3, global: 3, green: 3 },
     research: null, concepts: [], conceptId: null, acts: [], elements: [], overheads: DEFAULT_OVERHEADS(),
     production: null, sustainability: null, travel: DEFAULT_TRAVEL(), log: [], look: null, images: [], artists: [], local: blankLocal(), lines: [], vendors: [], cues: {}, sbStep: 1, prevReport: null, carbon: blankCarbon(), closeout: null, v: 3
@@ -838,7 +848,7 @@ function localEmpty(L) { return !L || LOCAL_KEYS.every(k => !String(L[k] || '').
 function parseTitled(text) { return String(text || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const i = l.indexOf(':'); return i > 0 && i < 60 ? { title: l.slice(0, i).trim(), detail: l.slice(i + 1).trim() } : { title: l.length > 40 ? l.slice(0, 40) + '…' : l, detail: l }; }); }
 const splitList = s => String(s || '').split(/,|\n/).map(x => x.trim()).filter(Boolean);
 const lines = s => String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
-function eventKind(b) { const t = String(b.eventType || '').toLowerCase(); return /final|kickoff|kick-off|match|cup/.test(t) ? 'final' : /opening|tournament|games|olymp/.test(t) ? 'opening' : /festival/.test(t) ? 'festival' : /award|gala/.test(t) ? 'awards' : /launch|product|brand/.test(t) ? 'launch' : 'celebration'; }
+function eventKind(b) { const t = String(b.eventType || '').toLowerCase(); return /final|kickoff|kick-off|match|cup|halftime|half-time/.test(t) ? 'final' : /contest/.test(t) ? 'awards' : /opening|tournament|games|olymp/.test(t) ? 'opening' : /festival/.test(t) ? 'festival' : /award|gala/.test(t) ? 'awards' : /launch|product|brand/.test(t) ? 'launch' : 'celebration'; }
 function lightOf(b) { const l = String(b.showLight || 'Night').toLowerCase(); return l.startsWith('day') ? 'day' : l.startsWith('dusk') ? 'dusk' : 'night'; }
 
 function libraryResearch(p) {
@@ -1025,10 +1035,12 @@ function linesTotals(p) {
 /* ------------------------------------------------------------------ */
 let REFDATA = null, refState = 'loading'; // loading | ready | missing
 let CEREMONIES = null; // reference/ceremonies.json: published ceremony figures with their citations
+let CATALOG = null; // reference/catalog.json: real events for Brief autocomplete, each field with its source
 async function loadReference() {
   try { const r = await fetch('reference/bundle.json', { cache: 'no-cache' }); if (!r.ok) throw new Error(String(r.status)); REFDATA = await r.json(); refState = 'ready'; }
   catch { REFDATA = null; refState = 'missing'; }
   try { const r = await fetch('reference/ceremonies.json', { cache: 'no-cache' }); if (r.ok) CEREMONIES = await r.json(); } catch { CEREMONIES = null; }
+  try { const r = await fetch('reference/catalog.json', { cache: 'no-cache' }); if (r.ok) CATALOG = await r.json(); } catch { CATALOG = null; }
   render();
 }
 // How a planner-entered number is backed. A number counts as sourced only with a basis AND a reference (quote no., invoice, meter log, report).
@@ -1577,7 +1589,7 @@ function loadDraft() {
   try { const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return null; const p = JSON.parse(raw); return p && p.brief && Array.isArray(p.elements) ? upgrade(p) : null; } catch { return null; }
 }
 function upgrade(p) {
-  if (p.example && (p.v || 0) < 3) p = examplePlan(); // the old example carried illustrative prices; replace it with the sourced version
+  if (p.example && (p.v || 0) < 4) p = examplePlan(); // older copies of the example carried illustrative or unsourced figures; replace with the sourced version
   p.priorities ||= { broadcast:3, local:3, global:3, green:3 };
   p.overheads ||= DEFAULT_OVERHEADS();
   p.acts ||= []; p.concepts ||= []; p.log ||= []; p.images ||= []; p.artists ||= []; if (p.look === undefined) p.look = null; p.local ||= blankLocal(); p.lines ||= []; p.vendors ||= []; p.cues ||= {}; p.sbStep ||= 1; if (p.prevReport === undefined) p.prevReport = null;
@@ -1652,7 +1664,8 @@ function scenario(tier, p = plan) {
 function travelTonnes(p = plan) { return calcCarbon(p).audienceT; }
 function weeksUntil(d) { if (!d) return null; const ms = new Date(d) - Date.now(); return Number.isFinite(ms) ? Math.floor(ms / (7 * 864e5)) : null; }
 function money(n, compact = true) {
-  const c = plan.brief.currency || 'EUR'; const big = compact && Math.abs(n) >= 100000;
+  const c = plan.brief.currency; const big = compact && Math.abs(n) >= 100000;
+  if (!c) return new Intl.NumberFormat('en', { notation: big ? 'compact' : 'standard', maximumFractionDigits: big ? 2 : 0 }).format(n || 0);
   try { return new Intl.NumberFormat('en', { style: 'currency', currency: c, notation: big ? 'compact' : 'standard', maximumFractionDigits: big ? 2 : 0 }).format(n || 0); }
   catch { return c + ' ' + Math.round(n || 0).toLocaleString('en'); }
 }
@@ -2252,13 +2265,19 @@ function libBtn(act, label) {
 function head(title, text, actions = '') {
   return `<div class="head"><div><div class="eyebrow">${esc(plan.brief.eventType || '')}${plan.brief.city ? ' · ' + esc(plan.brief.city) : ''}</div><h1>${title}</h1>${text ? `<p>${text}</p>` : ''}</div>${actions ? `<div class="actions">${actions}</div>` : ''}</div>`;
 }
+function briefSrcNote(bind) {
+  const k = bind.startsWith('brief.') ? bind.slice(6) : null, x = k && plan.brief.src?.[k];
+  if (!x || x.b !== 'published') return '';
+  return `<span class="fsrc">From ${x.url ? `<a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.r)}</a>` : esc(x.r)}${x.cite ? ' · cites ' + cerRef(x.cite) : ''}</span>`;
+}
 function field(label, bind, opts = {}) {
   const v = bind.split('.').reduce((o, k) => o?.[k], plan) ?? '';
   const id = 'f-' + bind.replace(/\./g, '-');
   const cls = opts.wide ? 'field wide' : 'field';
+  if (opts.suggest) return `<div class="${cls}"><label for="${id}">${label}</label><div class="combo"><input id="${id}" data-bind="${bind}" data-suggest="${opts.suggest}" value="${esc(v)}" placeholder="${esc(opts.ph || '')}" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sug-${opts.suggest}"><ul class="sug" id="sug-${opts.suggest}" role="listbox" hidden></ul></div>${opts.hint ? `<span class="note">${opts.hint}</span>` : ''}${briefSrcNote(bind)}</div>`;
   if (opts.textarea) return `<div class="${cls}"><label for="${id}">${label}</label><textarea id="${id}" data-bind="${bind}" placeholder="${esc(opts.ph || '')}" rows="${opts.rows || 2}">${esc(v)}</textarea></div>`;
-  if (opts.options) return `<div class="${cls}"><label for="${id}">${label}</label><select id="${id}" data-bind="${bind}">${opts.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select></div>`;
-  return `<div class="${cls}"><label for="${id}">${label}</label><input id="${id}" data-bind="${bind}" type="${opts.type || 'text'}" value="${esc(v)}" placeholder="${esc(opts.ph || '')}" ${opts.type === 'number' ? 'inputmode="numeric" min="0"' : ''}></div>`;
+  if (opts.options) return `<div class="${cls}"><label for="${id}">${label}</label><select id="${id}" data-bind="${bind}">${opts.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>${briefSrcNote(bind)}</div>`;
+  return `<div class="${cls}"><label for="${id}">${label}</label><input id="${id}" data-bind="${bind}" type="${opts.type || 'text'}" value="${esc(v)}" placeholder="${esc(opts.ph || '')}" ${opts.type === 'number' ? 'inputmode="numeric" min="0"' : ''}>${briefSrcNote(bind)}</div>`;
 }
 
 /* 01 Brief: ask for the inputs that drive the most calculations, missing ones first */
@@ -2318,6 +2337,84 @@ function briefNeeds(p = plan) {
   ];
   return items;
 }
+/* Brief autocomplete: suggestions from reference/catalog.json (events) and the city profiles */
+const SERIES_ALIAS = { ucl: 'ucl champions league cl', uel: 'uel europa', uecl: 'uecl conference', uwcl: 'uwcl women womens', euro: 'euro euros european championship', weuro: 'weuro women womens euro', wc: 'world cup fifa wc', wwc: 'women womens world cup', cwc: 'club world cup', afcon: 'afcon africa cup nations', rwc: 'rugby world cup', cricket: 'cricket world cup icc', summer: 'olympics olympic games summer', winter: 'olympics olympic games winter', spara: 'paralympics paralympic summer', wpara: 'paralympics paralympic winter', cwg: 'commonwealth games', asian: 'asian games', pan: 'pan american games panam', sb: 'super bowl superbowl nfl halftime', esc: 'eurovision esc song contest' };
+function catalogEvents() { return CATALOG?.events || []; }
+const evText = e => `${e.name} ${e.seriesName} ${SERIES_ALIAS[e.series] || ''} ${e.year} ${e.fields.city?.value || ''} ${e.fields.country?.value || ''} ${e.fields.venue?.value || ''}`.toLowerCase();
+function wordPrefixMatch(text, q) { const words = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/[^a-z0-9]+/).filter(Boolean); return q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/[^a-z0-9]+/).filter(Boolean).every(t => words.some(w => w.startsWith(t))); }
+function suggestEvents(q) {
+  if (q.trim().length < 2) return [];
+  const today = new Date().toISOString().slice(0, 10), type = plan.brief.eventType;
+  return catalogEvents().filter(e => wordPrefixMatch(evText(e), q)).map(e => {
+    const d = e.fields.date?.value || `${e.year}-12-31`, future = d >= today;
+    const qt = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean), extra = e.seriesName.toLowerCase().split(/[^a-z0-9]+/).filter(w => w && !qt.some(t => w.startsWith(t))).length;
+    return { e, rank: (e.eventType === type ? 0 : 2) + (future ? 0 : 1), extra, d };
+  }).sort((a, b) => a.rank - b.rank || (a.rank % 2 === 0 ? a.d.slice(0, 4).localeCompare(b.d.slice(0, 4)) : b.d.slice(0, 4).localeCompare(a.d.slice(0, 4))) || a.extra - b.extra || a.d.localeCompare(b.d)).slice(0, 8).map(x => x.e);
+}
+function catalogCities() {
+  const m = new Map();
+  catalogEvents().forEach(e => { const c = e.fields.city?.value; if (c && !m.has(c.toLowerCase())) m.set(c.toLowerCase(), { city: c, country: e.fields.country?.value || '', from: e }); });
+  CITY_PACKS.forEach(p => { if (!m.has(p.city.toLowerCase())) m.set(p.city.toLowerCase(), { city: p.city, country: '', pack: true }); });
+  return [...m.values()];
+}
+function suggestCities(q) { if (q.trim().length < 2) return []; return catalogCities().filter(c => wordPrefixMatch(c.city, q)).slice(0, 8); }
+function hl(text, q) { const toks = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); return esc(text).replace(/[A-Za-z0-9À-ÿ]+/g, w => { const t = toks.find(t => w.toLowerCase().startsWith(t)); return t ? `<mark>${w.slice(0, t.length)}</mark>${w.slice(t.length)}` : w; }); }
+let sugState = { kind: null, items: [], i: -1 };
+function showSuggest(el) {
+  const kind = el.dataset.suggest, q = el.value, box = $('#sug-' + kind); if (!box) return;
+  const items = kind === 'event' ? suggestEvents(q) : suggestCities(q);
+  sugState = { kind, items, i: items.length ? 0 : -1 };
+  if (!items.length) { box.hidden = true; el.setAttribute('aria-expanded', 'false'); return; }
+  const fmtDate = d => { try { return new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch { return d; } };
+  box.innerHTML = (kind === 'event' ? '<li class="h" aria-hidden="true">Real events, from published records</li>' : '') + items.map((x, i) => kind === 'event'
+    ? `<li role="option" id="sug-event-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.name, q)}</span><span class="m">${[x.fields.date ? fmtDate(x.fields.date.value) : '', x.fields.venue?.value, x.fields.city?.value, x.hosts ? x.hosts.join(', ') : x.fields.country?.value].filter(Boolean).map(esc).join(' · ')}${x.eventType !== plan.brief.eventType ? ` · <i>${esc(x.eventType)}</i>` : ''}</span></li>`
+    : `<li role="option" id="sug-city-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.city, q)}</span><span class="m">${esc(x.country || 'City profile')}</span></li>`).join('');
+  box.hidden = false; el.setAttribute('aria-expanded', 'true'); el.setAttribute('aria-activedescendant', `sug-${kind}-0`);
+}
+function hideSuggest(kind) { const box = $('#sug-' + kind); if (box) box.hidden = true; const el = $(`[data-suggest="${kind}"]`); if (el) el.setAttribute('aria-expanded', 'false'); sugState = { kind: null, items: [], i: -1 }; }
+function moveSuggest(d) { const { kind, items } = sugState; if (!items.length) return; sugState.i = (sugState.i + d + items.length) % items.length; document.querySelectorAll(`#sug-${kind} [role=option]`).forEach((li, i) => li.setAttribute('aria-selected', i === sugState.i)); const el = $(`[data-suggest="${kind}"]`); el?.setAttribute('aria-activedescendant', `sug-${kind}-${sugState.i}`); $(`#sug-${kind}-${sugState.i}`)?.scrollIntoView({ block: 'nearest' }); }
+function chooseSuggest(i) { const { kind, items } = sugState, x = items[i]; if (!x) return; hideSuggest(kind); if (kind === 'event') applyCatalogEvent(x); else applyCity(x); }
+// Fill only fields that are empty or were themselves filled from a published record; never overwrite what the user typed.
+function canFill(b, k) { const v = b[k]; return v == null || String(v).trim() === '' || +v === 0 && typeof v === 'number' || b.src?.[k]?.b === 'published'; }
+function currencyOptions(country) { const map = CATALOG?.currencyByCountry || {}; const hit = lookupCountry(Object.fromEntries(Object.entries(map).map(([k, v]) => [k, { codes: v }])), country); return hit && hit.codes.length > 1 ? hit.codes : null; }
+function currencyFor(country) { const map = CATALOG?.currencyByCountry || {}; const hit = lookupCountry(Object.fromEntries(Object.entries(map).map(([k, v]) => [k, { codes: v }])), country); return hit && hit.codes.length === 1 ? { code: hit.codes[0], country: hit.country } : null; }
+function fillCurrency(b) {
+  if (!b.country || !canFill(b, 'currency') && b.src?.currency?.b !== 'published') return null;
+  const c = currencyFor(b.country); if (!c) return null;
+  b.currency = c.code; b.src.currency = { b: 'published', r: `Wikidata: currency of ${c.country}`, url: 'https://www.wikidata.org/wiki/Property:P38' }; return 'currency';
+}
+function applyCatalogEvent(ev) {
+  const filled = [];
+  mutate(p => {
+    const b = p.brief; b.src ||= {};
+    b.eventName = ev.name;
+    if (!b.eventType) b.eventType = ev.eventType;
+    const set = (k, v, extra = {}) => { if (v == null || v === '' || !canFill(b, k)) return; b[k] = v; b.src[k] = { b: 'published', r: `Wikipedia: ${ev.source.title}`, url: ev.source.revision ? `https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(ev.source.title.replace(/ /g, '_'))}&oldid=${ev.source.revision}` : ev.source.url, ...extra }; filled.push(k); };
+    const F = ev.fields;
+    set('date', F.date?.value); set('venue', F.venue?.value); set('city', F.city?.value); set('country', F.country?.value);
+    if (F.venue?.value && canFill(b, 'venueType')) { b.venueType = ev.venueType; b.src.venueType = { b: 'published', r: `Event type of ${ev.seriesName}`, url: ev.source.url }; filled.push('venue type'); }
+    if (F.capacity) { const from = F.capacity.from; if (canFill(b, 'capacity')) { b.capacity = F.capacity.value; b.src.capacity = { b: 'published', r: `Wikipedia: ${from?.title || ev.fields.venue?.value} (venue capacity)`, url: from?.revision ? `https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(from.title.replace(/ /g, '_'))}&oldid=${from.revision}` : from?.url, cite: F.capacity.cite || null }; filled.push('capacity'); } }
+    if (F.currency && canFill(b, 'currency')) { b.currency = F.currency.value; b.src.currency = { b: 'published', r: F.currency.from?.title || 'Wikidata', url: 'https://www.wikidata.org/wiki/Property:P38' }; filled.push('currency'); }
+    else { const c = fillCurrency(b); if (c) filled.push(c); }
+    if (p.name.startsWith('New ')) p.name = ev.name;
+    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+  }, { log: `Brief filled from ${ev.source.title}` });
+  const multi = ev.currencyOptions || currencyOptions(plan.brief.country);
+  toast((filled.length ? `Filled ${filled.join(', ')} from published records. Each shows its source; change any of them.` : `${ev.name} chosen. Your own entries were kept.`)
+    + (ev.hosts ? ` Hosts: ${ev.hosts.join(', ')}. Enter the country where your ceremony takes place.` : '')
+    + (multi && !filled.includes('currency') ? ` Wikidata lists ${multi.join(' and ')} for ${plan.brief.country}: choose the currency.` : ''));
+}
+function applyCity(c) {
+  const filled = [];
+  mutate(p => {
+    const b = p.brief; b.src ||= {};
+    b.city = c.city; delete b.src.city;
+    if (c.country && canFill(b, 'country')) { b.country = c.country; b.src.country = { b: 'published', r: `Wikipedia: ${c.from.source.title}`, url: c.from.source.url }; filled.push('country'); }
+    const cur = fillCurrency(b); if (cur) filled.push(cur);
+    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+  });
+  if (filled.length) toast(`Filled ${filled.join(', ')}. Each shows its source.`);
+}
 function needsPanel() {
   const items = briefNeeds(), open = items.filter(i => i.status !== 'ok');
   const row = i => {
@@ -2336,19 +2433,24 @@ function needsPanel() {
 function vBrief() {
   const pr = plan.priorities;
   const slider = (k, label) => `<div class="slider"><div class="row"><label for="p-${k}">${label}</label><span class="mono" id="pv-${k}">${pr[k]}/5</span></div><input type="range" id="p-${k}" min="1" max="5" step="1" value="${pr[k]}" data-prio="${k}"></div>`;
-  const types = [...new Set([plan.brief.eventType, ...TEMPLATES.map(t => t.eventType)])];
+  const types = [...new Set([plan.brief.eventType, ...TEMPLATES.map(t => t.eventType), ...(CATALOG?.series || []).map(x => x.eventType)].filter(Boolean))];
+  const curs = [...new Set(['EUR', 'USD', 'GBP', 'CHF', 'AED', 'SAR', 'QAR', 'INR', 'BRL', 'AUD', 'JPY', 'CAD', ...Object.keys(REFDATA?.currency?.perUSD || {}), plan.brief.currency].filter(Boolean))].sort();
   return `${head('The brief', 'Where, what and for whom. Everything downstream (research, concepts, show design and the sustainability review) is built from this.', `${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}`)}
+  <section class="panel" id="brief-start"><h2>Start here</h2><p class="note" style="margin:-8px 0 14px">Choose the type, then start typing the event's name or city. Suggestions are real events from published records; picking one fills the date, venue, city, country, capacity and currency, each with its source. Change anything afterwards.</p>
+    <div class="start-steps">
+      ${field('<span class="n">1</span>Event type', 'brief.eventType', { options: types })}
+      ${field('<span class="n">2</span>Event name', 'brief.eventName', { suggest: 'event', ph: 'Start typing: UEFA, Olympics, Super Bowl…' })}
+      ${field('<span class="n">3</span>City', 'brief.city', { suggest: 'city', ph: 'Start typing a city' })}
+    </div>
+  </section>
   ${needsPanel()}
   <p class="note">Buttons marked <b>Claude</b> use the Claude account of whoever is using the page. Buttons marked <b>Library</b> use the built-in show library and need no Claude account.</p>
   <section class="panel"><h2>Event</h2><div class="form">
-    ${field('Event name', 'brief.eventName', { ph: 'e.g. Cup Final pre-match show' })}
-    ${field('Event type', 'brief.eventType', { options: types })}
     ${field('Date', 'brief.date', { type: 'date' })}
     ${field('Show length (minutes)', 'brief.showMinutes', { type: 'number' })}
     ${field('Show light', 'brief.showLight', { options: ['Night', 'Dusk', 'Daylight'] })}
   </div></section>
   <section class="panel"><h2>Place</h2><div class="form">
-    ${field('City', 'brief.city', { ph: 'e.g. Munich' })}
     ${field('Country', 'brief.country', { ph: 'e.g. Germany' })}
     ${field('Venue', 'brief.venue', { ph: 'e.g. national stadium' })}
     ${field('Venue type', 'brief.venueType', { ph: 'Stadium, arena, outdoor…' })}
@@ -2362,7 +2464,7 @@ function vBrief() {
     ${field('Avoid', 'brief.avoid', { textarea: true })}
   </div></section>
   <section class="panel"><h2>Budget</h2><div class="form">
-    ${field('Currency', 'brief.currency', { options: ['EUR','USD','GBP','CHF','AED','SAR','QAR','INR','BRL','AUD','JPY','CAD'] })}
+    ${field('Currency', 'brief.currency', { options: ['', ...curs] })}
     ${field('Budget cap', 'brief.budgetCap', { type: 'number' })}
   </div></section>
   <section class="panel"><h2>Priorities</h2><p class="muted" style="margin:-6px 0 14px;font-size:14px">These weights guide Claude's suggestions and decide what gets cut first when you fit the show to budget.</p>
@@ -3273,7 +3375,18 @@ document.addEventListener('click', ev => {
 document.addEventListener('submit', ev => {
   if (ev.target.matches('[data-form=cmd]')) { ev.preventDefault(); cmdDraft = $('#cmd-input').value; runCommand(cmdDraft); }
 });
-document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && $('#overlay').innerHTML) closeModal(); });
+document.addEventListener('keydown', ev => {
+  const el = ev.target;
+  if (el.dataset?.suggest && sugState.kind === el.dataset.suggest && sugState.items.length) {
+    if (ev.key === 'ArrowDown') { ev.preventDefault(); moveSuggest(1); return; }
+    if (ev.key === 'ArrowUp') { ev.preventDefault(); moveSuggest(-1); return; }
+    if (ev.key === 'Enter' || (ev.key === 'Tab' && !ev.shiftKey && el.value.trim().length >= 2)) { if (sugState.i >= 0) { ev.preventDefault(); chooseSuggest(sugState.i); } return; }
+    if (ev.key === 'Escape') { hideSuggest(el.dataset.suggest); return; }
+  }
+  if (ev.key === 'Escape' && $('#overlay').innerHTML) closeModal();
+});
+document.addEventListener('mousedown', ev => { const li = ev.target.closest('[data-sug]'); if (li) { ev.preventDefault(); chooseSuggest(+li.dataset.sug); } });
+document.addEventListener('focusout', ev => { const k = ev.target.dataset?.suggest; if (k) setTimeout(() => { if (document.activeElement !== ev.target) hideSuggest(k); }, 120); });
 document.addEventListener('input', ev => {
   const el = ev.target;
   if (el.id === 'cmd-input') { cmdDraft = el.value; return; }
@@ -3281,6 +3394,8 @@ document.addEventListener('input', ev => {
   if (el.dataset.bind) {
     const path = el.dataset.bind.split('.'); let o = plan; for (let i = 0; i < path.length - 1; i++) o = o[path[i]];
     o[path.at(-1)] = el.type === 'number' ? num(el.value) : el.value;
+    if (path[0] === 'brief' && plan.brief.src?.[path[1]]) { delete plan.brief.src[path[1]]; el.parentElement.querySelector(':scope > .fsrc, :scope ~ .fsrc')?.remove(); } // typed by the user now
+    if (el.dataset.suggest) showSuggest(el);
     touched(); renderTop(); renderNav(); return;
   }
   if (el.dataset.local) { plan.local[el.dataset.local] = el.value; touched(); return; }
@@ -3293,6 +3408,8 @@ document.addEventListener('input', ev => {
 document.addEventListener('change', ev => {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
+  if (el.dataset.bind === 'brief.country') { const c = fillCurrency(plan.brief); if (c) { touched(); render(); toast(`Currency set to ${plan.brief.currency} for ${plan.brief.country} (Wikidata). Change it if quotes come in another currency.`); return; } const m = currencyOptions(plan.brief.country); if (m) toast(`Wikidata lists ${m.join(' and ')} for ${plan.brief.country}: choose the currency.`); }
+  if (el.dataset.bind === 'brief.eventName') { const hit = catalogEvents().find(e => e.name.toLowerCase() === el.value.trim().toLowerCase()); if (hit) { applyCatalogEvent(hit); return; } }
   if (el.dataset.bind && $('#brief-needs')) { $('#brief-needs').outerHTML = needsPanel(); return; }
   if (el.dataset.cerctx != null) { cerFilter.ctx = el.checked; const y = scrollY; render(); scrollTo(0, y); return; }
   if (el.dataset.cerf && el.tagName === 'SELECT') { cerFilter[el.dataset.cerf] = el.value; const y = scrollY; render(); scrollTo(0, y); return; }

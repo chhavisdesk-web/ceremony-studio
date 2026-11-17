@@ -1,0 +1,7315 @@
+{
+ "_about": "Real events for Brief autocomplete. Each field value comes from the event's English Wikipedia infobox (date, venue, city, country), the venue's article (capacity, with its citation when the infobox gives one) or Wikidata (currency of the country). Missing fields are left empty, never estimated.",
+ "source": "wikipedia-en",
+ "license": "Wikipedia text CC BY-SA 4.0; Wikidata CC0",
+ "builtAt": "2026-11-17",
+ "series": [
+  {
+   "key": "ucl",
+   "name": "UEFA Champions League final",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "uel",
+   "name": "UEFA Europa League final",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "uecl",
+   "name": "UEFA Conference League final",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "uwcl",
+   "name": "UEFA Women's Champions League final",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "euro",
+   "name": "UEFA European Championship (EURO)",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "weuro",
+   "name": "UEFA Women's Euro",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "wc",
+   "name": "FIFA World Cup",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "wwc",
+   "name": "FIFA Women's World Cup",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "cwc",
+   "name": "FIFA Club World Cup",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "afcon",
+   "name": "Africa Cup of Nations",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "rwc",
+   "name": "Rugby World Cup",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "cricket",
+   "name": "Cricket World Cup",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "summer",
+   "name": "Summer Olympics",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "winter",
+   "name": "Winter Olympics",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "spara",
+   "name": "Summer Paralympics",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "wpara",
+   "name": "Winter Paralympics",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "cwg",
+   "name": "Commonwealth Games",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "asian",
+   "name": "Asian Games",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "pan",
+   "name": "Pan American Games",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "sb",
+   "name": "Super Bowl",
+   "eventType": "Halftime show",
+   "venueType": "Stadium"
+  },
+  {
+   "key": "esc",
+   "name": "Eurovision Song Contest",
+   "eventType": "Televised song contest",
+   "venueType": "Arena"
+  }
+ ],
+ "events": [
+  {
+   "id": "ucl-2015",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2015,
+   "name": "UEFA Champions League final 2015",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2015_UEFA_Champions_League_final",
+    "revision": 1385970124
+   },
+   "fields": {
+    "date": {
+     "value": "2015-06-06"
+    },
+    "venue": {
+     "value": "Olympiastadion"
+    },
+    "city": {
+     "value": "Berlin"
+    },
+    "attendance": {
+     "value": "70,442"
+    },
+    "capacity": {
+     "value": 74475,
+     "cite": {
+      "url": "http://olympiastadion.berlin/en/stadion-2/",
+      "title": "Stadion",
+      "work": "olympiastadion-berlin.de",
+      "date": "n.d.",
+      "archive": "https://web.archive.org/web/20170312064505/http://olympiastadion.berlin/en/stadion-2/"
+     },
+     "from": {
+      "title": "Olympiastadion (Berlin)",
+      "url": "https://en.wikipedia.org/wiki/Olympiastadion_%28Berlin%29",
+      "revision": 1386081636
+     }
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Olympiastadion (Berlin)"
+  },
+  {
+   "id": "ucl-2016",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2016,
+   "name": "UEFA Champions League final 2016",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2016 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2016_UEFA_Champions_League_final",
+    "revision": 1373353713
+   },
+   "fields": {
+    "date": {
+     "value": "2016-05-28"
+    },
+    "venue": {
+     "value": "San Siro"
+    },
+    "city": {
+     "value": "Milan"
+    },
+    "attendance": {
+     "value": "71,942"
+    },
+    "capacity": {
+     "value": 75817,
+     "cite": {
+      "url": "https://www.sansirostadium.com/en/stadium/Structure",
+      "title": "Structure",
+      "work": "sansirostadium.com",
+      "date": "",
+      "archive": "https://web.archive.org/web/20221207043417/https://www.sansirostadium.com/en/stadium/Structure"
+     },
+     "from": {
+      "title": "San Siro",
+      "url": "https://en.wikipedia.org/wiki/San_Siro",
+      "revision": 1384793549
+     }
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "San Siro"
+  },
+  {
+   "id": "ucl-2017",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2017,
+   "name": "UEFA Champions League final 2017",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2017 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2017_UEFA_Champions_League_final",
+    "revision": 1373864667
+   },
+   "fields": {
+    "date": {
+     "value": "2017-06-03"
+    },
+    "venue": {
+     "value": "Millennium Stadium"
+    },
+    "city": {
+     "value": "Cardiff"
+    },
+    "attendance": {
+     "value": "65,842"
+    },
+    "capacity": {
+     "value": 73931,
+     "cite": {
+      "url": "https://www.bbc.co.uk/news/uk-wales-47242138",
+      "title": "Principality Stadium: Disabled spaces increased by 30%",
+      "work": "BBC News",
+      "date": "14 February 2019",
+      "archive": ""
+     },
+     "from": {
+      "title": "Millennium Stadium",
+      "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
+      "revision": 1382713366
+     }
+    },
+    "country": {
+     "value": "CF10 1NS"
+    }
+   },
+   "venueRef": "Millennium Stadium"
+  },
+  {
+   "id": "ucl-2018",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2018,
+   "name": "UEFA Champions League final 2018",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2018_UEFA_Champions_League_final",
+    "revision": 1381607985
+   },
+   "fields": {
+    "date": {
+     "value": "2018-05-26"
+    },
+    "venue": {
+     "value": "NSC Olimpiyskiy"
+    },
+    "city": {
+     "value": "Kyiv"
+    },
+    "attendance": {
+     "value": "61,561"
+    },
+    "capacity": {
+     "value": 50000,
+     "cite": {
+      "url": "http://nsc-olimpiyskiy.com.ua/en/stadium/history/",
+      "title": "Great history of NSC \"Olimpiyskiy\"",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Olympic Stadium (Kyiv)",
+      "url": "https://en.wikipedia.org/wiki/Olympic_Stadium_%28Kyiv%29",
+      "revision": 1372222762
+     }
+    },
+    "country": {
+     "value": "Ukraine"
+    },
+    "currency": {
+     "value": "UAH",
+     "from": {
+      "title": "Wikidata: currency (P38) of Ukraine",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Olimpiyskiy National Sports Complex"
+  },
+  {
+   "id": "ucl-2019",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2019,
+   "name": "UEFA Champions League final 2019",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2019_UEFA_Champions_League_final",
+    "revision": 1376279481
+   },
+   "fields": {
+    "date": {
+     "value": "2019-06-01"
+    },
+    "venue": {
+     "value": "Estadio Metropolitano"
+    },
+    "city": {
+     "value": "Madrid"
+    },
+    "attendance": {
+     "value": "63,272"
+    },
+    "capacity": {
+     "value": 70813,
+     "cite": {
+      "url": "https://www.atleticodemadrid.com/noticias/record-de-asistencia-al-riyadh-air-metropolitano",
+      "title": "Club Atlético de Madrid - Récord de asistencia al Riyadh Air Metropolitano",
+      "work": "Club Atlético de Madrid",
+      "date": "2026-09-20",
+      "archive": ""
+     },
+     "from": {
+      "title": "Metropolitano Stadium",
+      "url": "https://en.wikipedia.org/wiki/Metropolitano_Stadium",
+      "revision": 1385994982
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Metropolitano Stadium"
+  },
+  {
+   "id": "ucl-2020",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2020,
+   "name": "UEFA Champions League final 2020",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2020 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2020_UEFA_Champions_League_final",
+    "revision": 1376279695
+   },
+   "fields": {
+    "date": {
+     "value": "2020-08-23"
+    },
+    "venue": {
+     "value": "Estádio da Luz"
+    },
+    "city": {
+     "value": "Lisbon"
+    },
+    "attendance": {
+     "value": "0"
+    },
+    "capacity": {
+     "value": 68100,
+     "cite": {
+      "url": "https://www.slbenfica.pt/pt-pt/agora/media-list/videos/2025/07/11/clube-futebol-benfica-estadio-da-luz-aumento-lugares-video",
+      "title": "Estádio da Luz ainda mais imponente",
+      "work": "www.slbenfica.pt",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Estádio da Luz",
+      "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_da_Luz",
+      "revision": 1385859337
+     }
+    },
+    "country": {
+     "value": "Portugal"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Portugal",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Estádio da Luz"
+  },
+  {
+   "id": "ucl-2021",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2021,
+   "name": "UEFA Champions League final 2021",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2021 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2021_UEFA_Champions_League_final",
+    "revision": 1359669709
+   },
+   "fields": {
+    "date": {
+     "value": "2021-05-29"
+    },
+    "venue": {
+     "value": "Estádio do Dragão"
+    },
+    "city": {
+     "value": "Porto"
+    },
+    "attendance": {
+     "value": "14,110"
+    },
+    "capacity": {
+     "value": 50033,
+     "from": {
+      "title": "Estádio do Dragão",
+      "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Drag%C3%A3o",
+      "revision": 1385729563
+     }
+    },
+    "country": {
+     "value": "Portugal"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Portugal",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Estádio do Dragão"
+  },
+  {
+   "id": "ucl-2022",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2022,
+   "name": "UEFA Champions League final 2022",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2022_UEFA_Champions_League_final",
+    "revision": 1376656202
+   },
+   "fields": {
+    "date": {
+     "value": "2022-05-28"
+    },
+    "venue": {
+     "value": "Stade de France"
+    },
+    "city": {
+     "value": "Saint-Denis"
+    },
+    "attendance": {
+     "value": "75,000"
+    },
+    "capacity": {
+     "value": 81338,
+     "cite": {
+      "url": "https://stadiumdb.com/stadiums/fra/stade_de_france",
+      "title": "\"Stade de France\". Stadiumdb.com",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Stade de France",
+      "url": "https://en.wikipedia.org/wiki/Stade_de_France",
+      "revision": 1385619266
+     }
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "venueRef": "Stade de France",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "ucl-2023",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2023,
+   "name": "UEFA Champions League final 2023",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2023_UEFA_Champions_League_final",
+    "revision": 1385701947
+   },
+   "fields": {
+    "date": {
+     "value": "2023-06-10"
+    },
+    "venue": {
+     "value": "Atatürk Olympic Stadium"
+    },
+    "city": {
+     "value": "Istanbul"
+    },
+    "attendance": {
+     "value": "71,412"
+    },
+    "capacity": {
+     "value": 77563,
+     "cite": {
+      "url": "http://www.tff.org/Default.aspx?pageID=394&stadID=110",
+      "title": "Stat Arama Detay",
+      "work": "",
+      "date": "",
+      "archive": "https://web.archive.org/web/20150104140346/http://www.tff.org/Default.aspx?pageId=394&stadId=110"
+     },
+     "from": {
+      "title": "Atatürk Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
+      "revision": 1381689706
+     }
+    },
+    "country": {
+     "value": "Turkey"
+    }
+   },
+   "venueRef": "Atatürk Olympic Stadium",
+   "currencyOptions": [
+    "TRL",
+    "TRY"
+   ]
+  },
+  {
+   "id": "ucl-2024",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2024,
+   "name": "UEFA Champions League final 2024",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2024_UEFA_Champions_League_final",
+    "revision": 1370459237
+   },
+   "fields": {
+    "date": {
+     "value": "2024-06-01"
+    },
+    "venue": {
+     "value": "Wembley Stadium"
+    },
+    "city": {
+     "value": "London"
+    },
+    "attendance": {
+     "value": "86,212"
+    },
+    "capacity": {
+     "value": 90000,
+     "cite": {
+      "url": "http://www.wembleystadium.com/about/stadium-facts-and-features",
+      "title": "Stadium Facts",
+      "work": "www.wembleystadium.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Wembley Stadium",
+      "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
+      "revision": 1384136752
+     }
+    },
+    "country": {
+     "value": "United Kingdom"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of United Kingdom",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Wembley Stadium"
+  },
+  {
+   "id": "ucl-2025",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2025,
+   "name": "UEFA Champions League final 2025",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2025_UEFA_Champions_League_final",
+    "revision": 1379805629
+   },
+   "fields": {
+    "date": {
+     "value": "2025-05-31"
+    },
+    "venue": {
+     "value": "Allianz Arena"
+    },
+    "city": {
+     "value": "Munich"
+    },
+    "attendance": {
+     "value": "64,327"
+    },
+    "capacity": {
+     "value": 75024,
+     "from": {
+      "title": "Allianz Arena",
+      "url": "https://en.wikipedia.org/wiki/Allianz_Arena",
+      "revision": 1385867579
+     }
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Allianz Arena"
+  },
+  {
+   "id": "ucl-2026",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2026,
+   "name": "UEFA Champions League final 2026",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2026_UEFA_Champions_League_final",
+    "revision": 1384565331
+   },
+   "fields": {
+    "date": {
+     "value": "2026-05-30"
+    },
+    "venue": {
+     "value": "Puskás Aréna"
+    },
+    "city": {
+     "value": "Budapest"
+    },
+    "attendance": {
+     "value": "61,035"
+    },
+    "capacity": {
+     "value": 67215,
+     "cite": {
+      "url": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "title": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "work": "",
+      "date": "March 2022",
+      "archive": ""
+     },
+     "from": {
+      "title": "Puskás Aréna",
+      "url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+      "revision": 1381786180
+     }
+    },
+    "country": {
+     "value": "Hungary"
+    },
+    "currency": {
+     "value": "HUF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Hungary",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Puskás Aréna"
+  },
+  {
+   "id": "ucl-2027",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2027,
+   "name": "UEFA Champions League final 2027",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2027_UEFA_Champions_League_final",
+    "revision": 1382366452
+   },
+   "fields": {
+    "date": {
+     "value": "2027-06-05"
+    },
+    "venue": {
+     "value": "Estadio Metropolitano"
+    },
+    "city": {
+     "value": "Madrid"
+    },
+    "capacity": {
+     "value": 70813,
+     "cite": {
+      "url": "https://www.atleticodemadrid.com/noticias/record-de-asistencia-al-riyadh-air-metropolitano",
+      "title": "Club Atlético de Madrid - Récord de asistencia al Riyadh Air Metropolitano",
+      "work": "Club Atlético de Madrid",
+      "date": "2026-09-20",
+      "archive": ""
+     },
+     "from": {
+      "title": "Metropolitano Stadium",
+      "url": "https://en.wikipedia.org/wiki/Metropolitano_Stadium",
+      "revision": 1385994982
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Metropolitano Stadium"
+  },
+  {
+   "id": "ucl-2028",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2028,
+   "name": "UEFA Champions League final 2028",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2028_UEFA_Champions_League_final",
+    "revision": 1375686583
+   },
+   "fields": {
+    "date": {
+     "value": "2028-05-27"
+    },
+    "venue": {
+     "value": "Munich Football Arena"
+    },
+    "city": {
+     "value": "Munich"
+    },
+    "capacity": {
+     "value": 75024,
+     "from": {
+      "title": "Allianz Arena",
+      "url": "https://en.wikipedia.org/wiki/Allianz_Arena",
+      "revision": 1385867579
+     }
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Allianz Arena"
+  },
+  {
+   "id": "ucl-2029",
+   "series": "ucl",
+   "seriesName": "UEFA Champions League final",
+   "year": 2029,
+   "name": "UEFA Champions League final 2029",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2029 UEFA Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2029_UEFA_Champions_League_final",
+    "revision": 1375094098
+   },
+   "fields": {
+    "date": {
+     "value": "2029-06-02"
+    },
+    "venue": {
+     "value": "Camp Nou"
+    },
+    "city": {
+     "value": "Barcelona"
+    },
+    "capacity": {
+     "value": 62652,
+     "cite": {
+      "url": "https://www.theguardian.com/football/2013/dec/10/barcelona-new-stadium-extend-spotify-camp-nou-105000",
+      "title": "Barcelona to build new stadium unless Camp Nou gets 105,000 capacity",
+      "work": "The Guardian",
+      "date": "10 December 2013",
+      "archive": "https://web.archive.org/web/20200203175903/https://www.theguardian.com/football/2013/dec/10/barcelona-new-stadium-extend-camp-nou-105000"
+     },
+     "from": {
+      "title": "Camp Nou",
+      "url": "https://en.wikipedia.org/wiki/Camp_Nou",
+      "revision": 1381738003
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Camp Nou"
+  },
+  {
+   "id": "uel-2015",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2015,
+   "name": "UEFA Europa League final 2015",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2015_UEFA_Europa_League_final",
+    "revision": 1363244686
+   },
+   "fields": {
+    "date": {
+     "value": "2015-05-27"
+    },
+    "venue": {
+     "value": "National Stadium"
+    },
+    "city": {
+     "value": "Warsaw"
+    },
+    "attendance": {
+     "value": "45,000"
+    },
+    "capacity": {
+     "value": 58000,
+     "cite": {
+      "url": "https://www.pgenarodowy.pl/o-stadionie",
+      "title": "PGE National Stadium official website",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Stadion Narodowy",
+      "url": "https://en.wikipedia.org/wiki/Stadion_Narodowy",
+      "revision": 1381750791
+     }
+    },
+    "country": {
+     "value": "Poland"
+    },
+    "currency": {
+     "value": "PLN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Poland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "National Stadium, Warsaw"
+  },
+  {
+   "id": "uel-2016",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2016,
+   "name": "UEFA Europa League final 2016",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2016 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2016_UEFA_Europa_League_final",
+    "revision": 1371651133
+   },
+   "fields": {
+    "date": {
+     "value": "2016-05-18"
+    },
+    "venue": {
+     "value": "St. Jakob-Park"
+    },
+    "city": {
+     "value": "Basel"
+    },
+    "attendance": {
+     "value": "34,429"
+    },
+    "capacity": {
+     "value": 38512,
+     "cite": {
+      "url": "http://www.fcb.ch/Club/StadiumSt.JakobPark",
+      "title": "Figures and facts",
+      "work": "FC Basel 1893",
+      "date": "",
+      "archive": "https://web.archive.org/web/20120203010621/http://www.fcb.ch/Club/StadiumSt.JakobPark"
+     },
+     "from": {
+      "title": "St. Jakob-Park",
+      "url": "https://en.wikipedia.org/wiki/St._Jakob-Park",
+      "revision": 1382438671
+     }
+    },
+    "country": {
+     "value": "Switzerland"
+    },
+    "currency": {
+     "value": "CHF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Switzerland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "St. Jakob-Park"
+  },
+  {
+   "id": "uel-2017",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2017,
+   "name": "UEFA Europa League final 2017",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2017 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2017_UEFA_Europa_League_final",
+    "revision": 1356576059
+   },
+   "fields": {
+    "date": {
+     "value": "2017-05-24"
+    },
+    "venue": {
+     "value": "Friends Arena"
+    },
+    "city": {
+     "value": "Solna"
+    },
+    "attendance": {
+     "value": "46,961"
+    },
+    "capacity": {
+     "value": 50000,
+     "cite": {
+      "url": "http://stadiumdb.com/stadiums/swe/friends_arena",
+      "title": "Friends Arena –",
+      "work": "Stadiumdb.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Nationalarenan",
+      "url": "https://en.wikipedia.org/wiki/Nationalarenan",
+      "revision": 1385853057
+     }
+    },
+    "country": {
+     "value": "Sweden"
+    },
+    "currency": {
+     "value": "SEK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Sweden",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Strawberry Arena"
+  },
+  {
+   "id": "uel-2018",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2018,
+   "name": "UEFA Europa League final 2018",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2018_UEFA_Europa_League_final",
+    "revision": 1381771093
+   },
+   "fields": {
+    "date": {
+     "value": "2018-05-16"
+    },
+    "venue": {
+     "value": "Parc Olympique Lyonnais"
+    },
+    "city": {
+     "value": "Décines-Charpieu"
+    },
+    "attendance": {
+     "value": "55,768"
+    },
+    "capacity": {
+     "value": 59186,
+     "cite": {
+      "url": "https://www.groupama-stadium.com/presentation/",
+      "title": "Bienvenue au Groupama Stadium",
+      "work": "Groupama Stadium",
+      "date": "",
+      "archive": "https://web.archive.org/web/20210327022938/https://www.groupama-stadium.com/presentation/"
+     },
+     "from": {
+      "title": "Parc Olympique Lyonnais",
+      "url": "https://en.wikipedia.org/wiki/Parc_Olympique_Lyonnais",
+      "revision": 1374907290
+     }
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "venueRef": "Parc Olympique Lyonnais",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "uel-2019",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2019,
+   "name": "UEFA Europa League final 2019",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2019_UEFA_Europa_League_final",
+    "revision": 1359977417
+   },
+   "fields": {
+    "date": {
+     "value": "2019-05-29"
+    },
+    "venue": {
+     "value": "Olympic Stadium"
+    },
+    "city": {
+     "value": "Baku"
+    },
+    "attendance": {
+     "value": "51,370"
+    },
+    "capacity": {
+     "value": 69870,
+     "cite": {
+      "url": "https://editorial.uefa.com/resources/0279-161fb68b3ca5-f10bf774dc62-1000/top-division_clubs_in_europe_2022-23.pdf",
+      "title": "First Division Clubs in Europe 2022/23",
+      "work": "UEFA",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Baku Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Baku_Olympic_Stadium",
+      "revision": 1380324542
+     }
+    },
+    "country": {
+     "value": "Azerbaijan"
+    },
+    "currency": {
+     "value": "AZN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Azerbaijan",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Baku Olympic Stadium"
+  },
+  {
+   "id": "uel-2020",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2020,
+   "name": "UEFA Europa League final 2020",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2020 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2020_UEFA_Europa_League_final",
+    "revision": 1341284450
+   },
+   "fields": {
+    "date": {
+     "value": "2020-08-21"
+    },
+    "venue": {
+     "value": "RheinEnergieStadion"
+    },
+    "city": {
+     "value": "Cologne"
+    },
+    "attendance": {
+     "value": "0"
+    },
+    "capacity": {
+     "value": 50000,
+     "cite": {
+      "url": "https://fc.de/en/club/about-the-club/playing-and-training-ground/rheinenergiestadion",
+      "title": "RheinEnergieSTADION",
+      "work": "fc.de",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "RheinEnergieStadion",
+      "url": "https://en.wikipedia.org/wiki/RheinEnergieStadion",
+      "revision": 1375754601
+     }
+    }
+   },
+   "venueRef": "RheinEnergieStadion"
+  },
+  {
+   "id": "uel-2021",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2021,
+   "name": "UEFA Europa League final 2021",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2021 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2021_UEFA_Europa_League_final",
+    "revision": 1368164542
+   },
+   "fields": {
+    "date": {
+     "value": "2021-05-26"
+    },
+    "venue": {
+     "value": "Stadion Gdańsk"
+    },
+    "city": {
+     "value": "Gdańsk"
+    },
+    "attendance": {
+     "value": "9,412"
+    },
+    "capacity": {
+     "value": 41620,
+     "from": {
+      "title": "Gdańsk Stadium",
+      "url": "https://en.wikipedia.org/wiki/Gda%C5%84sk_Stadium",
+      "revision": 1381744490
+     }
+    },
+    "country": {
+     "value": "Poland"
+    },
+    "currency": {
+     "value": "PLN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Poland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Gdańsk Stadium"
+  },
+  {
+   "id": "uel-2022",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2022,
+   "name": "UEFA Europa League final 2022",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2022_UEFA_Europa_League_final",
+    "revision": 1376656244
+   },
+   "fields": {
+    "date": {
+     "value": "2022-05-18"
+    },
+    "venue": {
+     "value": "Estadio Ramón Sánchez Pizjuán"
+    },
+    "city": {
+     "value": "Seville"
+    },
+    "attendance": {
+     "value": "38,842"
+    },
+    "capacity": {
+     "value": 43751,
+     "cite": {
+      "url": "https://www.sevillafc.es/en/the-club/organization/sevilla-fc",
+      "title": "Sevilla F.C. The organization",
+      "work": "www.sevillafc.es",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Ramón Sánchez-Pizjuán Stadium",
+      "url": "https://en.wikipedia.org/wiki/Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n_Stadium",
+      "revision": 1374243072
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Ramón Sánchez Pizjuán Stadium"
+  },
+  {
+   "id": "uel-2023",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2023,
+   "name": "UEFA Europa League final 2023",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2023_UEFA_Europa_League_final",
+    "revision": 1377311247
+   },
+   "fields": {
+    "date": {
+     "value": "2023-05-31"
+    },
+    "venue": {
+     "value": "Puskás Aréna"
+    },
+    "city": {
+     "value": "Budapest"
+    },
+    "attendance": {
+     "value": "61,476"
+    },
+    "capacity": {
+     "value": 67215,
+     "cite": {
+      "url": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "title": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "work": "",
+      "date": "March 2022",
+      "archive": ""
+     },
+     "from": {
+      "title": "Puskás Aréna",
+      "url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+      "revision": 1381786180
+     }
+    },
+    "country": {
+     "value": "Hungary"
+    },
+    "currency": {
+     "value": "HUF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Hungary",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Puskás Aréna"
+  },
+  {
+   "id": "uel-2024",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2024,
+   "name": "UEFA Europa League final 2024",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2024_UEFA_Europa_League_final",
+    "revision": 1374820218
+   },
+   "fields": {
+    "date": {
+     "value": "2024-05-22"
+    },
+    "venue": {
+     "value": "Aviva Stadium"
+    },
+    "city": {
+     "value": "Dublin"
+    },
+    "attendance": {
+     "value": "47,135"
+    },
+    "capacity": {
+     "value": 51711,
+     "cite": {
+      "url": "http://www.avivastadium.ie/stadium-info",
+      "title": "Stadium Info",
+      "work": "Aviva Stadium",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Aviva Stadium",
+      "url": "https://en.wikipedia.org/wiki/Aviva_Stadium",
+      "revision": 1385969435
+     }
+    }
+   },
+   "venueRef": "Aviva Stadium"
+  },
+  {
+   "id": "uel-2025",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2025,
+   "name": "UEFA Europa League final 2025",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2025_UEFA_Europa_League_final",
+    "revision": 1381679920
+   },
+   "fields": {
+    "date": {
+     "value": "2025-05-21"
+    },
+    "venue": {
+     "value": "San Mamés"
+    },
+    "city": {
+     "value": "Bilbao"
+    },
+    "attendance": {
+     "value": "49,224"
+    },
+    "capacity": {
+     "value": 53331,
+     "cite": {
+      "url": "https://www.athletic-club.eus/en/san-mames/the-stadium",
+      "title": "The Stadium",
+      "work": "www.athletic-club.eus",
+      "date": "",
+      "archive": "https://web.archive.org/web/20190414111222/https://www.athletic-club.eus/en/san-mames/the-stadium"
+     },
+     "from": {
+      "title": "San Mamés Stadium (2013)",
+      "url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium_%282013%29",
+      "revision": 1381759671
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "San Mamés Stadium (2013)"
+  },
+  {
+   "id": "uel-2026",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2026,
+   "name": "UEFA Europa League final 2026",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2026_UEFA_Europa_League_final",
+    "revision": 1378011998
+   },
+   "fields": {
+    "date": {
+     "value": "2026-05-20"
+    },
+    "venue": {
+     "value": "Beşiktaş Stadium"
+    },
+    "city": {
+     "value": "Istanbul"
+    },
+    "attendance": {
+     "value": "37,324"
+    },
+    "capacity": {
+     "value": 42684,
+     "cite": {
+      "url": "http://www.tff.org/Default.aspx?pageID=394&stadID=6097",
+      "title": "Stat Arama Detay TFF",
+      "work": "Tff.org",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Beşiktaş Stadium",
+      "url": "https://en.wikipedia.org/wiki/Be%C5%9Fikta%C5%9F_Stadium",
+      "revision": 1372219790
+     }
+    },
+    "country": {
+     "value": "Turkey"
+    }
+   },
+   "venueRef": "Beşiktaş Stadium",
+   "currencyOptions": [
+    "TRL",
+    "TRY"
+   ]
+  },
+  {
+   "id": "uel-2027",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2027,
+   "name": "UEFA Europa League final 2027",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2027_UEFA_Europa_League_final",
+    "revision": 1375482523
+   },
+   "fields": {
+    "date": {
+     "value": "2027-05-26"
+    },
+    "venue": {
+     "value": "Frankfurt Arena"
+    },
+    "city": {
+     "value": "Frankfurt"
+    },
+    "capacity": {
+     "value": 60100,
+     "cite": {
+      "url": "https://www.deutschebankpark.de/der-dbp/daten-und-fakten/",
+      "title": "deutschebankpark.de",
+      "work": "(44,000 in end-stage setup, \"up to 65,000 spectators depending on usage\")",
+      "date": "",
+      "archive": "https://web.archive.org/web/20231020062236/https://www.deutschebankpark.de/der-dbp/daten-und-fakten/"
+     },
+     "from": {
+      "title": "Waldstadion (Frankfurt)",
+      "url": "https://en.wikipedia.org/wiki/Waldstadion_%28Frankfurt%29",
+      "revision": 1380205476
+     }
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Waldstadion (Frankfurt)"
+  },
+  {
+   "id": "uel-2028",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2028,
+   "name": "UEFA Europa League final 2028",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2028_UEFA_Europa_League_final",
+    "revision": 1375089898
+   },
+   "fields": {
+    "date": {
+     "value": "2028-05-17"
+    },
+    "venue": {
+     "value": "Arena Națională"
+    },
+    "city": {
+     "value": "Bucharest"
+    },
+    "capacity": {
+     "value": 55634,
+     "cite": {
+      "url": "http://www.gsp.ro/international/steaua-chelsea/am-cucerit-europa-si-n-tribune-steaua-chelsea-a-fost-urmarit-de-cei-mai-multi-suporteri-dintre-meciurile-din-optimile-europa-league-392899.html",
+      "title": "Am cucerit Europa şi-n tribune! – Steaua – Chelsea a fost urmărit de cei mai mulţi suporteri dintre meciurile din optimile Europa League",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Arena Națională",
+      "url": "https://en.wikipedia.org/wiki/Arena_Na%C8%9Bional%C4%83",
+      "revision": 1385016270
+     }
+    },
+    "country": {
+     "value": "Romania"
+    },
+    "currency": {
+     "value": "RON",
+     "from": {
+      "title": "Wikidata: currency (P38) of Romania",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Arena Națională"
+  },
+  {
+   "id": "uel-2029",
+   "series": "uel",
+   "seriesName": "UEFA Europa League final",
+   "year": 2029,
+   "name": "UEFA Europa League final 2029",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2029 UEFA Europa League final",
+    "url": "https://en.wikipedia.org/wiki/2029_UEFA_Europa_League_final",
+    "revision": 1375088518
+   },
+   "fields": {
+    "date": {
+     "value": "2029-05-23"
+    },
+    "venue": {
+     "value": "Belgrade"
+    },
+    "city": {
+     "value": "Belgrade"
+    }
+   },
+   "venueRef": "Belgrade"
+  },
+  {
+   "id": "uecl-2022",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2022,
+   "name": "UEFA Conference League final 2022",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 UEFA Europa Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2022_UEFA_Europa_Conference_League_final",
+    "revision": 1376656238
+   },
+   "fields": {
+    "date": {
+     "value": "2022-05-25"
+    },
+    "venue": {
+     "value": "Arena Kombëtare"
+    },
+    "city": {
+     "value": "Tirana"
+    },
+    "attendance": {
+     "value": "19,597"
+    },
+    "capacity": {
+     "value": 22500,
+     "from": {
+      "title": "Arena Kombëtare",
+      "url": "https://en.wikipedia.org/wiki/Arena_Komb%C3%ABtare",
+      "revision": 1377821527
+     }
+    },
+    "country": {
+     "value": "Albania"
+    },
+    "currency": {
+     "value": "ALL",
+     "from": {
+      "title": "Wikidata: currency (P38) of Albania",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Arena Kombëtare"
+  },
+  {
+   "id": "uecl-2023",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2023,
+   "name": "UEFA Conference League final 2023",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 UEFA Europa Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2023_UEFA_Europa_Conference_League_final",
+    "revision": 1381679907
+   },
+   "fields": {
+    "date": {
+     "value": "2023-06-07"
+    },
+    "venue": {
+     "value": "Fortuna Arena"
+    },
+    "city": {
+     "value": "Prague"
+    },
+    "attendance": {
+     "value": "17,363"
+    },
+    "capacity": {
+     "value": 19370,
+     "cite": {
+      "url": "https://en.slavia.cz/zobraz.asp?t=klub-sinobo-stadium",
+      "title": "About Sinobo Stadium",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Fortuna Arena",
+      "url": "https://en.wikipedia.org/wiki/Fortuna_Arena",
+      "revision": 1385206399
+     }
+    },
+    "country": {
+     "value": "100 00"
+    }
+   },
+   "venueRef": "Fortuna Arena"
+  },
+  {
+   "id": "uecl-2024",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2024,
+   "name": "UEFA Conference League final 2024",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 UEFA Europa Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2024_UEFA_Europa_Conference_League_final",
+    "revision": 1377254093
+   },
+   "fields": {
+    "date": {
+     "value": "2024-05-29"
+    },
+    "venue": {
+     "value": "Agia Sophia Stadium"
+    },
+    "city": {
+     "value": "Athens"
+    },
+    "attendance": {
+     "value": "26,842"
+    },
+    "capacity": {
+     "value": 31100,
+     "cite": {
+      "url": "https://diavgeia.gov.gr/doc/%CE%A81567%CE%9B7-7%CE%98%CE%9F?inline=true",
+      "title": "Θέμα: Άδεια Διεξαγωγής Αθλητικών Συναντήσεων Ποδοσφαίρισης",
+      "work": "diavgeia.gov.gr",
+      "date": "17 August 2023",
+      "archive": ""
+     },
+     "from": {
+      "title": "Agia Sophia Stadium",
+      "url": "https://en.wikipedia.org/wiki/Agia_Sophia_Stadium",
+      "revision": 1385647999
+     }
+    },
+    "country": {
+     "value": "Greece"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Greece",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Agia Sophia Stadium"
+  },
+  {
+   "id": "uecl-2025",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2025,
+   "name": "UEFA Conference League final 2025",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 UEFA Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2025_UEFA_Conference_League_final",
+    "revision": 1367100831
+   },
+   "fields": {
+    "date": {
+     "value": "2025-05-28"
+    },
+    "venue": {
+     "value": "Wrocław Stadium"
+    },
+    "city": {
+     "value": "Wrocław"
+    },
+    "attendance": {
+     "value": "39,754"
+    },
+    "capacity": {
+     "value": 42771,
+     "cite": {
+      "url": "https://stadionwroclaw.pl/stadion/fakty-i-liczby/",
+      "title": "Fakty i liczby",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Wrocław Stadium",
+      "url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium",
+      "revision": 1385454870
+     }
+    },
+    "country": {
+     "value": "Poland"
+    },
+    "currency": {
+     "value": "PLN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Poland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Wrocław Stadium"
+  },
+  {
+   "id": "uecl-2026",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2026,
+   "name": "UEFA Conference League final 2026",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 UEFA Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2026_UEFA_Conference_League_final",
+    "revision": 1378012006
+   },
+   "fields": {
+    "date": {
+     "value": "2026-05-27"
+    },
+    "venue": {
+     "value": "Red Bull Arena"
+    },
+    "city": {
+     "value": "Leipzig"
+    },
+    "attendance": {
+     "value": "39,176"
+    },
+    "capacity": {
+     "value": 47800,
+     "cite": {
+      "url": "https://rbleipzig.com/en/stadium/red-bull-arena/facts-and-stats",
+      "title": "Red Bull Arena in Leipzig: All the facts and stats",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Red Bull Arena (Leipzig)",
+      "url": "https://en.wikipedia.org/wiki/Red_Bull_Arena_%28Leipzig%29",
+      "revision": 1386009742
+     }
+    }
+   },
+   "venueRef": "Red Bull Arena (Leipzig)"
+  },
+  {
+   "id": "uecl-2027",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2027,
+   "name": "UEFA Conference League final 2027",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 UEFA Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2027_UEFA_Conference_League_final",
+    "revision": 1375961297
+   },
+   "fields": {
+    "date": {
+     "value": "2027-06-02"
+    },
+    "venue": {
+     "value": "Beşiktaş Stadium"
+    },
+    "city": {
+     "value": "Istanbul"
+    },
+    "capacity": {
+     "value": 42684,
+     "cite": {
+      "url": "http://www.tff.org/Default.aspx?pageID=394&stadID=6097",
+      "title": "Stat Arama Detay TFF",
+      "work": "Tff.org",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Beşiktaş Stadium",
+      "url": "https://en.wikipedia.org/wiki/Be%C5%9Fikta%C5%9F_Stadium",
+      "revision": 1372219790
+     }
+    },
+    "country": {
+     "value": "Turkey"
+    }
+   },
+   "venueRef": "Beşiktaş Stadium",
+   "currencyOptions": [
+    "TRL",
+    "TRY"
+   ]
+  },
+  {
+   "id": "uecl-2028",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2028,
+   "name": "UEFA Conference League final 2028",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 UEFA Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2028_UEFA_Conference_League_final",
+    "revision": 1381011363
+   },
+   "fields": {
+    "date": {
+     "value": "2028-05-24"
+    },
+    "venue": {
+     "value": "Juventus Stadium"
+    },
+    "city": {
+     "value": "Turin"
+    },
+    "capacity": {
+     "value": 41689,
+     "cite": {
+      "url": "https://www.juventus.com/en/allianz-stadium/our-home",
+      "title": "Our home",
+      "work": "juventus.com",
+      "date": "24 June 2020",
+      "archive": ""
+     },
+     "from": {
+      "title": "Juventus Stadium",
+      "url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
+      "revision": 1386097269
+     }
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Juventus Stadium"
+  },
+  {
+   "id": "uecl-2029",
+   "series": "uecl",
+   "seriesName": "UEFA Conference League final",
+   "year": 2029,
+   "name": "UEFA Conference League final 2029",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2029 UEFA Conference League final",
+    "url": "https://en.wikipedia.org/wiki/2029_UEFA_Conference_League_final",
+    "revision": 1375482059
+   },
+   "fields": {
+    "date": {
+     "value": "2029-05-30"
+    },
+    "venue": {
+     "value": "Puskás Aréna"
+    },
+    "city": {
+     "value": "Budapest"
+    },
+    "capacity": {
+     "value": 67215,
+     "cite": {
+      "url": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "title": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+      "work": "",
+      "date": "March 2022",
+      "archive": ""
+     },
+     "from": {
+      "title": "Puskás Aréna",
+      "url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+      "revision": 1381786180
+     }
+    },
+    "country": {
+     "value": "Hungary"
+    },
+    "currency": {
+     "value": "HUF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Hungary",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Puskás Aréna"
+  },
+  {
+   "id": "uwcl-2015",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2015,
+   "name": "UEFA Women's Champions League final 2015",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2015_UEFA_Women%27s_Champions_League_final",
+    "revision": 1365442855
+   },
+   "fields": {
+    "date": {
+     "value": "2015-05-14"
+    },
+    "venue": {
+     "value": "Friedrich-Ludwig-Jahn-Sportpark"
+    },
+    "city": {
+     "value": "Berlin"
+    },
+    "attendance": {
+     "value": "17,147"
+    },
+    "capacity": {
+     "value": 19708,
+     "cite": {
+      "url": "https://www.fcc-supporters.org/fuwo/files/FUWO%201990/FUWO%201990%2006.pdf",
+      "title": "Visitenkarte",
+      "work": "DFV der DDR",
+      "date": "6 February 1990",
+      "archive": ""
+     },
+     "from": {
+      "title": "Friedrich-Ludwig-Jahn-Sportpark",
+      "url": "https://en.wikipedia.org/wiki/Friedrich-Ludwig-Jahn-Sportpark",
+      "revision": 1382887812
+     }
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Friedrich-Ludwig-Jahn-Sportpark"
+  },
+  {
+   "id": "uwcl-2016",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2016,
+   "name": "UEFA Women's Champions League final 2016",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2016 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2016_UEFA_Women%27s_Champions_League_final",
+    "revision": 1352176447
+   },
+   "fields": {
+    "date": {
+     "value": "2016-05-26"
+    },
+    "venue": {
+     "value": "Mapei Stadium – Città del Tricolore"
+    },
+    "city": {
+     "value": "Reggio Emilia"
+    },
+    "attendance": {
+     "value": "15,117"
+    },
+    "capacity": {
+     "value": 21525,
+     "from": {
+      "title": "Mapei Stadium – Città del Tricolore",
+      "url": "https://en.wikipedia.org/wiki/Mapei_Stadium_%E2%80%93_Citt%C3%A0_del_Tricolore",
+      "revision": 1377074329
+     }
+    },
+    "country": {
+     "value": "42122 Reggio Emilia (RE)"
+    }
+   },
+   "venueRef": "Mapei Stadium – Città del Tricolore"
+  },
+  {
+   "id": "uwcl-2017",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2017,
+   "name": "UEFA Women's Champions League final 2017",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2017 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2017_UEFA_Women%27s_Champions_League_final",
+    "revision": 1385538876
+   },
+   "fields": {
+    "date": {
+     "value": "2017-06-01"
+    },
+    "venue": {
+     "value": "Cardiff City Stadium"
+    },
+    "city": {
+     "value": "Cardiff"
+    },
+    "attendance": {
+     "value": "22,433"
+    },
+    "capacity": {
+     "value": 33280,
+     "cite": {
+      "url": "http://www.cardiffcityfc.co.uk/tickets/stadium_visitors/",
+      "title": "Stadium Visitors",
+      "work": "Cardiff City F.C.",
+      "date": "",
+      "archive": "https://web.archive.org/web/20150504163133/http://www.cardiffcityfc.co.uk/tickets/stadium_visitors/"
+     },
+     "from": {
+      "title": "Cardiff City Stadium",
+      "url": "https://en.wikipedia.org/wiki/Cardiff_City_Stadium",
+      "revision": 1381740089
+     }
+    },
+    "country": {
+     "value": "Wales"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of Wales",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Cardiff City Stadium"
+  },
+  {
+   "id": "uwcl-2018",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2018,
+   "name": "UEFA Women's Champions League final 2018",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2018_UEFA_Women%27s_Champions_League_final",
+    "revision": 1385005758
+   },
+   "fields": {
+    "date": {
+     "value": "2018-05-24"
+    },
+    "venue": {
+     "value": "Valeriy Lobanovskyi Dynamo Stadium"
+    },
+    "city": {
+     "value": "Kyiv"
+    },
+    "attendance": {
+     "value": "14,237"
+    },
+    "capacity": {
+     "value": 16873,
+     "from": {
+      "title": "Valeriy Lobanovskyi Dynamo Stadium",
+      "url": "https://en.wikipedia.org/wiki/Valeriy_Lobanovskyi_Dynamo_Stadium",
+      "revision": 1383218201
+     }
+    },
+    "country": {
+     "value": "Ukraine"
+    },
+    "currency": {
+     "value": "UAH",
+     "from": {
+      "title": "Wikidata: currency (P38) of Ukraine",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Valeriy Lobanovskyi Dynamo Stadium"
+  },
+  {
+   "id": "uwcl-2019",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2019,
+   "name": "UEFA Women's Champions League final 2019",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2019_UEFA_Women%27s_Champions_League_final",
+    "revision": 1384575541
+   },
+   "fields": {
+    "date": {
+     "value": "2019-05-18"
+    },
+    "venue": {
+     "value": "Groupama Arena"
+    },
+    "city": {
+     "value": "Budapest"
+    },
+    "attendance": {
+     "value": "19,487"
+    },
+    "capacity": {
+     "value": 23700,
+     "from": {
+      "title": "Ferencváros Stadion",
+      "url": "https://en.wikipedia.org/wiki/Ferencv%C3%A1ros_Stadion",
+      "revision": 1385395210
+     }
+    },
+    "country": {
+     "value": "Hungary"
+    },
+    "currency": {
+     "value": "HUF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Hungary",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Groupama Arena"
+  },
+  {
+   "id": "uwcl-2020",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2020,
+   "name": "UEFA Women's Champions League final 2020",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2020 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2020_UEFA_Women%27s_Champions_League_final",
+    "revision": 1354102817
+   },
+   "fields": {
+    "date": {
+     "value": "2020-08-30"
+    },
+    "venue": {
+     "value": "Anoeta"
+    },
+    "city": {
+     "value": "San Sebastián"
+    },
+    "attendance": {
+     "value": "0"
+    },
+    "capacity": {
+     "value": 40000,
+     "from": {
+      "title": "Anoeta Stadium",
+      "url": "https://en.wikipedia.org/wiki/Anoeta_Stadium",
+      "revision": 1384161826
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Anoeta Stadium"
+  },
+  {
+   "id": "uwcl-2021",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2021,
+   "name": "UEFA Women's Champions League final 2021",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2021 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2021_UEFA_Women%27s_Champions_League_final",
+    "revision": 1341290028
+   },
+   "fields": {
+    "date": {
+     "value": "2021-05-16"
+    },
+    "venue": {
+     "value": "Gamla Ullevi"
+    },
+    "city": {
+     "value": "Gothenburg"
+    },
+    "attendance": {
+     "value": "0"
+    },
+    "capacity": {
+     "value": 18416,
+     "cite": {
+      "url": "http://www.gamlaullevi.se/arenan/",
+      "title": "Arenan | Gamla Ullevi",
+      "work": "",
+      "date": "",
+      "archive": "https://web.archive.org/web/20141012100246/http://www.gamlaullevi.se/arenan/"
+     },
+     "from": {
+      "title": "Gamla Ullevi",
+      "url": "https://en.wikipedia.org/wiki/Gamla_Ullevi",
+      "revision": 1372181574
+     }
+    },
+    "country": {
+     "value": "Sweden"
+    },
+    "currency": {
+     "value": "SEK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Sweden",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Gamla Ullevi"
+  },
+  {
+   "id": "uwcl-2022",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2022,
+   "name": "UEFA Women's Champions League final 2022",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2022_UEFA_Women%27s_Champions_League_final",
+    "revision": 1356758745
+   },
+   "fields": {
+    "date": {
+     "value": "2022-05-21"
+    },
+    "venue": {
+     "value": "Juventus Stadium"
+    },
+    "city": {
+     "value": "Turin"
+    },
+    "attendance": {
+     "value": "32,257"
+    },
+    "capacity": {
+     "value": 41689,
+     "cite": {
+      "url": "https://www.juventus.com/en/allianz-stadium/our-home",
+      "title": "Our home",
+      "work": "juventus.com",
+      "date": "24 June 2020",
+      "archive": ""
+     },
+     "from": {
+      "title": "Juventus Stadium",
+      "url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
+      "revision": 1386097269
+     }
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Juventus Stadium"
+  },
+  {
+   "id": "uwcl-2023",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2023,
+   "name": "UEFA Women's Champions League final 2023",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2023_UEFA_Women%27s_Champions_League_final",
+    "revision": 1341288624
+   },
+   "fields": {
+    "date": {
+     "value": "2023-06-03"
+    },
+    "venue": {
+     "value": "Philips Stadion"
+    },
+    "city": {
+     "value": "Eindhoven"
+    },
+    "attendance": {
+     "value": "33,147"
+    },
+    "capacity": {
+     "value": 35119,
+     "cite": {
+      "url": "http://stadiumdb.com/stadiums/ned/philips_stadion",
+      "title": "Philips Stadion",
+      "work": "StadiumDB.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Philips Stadion",
+      "url": "https://en.wikipedia.org/wiki/Philips_Stadion",
+      "revision": 1372214207
+     }
+    },
+    "country": {
+     "value": "Netherlands"
+    }
+   },
+   "venueRef": "Philips Stadion",
+   "currencyOptions": [
+    "EUR",
+    "USD"
+   ]
+  },
+  {
+   "id": "uwcl-2024",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2024,
+   "name": "UEFA Women's Champions League final 2024",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2024_UEFA_Women%27s_Champions_League_final",
+    "revision": 1381784145
+   },
+   "fields": {
+    "date": {
+     "value": "2024-05-25"
+    },
+    "venue": {
+     "value": "San Mamés Stadium"
+    },
+    "city": {
+     "value": "Bilbao"
+    },
+    "attendance": {
+     "value": "50,827"
+    },
+    "capacity": {
+     "value": 53331,
+     "cite": {
+      "url": "https://www.athletic-club.eus/en/san-mames/the-stadium",
+      "title": "The Stadium",
+      "work": "www.athletic-club.eus",
+      "date": "",
+      "archive": "https://web.archive.org/web/20190414111222/https://www.athletic-club.eus/en/san-mames/the-stadium"
+     },
+     "from": {
+      "title": "San Mamés Stadium (2013)",
+      "url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium_%282013%29",
+      "revision": 1381759671
+     }
+    },
+    "country": {
+     "value": "Spain"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Spain",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "San Mamés Stadium (2013)"
+  },
+  {
+   "id": "uwcl-2025",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2025,
+   "name": "UEFA Women's Champions League final 2025",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2025_UEFA_Women%27s_Champions_League_final",
+    "revision": 1355881192
+   },
+   "fields": {
+    "date": {
+     "value": "2025-05-24"
+    },
+    "venue": {
+     "value": "Estádio José Alvalade"
+    },
+    "city": {
+     "value": "Lisbon"
+    },
+    "attendance": {
+     "value": "38,356"
+    },
+    "capacity": {
+     "value": 52095,
+     "from": {
+      "title": "Estádio José Alvalade",
+      "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jos%C3%A9_Alvalade",
+      "revision": 1385859221
+     }
+    },
+    "country": {
+     "value": "Portugal"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Portugal",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Estádio José Alvalade"
+  },
+  {
+   "id": "uwcl-2026",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2026,
+   "name": "UEFA Women's Champions League final 2026",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2026_UEFA_Women%27s_Champions_League_final",
+    "revision": 1381784882
+   },
+   "fields": {
+    "date": {
+     "value": "2026-05-23"
+    },
+    "venue": {
+     "value": "Ullevaal Stadion"
+    },
+    "city": {
+     "value": "Oslo"
+    },
+    "attendance": {
+     "value": "24,258"
+    },
+    "capacity": {
+     "value": 27182,
+     "cite": {
+      "url": "https://ullevaal-stadion.no/om-ullevaal-stadion/teknisk-info/",
+      "title": "Teknisk-info",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Ullevaal Stadion",
+      "url": "https://en.wikipedia.org/wiki/Ullevaal_Stadion",
+      "revision": 1381690319
+     }
+    },
+    "country": {
+     "value": "Norway"
+    },
+    "currency": {
+     "value": "NOK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Norway",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Ullevaal Stadion"
+  },
+  {
+   "id": "uwcl-2027",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2027,
+   "name": "UEFA Women's Champions League final 2027",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2027_UEFA_Women%27s_Champions_League_final",
+    "revision": 1359813474
+   },
+   "fields": {
+    "venue": {
+     "value": "Stadion Narodowy"
+    },
+    "city": {
+     "value": "Warsaw"
+    },
+    "capacity": {
+     "value": 58000,
+     "cite": {
+      "url": "https://www.pgenarodowy.pl/o-stadionie",
+      "title": "PGE National Stadium official website",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Stadion Narodowy",
+      "url": "https://en.wikipedia.org/wiki/Stadion_Narodowy",
+      "revision": 1381750791
+     }
+    },
+    "country": {
+     "value": "Poland"
+    },
+    "currency": {
+     "value": "PLN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Poland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Stadion Narodowy"
+  },
+  {
+   "id": "uwcl-2028",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2028,
+   "name": "UEFA Women's Champions League final 2028",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2028_UEFA_Women%27s_Champions_League_final",
+    "revision": 1375110359
+   },
+   "fields": {
+    "venue": {
+     "value": "Parc Olympique Lyonnais"
+    },
+    "city": {
+     "value": "Décines-Charpieu"
+    },
+    "capacity": {
+     "value": 59186,
+     "cite": {
+      "url": "https://www.groupama-stadium.com/presentation/",
+      "title": "Bienvenue au Groupama Stadium",
+      "work": "Groupama Stadium",
+      "date": "",
+      "archive": "https://web.archive.org/web/20210327022938/https://www.groupama-stadium.com/presentation/"
+     },
+     "from": {
+      "title": "Parc Olympique Lyonnais",
+      "url": "https://en.wikipedia.org/wiki/Parc_Olympique_Lyonnais",
+      "revision": 1374907290
+     }
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "venueRef": "Parc Olympique Lyonnais",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "uwcl-2029",
+   "series": "uwcl",
+   "seriesName": "UEFA Women's Champions League final",
+   "year": 2029,
+   "name": "UEFA Women's Champions League final 2029",
+   "eventType": "Football final kickoff show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2029 UEFA Women's Champions League final",
+    "url": "https://en.wikipedia.org/wiki/2029_UEFA_Women%27s_Champions_League_final",
+    "revision": 1375090487
+   },
+   "fields": {
+    "venue": {
+     "value": "Millennium Stadium"
+    },
+    "city": {
+     "value": "Cardiff"
+    },
+    "capacity": {
+     "value": 73931,
+     "cite": {
+      "url": "https://www.bbc.co.uk/news/uk-wales-47242138",
+      "title": "Principality Stadium: Disabled spaces increased by 30%",
+      "work": "BBC News",
+      "date": "14 February 2019",
+      "archive": ""
+     },
+     "from": {
+      "title": "Millennium Stadium",
+      "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
+      "revision": 1382713366
+     }
+    },
+    "country": {
+     "value": "CF10 1NS"
+    }
+   },
+   "venueRef": "Millennium Stadium"
+  },
+  {
+   "id": "euro-2016",
+   "series": "euro",
+   "seriesName": "UEFA European Championship (EURO)",
+   "year": 2016,
+   "name": "UEFA European Championship (EURO) 2016",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Euro 2016",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2016",
+    "revision": 1383884257
+   },
+   "fields": {
+    "date": {
+     "value": "2016-06-10"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "euro-2020",
+   "series": "euro",
+   "seriesName": "UEFA European Championship (EURO)",
+   "year": 2020,
+   "name": "UEFA European Championship (EURO) 2020",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Euro 2020",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2020",
+    "revision": 1383884272
+   },
+   "fields": {
+    "date": {
+     "value": "2021-07-11"
+    }
+   },
+   "hosts": [
+    "Azerbaijan",
+    "Denmark",
+    "England",
+    "Germany"
+   ]
+  },
+  {
+   "id": "euro-2024",
+   "series": "euro",
+   "seriesName": "UEFA European Championship (EURO)",
+   "year": 2024,
+   "name": "UEFA European Championship (EURO) 2024",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Euro 2024",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2024",
+    "revision": 1383884292
+   },
+   "fields": {
+    "date": {
+     "value": "2024-06-14"
+    },
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "euro-2028",
+   "series": "euro",
+   "seriesName": "UEFA European Championship (EURO)",
+   "year": 2028,
+   "name": "UEFA European Championship (EURO) 2028",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Euro 2028",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2028",
+    "revision": 1384863877
+   },
+   "fields": {
+    "date": {
+     "value": "2028-06-09"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "hosts": [
+    "England",
+    "Republic of Ireland",
+    "Scotland",
+    "Wales"
+   ]
+  },
+  {
+   "id": "euro-2032",
+   "series": "euro",
+   "seriesName": "UEFA European Championship (EURO)",
+   "year": 2032,
+   "name": "UEFA European Championship (EURO) 2032",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Euro 2032",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2032",
+    "revision": 1383908459
+   },
+   "fields": {},
+   "hosts": [
+    "Italy",
+    "Turkey"
+   ]
+  },
+  {
+   "id": "weuro-2017",
+   "series": "weuro",
+   "seriesName": "UEFA Women's Euro",
+   "year": 2017,
+   "name": "UEFA Women's Euro 2017",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Women's Euro 2017",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Women%27s_Euro_2017",
+    "revision": 1383612498
+   },
+   "fields": {
+    "date": {
+     "value": "2017-07-16"
+    },
+    "country": {
+     "value": "Netherlands"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "currencyOptions": [
+    "EUR",
+    "USD"
+   ]
+  },
+  {
+   "id": "weuro-2022",
+   "series": "weuro",
+   "seriesName": "UEFA Women's Euro",
+   "year": 2022,
+   "name": "UEFA Women's Euro 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Women's Euro 2022",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Women%27s_Euro_2022",
+    "revision": 1383884324
+   },
+   "fields": {
+    "date": {
+     "value": "2022-07-31"
+    },
+    "country": {
+     "value": "England"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of England",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "weuro-2025",
+   "series": "weuro",
+   "seriesName": "UEFA Women's Euro",
+   "year": 2025,
+   "name": "UEFA Women's Euro 2025",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Women's Euro 2025",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Women%27s_Euro_2025",
+    "revision": 1380840840
+   },
+   "fields": {
+    "date": {
+     "value": "2025-07-27"
+    },
+    "country": {
+     "value": "Switzerland"
+    },
+    "currency": {
+     "value": "CHF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Switzerland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "weuro-2029",
+   "series": "weuro",
+   "seriesName": "UEFA Women's Euro",
+   "year": 2029,
+   "name": "UEFA Women's Euro 2029",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "UEFA Women's Euro 2029",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Women%27s_Euro_2029",
+    "revision": 1384922885
+   },
+   "fields": {
+    "country": {
+     "value": "Germany"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Germany",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   }
+  },
+  {
+   "id": "wc-2014",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2014,
+   "name": "FIFA World Cup 2014",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2014 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup",
+    "revision": 1386289950
+   },
+   "fields": {
+    "date": {
+     "value": "2014-06-12"
+    },
+    "country": {
+     "value": "Brazil"
+    },
+    "currency": {
+     "value": "BRL",
+     "from": {
+      "title": "Wikidata: currency (P38) of Brazil",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "wc-2018",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2018,
+   "name": "FIFA World Cup 2018",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2018_FIFA_World_Cup",
+    "revision": 1383879325
+   },
+   "fields": {
+    "date": {
+     "value": "2018-06-14"
+    },
+    "country": {
+     "value": "Russia"
+    },
+    "currency": {
+     "value": "RUB",
+     "from": {
+      "title": "Wikidata: currency (P38) of Russia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "wc-2022",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2022,
+   "name": "FIFA World Cup 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2022_FIFA_World_Cup",
+    "revision": 1385791503
+   },
+   "fields": {
+    "date": {
+     "value": "2022-11-20"
+    },
+    "country": {
+     "value": "Qatar"
+    },
+    "currency": {
+     "value": "QAR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Qatar",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "wc-2026",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2026,
+   "name": "FIFA World Cup 2026",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup",
+    "revision": 1385790092
+   },
+   "fields": {
+    "date": {
+     "value": "2026-06-11"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "hosts": [
+    "Canada",
+    "Mexico",
+    "United States"
+   ]
+  },
+  {
+   "id": "wc-2030",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2030,
+   "name": "FIFA World Cup 2030",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2030 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2030_FIFA_World_Cup",
+    "revision": 1385845121
+   },
+   "fields": {
+    "date": {
+     "value": "2030-06-08"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "hosts": [
+    "Morocco",
+    "Portugal",
+    "Spain"
+   ]
+  },
+  {
+   "id": "wc-2034",
+   "series": "wc",
+   "seriesName": "FIFA World Cup",
+   "year": 2034,
+   "name": "FIFA World Cup 2034",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2034 FIFA World Cup",
+    "url": "https://en.wikipedia.org/wiki/2034_FIFA_World_Cup",
+    "revision": 1386293111
+   },
+   "fields": {
+    "country": {
+     "value": "Saudi Arabia"
+    },
+    "currency": {
+     "value": "SAR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Saudi Arabia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   }
+  },
+  {
+   "id": "wwc-2015",
+   "series": "wwc",
+   "seriesName": "FIFA Women's World Cup",
+   "year": 2015,
+   "name": "FIFA Women's World Cup 2015",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 FIFA Women's World Cup",
+    "url": "https://en.wikipedia.org/wiki/2015_FIFA_Women%27s_World_Cup",
+    "revision": 1385751020
+   },
+   "fields": {
+    "date": {
+     "value": "2015-06-06"
+    },
+    "country": {
+     "value": "Canada"
+    },
+    "currency": {
+     "value": "CAD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Canada",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "wwc-2019",
+   "series": "wwc",
+   "seriesName": "FIFA Women's World Cup",
+   "year": 2019,
+   "name": "FIFA Women's World Cup 2019",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 FIFA Women's World Cup",
+    "url": "https://en.wikipedia.org/wiki/2019_FIFA_Women%27s_World_Cup",
+    "revision": 1385546201
+   },
+   "fields": {
+    "date": {
+     "value": "2019-06-07"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "wwc-2023",
+   "series": "wwc",
+   "seriesName": "FIFA Women's World Cup",
+   "year": 2023,
+   "name": "FIFA Women's World Cup 2023",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 FIFA Women's World Cup",
+    "url": "https://en.wikipedia.org/wiki/2023_FIFA_Women%27s_World_Cup",
+    "revision": 1384235887
+   },
+   "fields": {
+    "date": {
+     "value": "2023-07-20"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "hosts": [
+    "Australia",
+    "New Zealand"
+   ]
+  },
+  {
+   "id": "wwc-2027",
+   "series": "wwc",
+   "seriesName": "FIFA Women's World Cup",
+   "year": 2027,
+   "name": "FIFA Women's World Cup 2027",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 FIFA Women's World Cup",
+    "url": "https://en.wikipedia.org/wiki/2027_FIFA_Women%27s_World_Cup",
+    "revision": 1386284920
+   },
+   "fields": {
+    "date": {
+     "value": "2027-06-24"
+    },
+    "country": {
+     "value": "Brazil"
+    },
+    "currency": {
+     "value": "BRL",
+     "from": {
+      "title": "Wikidata: currency (P38) of Brazil",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "wwc-2031",
+   "series": "wwc",
+   "seriesName": "FIFA Women's World Cup",
+   "year": 2031,
+   "name": "FIFA Women's World Cup 2031",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2031 FIFA Women's World Cup",
+    "url": "https://en.wikipedia.org/wiki/2031_FIFA_Women%27s_World_Cup",
+    "revision": 1385782777
+   },
+   "fields": {},
+   "hosts": [
+    "Costa Rica",
+    "Jamaica",
+    "Mexico",
+    "United States"
+   ]
+  },
+  {
+   "id": "cwc-2025",
+   "series": "cwc",
+   "seriesName": "FIFA Club World Cup",
+   "year": 2025,
+   "name": "FIFA Club World Cup 2025",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 FIFA Club World Cup",
+    "url": "https://en.wikipedia.org/wiki/2025_FIFA_Club_World_Cup",
+    "revision": 1385624184
+   },
+   "fields": {
+    "date": {
+     "value": "2025-06-14"
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "cwc-2029",
+   "series": "cwc",
+   "seriesName": "FIFA Club World Cup",
+   "year": 2029,
+   "name": "FIFA Club World Cup 2029",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2029 FIFA Club World Cup",
+    "url": "https://en.wikipedia.org/wiki/2029_FIFA_Club_World_Cup",
+    "revision": 1386280894
+   },
+   "fields": {}
+  },
+  {
+   "id": "afcon-2019",
+   "series": "afcon",
+   "seriesName": "Africa Cup of Nations",
+   "year": 2019,
+   "name": "Africa Cup of Nations 2019",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 Africa Cup of Nations",
+    "url": "https://en.wikipedia.org/wiki/2019_Africa_Cup_of_Nations",
+    "revision": 1381376489
+   },
+   "fields": {
+    "date": {
+     "value": "2019-06-21"
+    },
+    "country": {
+     "value": "Egypt"
+    },
+    "currency": {
+     "value": "EGP",
+     "from": {
+      "title": "Wikidata: currency (P38) of Egypt",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year"
+  },
+  {
+   "id": "afcon-2021",
+   "series": "afcon",
+   "seriesName": "Africa Cup of Nations",
+   "year": 2021,
+   "name": "Africa Cup of Nations 2021",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2021 Africa Cup of Nations",
+    "url": "https://en.wikipedia.org/wiki/2021_Africa_Cup_of_Nations",
+    "revision": 1377828945
+   },
+   "fields": {
+    "date": {
+     "value": "2022-02-06"
+    },
+    "country": {
+     "value": "Cameroon"
+    },
+    "currency": {
+     "value": "XAF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Cameroon",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   }
+  },
+  {
+   "id": "afcon-2023",
+   "series": "afcon",
+   "seriesName": "Africa Cup of Nations",
+   "year": 2023,
+   "name": "Africa Cup of Nations 2023",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 Africa Cup of Nations",
+    "url": "https://en.wikipedia.org/wiki/2023_Africa_Cup_of_Nations",
+    "revision": 1383879890
+   },
+   "fields": {
+    "date": {
+     "value": "2024-02-11"
+    },
+    "country": {
+     "value": "Ivory Coast"
+    },
+    "currency": {
+     "value": "XOF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Ivory Coast",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   }
+  },
+  {
+   "id": "afcon-2025",
+   "series": "afcon",
+   "seriesName": "Africa Cup of Nations",
+   "year": 2025,
+   "name": "Africa Cup of Nations 2025",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2025 Africa Cup of Nations",
+    "url": "https://en.wikipedia.org/wiki/2025_Africa_Cup_of_Nations",
+    "revision": 1382882934
+   },
+   "fields": {
+    "country": {
+     "value": "Morocco"
+    },
+    "currency": {
+     "value": "MAD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Morocco",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   }
+  },
+  {
+   "id": "afcon-2027",
+   "series": "afcon",
+   "seriesName": "Africa Cup of Nations",
+   "year": 2027,
+   "name": "Africa Cup of Nations 2027",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 Africa Cup of Nations",
+    "url": "https://en.wikipedia.org/wiki/2027_Africa_Cup_of_Nations",
+    "revision": 1386261553
+   },
+   "fields": {
+    "date": {
+     "value": "2027-06-19"
+    }
+   },
+   "dateNote": "First day of the dates field in the infobox, in the edition year",
+   "hosts": [
+    "Kenya",
+    "Tanzania",
+    "Uganda"
+   ]
+  },
+  {
+   "id": "rwc-2015",
+   "series": "rwc",
+   "seriesName": "Rugby World Cup",
+   "year": 2015,
+   "name": "Rugby World Cup 2015",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 Rugby World Cup",
+    "url": "https://en.wikipedia.org/wiki/2015_Rugby_World_Cup",
+    "revision": 1383247045
+   },
+   "fields": {
+    "attendance": {
+     "value": "2477805"
+    }
+   }
+  },
+  {
+   "id": "rwc-2019",
+   "series": "rwc",
+   "seriesName": "Rugby World Cup",
+   "year": 2019,
+   "name": "Rugby World Cup 2019",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 Rugby World Cup",
+    "url": "https://en.wikipedia.org/wiki/2019_Rugby_World_Cup",
+    "revision": 1386185052
+   },
+   "fields": {
+    "attendance": {
+     "value": "1698528"
+    }
+   }
+  },
+  {
+   "id": "rwc-2023",
+   "series": "rwc",
+   "seriesName": "Rugby World Cup",
+   "year": 2023,
+   "name": "Rugby World Cup 2023",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 Rugby World Cup",
+    "url": "https://en.wikipedia.org/wiki/2023_Rugby_World_Cup",
+    "revision": 1386252052
+   },
+   "fields": {}
+  },
+  {
+   "id": "rwc-2027",
+   "series": "rwc",
+   "seriesName": "Rugby World Cup",
+   "year": 2027,
+   "name": "Rugby World Cup 2027",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 Rugby World Cup",
+    "url": "https://en.wikipedia.org/wiki/2027_Rugby_World_Cup",
+    "revision": 1384965771
+   },
+   "fields": {}
+  },
+  {
+   "id": "rwc-2031",
+   "series": "rwc",
+   "seriesName": "Rugby World Cup",
+   "year": 2031,
+   "name": "Rugby World Cup 2031",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2031 Men's Rugby World Cup",
+    "url": "https://en.wikipedia.org/wiki/2031_Men%27s_Rugby_World_Cup",
+    "revision": 1384717279
+   },
+   "fields": {}
+  },
+  {
+   "id": "cricket-2015",
+   "series": "cricket",
+   "seriesName": "Cricket World Cup",
+   "year": 2015,
+   "name": "Cricket World Cup 2015",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 Cricket World Cup",
+    "url": "https://en.wikipedia.org/wiki/2015_Cricket_World_Cup",
+    "revision": 1383879126
+   },
+   "fields": {
+    "attendance": {
+     "value": "1016420"
+    }
+   }
+  },
+  {
+   "id": "cricket-2019",
+   "series": "cricket",
+   "seriesName": "Cricket World Cup",
+   "year": 2019,
+   "name": "Cricket World Cup 2019",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 Cricket World Cup",
+    "url": "https://en.wikipedia.org/wiki/2019_Cricket_World_Cup",
+    "revision": 1385466017
+   },
+   "fields": {
+    "attendance": {
+     "value": "752000"
+    }
+   }
+  },
+  {
+   "id": "cricket-2023",
+   "series": "cricket",
+   "seriesName": "Cricket World Cup",
+   "year": 2023,
+   "name": "Cricket World Cup 2023",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 Cricket World Cup",
+    "url": "https://en.wikipedia.org/wiki/2023_Cricket_World_Cup",
+    "revision": 1378830607
+   },
+   "fields": {
+    "attendance": {
+     "value": "1250307"
+    }
+   }
+  },
+  {
+   "id": "cricket-2027",
+   "series": "cricket",
+   "seriesName": "Cricket World Cup",
+   "year": 2027,
+   "name": "Cricket World Cup 2027",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 Cricket World Cup",
+    "url": "https://en.wikipedia.org/wiki/2027_Cricket_World_Cup",
+    "revision": 1382655343
+   },
+   "fields": {}
+  },
+  {
+   "id": "summer-2012",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2012,
+   "name": "Summer Olympics 2012",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2012 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2012_Summer_Olympics",
+    "revision": 1385798960
+   },
+   "fields": {
+    "date": {
+     "value": "2012-07-27"
+    },
+    "venue": {
+     "value": "Olympic Stadium"
+    },
+    "city": {
+     "value": "London"
+    },
+    "capacity": {
+     "value": 62500,
+     "cite": {
+      "url": "https://www.whufc.com/news/important-supporter-update-capacity-increase-west-stand-reconfiguration-202223-ticketing",
+      "title": "Important supporter update – capacity increase, West Stand reconfiguration & 2022/23 ticketing {{pipe",
+      "work": "Whufc.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "London Stadium",
+      "url": "https://en.wikipedia.org/wiki/London_Stadium",
+      "revision": 1385930381
+     }
+    },
+    "country": {
+     "value": "E20 2ST"
+    }
+   },
+   "venueRef": "London Stadium"
+  },
+  {
+   "id": "summer-2016",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2016,
+   "name": "Summer Olympics 2016",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2016 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2016_Summer_Olympics",
+    "revision": 1386202212
+   },
+   "fields": {
+    "date": {
+     "value": "2016-08-05"
+    },
+    "venue": {
+     "value": "Estádio do Maracanã"
+    },
+    "city": {
+     "value": "Rio de Janeiro"
+    },
+    "capacity": {
+     "value": 73139,
+     "cite": {
+      "url": "https://digitalhub.fifa.com/m/7dad0d3009710ee7/original/The-Brazilian-Bid-Book-FIFA-Women-s-World-Cup-2027.pdf",
+      "title": "The Brazilian Bid for the FIFA Women's World Cup 2027",
+      "work": "FIFA",
+      "date": "8 December 2023",
+      "archive": ""
+     },
+     "from": {
+      "title": "Maracanã Stadium",
+      "url": "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
+      "revision": 1385584231
+     }
+    },
+    "country": {
+     "value": "Brazil"
+    },
+    "currency": {
+     "value": "BRL",
+     "from": {
+      "title": "Wikidata: currency (P38) of Brazil",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Estádio do Maracanã"
+  },
+  {
+   "id": "summer-2020",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2020,
+   "name": "Summer Olympics 2020",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2020 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2020_Summer_Olympics",
+    "revision": 1385799313
+   },
+   "fields": {
+    "venue": {
+     "value": "Japan National Stadium"
+    },
+    "city": {
+     "value": "Tokyo"
+    },
+    "capacity": {
+     "value": 67750,
+     "cite": {
+      "url": "https://jns-e.com/stadium/facility/",
+      "title": "施設概要",
+      "work": "MUFGスタジアム公式サイト",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Japan National Stadium",
+      "url": "https://en.wikipedia.org/wiki/Japan_National_Stadium",
+      "revision": 1378899630
+     }
+    },
+    "country": {
+     "value": "Japan"
+    },
+    "currency": {
+     "value": "JPY",
+     "from": {
+      "title": "Wikidata: currency (P38) of Japan",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Japan National Stadium"
+  },
+  {
+   "id": "summer-2024",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2024,
+   "name": "Summer Olympics 2024",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2024_Summer_Olympics",
+    "revision": 1385798686
+   },
+   "fields": {
+    "date": {
+     "value": "2024-07-26"
+    },
+    "venue": {
+     "value": "Jardins du Trocadéro"
+    },
+    "city": {
+     "value": "Paris"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "venueRef": "Jardins du Trocadéro",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "summer-2028",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2028,
+   "name": "Summer Olympics 2028",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2028_Summer_Olympics",
+    "revision": 1386021684
+   },
+   "fields": {
+    "date": {
+     "value": "2028-07-14"
+    },
+    "venue": {
+     "value": "Los Angeles Memorial Coliseum"
+    },
+    "city": {
+     "value": "Los Angeles"
+    },
+    "capacity": {
+     "value": 77500,
+     "cite": {
+      "url": "http://www.usctrojans.com/facilities/usc-memorial-coliseum.html",
+      "title": "Memorial Coliseum",
+      "work": "University of Southern California",
+      "date": "",
+      "archive": "https://web.archive.org/web/20100302205334/http://www.usctrojans.com/facilities/usc-memorial-coliseum.html"
+     },
+     "from": {
+      "title": "Los Angeles Memorial Coliseum",
+      "url": "https://en.wikipedia.org/wiki/Los_Angeles_Memorial_Coliseum",
+      "revision": 1386294329
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Los Angeles Memorial Coliseum"
+  },
+  {
+   "id": "summer-2032",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2032,
+   "name": "Summer Olympics 2032",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2032 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/2032_Summer_Olympics",
+    "revision": 1386172275
+   },
+   "fields": {
+    "date": {
+     "value": "2032-07-23"
+    },
+    "venue": {
+     "value": "Brisbane Stadium"
+    },
+    "city": {
+     "value": "Brisbane"
+    },
+    "capacity": {
+     "value": 63000,
+     "from": {
+      "title": "Brisbane Stadium",
+      "url": "https://en.wikipedia.org/wiki/Brisbane_Stadium",
+      "revision": 1385990876
+     }
+    },
+    "country": {
+     "value": "Australia"
+    },
+    "currency": {
+     "value": "AUD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Australia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Brisbane Stadium"
+  },
+  {
+   "id": "summer-2036",
+   "series": "summer",
+   "seriesName": "Summer Olympics",
+   "year": 2036,
+   "name": "Summer Olympics 2036",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Bids for the 2036 Summer Olympics",
+    "url": "https://en.wikipedia.org/wiki/Bids_for_the_2036_Summer_Olympics",
+    "revision": 1386273818
+   },
+   "fields": {}
+  },
+  {
+   "id": "winter-2014",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2014,
+   "name": "Winter Olympics 2014",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2014 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2014_Winter_Olympics",
+    "revision": 1383879109
+   },
+   "fields": {
+    "date": {
+     "value": "2014-02-07"
+    },
+    "venue": {
+     "value": "Fisht Olympic Stadium"
+    },
+    "city": {
+     "value": "Sochi"
+    },
+    "capacity": {
+     "value": 45994,
+     "cite": {
+      "url": "https://premierliga.ru/clubs/sochi/?category=stadium",
+      "title": "Сочи Футбольный клуб | РПЛ",
+      "work": "Premierliga.ru",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Fisht Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium",
+      "revision": 1381756906
+     }
+    },
+    "country": {
+     "value": "Russia"
+    },
+    "currency": {
+     "value": "RUB",
+     "from": {
+      "title": "Wikidata: currency (P38) of Russia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Fisht Olympic Stadium"
+  },
+  {
+   "id": "winter-2018",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2018,
+   "name": "Winter Olympics 2018",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2018_Winter_Olympics",
+    "revision": 1385801727
+   },
+   "fields": {
+    "date": {
+     "value": "2018-02-09"
+    },
+    "venue": {
+     "value": "Pyeongchang Olympic Stadium"
+    },
+    "city": {
+     "value": "Pyeongchang"
+    },
+    "capacity": {
+     "value": 35000,
+     "cite": {
+      "url": "http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/",
+      "title": "PyeongChang Olympic Stadium : PyeongChang 2018 Venue",
+      "work": "",
+      "date": "",
+      "archive": "https://web.archive.org/web/20180216075001/http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/"
+     },
+     "from": {
+      "title": "Pyeongchang Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Pyeongchang_Olympic_Stadium",
+      "revision": 1372222379
+     }
+    },
+    "country": {
+     "value": "South Korea"
+    },
+    "currency": {
+     "value": "KRW",
+     "from": {
+      "title": "Wikidata: currency (P38) of South Korea",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Pyeongchang Olympic Stadium"
+  },
+  {
+   "id": "winter-2022",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2022,
+   "name": "Winter Olympics 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2022_Winter_Olympics",
+    "revision": 1386185337
+   },
+   "fields": {
+    "date": {
+     "value": "2022-02-04"
+    },
+    "venue": {
+     "value": "Beijing National Stadium"
+    },
+    "city": {
+     "value": "Beijing"
+    },
+    "capacity": {
+     "value": 91000,
+     "cite": {
+      "url": "https://www.n-s.cn/enshownews.jsp?type1=20",
+      "title": "[https://www.n-s.cn/enshownews.jsp?type1=20]",
+      "work": "",
+      "date": "July 2026",
+      "archive": ""
+     },
+     "from": {
+      "title": "Beijing National Stadium",
+      "url": "https://en.wikipedia.org/wiki/Beijing_National_Stadium",
+      "revision": 1383816290
+     }
+    },
+    "country": {
+     "value": "China"
+    }
+   },
+   "venueRef": "Beijing National Stadium"
+  },
+  {
+   "id": "winter-2026",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2026,
+   "name": "Winter Olympics 2026",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2026_Winter_Olympics",
+    "revision": 1385802185
+   },
+   "fields": {
+    "date": {
+     "value": "2026-02-06"
+    },
+    "venue": {
+     "value": "Stadio San Siro"
+    },
+    "city": {
+     "value": "Milan and Cortina d'Ampezzo"
+    },
+    "capacity": {
+     "value": 75817,
+     "cite": {
+      "url": "https://www.sansirostadium.com/en/stadium/Structure",
+      "title": "Structure",
+      "work": "sansirostadium.com",
+      "date": "",
+      "archive": "https://web.archive.org/web/20221207043417/https://www.sansirostadium.com/en/stadium/Structure"
+     },
+     "from": {
+      "title": "San Siro",
+      "url": "https://en.wikipedia.org/wiki/San_Siro",
+      "revision": 1384793549
+     }
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Stadio San Siro"
+  },
+  {
+   "id": "winter-2030",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2030,
+   "name": "Winter Olympics 2030",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2030 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2030_Winter_Olympics",
+    "revision": 1386273033
+   },
+   "fields": {
+    "date": {
+     "value": "2030-02-01"
+    },
+    "city": {
+     "value": "French Alps"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "winter-2034",
+   "series": "winter",
+   "seriesName": "Winter Olympics",
+   "year": 2034,
+   "name": "Winter Olympics 2034",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2034 Winter Olympics",
+    "url": "https://en.wikipedia.org/wiki/2034_Winter_Olympics",
+    "revision": 1383205154
+   },
+   "fields": {
+    "date": {
+     "value": "2034-02-10"
+    },
+    "venue": {
+     "value": "Rice–Eccles Stadium"
+    },
+    "city": {
+     "value": "Utah"
+    },
+    "capacity": {
+     "value": 54383,
+     "cite": {
+      "url": "https://utahutes.com/facilities/rice-eccles-stadium/3",
+      "title": "Rice-Eccles Stadium - Facilities - University of Utah Athletics",
+      "work": "University of Utah Athletics Department",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Rice–Eccles Stadium",
+      "url": "https://en.wikipedia.org/wiki/Rice%E2%80%93Eccles_Stadium",
+      "revision": 1385311114
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Rice–Eccles Stadium"
+  },
+  {
+   "id": "spara-2012",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2012,
+   "name": "Summer Paralympics 2012",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2012 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2012_Summer_Paralympics",
+    "revision": 1385800028
+   },
+   "fields": {
+    "date": {
+     "value": "2012-08-29"
+    },
+    "venue": {
+     "value": "Olympic Stadium"
+    },
+    "city": {
+     "value": "London"
+    },
+    "capacity": {
+     "value": 62500,
+     "cite": {
+      "url": "https://www.whufc.com/news/important-supporter-update-capacity-increase-west-stand-reconfiguration-202223-ticketing",
+      "title": "Important supporter update – capacity increase, West Stand reconfiguration & 2022/23 ticketing {{pipe",
+      "work": "Whufc.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "London Stadium",
+      "url": "https://en.wikipedia.org/wiki/London_Stadium",
+      "revision": 1385930381
+     }
+    },
+    "country": {
+     "value": "E20 2ST"
+    }
+   },
+   "venueRef": "London Stadium"
+  },
+  {
+   "id": "spara-2016",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2016,
+   "name": "Summer Paralympics 2016",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2016 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2016_Summer_Paralympics",
+    "revision": 1385656329
+   },
+   "fields": {
+    "date": {
+     "value": "2016-09-07"
+    },
+    "venue": {
+     "value": "Estádio do Maracanã"
+    },
+    "city": {
+     "value": "Rio de Janeiro"
+    },
+    "capacity": {
+     "value": 73139,
+     "cite": {
+      "url": "https://digitalhub.fifa.com/m/7dad0d3009710ee7/original/The-Brazilian-Bid-Book-FIFA-Women-s-World-Cup-2027.pdf",
+      "title": "The Brazilian Bid for the FIFA Women's World Cup 2027",
+      "work": "FIFA",
+      "date": "8 December 2023",
+      "archive": ""
+     },
+     "from": {
+      "title": "Maracanã Stadium",
+      "url": "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
+      "revision": 1385584231
+     }
+    },
+    "country": {
+     "value": "Brazil"
+    },
+    "currency": {
+     "value": "BRL",
+     "from": {
+      "title": "Wikidata: currency (P38) of Brazil",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Maracanã Stadium"
+  },
+  {
+   "id": "spara-2020",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2020,
+   "name": "Summer Paralympics 2020",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2020 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2020_Summer_Paralympics",
+    "revision": 1385800159
+   },
+   "fields": {
+    "date": {
+     "value": "2021-08-24"
+    },
+    "venue": {
+     "value": "Japan National Stadium"
+    },
+    "city": {
+     "value": "Tokyo"
+    },
+    "capacity": {
+     "value": 67750,
+     "cite": {
+      "url": "https://jns-e.com/stadium/facility/",
+      "title": "施設概要",
+      "work": "MUFGスタジアム公式サイト",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Japan National Stadium",
+      "url": "https://en.wikipedia.org/wiki/Japan_National_Stadium",
+      "revision": 1378899630
+     }
+    },
+    "country": {
+     "value": "Japan"
+    },
+    "currency": {
+     "value": "JPY",
+     "from": {
+      "title": "Wikidata: currency (P38) of Japan",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Japan National Stadium"
+  },
+  {
+   "id": "spara-2024",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2024,
+   "name": "Summer Paralympics 2024",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2024 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2024_Summer_Paralympics",
+    "revision": 1385800309
+   },
+   "fields": {
+    "date": {
+     "value": "2024-08-28"
+    },
+    "venue": {
+     "value": "Place de la Concorde"
+    },
+    "city": {
+     "value": "Paris"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "venueRef": "Place de la Concorde",
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "spara-2028",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2028,
+   "name": "Summer Paralympics 2028",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2028 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2028_Summer_Paralympics",
+    "revision": 1385800567
+   },
+   "fields": {
+    "date": {
+     "value": "2028-08-15"
+    },
+    "venue": {
+     "value": "Los Angeles Memorial Coliseum"
+    },
+    "city": {
+     "value": "Los Angeles"
+    },
+    "capacity": {
+     "value": 77500,
+     "cite": {
+      "url": "http://www.usctrojans.com/facilities/usc-memorial-coliseum.html",
+      "title": "Memorial Coliseum",
+      "work": "University of Southern California",
+      "date": "",
+      "archive": "https://web.archive.org/web/20100302205334/http://www.usctrojans.com/facilities/usc-memorial-coliseum.html"
+     },
+     "from": {
+      "title": "Los Angeles Memorial Coliseum",
+      "url": "https://en.wikipedia.org/wiki/Los_Angeles_Memorial_Coliseum",
+      "revision": 1386294329
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Los Angeles Memorial Coliseum"
+  },
+  {
+   "id": "spara-2032",
+   "series": "spara",
+   "seriesName": "Summer Paralympics",
+   "year": 2032,
+   "name": "Summer Paralympics 2032",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2032 Summer Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2032_Summer_Paralympics",
+    "revision": 1385922776
+   },
+   "fields": {
+    "date": {
+     "value": "2032-08-24"
+    },
+    "venue": {
+     "value": "Brisbane Stadium"
+    },
+    "city": {
+     "value": "Brisbane"
+    },
+    "capacity": {
+     "value": 63000,
+     "from": {
+      "title": "Brisbane Stadium",
+      "url": "https://en.wikipedia.org/wiki/Brisbane_Stadium",
+      "revision": 1385990876
+     }
+    },
+    "country": {
+     "value": "Australia"
+    },
+    "currency": {
+     "value": "AUD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Australia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Brisbane Stadium"
+  },
+  {
+   "id": "wpara-2014",
+   "series": "wpara",
+   "seriesName": "Winter Paralympics",
+   "year": 2014,
+   "name": "Winter Paralympics 2014",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2014 Winter Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2014_Winter_Paralympics",
+    "revision": 1376897754
+   },
+   "fields": {
+    "date": {
+     "value": "2014-03-07"
+    },
+    "venue": {
+     "value": "Fisht Olympic Stadium"
+    },
+    "city": {
+     "value": "Sochi"
+    },
+    "capacity": {
+     "value": 45994,
+     "cite": {
+      "url": "https://premierliga.ru/clubs/sochi/?category=stadium",
+      "title": "Сочи Футбольный клуб | РПЛ",
+      "work": "Premierliga.ru",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Fisht Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium",
+      "revision": 1381756906
+     }
+    },
+    "country": {
+     "value": "Russia"
+    },
+    "currency": {
+     "value": "RUB",
+     "from": {
+      "title": "Wikidata: currency (P38) of Russia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Fisht Olympic Stadium"
+  },
+  {
+   "id": "wpara-2018",
+   "series": "wpara",
+   "seriesName": "Winter Paralympics",
+   "year": 2018,
+   "name": "Winter Paralympics 2018",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 Winter Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2018_Winter_Paralympics",
+    "revision": 1383769477
+   },
+   "fields": {
+    "date": {
+     "value": "2018-03-09"
+    },
+    "venue": {
+     "value": "Pyeongchang Olympic Stadium"
+    },
+    "city": {
+     "value": "Pyeongchang"
+    },
+    "capacity": {
+     "value": 35000,
+     "cite": {
+      "url": "http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/",
+      "title": "PyeongChang Olympic Stadium : PyeongChang 2018 Venue",
+      "work": "",
+      "date": "",
+      "archive": "https://web.archive.org/web/20180216075001/http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/"
+     },
+     "from": {
+      "title": "Pyeongchang Olympic Stadium",
+      "url": "https://en.wikipedia.org/wiki/Pyeongchang_Olympic_Stadium",
+      "revision": 1372222379
+     }
+    },
+    "country": {
+     "value": "South Korea"
+    },
+    "currency": {
+     "value": "KRW",
+     "from": {
+      "title": "Wikidata: currency (P38) of South Korea",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Pyeongchang Olympic Stadium"
+  },
+  {
+   "id": "wpara-2022",
+   "series": "wpara",
+   "seriesName": "Winter Paralympics",
+   "year": 2022,
+   "name": "Winter Paralympics 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 Winter Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2022_Winter_Paralympics",
+    "revision": 1364298231
+   },
+   "fields": {
+    "date": {
+     "value": "2022-03-04"
+    },
+    "venue": {
+     "value": "Beijing National Stadium"
+    },
+    "city": {
+     "value": "Beijing"
+    },
+    "capacity": {
+     "value": 91000,
+     "cite": {
+      "url": "https://www.n-s.cn/enshownews.jsp?type1=20",
+      "title": "[https://www.n-s.cn/enshownews.jsp?type1=20]",
+      "work": "",
+      "date": "July 2026",
+      "archive": ""
+     },
+     "from": {
+      "title": "Beijing National Stadium",
+      "url": "https://en.wikipedia.org/wiki/Beijing_National_Stadium",
+      "revision": 1383816290
+     }
+    },
+    "country": {
+     "value": "China"
+    }
+   },
+   "venueRef": "Beijing National Stadium"
+  },
+  {
+   "id": "wpara-2026",
+   "series": "wpara",
+   "seriesName": "Winter Paralympics",
+   "year": 2026,
+   "name": "Winter Paralympics 2026",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 Winter Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2026_Winter_Paralympics",
+    "revision": 1385801112
+   },
+   "fields": {
+    "date": {
+     "value": "2026-03-06"
+    },
+    "venue": {
+     "value": "Verona Arena"
+    },
+    "city": {
+     "value": "Milan and Cortina d'Ampezzo"
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Verona Arena"
+  },
+  {
+   "id": "wpara-2030",
+   "series": "wpara",
+   "seriesName": "Winter Paralympics",
+   "year": 2030,
+   "name": "Winter Paralympics 2030",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2030 Winter Paralympics",
+    "url": "https://en.wikipedia.org/wiki/2030_Winter_Paralympics",
+    "revision": 1370088964
+   },
+   "fields": {
+    "date": {
+     "value": "2030-03-01"
+    },
+    "city": {
+     "value": "French Alps"
+    },
+    "country": {
+     "value": "France"
+    }
+   },
+   "currencyOptions": [
+    "EUR",
+    "XPF"
+   ]
+  },
+  {
+   "id": "cwg-2014",
+   "series": "cwg",
+   "seriesName": "Commonwealth Games",
+   "year": 2014,
+   "name": "Commonwealth Games 2014",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2014 Commonwealth Games",
+    "url": "https://en.wikipedia.org/wiki/2014_Commonwealth_Games",
+    "revision": 1385902152
+   },
+   "fields": {
+    "date": {
+     "value": "2014-07-23"
+    },
+    "venue": {
+     "value": "Celtic Park"
+    },
+    "city": {
+     "value": "Glasgow"
+    },
+    "country": {
+     "value": "Scotland"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of Scotland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Celtic Park"
+  },
+  {
+   "id": "cwg-2018",
+   "series": "cwg",
+   "seriesName": "Commonwealth Games",
+   "year": 2018,
+   "name": "Commonwealth Games 2018",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 Commonwealth Games",
+    "url": "https://en.wikipedia.org/wiki/2018_Commonwealth_Games",
+    "revision": 1386227398
+   },
+   "fields": {
+    "date": {
+     "value": "2018-04-04"
+    },
+    "venue": {
+     "value": "Carrara Stadium"
+    },
+    "city": {
+     "value": "Gold Coast"
+    },
+    "capacity": {
+     "value": 50000,
+     "cite": {
+      "url": "http://www.mygc.com.au/gold-coasts-queen-concert-deemed-a-7m-success/",
+      "title": "Gold Coast's QUEEN concert deemed a $7M success",
+      "work": "myGC.com.au",
+      "date": "2 March 2020",
+      "archive": ""
+     },
+     "from": {
+      "title": "Carrara Stadium",
+      "url": "https://en.wikipedia.org/wiki/Carrara_Stadium",
+      "revision": 1385969335
+     }
+    },
+    "country": {
+     "value": "Queensland"
+    }
+   },
+   "venueRef": "Carrara Stadium"
+  },
+  {
+   "id": "cwg-2022",
+   "series": "cwg",
+   "seriesName": "Commonwealth Games",
+   "year": 2022,
+   "name": "Commonwealth Games 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 Commonwealth Games",
+    "url": "https://en.wikipedia.org/wiki/2022_Commonwealth_Games",
+    "revision": 1386223082
+   },
+   "fields": {
+    "date": {
+     "value": "2022-07-28"
+    },
+    "venue": {
+     "value": "Alexander Stadium"
+    },
+    "city": {
+     "value": "Perry Park"
+    },
+    "capacity": {
+     "value": 18000,
+     "from": {
+      "title": "Alexander Stadium",
+      "url": "https://en.wikipedia.org/wiki/Alexander_Stadium",
+      "revision": 1381706913
+     }
+    },
+    "country": {
+     "value": "Birmingham"
+    }
+   },
+   "venueRef": "Alexander Stadium"
+  },
+  {
+   "id": "cwg-2026",
+   "series": "cwg",
+   "seriesName": "Commonwealth Games",
+   "year": 2026,
+   "name": "Commonwealth Games 2026",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 Commonwealth Games",
+    "url": "https://en.wikipedia.org/wiki/2026_Commonwealth_Games",
+    "revision": 1383638531
+   },
+   "fields": {
+    "date": {
+     "value": "2026-07-23"
+    },
+    "venue": {
+     "value": "The Hydro"
+    },
+    "capacity": {
+     "value": 12306,
+     "from": {
+      "title": "OVO Hydro",
+      "url": "https://en.wikipedia.org/wiki/OVO_Hydro",
+      "revision": 1382925450
+     }
+    }
+   },
+   "venueRef": "OVO Hydro"
+  },
+  {
+   "id": "cwg-2030",
+   "series": "cwg",
+   "seriesName": "Commonwealth Games",
+   "year": 2030,
+   "name": "Commonwealth Games 2030",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2030 Commonwealth Games",
+    "url": "https://en.wikipedia.org/wiki/2030_Commonwealth_Games",
+    "revision": 1385902917
+   },
+   "fields": {
+    "venue": {
+     "value": "Narendra Modi Stadium"
+    },
+    "city": {
+     "value": "Ahmedabad"
+    },
+    "capacity": {
+     "value": 132000,
+     "cite": {
+      "url": "https://www.bbc.com/news/world-asia-india-66991540",
+      "title": "An epic battle in Narendra Modi Stadium",
+      "work": "BBC News",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Narendra Modi Stadium",
+      "url": "https://en.wikipedia.org/wiki/Narendra_Modi_Stadium",
+      "revision": 1381737562
+     }
+    },
+    "country": {
+     "value": "India"
+    },
+    "currency": {
+     "value": "INR",
+     "from": {
+      "title": "Wikidata: currency (P38) of India",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Narendra Modi Stadium"
+  },
+  {
+   "id": "asian-2014",
+   "series": "asian",
+   "seriesName": "Asian Games",
+   "year": 2014,
+   "name": "Asian Games 2014",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2014 Asian Games",
+    "url": "https://en.wikipedia.org/wiki/2014_Asian_Games",
+    "revision": 1381235774
+   },
+   "fields": {
+    "date": {
+     "value": "2014-09-19"
+    },
+    "venue": {
+     "value": "Incheon Asiad Main Stadium"
+    },
+    "city": {
+     "value": "Incheon"
+    },
+    "capacity": {
+     "value": 29465,
+     "cite": {
+      "url": "https://web.archive.org/web/20140708010103/http://www.incheon2014apg.org/open_content/eng/stadium/seogu.jsp",
+      "title": "",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Incheon Asiad Main Stadium",
+      "url": "https://en.wikipedia.org/wiki/Incheon_Asiad_Main_Stadium",
+      "revision": 1381783359
+     }
+    },
+    "country": {
+     "value": "South Korea"
+    },
+    "currency": {
+     "value": "KRW",
+     "from": {
+      "title": "Wikidata: currency (P38) of South Korea",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Incheon Asiad Main Stadium"
+  },
+  {
+   "id": "asian-2018",
+   "series": "asian",
+   "seriesName": "Asian Games",
+   "year": 2018,
+   "name": "Asian Games 2018",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2018 Asian Games",
+    "url": "https://en.wikipedia.org/wiki/2018_Asian_Games",
+    "revision": 1384395949
+   },
+   "fields": {
+    "date": {
+     "value": "2018-08-18"
+    },
+    "venue": {
+     "value": "Gelora Bung Karno Main Stadium"
+    },
+    "city": {
+     "value": "Jakarta and Palembang"
+    },
+    "capacity": {
+     "value": 77193,
+     "cite": {
+      "url": "https://reservation.gbk.id/venue/id_stadion-utama-gelora-bung-karno",
+      "title": "E-Booking Stadion Utama Gelora Bung Karno",
+      "work": "gbk.id",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Gelora Bung Karno Stadium",
+      "url": "https://en.wikipedia.org/wiki/Gelora_Bung_Karno_Stadium",
+      "revision": 1385335160
+     }
+    },
+    "country": {
+     "value": "Indonesia"
+    },
+    "currency": {
+     "value": "IDR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Indonesia",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Gelora Bung Karno Stadium"
+  },
+  {
+   "id": "asian-2022",
+   "series": "asian",
+   "seriesName": "Asian Games",
+   "year": 2022,
+   "name": "Asian Games 2022",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2022 Asian Games",
+    "url": "https://en.wikipedia.org/wiki/2022_Asian_Games",
+    "revision": 1381080266
+   },
+   "fields": {
+    "date": {
+     "value": "2023-09-23"
+    },
+    "venue": {
+     "value": "Hangzhou Sports Park Stadium"
+    },
+    "city": {
+     "value": "Hangzhou"
+    },
+    "capacity": {
+     "value": 80000,
+     "from": {
+      "title": "Hangzhou Olympic Expo Center",
+      "url": "https://en.wikipedia.org/wiki/Hangzhou_Olympic_Expo_Center",
+      "revision": 1377787678
+     }
+    },
+    "country": {
+     "value": "China"
+    }
+   },
+   "venueRef": "Hangzhou Olympic Sports Expo Center"
+  },
+  {
+   "id": "asian-2026",
+   "series": "asian",
+   "seriesName": "Asian Games",
+   "year": 2026,
+   "name": "Asian Games 2026",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2026 Asian Games",
+    "url": "https://en.wikipedia.org/wiki/2026_Asian_Games",
+    "revision": 1385493440
+   },
+   "fields": {
+    "date": {
+     "value": "2026-09-19"
+    },
+    "venue": {
+     "value": "Paloma Mizuho Stadium"
+    },
+    "city": {
+     "value": "Aichi Prefecture and Nagoya"
+    },
+    "capacity": {
+     "value": 30000,
+     "from": {
+      "title": "Paloma Mizuho Stadium (2026)",
+      "url": "https://en.wikipedia.org/wiki/Paloma_Mizuho_Stadium_%282026%29",
+      "revision": 1381810415
+     }
+    },
+    "country": {
+     "value": "Japan"
+    },
+    "currency": {
+     "value": "JPY",
+     "from": {
+      "title": "Wikidata: currency (P38) of Japan",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Paloma Mizuho Stadium (2026)"
+  },
+  {
+   "id": "asian-2030",
+   "series": "asian",
+   "seriesName": "Asian Games",
+   "year": 2030,
+   "name": "Asian Games 2030",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2030 Asian Games",
+    "url": "https://en.wikipedia.org/wiki/2030_Asian_Games",
+    "revision": 1380171454
+   },
+   "fields": {
+    "date": {
+     "value": "2030-11-04"
+    },
+    "venue": {
+     "value": "Khalifa International Stadium"
+    },
+    "city": {
+     "value": "Doha"
+    },
+    "capacity": {
+     "value": 45857,
+     "from": {
+      "title": "Khalifa International Stadium",
+      "url": "https://en.wikipedia.org/wiki/Khalifa_International_Stadium",
+      "revision": 1372210129
+     }
+    },
+    "country": {
+     "value": "Qatar"
+    },
+    "currency": {
+     "value": "QAR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Qatar",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Khalifa International Stadium"
+  },
+  {
+   "id": "pan-2015",
+   "series": "pan",
+   "seriesName": "Pan American Games",
+   "year": 2015,
+   "name": "Pan American Games 2015",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2015 Pan American Games",
+    "url": "https://en.wikipedia.org/wiki/2015_Pan_American_Games",
+    "revision": 1383879159
+   },
+   "fields": {
+    "venue": {
+     "value": "Pan Am Dome"
+    },
+    "city": {
+     "value": "Toronto"
+    },
+    "capacity": {
+     "value": 39150,
+     "from": {
+      "title": "Rogers Centre",
+      "url": "https://en.wikipedia.org/wiki/Rogers_Centre",
+      "revision": 1385928528
+     }
+    },
+    "country": {
+     "value": "Canada"
+    },
+    "currency": {
+     "value": "CAD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Canada",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Rogers Centre"
+  },
+  {
+   "id": "pan-2019",
+   "series": "pan",
+   "seriesName": "Pan American Games",
+   "year": 2019,
+   "name": "Pan American Games 2019",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2019 Pan American Games",
+    "url": "https://en.wikipedia.org/wiki/2019_Pan_American_Games",
+    "revision": 1374859361
+   },
+   "fields": {
+    "venue": {
+     "value": "National Stadium of Peru"
+    },
+    "city": {
+     "value": "Lima"
+    },
+    "capacity": {
+     "value": 40272,
+     "from": {
+      "title": "National Stadium of Peru",
+      "url": "https://en.wikipedia.org/wiki/National_Stadium_of_Peru",
+      "revision": 1384432290
+     }
+    },
+    "country": {
+     "value": "Peru"
+    },
+    "currency": {
+     "value": "PEN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Peru",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "National Stadium of Peru"
+  },
+  {
+   "id": "pan-2023",
+   "series": "pan",
+   "seriesName": "Pan American Games",
+   "year": 2023,
+   "name": "Pan American Games 2023",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2023 Pan American Games",
+    "url": "https://en.wikipedia.org/wiki/2023_Pan_American_Games",
+    "revision": 1377232484
+   },
+   "fields": {
+    "venue": {
+     "value": "Estadio Nacional Julio Martínez Prádanos"
+    },
+    "city": {
+     "value": "Santiago"
+    },
+    "capacity": {
+     "value": 48745,
+     "cite": {
+      "url": "https://parqueestadionacional.cl/?page_id=24",
+      "title": "Estadio Nacional Julio Martínez Prádanos",
+      "work": "",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Julio Martínez Prádanos National Stadium",
+      "url": "https://en.wikipedia.org/wiki/Julio_Mart%C3%ADnez_Pr%C3%A1danos_National_Stadium",
+      "revision": 1383906115
+     }
+    },
+    "country": {
+     "value": "Chile"
+    }
+   },
+   "venueRef": "Estadio Nacional Julio Martínez Prádanos",
+   "currencyOptions": [
+    "CLF",
+    "CLP"
+   ]
+  },
+  {
+   "id": "pan-2027",
+   "series": "pan",
+   "seriesName": "Pan American Games",
+   "year": 2027,
+   "name": "Pan American Games 2027",
+   "eventType": "Tournament opening ceremony",
+   "venueType": "Stadium",
+   "source": {
+    "title": "2027 Pan American Games",
+    "url": "https://en.wikipedia.org/wiki/2027_Pan_American_Games",
+    "revision": 1385278975
+   },
+   "fields": {
+    "date": {
+     "value": "2027-07-23"
+    },
+    "venue": {
+     "value": "National Stadium of Peru"
+    },
+    "capacity": {
+     "value": 40272,
+     "from": {
+      "title": "National Stadium of Peru",
+      "url": "https://en.wikipedia.org/wiki/National_Stadium_of_Peru",
+      "revision": 1384432290
+     }
+    },
+    "city": {
+     "value": "Lima"
+    },
+    "country": {
+     "value": "Peru"
+    },
+    "currency": {
+     "value": "PEN",
+     "from": {
+      "title": "Wikidata: currency (P38) of Peru",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "National Stadium of Peru"
+  },
+  {
+   "id": "sb-2015",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2015,
+   "name": "Super Bowl XLIX (2015)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl XLIX",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_XLIX",
+    "revision": 1384203660
+   },
+   "fields": {
+    "date": {
+     "value": "2015-02-01"
+    },
+    "venue": {
+     "value": "University of Phoenix Stadium"
+    },
+    "city": {
+     "value": "Glendale"
+    },
+    "attendance": {
+     "value": "70,288",
+     "cite": {
+      "url": "https://www.startribune.com/chart-super-bowl-xlix-by-the-numbers/290500001/",
+      "title": "Chart: Super Bowl XLIX by the numbers",
+      "work": "Star Tribune",
+      "date": "February 2, 2015",
+      "archive": "https://web.archive.org/web/20240612184705/https://www.startribune.com/chart-super-bowl-xlix-by-the-numbers/290500001/"
+     }
+    },
+    "capacity": {
+     "value": 63400,
+     "cite": {
+      "url": "http://www.buccaneers.com/news/newsdetail.aspx?newsid=6289",
+      "title": "The Big Game On the Horizon",
+      "work": "Buccaneers.com",
+      "date": "February 9, 2008",
+      "archive": ""
+     },
+     "from": {
+      "title": "State Farm Stadium",
+      "url": "https://en.wikipedia.org/wiki/State_Farm_Stadium",
+      "revision": 1385888712
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "State Farm Stadium"
+  },
+  {
+   "id": "sb-2016",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2016,
+   "name": "Super Bowl L (2016)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl 50",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_50",
+    "revision": 1381188417
+   },
+   "fields": {
+    "date": {
+     "value": "2016-02-07"
+    },
+    "venue": {
+     "value": "Levi's Stadium"
+    },
+    "city": {
+     "value": "Santa Clara"
+    },
+    "attendance": {
+     "value": "71,088",
+     "cite": {
+      "url": "http://www.cbssports.com/nfl/eye-on-football/25481285/fans-at-super-bowl-50-spent-nearly-11m-bought-8000-glasses-of-wine",
+      "title": "Fans at Super Bowl 50 spent nearly $11 million, bought 8K glasses of wine",
+      "work": "CBS Sports",
+      "date": "February 11, 2016",
+      "archive": "https://web.archive.org/web/20160302012242/http://www.cbssports.com/nfl/eye-on-football/25481285/fans-at-super-bowl-50-spent-nearly-11m-bought-8000-glasses-of-wine"
+     }
+    },
+    "capacity": {
+     "value": 68500,
+     "cite": {
+      "url": "https://levisstadium.com/levis-stadium-events/",
+      "title": "About Levi's® Stadium",
+      "work": "LevisStadium.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Levi's Stadium",
+      "url": "https://en.wikipedia.org/wiki/Levi%27s_Stadium",
+      "revision": 1385932644
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Levi's Stadium"
+  },
+  {
+   "id": "sb-2017",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2017,
+   "name": "Super Bowl LI (2017)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LI",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LI",
+    "revision": 1385943256
+   },
+   "fields": {
+    "date": {
+     "value": "2017-02-05"
+    },
+    "venue": {
+     "value": "NRG Stadium"
+    },
+    "city": {
+     "value": "Houston"
+    },
+    "attendance": {
+     "value": "70,807",
+     "cite": {
+      "url": "https://nflcdns.nfl.com/liveupdate/gamecenter/57167/ATL_Gamebook.pdf",
+      "title": "Super Bowl LI Game Summary",
+      "work": "NFL.com",
+      "date": "February 5, 2017",
+      "archive": "https://web.archive.org/web/20200707220214/https://nflcdns.nfl.com/liveupdate/gamecenter/57167/ATL_Gamebook.pdf"
+     }
+    },
+    "capacity": {
+     "value": 72220,
+     "cite": {
+      "url": "https://nflcommunications.com/Documents/2018%20Record%20and%20Fact%20Book%20(8.6.18).pdf",
+      "title": "Official 2018 National Football League Record & Fact Book",
+      "work": "National Football League",
+      "date": "August 6, 2018",
+      "archive": ""
+     },
+     "from": {
+      "title": "Reliant Stadium",
+      "url": "https://en.wikipedia.org/wiki/Reliant_Stadium",
+      "revision": 1383923742
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "NRG Stadium"
+  },
+  {
+   "id": "sb-2018",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2018,
+   "name": "Super Bowl LII (2018)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LII",
+    "revision": 1381717068
+   },
+   "fields": {
+    "date": {
+     "value": "2018-02-04"
+    },
+    "venue": {
+     "value": "U.S. Bank Stadium"
+    },
+    "city": {
+     "value": "Minneapolis"
+    },
+    "attendance": {
+     "value": "67,612"
+    },
+    "capacity": {
+     "value": 66202,
+     "cite": {
+      "url": "https://static.clubs.nfl.com/image/upload/vikings/basfjo3vggnuukwhmbkf",
+      "title": "2022 Minnesota Vikings Media Guide",
+      "work": "Minnesota Vikings",
+      "date": "",
+      "archive": "https://web.archive.org/web/20250525151438/https://static.clubs.nfl.com/image/upload/vikings/basfjo3vggnuukwhmbkf"
+     },
+     "from": {
+      "title": "U.S. Bank Stadium",
+      "url": "https://en.wikipedia.org/wiki/U.S._Bank_Stadium",
+      "revision": 1386292905
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "U.S. Bank Stadium"
+  },
+  {
+   "id": "sb-2019",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2019,
+   "name": "Super Bowl LIII (2019)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LIII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LIII",
+    "revision": 1385844840
+   },
+   "fields": {
+    "date": {
+     "value": "2019-02-03"
+    },
+    "venue": {
+     "value": "Mercedes-Benz Stadium"
+    },
+    "city": {
+     "value": "Atlanta"
+    },
+    "attendance": {
+     "value": "70,081"
+    },
+    "capacity": {
+     "value": 71000,
+     "cite": {
+      "url": "https://www.atlutd.com/post/2017/07/14/atlanta-united-single-match-tickets-go-sale-mercedes-benz-stadium",
+      "title": "Atlanta United Single-Match Tickets to Go On-Sale for Mercedes-Benz Stadium",
+      "work": "",
+      "date": "July 14, 2017",
+      "archive": ""
+     },
+     "from": {
+      "title": "Mercedes-Benz Stadium",
+      "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_Stadium",
+      "revision": 1385306999
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Mercedes-Benz Stadium"
+  },
+  {
+   "id": "sb-2020",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2020,
+   "name": "Super Bowl LIV (2020)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LIV",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LIV",
+    "revision": 1381952087
+   },
+   "fields": {
+    "date": {
+     "value": "2020-02-02"
+    },
+    "venue": {
+     "value": "Hard Rock Stadium"
+    },
+    "city": {
+     "value": "Miami Gardens"
+    },
+    "attendance": {
+     "value": "62,417"
+    },
+    "capacity": {
+     "value": 64767,
+     "cite": {
+      "url": "http://www.newmiamistadium.com/faqs/",
+      "title": "FAQs",
+      "work": "Miami Dolphins",
+      "date": "",
+      "archive": "https://web.archive.org/web/20150612143057/http://www.newmiamistadium.com/faqs/"
+     },
+     "from": {
+      "title": "Hard Rock Stadium",
+      "url": "https://en.wikipedia.org/wiki/Hard_Rock_Stadium",
+      "revision": 1385366599
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Hard Rock Stadium"
+  },
+  {
+   "id": "sb-2021",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2021,
+   "name": "Super Bowl LV (2021)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LV",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LV",
+    "revision": 1386094420
+   },
+   "fields": {
+    "date": {
+     "value": "2021-02-07"
+    },
+    "venue": {
+     "value": "Raymond James Stadium"
+    },
+    "city": {
+     "value": "Tampa"
+    },
+    "attendance": {
+     "value": "24,835"
+    },
+    "capacity": {
+     "value": 69218,
+     "from": {
+      "title": "Raymond James Stadium",
+      "url": "https://en.wikipedia.org/wiki/Raymond_James_Stadium",
+      "revision": 1383818412
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Raymond James Stadium"
+  },
+  {
+   "id": "sb-2022",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2022,
+   "name": "Super Bowl LVI (2022)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LVI",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LVI",
+    "revision": 1386259299
+   },
+   "fields": {
+    "date": {
+     "value": "2022-02-13"
+    },
+    "venue": {
+     "value": "SoFi Stadium"
+    },
+    "city": {
+     "value": "Inglewood"
+    },
+    "attendance": {
+     "value": "70,048"
+    },
+    "capacity": {
+     "value": 70240,
+     "cite": {
+      "url": "https://www.latimes.com/sports/rams/la-sp-rams-ground-breaking-20161117-story.html",
+      "title": "Los Angeles Rams Break Ground on $2.6-billion Inglewood Stadium, 'New Era' of NFL",
+      "work": "Los Angeles Times",
+      "date": "November 17, 2016",
+      "archive": ""
+     },
+     "from": {
+      "title": "SoFi Stadium",
+      "url": "https://en.wikipedia.org/wiki/SoFi_Stadium",
+      "revision": 1385953459
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "SoFi Stadium"
+  },
+  {
+   "id": "sb-2023",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2023,
+   "name": "Super Bowl LVII (2023)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LVII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LVII",
+    "revision": 1385881870
+   },
+   "fields": {
+    "date": {
+     "value": "2023-02-12"
+    },
+    "venue": {
+     "value": "State Farm Stadium"
+    },
+    "city": {
+     "value": "Glendale"
+    },
+    "attendance": {
+     "value": "67,827"
+    },
+    "capacity": {
+     "value": 63400,
+     "cite": {
+      "url": "http://www.buccaneers.com/news/newsdetail.aspx?newsid=6289",
+      "title": "The Big Game On the Horizon",
+      "work": "Buccaneers.com",
+      "date": "February 9, 2008",
+      "archive": ""
+     },
+     "from": {
+      "title": "State Farm Stadium",
+      "url": "https://en.wikipedia.org/wiki/State_Farm_Stadium",
+      "revision": 1385888712
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "State Farm Stadium"
+  },
+  {
+   "id": "sb-2024",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2024,
+   "name": "Super Bowl LVIII (2024)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LVIII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LVIII",
+    "revision": 1383883947
+   },
+   "fields": {
+    "date": {
+     "value": "2024-02-11"
+    },
+    "venue": {
+     "value": "Allegiant Stadium"
+    },
+    "city": {
+     "value": "Paradise"
+    },
+    "attendance": {
+     "value": "61,629"
+    },
+    "capacity": {
+     "value": 65000,
+     "cite": {
+      "url": "https://www.nfl.com/news/jon-gruden-on-allegiant-stadium-greatest-thing-i-ve-ever-seen",
+      "title": "Jon Gruden on Allegiant Stadium: 'Greatest thing I've ever seen'",
+      "work": "NFL.com",
+      "date": "July 10, 2020",
+      "archive": ""
+     },
+     "from": {
+      "title": "Allegiant Stadium",
+      "url": "https://en.wikipedia.org/wiki/Allegiant_Stadium",
+      "revision": 1385129867
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Allegiant Stadium"
+  },
+  {
+   "id": "sb-2025",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2025,
+   "name": "Super Bowl LIX (2025)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LIX",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LIX",
+    "revision": 1383883928
+   },
+   "fields": {
+    "date": {
+     "value": "2025-02-09"
+    },
+    "venue": {
+     "value": "Caesars Superdome"
+    },
+    "city": {
+     "value": "New Orleans"
+    },
+    "attendance": {
+     "value": "65,719"
+    },
+    "capacity": {
+     "value": 73208,
+     "cite": {
+      "url": "http://superdome.com/uploads/SUPERDOMEMEDIAKIT5.3.12FINAL.pdf",
+      "title": "The Superdome – An Icon Transformed",
+      "work": "State of Louisiana",
+      "date": "",
+      "archive": "https://web.archive.org/web/20140221185008/http://superdome.com/uploads/SUPERDOMEMEDIAKIT5.3.12FINAL.pdf"
+     },
+     "from": {
+      "title": "Caesars Superdome",
+      "url": "https://en.wikipedia.org/wiki/Caesars_Superdome",
+      "revision": 1386069144
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Caesars Superdome"
+  },
+  {
+   "id": "sb-2026",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2026,
+   "name": "Super Bowl LX (2026)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LX",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LX",
+    "revision": 1385050487
+   },
+   "fields": {
+    "date": {
+     "value": "2026-02-08"
+    },
+    "venue": {
+     "value": "Levi's Stadium"
+    },
+    "city": {
+     "value": "Santa Clara"
+    },
+    "attendance": {
+     "value": "70,823"
+    },
+    "capacity": {
+     "value": 68500,
+     "cite": {
+      "url": "https://levisstadium.com/levis-stadium-events/",
+      "title": "About Levi's® Stadium",
+      "work": "LevisStadium.com",
+      "date": "",
+      "archive": ""
+     },
+     "from": {
+      "title": "Levi's Stadium",
+      "url": "https://en.wikipedia.org/wiki/Levi%27s_Stadium",
+      "revision": 1385932644
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Levi's Stadium"
+  },
+  {
+   "id": "sb-2027",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2027,
+   "name": "Super Bowl LXI (2027)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LXI",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LXI",
+    "revision": 1386215508
+   },
+   "fields": {
+    "date": {
+     "value": "2027-02-14"
+    },
+    "venue": {
+     "value": "SoFi Stadium"
+    },
+    "city": {
+     "value": "Inglewood"
+    },
+    "capacity": {
+     "value": 70240,
+     "cite": {
+      "url": "https://www.latimes.com/sports/rams/la-sp-rams-ground-breaking-20161117-story.html",
+      "title": "Los Angeles Rams Break Ground on $2.6-billion Inglewood Stadium, 'New Era' of NFL",
+      "work": "Los Angeles Times",
+      "date": "November 17, 2016",
+      "archive": ""
+     },
+     "from": {
+      "title": "SoFi Stadium",
+      "url": "https://en.wikipedia.org/wiki/SoFi_Stadium",
+      "revision": 1385953459
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "SoFi Stadium"
+  },
+  {
+   "id": "sb-2028",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2028,
+   "name": "Super Bowl LXII (2028)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LXII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LXII",
+    "revision": 1386266135
+   },
+   "fields": {
+    "date": {
+     "value": "2028-02-13"
+    },
+    "venue": {
+     "value": "Mercedes-Benz Stadium"
+    },
+    "city": {
+     "value": "Atlanta"
+    },
+    "capacity": {
+     "value": 71000,
+     "cite": {
+      "url": "https://www.atlutd.com/post/2017/07/14/atlanta-united-single-match-tickets-go-sale-mercedes-benz-stadium",
+      "title": "Atlanta United Single-Match Tickets to Go On-Sale for Mercedes-Benz Stadium",
+      "work": "",
+      "date": "July 14, 2017",
+      "archive": ""
+     },
+     "from": {
+      "title": "Mercedes-Benz Stadium",
+      "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_Stadium",
+      "revision": 1385306999
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Mercedes-Benz Stadium"
+  },
+  {
+   "id": "sb-2029",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2029,
+   "name": "Super Bowl LXIII (2029)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LXIII",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LXIII",
+    "revision": 1383883953
+   },
+   "fields": {
+    "date": {
+     "value": "2029-02-11"
+    },
+    "venue": {
+     "value": "Allegiant Stadium"
+    },
+    "city": {
+     "value": "Las Vegas"
+    },
+    "capacity": {
+     "value": 65000,
+     "cite": {
+      "url": "https://www.nfl.com/news/jon-gruden-on-allegiant-stadium-greatest-thing-i-ve-ever-seen",
+      "title": "Jon Gruden on Allegiant Stadium: 'Greatest thing I've ever seen'",
+      "work": "NFL.com",
+      "date": "July 10, 2020",
+      "archive": ""
+     },
+     "from": {
+      "title": "Allegiant Stadium",
+      "url": "https://en.wikipedia.org/wiki/Allegiant_Stadium",
+      "revision": 1385129867
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Allegiant Stadium"
+  },
+  {
+   "id": "sb-2030",
+   "series": "sb",
+   "seriesName": "Super Bowl",
+   "year": 2030,
+   "name": "Super Bowl LXIV (2030)",
+   "eventType": "Halftime show",
+   "venueType": "Stadium",
+   "source": {
+    "title": "Super Bowl LXIV",
+    "url": "https://en.wikipedia.org/wiki/Super_Bowl_LXIV",
+    "revision": 1381075943
+   },
+   "fields": {
+    "date": {
+     "value": "2030-02-10"
+    },
+    "venue": {
+     "value": "Nissan Stadium"
+    },
+    "city": {
+     "value": "Nashville"
+    },
+    "capacity": {
+     "value": 60000,
+     "from": {
+      "title": "Nissan Stadium (2027)",
+      "url": "https://en.wikipedia.org/wiki/Nissan_Stadium_%282027%29",
+      "revision": 1384037091
+     }
+    },
+    "country": {
+     "value": "United States"
+    },
+    "currency": {
+     "value": "USD",
+     "from": {
+      "title": "Wikidata: currency (P38) of United States",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Nissan Stadium (2027)"
+  },
+  {
+   "id": "esc-2015",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2015,
+   "name": "Eurovision Song Contest 2015",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2015",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2015",
+    "revision": 1385916617
+   },
+   "fields": {
+    "venue": {
+     "value": "Wiener Stadthalle"
+    },
+    "city": {
+     "value": "Vienna"
+    },
+    "capacity": {
+     "value": 16083,
+     "from": {
+      "title": "Wiener Stadthalle",
+      "url": "https://en.wikipedia.org/wiki/Wiener_Stadthalle",
+      "revision": 1375766997
+     }
+    },
+    "country": {
+     "value": "Austria"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Austria",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Wiener Stadthalle"
+  },
+  {
+   "id": "esc-2016",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2016,
+   "name": "Eurovision Song Contest 2016",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2016",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2016",
+    "revision": 1381465572
+   },
+   "fields": {
+    "date": {
+     "value": "2016-05-14"
+    },
+    "venue": {
+     "value": "Ericsson Globe"
+    },
+    "city": {
+     "value": "Stockholm"
+    },
+    "capacity": {
+     "value": 13950,
+     "from": {
+      "title": "Avicii Arena",
+      "url": "https://en.wikipedia.org/wiki/Avicii_Arena",
+      "revision": 1377046752
+     }
+    },
+    "country": {
+     "value": "Sweden"
+    },
+    "currency": {
+     "value": "SEK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Sweden",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Avicii Arena"
+  },
+  {
+   "id": "esc-2017",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2017,
+   "name": "Eurovision Song Contest 2017",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2017",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2017",
+    "revision": 1383831427
+   },
+   "fields": {
+    "date": {
+     "value": "2017-05-13"
+    },
+    "venue": {
+     "value": "International Exhibition Centre"
+    },
+    "city": {
+     "value": "Kyiv"
+    },
+    "country": {
+     "value": "Ukraine"
+    },
+    "currency": {
+     "value": "UAH",
+     "from": {
+      "title": "Wikidata: currency (P38) of Ukraine",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "International Exhibition Centre"
+  },
+  {
+   "id": "esc-2018",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2018,
+   "name": "Eurovision Song Contest 2018",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2018",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2018",
+    "revision": 1378844074
+   },
+   "fields": {
+    "venue": {
+     "value": "Altice Arena"
+    },
+    "city": {
+     "value": "Lisbon"
+    },
+    "capacity": {
+     "value": 20100,
+     "from": {
+      "title": "MEO Arena",
+      "url": "https://en.wikipedia.org/wiki/MEO_Arena",
+      "revision": 1381783875
+     }
+    },
+    "country": {
+     "value": "Portugal"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Portugal",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "MEO Arena"
+  },
+  {
+   "id": "esc-2019",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2019,
+   "name": "Eurovision Song Contest 2019",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2019",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2019",
+    "revision": 1385710523
+   },
+   "fields": {
+    "date": {
+     "value": "2019-05-18"
+    },
+    "venue": {
+     "value": "Expo Tel Aviv"
+    },
+    "city": {
+     "value": "Tel Aviv"
+    },
+    "capacity": {
+     "value": 5990,
+     "from": {
+      "title": "Expo Tel Aviv",
+      "url": "https://en.wikipedia.org/wiki/Expo_Tel_Aviv",
+      "revision": 1368569718
+     }
+    },
+    "country": {
+     "value": "Israel"
+    },
+    "currency": {
+     "value": "ILS",
+     "from": {
+      "title": "Wikidata: currency (P38) of Israel",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Expo Tel Aviv"
+  },
+  {
+   "id": "esc-2021",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2021,
+   "name": "Eurovision Song Contest 2021",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2021",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2021",
+    "revision": 1382558343
+   },
+   "fields": {
+    "date": {
+     "value": "2021-05-22"
+    },
+    "venue": {
+     "value": "Rotterdam Ahoy"
+    },
+    "city": {
+     "value": "Rotterdam"
+    },
+    "country": {
+     "value": "Netherlands"
+    }
+   },
+   "venueRef": "Rotterdam Ahoy",
+   "currencyOptions": [
+    "EUR",
+    "USD"
+   ]
+  },
+  {
+   "id": "esc-2022",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2022,
+   "name": "Eurovision Song Contest 2022",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2022",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2022",
+    "revision": 1381404225
+   },
+   "fields": {
+    "date": {
+     "value": "2022-05-14"
+    },
+    "venue": {
+     "value": "Palasport Olimpico"
+    },
+    "city": {
+     "value": "Turin"
+    },
+    "capacity": {
+     "value": 14350,
+     "cite": {
+      "url": "http://www.euroleague.net/news/i/67119/180",
+      "title": "Euroleague Final Four bound for Turin, Italy in 2011!",
+      "work": "",
+      "date": "",
+      "archive": "https://web.archive.org/web/20100219231251/http://www.euroleague.net/news/i/67119/180"
+     },
+     "from": {
+      "title": "Inalpi Arena",
+      "url": "https://en.wikipedia.org/wiki/Inalpi_Arena",
+      "revision": 1381709270
+     }
+    },
+    "country": {
+     "value": "Italy"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Italy",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Inalpi Arena"
+  },
+  {
+   "id": "esc-2023",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2023,
+   "name": "Eurovision Song Contest 2023",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2023",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2023",
+    "revision": 1385709907
+   },
+   "fields": {
+    "date": {
+     "value": "2023-05-13"
+    },
+    "venue": {
+     "value": "M&S Bank Arena Liverpool"
+    },
+    "city": {
+     "value": "Liverpool"
+    },
+    "capacity": {
+     "value": 7513,
+     "from": {
+      "title": "Liverpool Arena",
+      "url": "https://en.wikipedia.org/wiki/Liverpool_Arena",
+      "revision": 1383188974
+     }
+    },
+    "country": {
+     "value": "England"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of England",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Liverpool Arena"
+  },
+  {
+   "id": "esc-2024",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2024,
+   "name": "Eurovision Song Contest 2024",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2024",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2024",
+    "revision": 1385997722
+   },
+   "fields": {
+    "date": {
+     "value": "2024-05-11"
+    },
+    "venue": {
+     "value": "Malmö Arena"
+    },
+    "city": {
+     "value": "Malmö"
+    },
+    "capacity": {
+     "value": 12600,
+     "from": {
+      "title": "Malmö Arena",
+      "url": "https://en.wikipedia.org/wiki/Malm%C3%B6_Arena",
+      "revision": 1372083586
+     }
+    },
+    "country": {
+     "value": "Sweden"
+    },
+    "currency": {
+     "value": "SEK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Sweden",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Malmö Arena"
+  },
+  {
+   "id": "esc-2025",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2025,
+   "name": "Eurovision Song Contest 2025",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2025",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2025",
+    "revision": 1384114997
+   },
+   "fields": {
+    "date": {
+     "value": "2025-05-17"
+    },
+    "venue": {
+     "value": "St. Jakobshalle"
+    },
+    "city": {
+     "value": "Basel"
+    },
+    "capacity": {
+     "value": 8000,
+     "from": {
+      "title": "St. Jakobshalle",
+      "url": "https://en.wikipedia.org/wiki/St._Jakobshalle",
+      "revision": 1372232449
+     }
+    },
+    "country": {
+     "value": "Switzerland"
+    },
+    "currency": {
+     "value": "CHF",
+     "from": {
+      "title": "Wikidata: currency (P38) of Switzerland",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "St. Jakobshalle"
+  },
+  {
+   "id": "esc-2026",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2026,
+   "name": "Eurovision Song Contest 2026",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2026",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2026",
+    "revision": 1385636648
+   },
+   "fields": {
+    "date": {
+     "value": "2026-05-16"
+    },
+    "venue": {
+     "value": "Wiener Stadthalle"
+    },
+    "city": {
+     "value": "Vienna"
+    },
+    "capacity": {
+     "value": 16083,
+     "from": {
+      "title": "Wiener Stadthalle",
+      "url": "https://en.wikipedia.org/wiki/Wiener_Stadthalle",
+      "revision": 1375766997
+     }
+    },
+    "country": {
+     "value": "Austria"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Austria",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Wiener Stadthalle"
+  },
+  {
+   "id": "esc-2027",
+   "series": "esc",
+   "seriesName": "Eurovision Song Contest",
+   "year": 2027,
+   "name": "Eurovision Song Contest 2027",
+   "eventType": "Televised song contest",
+   "venueType": "Arena",
+   "source": {
+    "title": "Eurovision Song Contest 2027",
+    "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest_2027",
+    "revision": 1386276652
+   },
+   "fields": {
+    "date": {
+     "value": "2027-05-15"
+    },
+    "venue": {
+     "value": "Arena Burgas"
+    },
+    "city": {
+     "value": "Burgas"
+    },
+    "capacity": {
+     "value": 4100,
+     "cite": {
+      "url": "https://www.segabg.com/hot/category-sport/ima-nova-svetlina-tunela-na-arena-burgas",
+      "title": "Има нова светлина в тунела на \"Арена Бургас\"",
+      "work": "Sega",
+      "date": "27 March 2023",
+      "archive": ""
+     },
+     "from": {
+      "title": "Arena Burgas",
+      "url": "https://en.wikipedia.org/wiki/Arena_Burgas",
+      "revision": 1385429541
+     }
+    },
+    "country": {
+     "value": "Bulgaria"
+    },
+    "currency": {
+     "value": "EUR",
+     "from": {
+      "title": "Wikidata: currency (P38) of Bulgaria",
+      "url": "https://query.wikidata.org/"
+     }
+    }
+   },
+   "venueRef": "Arena Burgas"
+  }
+ ],
+ "currencyByCountry": {
+  "Malta": [
+   "EUR"
+  ],
+  "Monaco": [
+   "EUR"
+  ],
+  "Montenegro": [
+   "EUR"
+  ],
+  "Vatican City": [
+   "EUR"
+  ],
+  "San Marino": [
+   "EUR"
+  ],
+  "Ireland": [
+   "EUR"
+  ],
+  "Spain": [
+   "EUR"
+  ],
+  "Panama": [
+   "PAB",
+   "USD"
+  ],
+  "Zimbabwe": [
+   "AUD",
+   "CNY",
+   "EUR",
+   "GBP",
+   "INR",
+   "JPY",
+   "USD",
+   "ZAR",
+   "ZWG"
+  ],
+  "Liberia": [
+   "LRD",
+   "USD"
+  ],
+  "Kingdom of the Netherlands": [
+   "AWG",
+   "EUR",
+   "USD",
+   "XCG"
+  ],
+  "United States": [
+   "USD"
+  ],
+  "Netherlands": [
+   "EUR",
+   "USD"
+  ],
+  "Timor-Leste": [
+   "USD"
+  ],
+  "Palau": [
+   "USD"
+  ],
+  "Federated States of Micronesia": [
+   "USD"
+  ],
+  "Marshall Islands": [
+   "USD"
+  ],
+  "Ecuador": [
+   "USD"
+  ],
+  "El Salvador": [
+   "USD"
+  ],
+  "Venezuela": [
+   "VES"
+  ],
+  "Cuba": [
+   "CUC",
+   "CUP"
+  ],
+  "Zambia": [
+   "ZMW"
+  ],
+  "Curaçao": [
+   "XCG"
+  ],
+  "Sint Maarten": [
+   "XCG"
+  ],
+  "India": [
+   "INR"
+  ],
+  "Japan": [
+   "JPY"
+  ],
+  "Ukraine": [
+   "UAH"
+  ],
+  "Central African Republic": [
+   "XAF"
+  ],
+  "Republic of the Congo": [
+   "XAF"
+  ],
+  "Equatorial Guinea": [
+   "XAF"
+  ],
+  "Gabon": [
+   "XAF"
+  ],
+  "Cameroon": [
+   "XAF"
+  ],
+  "Chad": [
+   "XAF"
+  ],
+  "Mali": [
+   "XOF"
+  ],
+  "Togo": [
+   "XOF"
+  ],
+  "Benin": [
+   "XOF"
+  ],
+  "Burkina Faso": [
+   "XOF"
+  ],
+  "Guinea-Bissau": [
+   "XOF"
+  ],
+  "Ivory Coast": [
+   "XOF"
+  ],
+  "Niger": [
+   "XOF"
+  ],
+  "Senegal": [
+   "XOF"
+  ],
+  "Qatar": [
+   "QAR"
+  ],
+  "Maldives": [
+   "MVR"
+  ],
+  "Mauritania": [
+   "MRU"
+  ],
+  "Nicaragua": [
+   "NIO"
+  ],
+  "Guatemala": [
+   "GTQ"
+  ],
+  "Paraguay": [
+   "PYG"
+  ],
+  "Vanuatu": [
+   "VUV"
+  ],
+  "Lesotho": [
+   "LSL",
+   "ZAR"
+  ],
+  "Uruguay": [
+   "UYU"
+  ],
+  "Jamaica": [
+   "JMD"
+  ],
+  "Malawi": [
+   "MWK"
+  ],
+  "Mauritius": [
+   "MUR"
+  ],
+  "Guyana": [
+   "GYD"
+  ],
+  "Guinea": [
+   "GNF"
+  ],
+  "France": [
+   "EUR",
+   "XPF"
+  ],
+  "Belarus": [
+   "BYN"
+  ],
+  "Aruba": [
+   "AWG"
+  ],
+  "Burundi": [
+   "BIF"
+  ],
+  "Syria": [
+   "SYP"
+  ],
+  "Yemen": [
+   "YER"
+  ],
+  "Trinidad and Tobago": [
+   "TTD"
+  ],
+  "Costa Rica": [
+   "CRC"
+  ],
+  "Dominican Republic": [
+   "DOP"
+  ],
+  "South Sudan": [
+   "SSP"
+  ],
+  "Colombia": [
+   "COP"
+  ],
+  "United Kingdom": [
+   "GBP"
+  ],
+  "Liechtenstein": [
+   "CHF"
+  ],
+  "Switzerland": [
+   "CHF"
+  ],
+  "Denmark": [
+   "DKK"
+  ],
+  "Kingdom of Denmark": [
+   "DKK"
+  ],
+  "Australia": [
+   "AUD"
+  ],
+  "Tuvalu": [
+   "AUD"
+  ],
+  "Nauru": [
+   "AUD"
+  ],
+  "Kiribati": [
+   "AUD"
+  ],
+  "Saint Vincent and the Grenadines": [
+   "XCD"
+  ],
+  "Saint Lucia": [
+   "XCD"
+  ],
+  "Saint Kitts and Nevis": [
+   "XCD"
+  ],
+  "Grenada": [
+   "XCD"
+  ],
+  "Antigua and Barbuda": [
+   "XCD"
+  ],
+  "Dominica": [
+   "XCD"
+  ],
+  "Comoros": [
+   "KMF"
+  ],
+  "Sudan": [
+   "SDG"
+  ],
+  "Oman": [
+   "OMR"
+  ],
+  "Belize": [
+   "BZD"
+  ],
+  "Kyrgyzstan": [
+   "KGS"
+  ],
+  "People's Republic of China": [
+   "CNY"
+  ],
+  "Russia": [
+   "RUB"
+  ],
+  "Indonesia": [
+   "IDR"
+  ],
+  "Madagascar": [
+   "MGA"
+  ],
+  "Sierra Leone": [
+   "SLE"
+  ],
+  "Samoa": [
+   "WST"
+  ],
+  "Tanzania": [
+   "TZS"
+  ],
+  "Cape Verde": [
+   "CVE"
+  ],
+  "Fiji": [
+   "FJD"
+  ],
+  "Djibouti": [
+   "DJF"
+  ],
+  "Seychelles": [
+   "SCR"
+  ],
+  "Sri Lanka": [
+   "LKR"
+  ],
+  "Solomon Islands": [
+   "SBD"
+  ],
+  "Uganda": [
+   "UGX"
+  ],
+  "Tunisia": [
+   "TND"
+  ],
+  "Somalia": [
+   "SOS"
+  ],
+  "Georgia": [
+   "GEL"
+  ],
+  "Tonga": [
+   "TOP"
+  ],
+  "Honduras": [
+   "HNL"
+  ],
+  "Hungary": [
+   "HUF"
+  ],
+  "Mexico": [
+   "MXN"
+  ],
+  "Democratic Republic of the Congo": [
+   "CDF"
+  ],
+  "Rwanda": [
+   "RWF"
+  ],
+  "Eswatini": [
+   "SZL"
+  ],
+  "Azerbaijan": [
+   "AZN"
+  ],
+  "Turkmenistan": [
+   "TMT"
+  ],
+  "Uzbekistan": [
+   "UZS"
+  ],
+  "Belgium": [
+   "EUR"
+  ],
+  "Luxembourg": [
+   "EUR"
+  ],
+  "Finland": [
+   "EUR"
+  ],
+  "Lithuania": [
+   "EUR"
+  ],
+  "Italy": [
+   "EUR"
+  ],
+  "Austria": [
+   "EUR"
+  ],
+  "Greece": [
+   "EUR"
+  ],
+  "Portugal": [
+   "EUR"
+  ],
+  "Bulgaria": [
+   "EUR"
+  ],
+  "Kosovo": [
+   "EUR"
+  ],
+  "Germany": [
+   "EUR"
+  ],
+  "Estonia": [
+   "EUR"
+  ],
+  "Latvia": [
+   "EUR"
+  ],
+  "Slovakia": [
+   "EUR"
+  ],
+  "Slovenia": [
+   "EUR"
+  ],
+  "Croatia": [
+   "EUR"
+  ],
+  "Andorra": [
+   "EUR"
+  ],
+  "Cyprus": [
+   "EUR"
+  ],
+  "North Korea": [
+   "KPW"
+  ],
+  "Canada": [
+   "CAD"
+  ],
+  "Sweden": [
+   "SEK"
+  ],
+  "Poland": [
+   "PLN"
+  ],
+  "Albania": [
+   "ALL"
+  ],
+  "Armenia": [
+   "AMD"
+  ],
+  "Czech Republic": [
+   "CZK"
+  ],
+  "Israel": [
+   "ILS"
+  ],
+  "Palestine": [
+   "EGP",
+   "ILS",
+   "JOD"
+  ],
+  "Iceland": [
+   "ISK"
+  ],
+  "Romania": [
+   "RON"
+  ],
+  "Norway": [
+   "NOK"
+  ],
+  "Cook Islands": [
+   "NZD"
+  ],
+  "Niue": [
+   "NZD"
+  ],
+  "New Zealand": [
+   "NZD"
+  ],
+  "Chile": [
+   "CLF",
+   "CLP"
+  ],
+  "Malaysia": [
+   "MYR"
+  ],
+  "Eritrea": [
+   "ERN"
+  ],
+  "Philippines": [
+   "PHP"
+  ],
+  "Serbia": [
+   "RSD"
+  ],
+  "Northern Cyprus": [
+   "TRL",
+   "TRY"
+  ],
+  "Turkey": [
+   "TRL",
+   "TRY"
+  ],
+  "Brazil": [
+   "BRL"
+  ],
+  "Kazakhstan": [
+   "KZT"
+  ],
+  "North Macedonia": [
+   "MKD"
+  ],
+  "Thailand": [
+   "THB"
+  ],
+  "Bosnia and Herzegovina": [
+   "BAM"
+  ],
+  "Moldova": [
+   "MDL"
+  ],
+  "Namibia": [
+   "NAD",
+   "ZAR"
+  ],
+  "South Africa": [
+   "ZAR"
+  ],
+  "Mongolia": [
+   "MNT"
+  ],
+  "Ghana": [
+   "GHS"
+  ],
+  "Botswana": [
+   "BWP"
+  ],
+  "Pakistan": [
+   "PKR"
+  ],
+  "Pahlavi Iran": [
+   "IRR"
+  ],
+  "Iran": [
+   "IRR"
+  ],
+  "Libya": [
+   "LYD"
+  ],
+  "Singapore": [
+   "SGD"
+  ],
+  "Vietnam": [
+   "VND"
+  ],
+  "Iraq": [
+   "IQD"
+  ],
+  "Kuwait": [
+   "KWD"
+  ],
+  "São Tomé and Príncipe": [
+   "STN"
+  ],
+  "The Bahamas": [
+   "BSD"
+  ],
+  "Barbados": [
+   "BBD"
+  ],
+  "Bangladesh": [
+   "BDT"
+  ],
+  "Egypt": [
+   "EGP"
+  ],
+  "Afghanistan": [
+   "AFN"
+  ],
+  "Argentina": [
+   "ARS"
+  ],
+  "Algeria": [
+   "DZD"
+  ],
+  "Saudi Arabia": [
+   "SAR"
+  ],
+  "Tajikistan": [
+   "TJS"
+  ],
+  "Laos": [
+   "LAK"
+  ],
+  "Morocco": [
+   "MAD"
+  ],
+  "United Arab Emirates": [
+   "AED"
+  ],
+  "Angola": [
+   "AOA"
+  ],
+  "Bolivia": [
+   "BOB"
+  ],
+  "Mozambique": [
+   "MZN"
+  ],
+  "Papua New Guinea": [
+   "PGK"
+  ],
+  "Bhutan": [
+   "BTN"
+  ],
+  "Bahrain": [
+   "BHD"
+  ],
+  "Myanmar": [
+   "MMK"
+  ],
+  "Lebanon": [
+   "LBP"
+  ],
+  "Suriname": [
+   "SRD"
+  ],
+  "South Korea": [
+   "KRW"
+  ],
+  "Kenya": [
+   "KES"
+  ],
+  "The Gambia": [
+   "GMD"
+  ],
+  "Nepal": [
+   "NPR"
+  ],
+  "Nigeria": [
+   "NGN"
+  ],
+  "Jordan": [
+   "JOD"
+  ],
+  "Haiti": [
+   "HTG"
+  ],
+  "Peru": [
+   "PEN"
+  ],
+  "Cambodia": [
+   "KHR"
+  ],
+  "Ethiopia": [
+   "ETB"
+  ],
+  "Brunei": [
+   "BND"
+  ]
+ },
+ "currencySource": "Wikidata: sovereign states (Q6256) with currency (P38) and ISO 4217 code (P498); currencies or ISO codes with an end time, and abolished currencies (P576), excluded"
+}

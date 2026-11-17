@@ -19,6 +19,17 @@ Ceremony Studio does not make up estimates. Each figure comes from one of these:
 
 Anything without a source is marked **No source**. The Budget step lists it, and the export includes it under "Figures without a source". Claude helps design and describe the show, but it is never asked for prices, CO2e or lead times.
 
+## Starting a brief
+
+Choose the event type, then start typing the event's name (for example "uef" or "super bowl") or its city. The suggestions are real events from `reference/catalog.json`.
+
+Picking one fills these fields from published records:
+- date, venue, city and country, from the event's Wikipedia article
+- capacity, from the venue's Wikipedia article
+- currency, from Wikidata
+
+Each auto-filled field shows its source. Typing over a field replaces the source with your own value. Choosing another event never overwrites what you typed. Budget, show length and the written brief are always yours to fill in.
+
 ## How it works
 
 - `index.html` is the whole app. It loads `reference/bundle.json` at start-up.
