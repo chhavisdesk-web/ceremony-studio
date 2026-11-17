@@ -1,0 +1,99 @@
+{
+  "_about": "Published budgets for ceremonies and shows. Figures are in the currency the source reports; amounts converted by the source are marked. Use as context only: they cover whole ceremonies, not elements. verification: see events.json.",
+  "budgets": [
+    {
+      "id": "london-2012-ceremonies",
+      "name": "London 2012 Olympic ceremonies",
+      "year": 2012,
+      "scope": "Opening and closing ceremonies",
+      "amount": 144000000,
+      "currency": "USD",
+      "status": "reported",
+      "note": "As reported by Kyodo in 2019, in USD",
+      "sources": [
+        "kazinform-ceremonies"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "tokyo-2020-ceremonies",
+      "name": "Tokyo 2020 Olympic ceremonies",
+      "year": 2019,
+      "scope": "Opening and closing ceremonies (budget)",
+      "amount": 13000000000,
+      "currency": "JPY",
+      "status": "budget",
+      "note": "Raised from JPY 9.1 billion set in 2013",
+      "sources": [
+        "kazinform-ceremonies"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "paris-2024-ceremonies",
+      "name": "Paris 2024 Olympic ceremonies",
+      "year": 2019,
+      "scope": "Opening and closing ceremonies",
+      "amount": 134000000,
+      "currency": "USD",
+      "status": "budget",
+      "note": "Planned budget as reported by Kyodo in 2019, in USD",
+      "sources": [
+        "kazinform-ceremonies"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "coronation-2023",
+      "name": "Coronation of King Charles III",
+      "year": 2023,
+      "scope": "Cost to UK taxpayers, all departments",
+      "amount": 72000000,
+      "currency": "GBP",
+      "status": "official",
+      "sources": [
+        "irishtimes-coronation"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "state-funeral-2022",
+      "name": "State funeral of Queen Elizabeth II and related events",
+      "year": 2022,
+      "scope": "Cost to UK government",
+      "amount": 161743000,
+      "currency": "GBP",
+      "status": "official",
+      "sources": [
+        "yorkshirepost-funeral"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "eurovision-basel-2025",
+      "name": "Eurovision Song Contest 2025, Basel (host canton)",
+      "year": 2025,
+      "scope": "Host city/canton spending cap; excludes the broadcaster",
+      "amount": 37000000,
+      "currency": "CHF",
+      "status": "budget",
+      "sources": [
+        "escxtra-basel"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "eurovision-vienna-2026",
+      "name": "Eurovision Song Contest 2026, Vienna (host city)",
+      "year": 2026,
+      "scope": "Host city spending; excludes the broadcaster",
+      "amount": 22600000,
+      "currency": "EUR",
+      "status": "budget",
+      "sources": [
+        "eurovoix-vienna"
+      ],
+      "verification": "excerpt"
+    }
+  ]
+}

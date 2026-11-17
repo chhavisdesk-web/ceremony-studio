@@ -1,0 +1,50 @@
+{
+  "_about": "Downloaded datasets, with the SHA-256 of the exact file used, so anyone can re-download and verify.",
+  "datasets": {
+    "desnz-2026": {
+      "title": "Greenhouse gas reporting: conversion factors 2026 (flat file, revised July 2026, version 1.2)",
+      "publisher": "UK Department for Energy Security and Net Zero (DESNZ)",
+      "page": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2026",
+      "url": "https://assets.publishing.service.gov.uk/media/6a6c9748862aaf18d9c62ac9/ghg-conversion-factors-2026-flat-format-revised.xlsx",
+      "licence": "Open Government Licence v3.0",
+      "sha256": "a9a455ab396dae226d510c7be6233748416d490c41a5d20f3dc7a0c45feecd5e",
+      "accessed": "2026-11-17"
+    },
+    "defra-spend-2023": {
+      "title": "Spend-based emissions multipliers, 1997 to 2023 (UK and England's carbon footprint to 2023)",
+      "publisher": "Defra / University of Leeds",
+      "page": "https://www.gov.uk/government/statistics/uks-carbon-footprint",
+      "url": "https://assets.publishing.service.gov.uk/media/6a3ce5fa33bc5beefd3c4983/spend_based_emissions_multipliers_1997_to_2023.ods",
+      "licence": "Open Government Licence v3.0",
+      "sha256": "f694d0e5bf7161bb01cb35eb7418dbf21af37fabc7df66ce4696b1dde364b389",
+      "accessed": "2026-11-17"
+    },
+    "owid-ember-energy": {
+      "title": "Our World in Data energy dataset (carbon_intensity_elec, from Ember Yearly Electricity Data 2026)",
+      "publisher": "Our World in Data, based on Ember",
+      "page": "https://github.com/owid/energy-data",
+      "url": "https://raw.githubusercontent.com/owid/energy-data/master/owid-energy-data.csv",
+      "licence": "CC BY 4.0",
+      "sha256": "266f2e2baad7975351bc9bb4aa061d22b1da9fe4c47d51d2ac6071e01e171f76",
+      "accessed": "2026-11-17"
+    },
+    "fred-fx-annual": {
+      "title": "Foreign exchange rates, annual averages (US Federal Reserve H.10 via FRED)",
+      "publisher": "Board of Governors of the Federal Reserve System, packaged by datasets/exchange-rates",
+      "page": "https://github.com/datasets/exchange-rates",
+      "url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/data/annual.csv",
+      "licence": "Public domain (ODC-PDDL)",
+      "sha256": "49b0b5dd9cd02303db57cefc6873bdf08fae6fdcbc0df3451d804041ae0fb648",
+      "accessed": "2026-11-17"
+    },
+    "fred-fx-monthly": {
+      "title": "Foreign exchange rates, monthly averages (US Federal Reserve H.10 via FRED)",
+      "publisher": "Board of Governors of the Federal Reserve System, packaged by datasets/exchange-rates",
+      "page": "https://github.com/datasets/exchange-rates",
+      "url": "https://raw.githubusercontent.com/datasets/exchange-rates/main/data/monthly.csv",
+      "licence": "Public domain (ODC-PDDL)",
+      "sha256": "f714b6e48e71078aae5effdadeb0daa3703ea040ed41471429a402706e11f684",
+      "accessed": "2026-11-17"
+    }
+  }
+}

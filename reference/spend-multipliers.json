@@ -1,0 +1,564 @@
+{
+  "_about": "Spend-based (environmentally extended input-output) multipliers for when no activity data exists. GHG Protocol Scope 3 guidance treats spend-based results as the lowest-quality method; replace them with activity or supplier data where you can.",
+  "source": "defra-spend-2023",
+  "method_source": "ghgp-scope3-technical",
+  "priceYear": 2023,
+  "unit": "kg CO2e per GBP spent (2023 prices, excluding VAT)",
+  "method": "Cost in the plan currency -> USD -> GBP at 2023 average exchange rates (currency.json), times the multiplier for the mapped SIC group. Costs are not deflated to 2023 prices: no published UK price index for the event year is in the reference set, and leaving prices undeflated can only overstate emissions. The multipliers describe UK supply chains.",
+  "sic": {
+    "1": {
+      "label": "Products of agriculture, hunting and related services",
+      "value": 1.9814
+    },
+    "2": {
+      "label": "Products of forestry, logging and related services",
+      "value": 0.15384
+    },
+    "3": {
+      "label": "Fish and other fishing products; aquaculture products; support services to fishing",
+      "value": 0.66093
+    },
+    "5": {
+      "label": "Coal and lignite",
+      "value": 1.51816
+    },
+    "6": {
+      "label": "Crude petroleum and natural gas",
+      "value": 0.24326
+    },
+    "7": {
+      "label": "Metal ores",
+      "value": 0.0
+    },
+    "8": {
+      "label": "Other mining and quarrying products",
+      "value": 0.7438
+    },
+    "9": {
+      "label": "Mining support services",
+      "value": 1.54541
+    },
+    "10.1": {
+      "label": "Preserved meat and meat products",
+      "value": 0.71363
+    },
+    "10.2 -3": {
+      "label": "Processed and preserved fish, crustaceans, molluscs, fruit and vegetables",
+      "value": 0.60709
+    },
+    "10.4": {
+      "label": "Vegetable and animal oils and fats",
+      "value": 0.69211
+    },
+    "10.5": {
+      "label": "Dairy products",
+      "value": 0.90525
+    },
+    "10.6": {
+      "label": "Grain mill products, starches and starch products",
+      "value": 0.64205
+    },
+    "10.7": {
+      "label": "Bakery and farinaceous products",
+      "value": 0.48378
+    },
+    "10.8": {
+      "label": "Other food products",
+      "value": 0.5973
+    },
+    "10.9": {
+      "label": "Prepared animal feeds",
+      "value": 0.81332
+    },
+    "11.01-6": {
+      "label": "Alcoholic beverages",
+      "value": 0.6578
+    },
+    "11.07": {
+      "label": "Soft drinks",
+      "value": 0.45598
+    },
+    "12": {
+      "label": "Tobacco products",
+      "value": 0.63255
+    },
+    "13": {
+      "label": "Textiles",
+      "value": 0.69282
+    },
+    "14": {
+      "label": "Wearing apparel",
+      "value": 0.69278
+    },
+    "15": {
+      "label": "Leather and related products",
+      "value": 0.73163
+    },
+    "16": {
+      "label": "Wood and of products of wood and cork, except furniture; articles of straw and plaiting materials",
+      "value": 0.43275
+    },
+    "17": {
+      "label": "Paper and paper products",
+      "value": 0.66916
+    },
+    "18": {
+      "label": "Printing and recording services",
+      "value": 0.34849
+    },
+    "19": {
+      "label": "Coke and refined petroleum products",
+      "value": 1.04558
+    },
+    "20.3": {
+      "label": "Paints, varnishes and similar coatings, printing ink and mastics",
+      "value": 0.99334
+    },
+    "20.4": {
+      "label": "Soap and detergents, cleaning and polishing preparations, perfumes and toilet preparations",
+      "value": 0.72827
+    },
+    "20.5": {
+      "label": "Other chemical products",
+      "value": 0.99334
+    },
+    "20A": {
+      "label": "Industrial gases, inorganics and fertilisers (all inorganic chemicals) - 20.11/13/15",
+      "value": 0.95517
+    },
+    "20B": {
+      "label": "Petrochemicals - 20.14/16/17/60",
+      "value": 0.99334
+    },
+    "20C": {
+      "label": "Dyestuffs, agro-chemicals - 20.12/20",
+      "value": 0.96608
+    },
+    "21": {
+      "label": "Basic pharmaceutical products and pharmaceutical preparations",
+      "value": 0.21901
+    },
+    "22": {
+      "label": "Rubber and plastic products",
+      "value": 0.64372
+    },
+    "23.5-6": {
+      "label": "Cement, lime, plaster and articles of concrete, cement and plaster",
+      "value": 2.08125
+    },
+    "23OTHER": {
+      "label": "Glass, refractory, clay, other porcelain and ceramic, stone and abrasive products - 23.1-4/7-9",
+      "value": 1.55201
+    },
+    "24.1-3": {
+      "label": "Basic iron and steel",
+      "value": 0.77428
+    },
+    "24.4-5": {
+      "label": "Other basic metals and casting",
+      "value": 0.03197
+    },
+    "25.4": {
+      "label": "Weapons and ammunition",
+      "value": 0.4324
+    },
+    "25OTHER": {
+      "label": "Fabricated metal products, excl. machinery and equipment and weapons & ammunition - 25.1-3/25.5-9",
+      "value": 0.56773
+    },
+    "26": {
+      "label": "Computer, electronic and optical products",
+      "value": 0.53641
+    },
+    "27": {
+      "label": "Electrical equipment",
+      "value": 0.84277
+    },
+    "28": {
+      "label": "Machinery and equipment n.e.c.",
+      "value": 0.51155
+    },
+    "29": {
+      "label": "Motor vehicles, trailers and semi-trailers",
+      "value": 0.46346
+    },
+    "30.1": {
+      "label": "Ships and boats",
+      "value": 0.28249
+    },
+    "30.3": {
+      "label": "Air and spacecraft and related machinery",
+      "value": 0.38922
+    },
+    "30OTHER": {
+      "label": "Other transport equipment - 30.2/4/9",
+      "value": 0.36026
+    },
+    "31": {
+      "label": "Furniture",
+      "value": 0.49549
+    },
+    "32": {
+      "label": "Other manufactured goods",
+      "value": 0.67801
+    },
+    "33.15": {
+      "label": "Repair and maintenance of ships and boats",
+      "value": 0.13356
+    },
+    "33.159999999999997": {
+      "label": "Repair and maintenance of aircraft and spacecraft",
+      "value": 0.09335
+    },
+    "33OTHER": {
+      "label": "Rest of repair; Installation - 33.11-14/17/19/20",
+      "value": 0.2657
+    },
+    "35.1": {
+      "label": "Electricity, transmission and distribution",
+      "value": 1.17676
+    },
+    "35.2-3": {
+      "label": "Gas; distribution of gaseous fuels through mains; steam and air conditioning supply",
+      "value": 1.13841
+    },
+    "36": {
+      "label": "Natural water; water treatment and supply services",
+      "value": 0.20329
+    },
+    "37": {
+      "label": "Sewerage services; sewage sludge",
+      "value": 0.35313
+    },
+    "38": {
+      "label": "Waste collection, treatment and disposal services; materials recovery services",
+      "value": 1.30688
+    },
+    "39": {
+      "label": "Remediation services and other waste management services",
+      "value": 0.25294
+    },
+    "41.2": {
+      "label": "Buildings and building construction works",
+      "value": 0.23186
+    },
+    "42.1-2": {
+      "label": "Constructions and construction works for civil engineering",
+      "value": 0.26547
+    },
+    "42.99": {
+      "label": "Specialised construction works",
+      "value": 0.21694
+    },
+    "45": {
+      "label": "Wholesale and retail trade and repair services of motor vehicles and motorcycles",
+      "value": 0.26745
+    },
+    "46": {
+      "label": "Wholesale trade services, except of motor vehicles and motorcycles",
+      "value": 4.51621
+    },
+    "47": {
+      "label": "Retail trade services, except of motor vehicles and motorcycles",
+      "value": 0.27191
+    },
+    "49.1-2": {
+      "label": "Rail transport services",
+      "value": 0.4234
+    },
+    "49.3-5": {
+      "label": "Land transport services and transport services via pipelines, excluding rail transport",
+      "value": 0.57488
+    },
+    "50": {
+      "label": "Water transport services",
+      "value": 0.96903
+    },
+    "51": {
+      "label": "Air transport services",
+      "value": 1.46881
+    },
+    "52": {
+      "label": "Warehousing and support services for transportation",
+      "value": 0.35125
+    },
+    "53": {
+      "label": "Postal and courier services",
+      "value": 0.22399
+    },
+    "55": {
+      "label": "Accommodation services",
+      "value": 0.28972
+    },
+    "56": {
+      "label": "Food and beverage serving services",
+      "value": 0.25955
+    },
+    "58": {
+      "label": "Publishing services",
+      "value": 0.0949
+    },
+    "59": {
+      "label": "Motion picture, video and TV programme production services, sound recording & music publishing",
+      "value": 0.13282
+    },
+    "60": {
+      "label": "Programming and broadcasting services",
+      "value": 0.21644
+    },
+    "61": {
+      "label": "Telecommunications services",
+      "value": 0.09464
+    },
+    "62": {
+      "label": "Computer programming, consultancy and related services",
+      "value": 0.09992
+    },
+    "63": {
+      "label": "Information services",
+      "value": 0.07988
+    },
+    "64": {
+      "label": "Financial services, except insurance and pension funding",
+      "value": 0.08435
+    },
+    "65.1-2": {
+      "label": "Insurance, reinsurance and pension funding services, except compulsory social security",
+      "value": 0.06142
+    },
+    "65.3": {
+      "label": "Pension funding services",
+      "value": 0.00093
+    },
+    "66": {
+      "label": "Services auxiliary to financial services and insurance services",
+      "value": 0.06745
+    },
+    "68.12": {
+      "label": "Real estate services, excluding on a fee or contract basis and imputed rent",
+      "value": 0.17676
+    },
+    "68.2IMP": {
+      "label": "Owner-Occupiers' Housing Services",
+      "value": 0.02682
+    },
+    "68.3": {
+      "label": "Real estate services on a fee or contract basis",
+      "value": 0.08283
+    },
+    "69.1": {
+      "label": "Legal services",
+      "value": 0.04592
+    },
+    "69.2": {
+      "label": "Accounting, bookkeeping and auditing services; tax consulting services",
+      "value": 0.05023
+    },
+    "70": {
+      "label": "Services of head offices; management consulting services",
+      "value": 0.08119
+    },
+    "71": {
+      "label": "Architectural and engineering services; technical testing and analysis services",
+      "value": 0.16172
+    },
+    "72": {
+      "label": "Scientific research and development services",
+      "value": 0.15188
+    },
+    "73": {
+      "label": "Advertising and market research services",
+      "value": 0.10574
+    },
+    "74": {
+      "label": "Other professional, scientific and technical services",
+      "value": 0.12591
+    },
+    "75": {
+      "label": "Veterinary services",
+      "value": 0.08324
+    },
+    "77": {
+      "label": "Rental and leasing services",
+      "value": 0.12977
+    },
+    "78": {
+      "label": "Employment services",
+      "value": 0.05477
+    },
+    "79": {
+      "label": "Travel agency, tour operator and other reservation services and related services",
+      "value": 0.43781
+    },
+    "80": {
+      "label": "Security and investigation services",
+      "value": 0.08944
+    },
+    "81": {
+      "label": "Services to buildings and landscape",
+      "value": 0.13808
+    },
+    "82": {
+      "label": "Office administrative, office support and other business support services",
+      "value": 0.15579
+    },
+    "84": {
+      "label": "Public administration and defence services; compulsory social security services",
+      "value": 0.22638
+    },
+    "85": {
+      "label": "Education services",
+      "value": 0.11973
+    },
+    "86": {
+      "label": "Human health services",
+      "value": 0.18453
+    },
+    "87": {
+      "label": "Residential care services",
+      "value": 0.12603
+    },
+    "88": {
+      "label": "Social work services without accommodation",
+      "value": 0.13564
+    },
+    "90": {
+      "label": "Creative, arts and entertainment services",
+      "value": 0.2963
+    },
+    "91": {
+      "label": "Libraries, archives, museums and other cultural services",
+      "value": 0.25482
+    },
+    "92": {
+      "label": "Gambling and betting services",
+      "value": 0.11264
+    },
+    "93": {
+      "label": "Sports services and amusement and recreation services",
+      "value": 0.23231
+    },
+    "94": {
+      "label": "Services furnished by membership organisations",
+      "value": 0.17372
+    },
+    "95": {
+      "label": "Repair services of computers and personal and household goods",
+      "value": 0.10132
+    },
+    "96": {
+      "label": "Other personal services",
+      "value": 0.08201
+    },
+    "97": {
+      "label": "Services of households as employers of domestic personnel",
+      "value": 0.03496
+    }
+  },
+  "map": {
+    "element": {
+      "Performance": {
+        "sic": "90",
+        "reason": "Performers are bought as creative, arts and entertainment services."
+      },
+      "Stage & set": {
+        "sic": "42.99",
+        "reason": "Temporary stages and sets are built and erected on site as specialised construction works."
+      },
+      "Projection": {
+        "sic": "77",
+        "reason": "Projectors and media servers are normally hired: rental and leasing services."
+      },
+      "Pitch art": {
+        "sic": "13",
+        "reason": "Pitch art is large printed or sewn fabric: textiles."
+      },
+      "Music": {
+        "sic": "90",
+        "reason": "Musicians, composers and producers: creative, arts and entertainment services."
+      },
+      "Cast & community": {
+        "sic": "90",
+        "reason": "Cast costs (choreography, rehearsal, stipends) are creative, arts and entertainment services."
+      },
+      "Crowd participation": {
+        "sic": "18",
+        "reason": "Card mosaics and printed items are printing services; for electronic wristbands choose 26."
+      },
+      "Special effects": {
+        "sic": "20.5",
+        "reason": "Pyrotechnics and effects consumables are other chemical products (SIC 20.51 explosives sits in this group)."
+      },
+      "Lighting": {
+        "sic": "77",
+        "reason": "Lighting fixtures are normally hired: rental and leasing services."
+      },
+      "Broadcast": {
+        "sic": "59",
+        "reason": "Broadcast specials are motion picture, video and TV programme production services."
+      },
+      "Sound": {
+        "sic": "77",
+        "reason": "Audio systems are normally hired: rental and leasing services."
+      },
+      "Costume": {
+        "sic": "14",
+        "reason": "Costumes are wearing apparel."
+      },
+      "Other": {
+        "sic": "90",
+        "reason": "Default for show elements: creative, arts and entertainment services."
+      }
+    },
+    "line": {
+      "Artist fees & travel": {
+        "sic": "90",
+        "reason": "Artist fees. Enter travel in the carbon calculator, not here, or it is counted twice."
+      },
+      "Rehearsals": {
+        "sic": "77",
+        "reason": "Rehearsal fields, marquees and equipment are hired."
+      },
+      "Venue & site": {
+        "sic": "93",
+        "reason": "Venue hire: sports services and amusement and recreation services."
+      },
+      "Crew & labour": {
+        "sic": "78",
+        "reason": "Freelance crew through agencies: employment services."
+      },
+      "Logistics & freight": {
+        "sic": "49.3-5",
+        "reason": "Land transport services. Use the activity calculator instead when you have tonne-km."
+      },
+      "Accommodation": {
+        "sic": "55",
+        "reason": "Accommodation services. Use hotel nights in the calculator instead when you have them."
+      },
+      "Catering": {
+        "sic": "56",
+        "reason": "Food and beverage serving services."
+      },
+      "Security & safety": {
+        "sic": "80",
+        "reason": "Security and investigation services."
+      },
+      "Content & marketing": {
+        "sic": "73",
+        "reason": "Advertising and market research services."
+      },
+      "Sustainability": {
+        "sic": null,
+        "reason": "Mitigation payments are not a purchase of goods or services that emit; no multiplier."
+      },
+      "Other": {
+        "sic": "90",
+        "reason": "Default: creative, arts and entertainment services."
+      }
+    }
+  },
+  "lineActivityDefault": [
+    "Logistics & freight",
+    "Accommodation"
+  ]
+}

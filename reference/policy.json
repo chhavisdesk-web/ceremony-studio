@@ -1,0 +1,4 @@
+{
+  "_about": "Policy values the app applies. Each must cite a published source; a plan can override them only with its own source.",
+  "carbonPrice": { "value": 25, "currency": "EUR", "unit": "per t CO2e", "label": "UEFA EURO 2024 Climate Fund rate", "sources": ["uefa-euro2024-climate-fund"], "note": "UEFA paid EUR 25 into the fund for each tonne of CO2 emitted in connection with EURO 2024. Used to price residual emissions and to weigh CO2e savings against cost savings when fitting a budget." }
+}

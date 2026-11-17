@@ -1,0 +1,33 @@
+{
+  "_about": "Average 2023 exchange rates, quoted as units of currency per US dollar. Used only to bring costs into the price basis of the spend-based multipliers (2023 GBP).",
+  "year": 2023,
+  "perUSD": {
+    "AUD": 1.5051,
+    "BRL": 4.9946,
+    "CAD": 1.3494,
+    "CHF": 0.8984,
+    "CNY": 7.0809,
+    "DKK": 6.89,
+    "EUR": 0.9245,
+    "GBP": 0.80425,
+    "HKD": 7.8292,
+    "INR": 82.5708,
+    "JPY": 140.5001,
+    "KRW": 1306.7637,
+    "MXN": 17.7334,
+    "MYR": 4.5577,
+    "NOK": 10.5659,
+    "NZD": 1.6279,
+    "SEK": 10.6089,
+    "SGD": 1.3428,
+    "THB": 34.7841,
+    "TWD": 31.1525,
+    "USD": 1.0,
+    "ZAR": 18.4535
+  },
+  "sources": {
+    "annual": "fred-fx-annual",
+    "GBP": "fred-fx-monthly (mean of the 12 monthly averages)"
+  },
+  "notCovered": "Currencies missing here (for example AED, SAR, QAR) have no published rate in this dataset, so spend-based CO2e is not calculated for them."
+}

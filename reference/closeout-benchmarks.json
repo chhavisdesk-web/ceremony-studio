@@ -1,0 +1,8 @@
+{
+  "_about": "Benchmarks built only from actuals in reference/closeouts/ (invoices, delivery dates, metered data). No scaling or extrapolation: the app shows the median with its range and sample size, and cites the files.",
+  "builtFrom": [],
+  "events": [],
+  "elementCost": [],
+  "leadWeeks": [],
+  "perAttendee": []
+}

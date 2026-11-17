@@ -1,0 +1,69 @@
+# Reference library
+
+Ceremony Studio has one rule for numbers: **every figure the app produces must trace back to a published standard, a published event report, or the planner's own documented data** (a vendor quote, an invoice, a meter reading). The app never makes up an estimate. If it has no source for a number, it says so and asks for one.
+
+This folder holds everything the app relies on. The app loads `bundle.json` when it starts.
+
+## What is here
+
+| File | What it holds | Where it comes from |
+|---|---|---|
+| `emission-factors.json` | Fuel, freight, travel, waste and hotel factors | UK DESNZ 2026 conversion factors. Each factor lists the exact DESNZ row IDs it adds up (direct + well-to-tank) |
+| `grid-intensity.json` | Electricity carbon intensity for 213 countries | Ember Yearly Electricity Data 2026, via Our World in Data |
+| `spend-multipliers.json` | kg CO2e per £ spent, by industry (SIC) group, plus the mapping from each app category to a SIC group and the reason | Defra / University of Leeds, UK carbon footprint 2023 |
+| `currency.json` | 2023 average exchange rates, used only to bring costs into the multipliers' price basis | US Federal Reserve H.10 via FRED |
+| `events.json` | Published whole-event footprints (Olympics, World Cups, EURO 2024 and others) | Organiser reports and press, one or more sources per figure |
+| `ceremony-budgets.json` | Published ceremony and show budgets | Press and government reporting |
+| `policy.json` | The internal carbon price (EUR 25/t) | UEFA EURO 2024 Climate Fund |
+| `closeouts/` | Close-out files exported from finished projects | Your own invoices, delivery dates and meter readings |
+| `closeout-benchmarks.json` | Medians, ranges and sample sizes built from `closeouts/` | Generated |
+| `sources.json` | The hand-curated bibliography | Edited by hand |
+| `datasets.json` | Every downloaded file, with its URL, licence, access date and SHA-256 hash | Generated |
+| `bundle.json` | All of the above in one file for the app | Generated |
+
+## How the app uses it
+
+| Number | Method | Basis |
+|---|---|---|
+| Energy, freight, travel, hotel and waste CO2e | Activity data you enter × a DESNZ factor | GHG Protocol activity-based method |
+| Grid electricity CO2e | kWh you enter × the country's grid intensity | Ember / OWID |
+| CO2e of a show element or budget line with no activity data | Quoted cost → 2023 GBP → × the SIC multiplier | GHG Protocol spend-based method (the lowest-quality method; replace it with supplier data when you can) |
+| Costs | Only what you enter, with its reference (quote number, invoice, rate card) | Your documents |
+| Cost benchmarks and lead times | Medians from your own close-out files, with n and the file names | Your past projects |
+| Weighing CO2e savings against cost when fitting a budget | EUR 25 per tonne | UEFA EURO 2024 Climate Fund |
+
+Anything without a source is marked **No source** in the app, is listed in the export, and is counted against the plan's source coverage.
+
+### Known limitations, stated rather than hidden
+- DESNZ factors describe UK conditions. Rail and hotel factors are UK or country-specific as published; use a local operator's factor where you have one.
+- Spend-based multipliers describe UK supply chains in 2023 prices. Costs are converted at 2023 exchange rates and not deflated, which can only overstate emissions.
+- Grid intensity is lifecycle (it includes upstream emissions), so it is higher than generation-only factors.
+- There is no published per-meal factor in these datasets, so catering uses catering spend or the caterer's own figure.
+- `events.json` and `ceremony-budgets.json` were transcribed from search excerpts because the build environment could not open those sites. Each entry says how sure the attribution is (`verification`). Open the cited page before quoting a figure to a client.
+
+## Updating
+
+Rebuild after DESNZ publishes new factors (every June), or to pick up new data:
+
+```bash
+python3 scripts/build_reference.py
+```
+
+This downloads the source files, records their hashes, regenerates the JSON, then refuses to finish if any value lacks a source.
+
+To edit curated data (`events.json`, `ceremony-budgets.json`, `policy.json`), add the source to `sources.json` first, cite its id, then run the build.
+
+## Close-outs: how the app learns from finished shows
+
+1. After the show, open **Export → Close-out** in the app. Enter actual costs with their invoice references, actual lead times, attendance, and metered energy, freight and waste.
+2. Download the close-out file.
+3. Commit it to `reference/closeouts/`.
+4. Rebuild without downloading anything:
+
+```bash
+python3 scripts/build_reference.py closeouts
+```
+
+5. Commit the updated `closeout-benchmarks.json` and `bundle.json`.
+
+From then on, the app shows those actuals as benchmarks: the median, range and sample size per element category and tier, actual lead times, and per-attendee activity. It cites the close-out files. It never scales or extrapolates them.

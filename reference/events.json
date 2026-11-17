@@ -1,0 +1,214 @@
+{
+  "_about": "Published whole-event greenhouse gas footprints. Whole-event figures include venues, operations and travel; none of these isolate a ceremony. Use them as context and sanity checks, never as a ceremony estimate. status: measured = organiser's post-event figure; estimate = third-party or partial; projected = pre-event forecast. verification: 'excerpt' = the figure appeared in a search excerpt attributed to the cited page; 'uncertain' = the figure came from a search summary and the exact page could not be confirmed. No page was opened directly from the build environment (its network blocks these hosts), so check the cited page before client use.",
+  "unit": "t CO2e",
+  "events": [
+    {
+      "id": "paris-2024-organiser",
+      "name": "Paris 2024 Olympic and Paralympic Games (organiser figure)",
+      "year": 2024,
+      "type": "olympics_summer",
+      "tCO2e": 1590000,
+      "status": "measured",
+      "boundary": "Organiser's own data and scope",
+      "shares": {
+        "travel_accommodation": 0.5
+      },
+      "sources": [
+        "wiki-paris2024-transport",
+        "sweep-paris2024"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "paris-2024-govt",
+      "name": "Paris 2024 Olympic and Paralympic Games (French government / EY)",
+      "year": 2024,
+      "type": "olympics_summer",
+      "tCO2e": 2085000,
+      "status": "measured",
+      "boundary": "IOC method, includes construction of permanent venues",
+      "sources": [
+        "fr-govt-paris2024"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "tokyo-2020",
+      "name": "Tokyo 2020 Olympic Games",
+      "year": 2021,
+      "type": "olympics_summer",
+      "tCO2e": 2730000,
+      "status": "estimate",
+      "boundary": "Held without spectators; about 1.5 Mt from venues and infrastructure",
+      "sources": [
+        "phys-tokyo2020"
+      ],
+      "verification": "uncertain"
+    },
+    {
+      "id": "rio-2016",
+      "name": "Rio 2016 Olympic Games",
+      "year": 2016,
+      "type": "olympics_summer",
+      "tCO2e": 3600000,
+      "tCO2e_high": 4500000,
+      "status": "estimate",
+      "boundary": "Venue and urban construction about 1.59 Mt; spectators estimated separately",
+      "sources": [
+        "climateaction-rio2016"
+      ],
+      "verification": "uncertain"
+    },
+    {
+      "id": "london-2012",
+      "name": "London 2012 Olympic and Paralympic Games",
+      "year": 2012,
+      "type": "olympics_summer",
+      "tCO2e": 3300000,
+      "tCO2e_high": 3400000,
+      "status": "estimate",
+      "boundary": "Includes Paralympic Games",
+      "sources": [
+        "geoj-olympics"
+      ],
+      "verification": "uncertain"
+    },
+    {
+      "id": "milano-cortina-2026",
+      "name": "Milano Cortina 2026 Winter Olympic Games",
+      "year": 2026,
+      "type": "olympics_winter",
+      "tCO2e": 930000,
+      "status": "projected",
+      "boundary": "Campaigner estimate from official data; excludes sponsorship (about +1.3 Mt)",
+      "shares": {
+        "spectator_travel": 0.44
+      },
+      "sources": [
+        "sgr-milano-cortina"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "euro-2024",
+      "name": "UEFA EURO 2024 (Germany)",
+      "year": 2024,
+      "type": "football_tournament",
+      "tCO2e": 316912,
+      "status": "measured",
+      "boundary": "UEFA final calculation including spectator travel",
+      "sources": [
+        "stadiaworld-euro2024-esg"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "wc-2010",
+      "name": "FIFA World Cup 2010 (South Africa)",
+      "year": 2010,
+      "type": "football_tournament",
+      "tCO2e": 2750000,
+      "status": "measured",
+      "boundary": "FIFA self-reported, narrower boundary",
+      "sources": [
+        "datahub-worldcup"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "wc-2014",
+      "name": "FIFA World Cup 2014 (Brazil)",
+      "year": 2014,
+      "type": "football_tournament",
+      "tCO2e": 2270000,
+      "status": "measured",
+      "boundary": "FIFA self-reported, narrower boundary",
+      "sources": [
+        "datahub-worldcup"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "wc-2018",
+      "name": "FIFA World Cup 2018 (Russia)",
+      "year": 2018,
+      "type": "football_tournament",
+      "tCO2e": 2100000,
+      "tCO2e_low": 2000000,
+      "tCO2e_high": 2200000,
+      "status": "measured",
+      "boundary": "FIFA self-reported; sources differ between 2.0 and 2.2 Mt",
+      "sources": [
+        "newstatesman-qatar"
+      ],
+      "verification": "uncertain"
+    },
+    {
+      "id": "wc-2022",
+      "name": "FIFA World Cup 2022 (Qatar)",
+      "year": 2022,
+      "type": "football_tournament",
+      "tCO2e": 3600000,
+      "status": "projected",
+      "boundary": "FIFA official projection; Carbon Market Watch argued the real figure could be up to 8x higher",
+      "sources": [
+        "newstatesman-qatar"
+      ],
+      "verification": "uncertain"
+    },
+    {
+      "id": "wc-2026",
+      "name": "FIFA World Cup 2026 (USA, Canada, Mexico)",
+      "year": 2026,
+      "type": "football_tournament",
+      "tCO2e": 9000000,
+      "status": "projected",
+      "boundary": "Third-party model",
+      "shares": {
+        "air_travel": 0.86
+      },
+      "sources": [
+        "datahub-worldcup"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "cwg-2022",
+      "name": "Commonwealth Games 2022 (Birmingham)",
+      "year": 2022,
+      "type": "multi_sport",
+      "tCO2e": 201800,
+      "status": "measured",
+      "boundary": "Organiser figure",
+      "sources": [
+        "b2022-carbon"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "cop25",
+      "name": "COP25 (Madrid)",
+      "year": 2019,
+      "type": "conference",
+      "tCO2e": 51101,
+      "status": "measured",
+      "sources": [
+        "scotsman-cop25"
+      ],
+      "verification": "excerpt"
+    },
+    {
+      "id": "cop26",
+      "name": "COP26 (Glasgow)",
+      "year": 2021,
+      "type": "conference",
+      "tCO2e": 131556,
+      "status": "measured",
+      "boundary": "COP26 Sustainability Report; the preliminary projection was 102,500 t",
+      "sources": [
+        "eciu-cop"
+      ],
+      "verification": "excerpt"
+    }
+  ]
+}

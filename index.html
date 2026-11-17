@@ -315,6 +315,12 @@ td a{color:var(--ink)}
 .actsedit .ar{display:grid;grid-template-columns:minmax(0,1fr) 90px minmax(0,2fr) auto;gap:8px;align-items:center}
 @media (max-width:640px){.actsedit .ar{grid-template-columns:1fr 80px}}
 .note{font-size:12.5px;color:var(--muted)}
+.src{display:inline-block;font-size:11.5px;line-height:1.5;padding:0 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;font-weight:500}
+.src.ok{color:var(--ok)}.src.no{color:var(--bad)}.src.ref{color:var(--muted)}
+.srcrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.srcrow select{max-width:200px}.srcrow input{flex:1;min-width:140px}
+.fsrc{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+.fsrc a{color:inherit}
 </style>
 
 <div class="app">
@@ -356,30 +362,38 @@ const STEPS = [
   ['budget','Budget'],['production','Production'],['sustainability','Sustainability'],['export','Export']
 ];
 const DRAFT_KEY = 'ceremony-studio:draft:v2';
+// Overhead rates are commercial terms (your rate card, the insurer's quote), so they start at 0 until you enter them with a source.
 const DEFAULT_OVERHEADS = () => ([
-  { id: uid(), name: 'Creative direction & design', pct: 5 },
-  { id: uid(), name: 'Production management & crew', pct: 10 },
-  { id: uid(), name: 'Insurance, permits & safety', pct: 3 },
-  { id: uid(), name: 'Contingency', pct: 7 }
+  { id: uid(), name: 'Creative direction & design', pct: 0, src: blankSrc() },
+  { id: uid(), name: 'Production management & crew', pct: 0, src: blankSrc() },
+  { id: uid(), name: 'Insurance, permits & safety', pct: 0, src: blankSrc() },
+  { id: uid(), name: 'Contingency', pct: 0, src: blankSrc() }
 ]);
-const DEFAULT_TRAVEL = () => ({ localPct: 45, nationalPct: 25, intlPct: 30, localKg: 3, nationalKg: 50, intlKg: 450 });
+// Audience travel comes from ticketing or survey data: share of attendees, one-way distance and mode per segment.
+const DEFAULT_TRAVEL = () => ({ src: blankSrc(), segments: [
+  { key: 'local', label: 'Local', pct: 0, km: 0, mode: 'bus', occ: 1 },
+  { key: 'national', label: 'National', pct: 0, km: 0, mode: 'train', occ: 1 },
+  { key: 'intl', label: 'International', pct: 0, km: 0, mode: 'flight', occ: 1 }
+] });
 
 const TEMPLATES = [
-  { key:'opening', label:'Tournament opening ceremony', eventType:'Tournament opening ceremony', venueType:'Stadium', capacity:60000, showMinutes:25, budgetCap:12000000 },
-  { key:'final', label:'Final kickoff show', eventType:'Football final kickoff show', venueType:'Stadium', capacity:70000, showMinutes:12, budgetCap:4000000 },
-  { key:'festival', label:'Festival opening night', eventType:'Festival opening night', venueType:'Outdoor festival site', capacity:30000, showMinutes:45, budgetCap:1500000 },
-  { key:'city', label:'National day / city celebration', eventType:'City celebration', venueType:'Outdoor public space', capacity:100000, showMinutes:30, budgetCap:3000000 },
-  { key:'awards', label:'Awards show / gala', eventType:'Awards show', venueType:'Arena', capacity:5000, showMinutes:120, budgetCap:2500000 },
-  { key:'launch', label:'Brand launch', eventType:'Product launch', venueType:'Indoor venue', capacity:1500, showMinutes:40, budgetCap:800000 }
+  { key:'opening', label:'Tournament opening ceremony', eventType:'Tournament opening ceremony', venueType:'Stadium', capacity:0, showMinutes:25, budgetCap:0 },
+  { key:'final', label:'Final kickoff show', eventType:'Football final kickoff show', venueType:'Stadium', capacity:0, showMinutes:12, budgetCap:0 },
+  { key:'festival', label:'Festival opening night', eventType:'Festival opening night', venueType:'Outdoor festival site', capacity:0, showMinutes:45, budgetCap:0 },
+  { key:'city', label:'National day / city celebration', eventType:'City celebration', venueType:'Outdoor public space', capacity:0, showMinutes:30, budgetCap:0 },
+  { key:'awards', label:'Awards show / gala', eventType:'Awards show', venueType:'Arena', capacity:0, showMinutes:120, budgetCap:0 },
+  { key:'launch', label:'Brand launch', eventType:'Product launch', venueType:'Indoor venue', capacity:0, showMinutes:40, budgetCap:0 }
 ];
 
 /* ------------------------------------------------------------------ */
 /* Example plan (clearly marked; estimates are illustrative)           */
 /* ------------------------------------------------------------------ */
+// Tiers carry descriptions only. Costs come from vendor quotes (with their reference); CO2e is calculated from them.
+const blankTier = desc => ({ desc: desc || '', cost: null, src: blankSrc(), co2s: null });
 function E(id, name, act, category, description, s, sig, std, lean, tier, leadWeeks, sourcing, gScore, gNote) {
   return { id, name, act, category, description,
     scores: { broadcast: s[0], local: s[1], global: s[2] },
-    tiers: { signature: { desc: sig[0], cost: sig[1], co2: sig[2] }, standard: { desc: std[0], cost: std[1], co2: std[2] }, lean: { desc: lean[0], cost: lean[1], co2: lean[2] } },
+    tiers: { signature: blankTier(sig[0]), standard: blankTier(std[0]), lean: blankTier(lean[0]) },
     tier, included: true, locked: false, leadWeeks, sourcing, green: { score: gScore, note: gNote } };
 }
 function examplePlan() {
@@ -396,7 +410,7 @@ function examplePlan() {
     lighting:'Daylight show: colour comes from fabric, cards, smoke and the LED ring, not beams.',
     costume:'Colour-blocked sun palette made by Madrid fashion students, loose and breathable for 30°C.' };
   return {
-    id: 'example-ucl-2027', example: true, name: 'Champions League Final 2027 kickoff show, Madrid (independent concept)', updatedAt: Date.now(),
+    id: 'example-ucl-2027', example: true, v: 3, name: 'Champions League Final 2027 kickoff show, Madrid (independent concept)', updatedAt: Date.now(),
     brief: {
       eventName: 'UEFA Champions League Final 2027: kickoff show', eventType: 'Football final kickoff show', city: 'Madrid', country: 'Spain',
       venue: 'Estadio Metropolitano', venueType: 'Stadium: fixed roof over the stands, open over the pitch', capacity: 70692, date: '2027-06-05', showMinutes: 12, showLight: 'Daylight',
@@ -454,24 +468,24 @@ function examplePlan() {
     ],
     conceptId: 'c3', acts, look,
     elements: [
-      E('e1','Headline performance','El Sol','Performance','The headline set at the peak of the show, with a Spanish guest.',[5,3,5],['Global superstar plus a Spanish star duet, 40 dancers',1400000,25],['International star with 16 dancers',550000,10],['Leading Spanish artist with 8 dancers',180000,3],'standard',24,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer an act already touring in Europe in early June.'),
-      E('e2','Roll-on centre stage','El Sol','Stage & set','A mirrored centre stage that reflects the sky and rolls off in under two minutes.',[4,3,3],['New kinetic stage with a rising sun disc',800000,40],['Reused modular stage, re-skinned with a mirror finish',380000,12],['Rental stage cart with a printed skin',200000,8],'signature',16,'Stage builders with pitch-certified wheels; reuse precedent from the 2026 show.',4,'The 2026 show reused the 2025 stage. Reuse again and publish it.'),
-      E('e3','Fabric sun on the pitch','El Sol','Pitch art','A giant printed fabric sun unfurled across the pitch by the cast. It is the hero image from above.',[5,5,4],['100 m sun in recycled PET, unfurled by 300 cast, second life as bags and shade sails',420000,18],['70 m sun unfurled by 200 cast',260000,11],['Centre-circle sun, 60 cast',90000,4],'signature',16,'Large-format textile printers in Spain; rigging and folding rehearsed offsite.',3,'Agree the second life (bags, shade sails for clubs) before printing.'),
-      E('e4','Flamenco percussion & brass','Los Caminos','Music','An original score: flamenco percussion, cajón, palmas and brass, with a producer.',[3,5,4],['80 musicians with choir and producer',240000,3],['40 musicians with producer',130000,1.5],['12 percussionists over playback',45000,0.6],'standard',14,'Madrid flamenco and brass musicians; commission the score early.',5,'Local musicians, minimal travel.'),
-      E('e5','Barrio cast','Los Caminos','Cast & community','Volunteers from Madrid neighbourhood clubs and dance schools, dancing a reworked chotis.',[3,5,3],['900 volunteers, 6 rehearsals',240000,6],['500 volunteers, 4 rehearsals',140000,4],['250 volunteers, 3 rehearsals',70000,2],'standard',16,'Recruited via the Madrid football federation, clubs and dance schools.',4,'Local cast; issue Metro passes for rehearsals.'),
-      E('e6','Sun-ray crowd mosaic','Kilómetro Cero','Crowd participation','The stands continue the sun\'s rays, then turn to both finalists\' colours.',[5,5,3],['LED wristbands for 70,000 synced to the Sky Ribbon',330000,20],['Recycled-paper card mosaic, 70,000 cards',70000,3],['20,000 recycled-fabric flags',40000,2],'signature',10,'Local printer for cards; seat-by-seat placement crew.',3,'Wristbands barely read in daylight and create e-waste. Cards work in sun.'),
-      E('e7','Daylight effects','El Sol','Special effects','Effects that still read in sun without loud bangs.',[4,2,4],['Coloured smoke plumes, CO2 jets and streamers',220000,8],['Coloured smoke and CO2 jets',120000,4],['Biodegradable streamer cannons',40000,1],'standard',12,'Licensed effects company; city permits and noise checks.',2,'Smoke and CO2 add emissions; streamers must be biodegradable and collected.'),
-      E('e8','Sky Ribbon & LED content','Salida','Lighting','Custom content for the 360° LED ring, tunnel panels and giant screens.',[5,3,4],['Custom content for every LED surface plus 120 moving heads',260000,5],['Custom content for the Sky Ribbon and screens',120000,2],['Adapted graphics on the screens',40000,0.5],'standard',10,'Content studio working with the stadium LED team.',4,'Uses the venue\'s own LED; little extra hardware.'),
-      E('e9','Trophy arrival at Km 0','Kilómetro Cero','Stage & set','The trophy reaches the centre spot, Kilómetro Cero.',[5,4,5],['Trophy rises on a 6 m kinetic column at the centre spot',240000,9],['Trophy carried in by former players along a fabric road',60000,1],['Trophy on a plinth with a camera moment',20000,0.3],'standard',14,'Automation specialist, or choreography only.',4,'The carried version has almost no footprint.'),
-      E('e10','Broadcast specials','Salida','Broadcast','Special angles and AR so the show reads on screen.',[5,1,5],['Cablecam, helicopter and AR sun graphics',300000,6],['Cablecam and AR graphics',180000,3],['AR graphics through the host broadcaster',70000,1],'standard',10,'Agreed with the host broadcaster (not yet announced).',4,'Mostly digital.'),
-      E('e11','Show audio','El Sol','Sound','Pitch PA plus a separate TV mix, managed to Madrid\'s noise limits.',[4,1,4],['Delay ring and a dedicated TV mix truck',240000,5],['Pitch PA and a TV mix position',170000,4],['House PA with a feed from front of house',80000,2],'standard',8,'Spanish audio hire; noise monitoring at nearby homes.',3,'Right-size the rig and avoid extra trucks.'),
-      E('e12','Costumes','Los Caminos','Costume','Sun-palette costumes for cast and dancers, cool enough for 30°C.',[3,5,3],['1,000 pieces made with Madrid fashion students',180000,7],['Custom tops over hired base garments',95000,4],['Printed tops on recycled cotton',35000,2],'standard',14,'Madrid fashion schools and local makers.',4,'Donate costumes to neighbourhood clubs afterwards.')
+      E('e1','Headline performance','El Sol','Performance','The headline set at the peak of the show, with a Spanish guest.',[5,3,5],['Global superstar plus a Spanish star duet, 40 dancers'],['International star with 16 dancers'],['Leading Spanish artist with 8 dancers'],'standard',null,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer an act already touring in Europe in early June.'),
+      E('e2','Roll-on centre stage','El Sol','Stage & set','A mirrored centre stage that reflects the sky and rolls off in under two minutes.',[4,3,3],['New kinetic stage with a rising sun disc'],['Reused modular stage, re-skinned with a mirror finish'],['Rental stage cart with a printed skin'],'signature',null,'Stage builders with pitch-certified wheels; reuse precedent from the 2026 show.',4,'The 2026 show reused the 2025 stage. Reuse again and publish it.'),
+      E('e3','Fabric sun on the pitch','El Sol','Pitch art','A giant printed fabric sun unfurled across the pitch by the cast. It is the hero image from above.',[5,5,4],['100 m sun in recycled PET, unfurled by 300 cast, second life as bags and shade sails'],['70 m sun unfurled by 200 cast'],['Centre-circle sun, 60 cast'],'signature',null,'Large-format textile printers in Spain; rigging and folding rehearsed offsite.',3,'Agree the second life (bags, shade sails for clubs) before printing.'),
+      E('e4','Flamenco percussion & brass','Los Caminos','Music','An original score: flamenco percussion, cajón, palmas and brass, with a producer.',[3,5,4],['80 musicians with choir and producer'],['40 musicians with producer'],['12 percussionists over playback'],'standard',null,'Madrid flamenco and brass musicians; commission the score early.',5,'Local musicians, minimal travel.'),
+      E('e5','Barrio cast','Los Caminos','Cast & community','Volunteers from Madrid neighbourhood clubs and dance schools, dancing a reworked chotis.',[3,5,3],['900 volunteers, 6 rehearsals'],['500 volunteers, 4 rehearsals'],['250 volunteers, 3 rehearsals'],'standard',null,'Recruited via the Madrid football federation, clubs and dance schools.',4,'Local cast; issue Metro passes for rehearsals.'),
+      E('e6','Sun-ray crowd mosaic','Kilómetro Cero','Crowd participation','The stands continue the sun\'s rays, then turn to both finalists\' colours.',[5,5,3],['LED wristbands for 70,000 synced to the Sky Ribbon'],['Recycled-paper card mosaic, 70,000 cards'],['20,000 recycled-fabric flags'],'signature',null,'Local printer for cards; seat-by-seat placement crew.',3,'Wristbands barely read in daylight and create e-waste. Cards work in sun.'),
+      E('e7','Daylight effects','El Sol','Special effects','Effects that still read in sun without loud bangs.',[4,2,4],['Coloured smoke plumes, CO2 jets and streamers'],['Coloured smoke and CO2 jets'],['Biodegradable streamer cannons'],'standard',null,'Licensed effects company; city permits and noise checks.',2,'Smoke and CO2 add emissions; streamers must be biodegradable and collected.'),
+      E('e8','Sky Ribbon & LED content','Salida','Lighting','Custom content for the 360° LED ring, tunnel panels and giant screens.',[5,3,4],['Custom content for every LED surface plus 120 moving heads'],['Custom content for the Sky Ribbon and screens'],['Adapted graphics on the screens'],'standard',null,'Content studio working with the stadium LED team.',4,'Uses the venue\'s own LED; little extra hardware.'),
+      E('e9','Trophy arrival at Km 0','Kilómetro Cero','Stage & set','The trophy reaches the centre spot, Kilómetro Cero.',[5,4,5],['Trophy rises on a 6 m kinetic column at the centre spot'],['Trophy carried in by former players along a fabric road'],['Trophy on a plinth with a camera moment'],'standard',null,'Automation specialist, or choreography only.',4,'The carried version has almost no footprint.'),
+      E('e10','Broadcast specials','Salida','Broadcast','Special angles and AR so the show reads on screen.',[5,1,5],['Cablecam, helicopter and AR sun graphics'],['Cablecam and AR graphics'],['AR graphics through the host broadcaster'],'standard',null,'Agreed with the host broadcaster (not yet announced).',4,'Mostly digital.'),
+      E('e11','Show audio','El Sol','Sound','Pitch PA plus a separate TV mix, managed to Madrid\'s noise limits.',[4,1,4],['Delay ring and a dedicated TV mix truck'],['Pitch PA and a TV mix position'],['House PA with a feed from front of house'],'standard',null,'Spanish audio hire; noise monitoring at nearby homes.',3,'Right-size the rig and avoid extra trucks.'),
+      E('e12','Costumes','Los Caminos','Costume','Sun-palette costumes for cast and dancers, cool enough for 30°C.',[3,5,3],['1,000 pieces made with Madrid fashion students'],['Custom tops over hired base garments'],['Printed tops on recycled cotton'],'standard',null,'Madrid fashion schools and local makers.',4,'Donate costumes to neighbourhood clubs afterwards.')
     ],
     overheads: [
-      { id:'o1', name:'Creative direction & design', pct:5 },
-      { id:'o2', name:'Production management & crew', pct:10 },
-      { id:'o3', name:'Insurance, permits & safety', pct:3 },
-      { id:'o4', name:'Contingency', pct:7 }
+      { id:'o1', name:'Creative direction & design', pct:0, src:blankSrc() },
+      { id:'o2', name:'Production management & crew', pct:0, src:blankSrc() },
+      { id:'o3', name:'Insurance, permits & safety', pct:0, src:blankSrc() },
+      { id:'o4', name:'Contingency', pct:0, src:blankSrc() }
     ],
     production: {
       phases: [
@@ -490,9 +504,9 @@ function examplePlan() {
     },
     sustainability: {
       swaps: [
-        { id:'s1', elementId:'e6', title:'Swap LED wristbands for the recycled-paper card mosaic', change:{ tier:'standard' }, costDelta:-260000, co2Delta:-17, rationale:'Wristbands barely show in daylight. Cards give a sharper top-down image with no e-waste.', applied:false },
-        { id:'s2', elementId:'e2', title:'Reuse and re-skin a modular stage instead of building a new kinetic one', change:{ tier:'standard' }, costDelta:-420000, co2Delta:-28, rationale:'Follows the 2026 precedent; the mirror skin still gives a signature look.', applied:false },
-        { id:'s3', elementId:'e7', title:'Swap smoke and CO2 for biodegradable streamers', change:{ tier:'lean' }, costDelta:-80000, co2Delta:-3, rationale:'Streamers read well in sun and avoid Madrid noise and air concerns.', applied:false }
+        { id:'s1', elementId:'e6', title:'Swap LED wristbands for the recycled-paper card mosaic', change:{ tier:'standard' }, rationale:'Wristbands barely show in daylight. Cards give a sharper top-down image with no e-waste.', applied:false },
+        { id:'s2', elementId:'e2', title:'Reuse and re-skin a modular stage instead of building a new kinetic one', change:{ tier:'standard' }, rationale:'Follows the 2026 precedent; the mirror skin still gives a signature look.', applied:false },
+        { id:'s3', elementId:'e7', title:'Swap smoke and CO2 for biodegradable streamers', change:{ tier:'lean' }, rationale:'Streamers read well in sun and avoid Madrid noise and air concerns.', applied:false }
       ],
       practices: [
         { title:'Metro to the match', detail:'Estadio Metropolitano station on Metro Line 7 has the largest platform in the network. Ask for free public transport with match tickets, as Munich offered in 2025.' },
@@ -502,7 +516,7 @@ function examplePlan() {
       ],
       reporting: ['Report show emissions separately from spectator travel, which UEFA\'s carbon calculator now includes.', 'Use GHG Protocol categories so the numbers fit UEFA\'s CSRD-aligned calculator.', 'UEFA pays into a fund for mitigating carbon emissions instead of offsetting (EURO 2024 used €25 per tonne); price the show\'s residual emissions the same way.']
     },
-    travel: { localPct: 25, nationalPct: 15, intlPct: 60, localKg: 3, nationalKg: 60, intlKg: 450 },
+    travel: DEFAULT_TRAVEL(),
     artists: [
       { id:'ar1', name:'Rosalía', origin:'Catalonia, Spain', role:'Global headliner', why:'Flamenco-rooted pop with global reach. She fits the flamenco percussion score directly.', audience:'Spain, Latin America, the US and Europe', feeBand:'signature', act:'El Sol', risks:'Touring and recording schedule around early June 2027.' },
       { id:'ar2', name:'C. Tangana', origin:'Madrid, Spain', role:'Local hero', why:'Madrid-born, and his flamenco and rumba-infused work is a love letter to the city.', audience:'Spain and Latin America', feeBand:'standard', act:'Los Caminos', risks:'Performs selectively; confirm interest in a football stage.' },
@@ -513,13 +527,13 @@ function examplePlan() {
       { id:'ar7', name:'Coro Nacional de España', origin:'Madrid, Spain', role:'Choir or ensemble', why:'Spain\'s national choir for the anthem, in a new arrangement with flamenco percussion.', audience:'Broadcast audience worldwide', feeBand:'lean', act:'Kilómetro Cero', risks:'Anthem arrangements need the rights holder\'s approval.' }
     ],
     lines: [
-      { id:'l1', name:'Artist travel & rider', category:'Artist fees & travel', cost:90000, co2:0, oh:true, note:'Estimate; travel CO₂ is in the carbon calculator' },
-      { id:'l2', name:'Offsite rehearsal field & marquees', category:'Rehearsals', cost:45000, co2:0, oh:true, note:'Full-size marked field, shade, water' },
-      { id:'l3', name:'Cast transport passes & meals', category:'Logistics & freight', cost:60000, co2:0, oh:true, note:'Metro passes for 500 cast' },
-      { id:'l4', name:'Card placement crew', category:'Crew & labour', cost:25000, co2:0, oh:true, note:'Match-day shift, 70,000 seats' },
-      { id:'l5', name:'Carbon mitigation fund', category:'Sustainability', cost:4000, co2:0, oh:false, note:'About 160 t at €25 per tonne (EURO 2024 rate)' }
+      { id:'l1', name:'Artist rider', category:'Artist fees & travel', cost:null, src:blankSrc(), co2m:'spend', oh:true, note:'Travel goes in the carbon calculator' },
+      { id:'l2', name:'Offsite rehearsal field & marquees', category:'Rehearsals', cost:null, src:blankSrc(), co2m:'spend', oh:true, note:'Full-size marked field, shade, water' },
+      { id:'l3', name:'Cast transport passes', category:'Logistics & freight', cost:null, src:blankSrc(), co2m:'spend', oh:true, note:'Metro passes for the cast' },
+      { id:'l4', name:'Card placement crew', category:'Crew & labour', cost:null, src:blankSrc(), co2m:'spend', oh:true, note:'Match-day shift' },
+      { id:'l5', name:'Carbon mitigation fund', category:'Sustainability', cost:null, src:blankSrc(), co2m:'none', oh:false, note:'Total CO₂e × EUR 25 per tonne (UEFA EURO 2024 Climate Fund rate): use the figure on the Sustainability step' }
     ],
-    carbon: { gridKWh:18000, gridFactor:.12, dieselL:2500, hvoL:0, truckTkm:60000, airTkm:4000, seaTkm:0, railTkm:0, crew:180, crewKm:1500, crewAir:70, crewRail:20, talent:20, talentKm:3000, hotelNights:900, mealsMeat:6000, mealsVeg:3000, mealsVegan:1000, landfillT:4, recycledT:6, compostT:1.5, incinT:0, factors:{} },
+    carbon: blankCarbon(),
     cues: { '0':'Sky Ribbon countdown starts. Wide from the main camera.', '2':'Runners reach the centre; brass enters from the stands.', '5.5':'Headliner rises on the mirrored stage.', '8':'Fabric sun fully open. Helicopter top-down.', '10':'Card mosaic: rays, then both finalists\' colours.', '11':'Trophy arrives at the centre spot. Anthem.' },
     sbStep: 1,
     vendors: [
@@ -563,11 +577,11 @@ function examplePlan() {
 function blankPlan(t) {
   const tpl = t || TEMPLATES[1];
   return {
-    id: uid(), example: false, name: 'New ' + tpl.label.toLowerCase(), updatedAt: Date.now(),
+    id: uid(), example: false, name: 'New ' + tpl.label.toLowerCase(), updatedAt: Date.now(), v: 3,
     brief: { eventName:'', eventType: tpl.eventType, city:'', country:'', venue:'', venueType: tpl.venueType, capacity: tpl.capacity, date:'', showMinutes: tpl.showMinutes, showLight:'Night', broadcast:'', audience:'', goals:'', mustHaves:'', avoid:'', currency:'EUR', budgetCap: tpl.budgetCap },
     priorities: { broadcast: 3, local: 3, global: 3, green: 3 },
     research: null, concepts: [], conceptId: null, acts: [], elements: [], overheads: DEFAULT_OVERHEADS(),
-    production: null, sustainability: null, travel: DEFAULT_TRAVEL(), log: [], look: null, images: [], artists: [], local: blankLocal(), lines: [], vendors: [], cues: {}, sbStep: 1, prevReport: null, carbon: null
+    production: null, sustainability: null, travel: DEFAULT_TRAVEL(), log: [], look: null, images: [], artists: [], local: blankLocal(), lines: [], vendors: [], cues: {}, sbStep: 1, prevReport: null, carbon: blankCarbon(), closeout: null, v: 3
   };
 }
 
@@ -921,28 +935,26 @@ function libraryArtists(p) {
 /* Built-in library: works with no Claude account at all               */
 /* ------------------------------------------------------------------ */
 // Base prices: European market, 70,000-seat stadium, in EUR. Scaled by capacity and converted at rough rates.
-const FX = { EUR:1, USD:1.1, GBP:.85, CHF:.95, AED:4, SAR:4.1, QAR:4, INR:92, BRL:6, AUD:1.65, JPY:160, CAD:1.5 };
 const LIB_ACTS = [['Opening', .15, 'Set the scene and give the cameras their first big image.'], ['Build', .35, 'Cast, music and set build the story.'], ['Peak', .3, 'Headline performance and effects.'], ['Finale', .2, 'The reveal, the crowd moment and the handover.']];
 const LIB = [
-  ['Headline performance',2,'Performance','A headline act at the peak of the show.',[5,2,5],['Global star with a large dance company',1200000,22],['Established international act with dancers',450000,9],['Leading national act with a small dance group',160000,3],20,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer acts already touring nearby.'],
-  ['Main stage & set',1,'Stage & set','The main stage and scenic pieces the show is built around.',[4,4,3],['Bespoke kinetic stages with automation',950000,48],['Modular stage with scenic cladding on rented deck',520000,24],['Rental stage with printed scenic panels',240000,10],16,'Regional stage builders; rent decks and build only the unique parts.',3,'Rent decks and plan a second life for bespoke parts.'],
-  ['Projection & screen content',0,'Projection','Projection mapping or screen content that sets the scene.',[5,3,4],['Full-surface laser projection mapping',480000,14],['Partial mapping plus big-screen content',300000,9],['Big-screen content only',90000,2],12,'Projection hire plus a content studio.',4,'Efficient lasers; content can be reused in the broadcast package.'],
-  ['Live music & original score',1,'Music','An original score played live by local musicians.',[3,5,3],['Large ensemble with a producer, original score',220000,3],['Mid-size ensemble with a producer',120000,1.5],['Small ensemble over playback',45000,0.6],14,'Local musicians and a local producer; commission the score early.',5,'Local musicians, minimal travel.'],
-  ['Community cast',1,'Cast & community','Local volunteers perform choreography and carry the story.',[3,5,3],['800 volunteers, 6 rehearsals',220000,6],['500 volunteers, 4 rehearsals',130000,4],['250 volunteers, 3 rehearsals',65000,2],14,'Recruit through clubs, schools and cultural groups.',4,'A local cast means low travel. Issue public transport passes.'],
-  ['Crowd participation',3,'Crowd participation','The whole audience becomes part of the picture.',[4,5,3],['LED wristbands for every guest',340000,20],['Recycled-paper card mosaic',75000,3],['Phone-light moment cued on the screens',12000,0.2],10,'Wristband supplier or a local printer.',3,'Wristbands create e-waste unless collected; cards can be recycled.'],
-  ['Special effects',2,'Special effects','Pyro or effects at the peak of the show.',[4,2,4],['Pyro, flame units and confetti',280000,9],['Cold sparks and flame units',140000,4],['Cold sparks only',55000,1],12,'Licensed effects company; permits through local authorities.',2,'Flame and confetti add fuel burn and waste; cold sparks are cleaner.'],
-  ['Lighting show',3,'Lighting','Venue lights plus added fixtures, synced to the music.',[5,2,4],['Full light show plus 300 moving heads',420000,12],['Light show plus 120 moving heads',250000,7],['Light show with the house rig',90000,2],8,'Regional lighting hire, programmed by the show lighting designer.',3,'Use the house rig first; add hire only where it shows on camera.'],
-  ['Signature reveal',3,'Stage & set','One oversized object or reveal that becomes the defining image.',[5,3,5],['Large kinetic sculpture',260000,11],['Large inflatable with internal light',120000,3],['Human reveal: performers carry it in',30000,0.5],14,'Fabrication workshop or specialist inflatable makers.',3,'Inflatables are light to transport and reusable.'],
-  ['Broadcast specials',0,'Broadcast','Special cameras and graphics so the show reads on screen.',[5,1,5],['Cablecam, FPV drones and AR graphics',320000,5],['Cablecam and AR graphics',190000,3],['AR graphics through the host broadcaster',70000,1],10,'Agreed with the host broadcaster; specialist camera hire.',4,'Mostly digital, with a small footprint.'],
-  ['Show audio',2,'Sound','Show PA plus a dedicated broadcast mix.',[4,1,4],['Delay ring and a dedicated TV mix truck',260000,6],['Show PA and a TV mix position',180000,4],['House PA with a feed from front of house',90000,2],8,'Regional audio hire.',3,'Right-size the rig and avoid extra trucks.'],
-  ['Costumes',1,'Costume','Costumes for the cast and dancers.',[3,4,3],['Custom pieces made with a local design school',170000,7],['Custom tops over hired base garments',90000,4],['Printed tops on recycled cotton',35000,2],14,'Local makers and design schools.',4,'Donate costumes to local groups afterwards.']
+  ['Headline performance',2,'Performance','A headline act at the peak of the show.',[5,2,5],['Global star with a large dance company'],['Established international act with dancers'],['Leading national act with a small dance group'],null,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer acts already touring nearby.'],
+  ['Main stage & set',1,'Stage & set','The main stage and scenic pieces the show is built around.',[4,4,3],['Bespoke kinetic stages with automation'],['Modular stage with scenic cladding on rented deck'],['Rental stage with printed scenic panels'],null,'Regional stage builders; rent decks and build only the unique parts.',3,'Rent decks and plan a second life for bespoke parts.'],
+  ['Projection & screen content',0,'Projection','Projection mapping or screen content that sets the scene.',[5,3,4],['Full-surface laser projection mapping'],['Partial mapping plus big-screen content'],['Big-screen content only'],null,'Projection hire plus a content studio.',4,'Efficient lasers; content can be reused in the broadcast package.'],
+  ['Live music & original score',1,'Music','An original score played live by local musicians.',[3,5,3],['Large ensemble with a producer, original score'],['Mid-size ensemble with a producer'],['Small ensemble over playback'],null,'Local musicians and a local producer; commission the score early.',5,'Local musicians, minimal travel.'],
+  ['Community cast',1,'Cast & community','Local volunteers perform choreography and carry the story.',[3,5,3],['800 volunteers, 6 rehearsals'],['500 volunteers, 4 rehearsals'],['250 volunteers, 3 rehearsals'],null,'Recruit through clubs, schools and cultural groups.',4,'A local cast means low travel. Issue public transport passes.'],
+  ['Crowd participation',3,'Crowd participation','The whole audience becomes part of the picture.',[4,5,3],['LED wristbands for every guest'],['Recycled-paper card mosaic'],['Phone-light moment cued on the screens'],null,'Wristband supplier or a local printer.',3,'Wristbands create e-waste unless collected; cards can be recycled.'],
+  ['Special effects',2,'Special effects','Pyro or effects at the peak of the show.',[4,2,4],['Pyro, flame units and confetti'],['Cold sparks and flame units'],['Cold sparks only'],null,'Licensed effects company; permits through local authorities.',2,'Flame and confetti add fuel burn and waste; cold sparks are cleaner.'],
+  ['Lighting show',3,'Lighting','Venue lights plus added fixtures, synced to the music.',[5,2,4],['Full light show plus 300 moving heads'],['Light show plus 120 moving heads'],['Light show with the house rig'],null,'Regional lighting hire, programmed by the show lighting designer.',3,'Use the house rig first; add hire only where it shows on camera.'],
+  ['Signature reveal',3,'Stage & set','One oversized object or reveal that becomes the defining image.',[5,3,5],['Large kinetic sculpture'],['Large inflatable with internal light'],['Human reveal: performers carry it in'],null,'Fabrication workshop or specialist inflatable makers.',3,'Inflatables are light to transport and reusable.'],
+  ['Broadcast specials',0,'Broadcast','Special cameras and graphics so the show reads on screen.',[5,1,5],['Cablecam, FPV drones and AR graphics'],['Cablecam and AR graphics'],['AR graphics through the host broadcaster'],null,'Agreed with the host broadcaster; specialist camera hire.',4,'Mostly digital, with a small footprint.'],
+  ['Show audio',2,'Sound','Show PA plus a dedicated broadcast mix.',[4,1,4],['Delay ring and a dedicated TV mix truck'],['Show PA and a TV mix position'],['House PA with a feed from front of house'],null,'Regional audio hire.',3,'Right-size the rig and avoid extra trucks.'],
+  ['Costumes',1,'Costume','Costumes for the cast and dancers.',[3,4,3],['Custom pieces made with a local design school'],['Custom tops over hired base garments'],['Printed tops on recycled cotton'],null,'Local makers and design schools.',4,'Donate costumes to local groups afterwards.']
 ];
 function libraryDesign(p) {
-  const cap = +p.brief.capacity || 20000, s = Math.min(1.8, Math.max(0.06, Math.pow(cap / 70000, 0.7)));
-  const fx = FX[p.brief.currency] || 1, m = +p.brief.showMinutes || 12;
+  const m = +p.brief.showMinutes || 12;
   const acts = LIB_ACTS.map(([name, share, description]) => ({ id: uid(), name, minutes: Math.max(0.5, Math.round(m * share * 2) / 2), description }));
   acts[3].minutes = Math.max(0.5, acts[3].minutes + m - acts.reduce((a, b) => a + b.minutes, 0));
-  const tier = t => ({ desc: t[0], cost: Math.round(t[1] * s * fx / 1000) * 1000, co2: Math.round(t[2] * s * 10) / 10 });
+  const tier = t => blankTier(t[0]);
   const elements = LIB.map(x => ({ id: uid(), name: x[0], act: acts[x[1]].name, category: x[2], description: x[3],
     scores: { broadcast: x[4][0], local: x[4][1], global: x[4][2] }, tiers: { signature: tier(x[5]), standard: tier(x[6]), lean: tier(x[7]) },
     tier: 'standard', included: true, locked: false, leadWeeks: x[8], sourcing: x[9], green: { score: x[10], note: x[11] } }));
@@ -965,11 +977,11 @@ function libraryProduction(p) {
 }
 function libraryGreen(p) {
   const swaps = p.elements.filter(e => e.included && !e.locked && e.tier !== 'lean').map(e => {
-    const lo = TIERS[TIERS.indexOf(e.tier) - 1];
-    return { e, lo, co2: e.tiers[e.tier].co2 - e.tiers[lo].co2, cost: e.tiers[e.tier].cost - e.tiers[lo].cost };
-  }).filter(x => x.co2 > 0).sort((a, b) => b.co2 - a.co2).slice(0, 5).map(x => ({
+    const lo = TIERS[TIERS.indexOf(e.tier) - 1], d = tierDelta(e, e.tier, lo, p);
+    return { e, lo, co2: d.co2 == null ? null : -d.co2, cost: d.cost == null ? null : -d.cost };
+  }).filter(x => x.co2 != null && x.co2 > 0).sort((a, b) => b.co2 - a.co2).slice(0, 5).map(x => ({
     id: uid(), elementId: x.e.id, title: `Move ${x.e.name} to ${TIER_LABEL[x.lo]}${x.e.tiers[x.lo].desc ? ': ' + x.e.tiers[x.lo].desc.charAt(0).toLowerCase() + x.e.tiers[x.lo].desc.slice(1) : ''}`,
-    change: { tier: x.lo }, costDelta: -Math.round(x.cost), co2Delta: -Math.round(x.co2 * 10) / 10, rationale: x.e.green.note || 'A lower-footprint version of the same idea.', applied: false }));
+    change: { tier: x.lo }, costDelta: x.cost == null ? null : -x.cost, co2Delta: -x.co2, rationale: x.e.green.note || 'A lower-footprint version of the same idea.', applied: false }));
   return {
     swaps,
     practices: [
@@ -988,101 +1000,194 @@ function libraryGreen(p) {
 /* Budget lines                                                         */
 /* ------------------------------------------------------------------ */
 const BUDGET_CATS = ['Artist fees & travel', 'Rehearsals', 'Venue & site', 'Crew & labour', 'Logistics & freight', 'Accommodation', 'Catering', 'Security & safety', 'Content & marketing', 'Sustainability', 'Other'];
+// Names and categories only: amounts come from quotes.
 const LINE_PRESETS = [
-  ['Artist travel & rider', 'Artist fees & travel', 90000], ['Rehearsal venue & marquees', 'Rehearsals', 45000], ['Crew accommodation', 'Accommodation', 60000],
-  ['Crew & cast catering', 'Catering', 40000], ['Freight & trucking', 'Logistics & freight', 50000], ['Security & stewarding', 'Security & safety', 30000],
-  ['Cast transport passes', 'Logistics & freight', 12000], ['Content & film production', 'Content & marketing', 80000], ['Carbon mitigation fund', 'Sustainability', 5000]
+  ['Artist rider', 'Artist fees & travel'], ['Rehearsal venue & marquees', 'Rehearsals'], ['Crew accommodation', 'Accommodation'],
+  ['Crew & cast catering', 'Catering'], ['Freight & trucking', 'Logistics & freight'], ['Security & stewarding', 'Security & safety'],
+  ['Cast transport passes', 'Logistics & freight'], ['Content & film production', 'Content & marketing'], ['Carbon mitigation fund', 'Sustainability']
 ];
+function defaultCo2Method(cat) {
+  if (cat === 'Sustainability') return 'none';
+  return (REFDATA?.['spend-multipliers']?.lineActivityDefault || ['Logistics & freight', 'Accommodation']).includes(cat) ? 'activity' : 'spend'; // same list as scripts/build_reference.py
+}
 function linesTotals(p) {
-  const L = p.lines || [];
-  return { oh: L.filter(l => l.oh !== false).reduce((s, l) => s + (+l.cost || 0), 0), no: L.filter(l => l.oh === false).reduce((s, l) => s + (+l.cost || 0), 0), co2: L.reduce((s, l) => s + (+l.co2 || 0), 0) };
+  const L = p.lines || [], c = l => hasCost(l) ? +l.cost : 0;
+  return { oh: L.filter(l => l.oh !== false).reduce((s, l) => s + c(l), 0), no: L.filter(l => l.oh === false).reduce((s, l) => s + c(l), 0), co2: L.reduce((s, l) => s + (lineCo2(l, p).t || 0), 0) };
 }
 
 /* ------------------------------------------------------------------ */
 /* Carbon calculator                                                    */
 /* ------------------------------------------------------------------ */
-// Approximate factors in kg CO2e, in the spirit of published conversion factors (e.g. UK DESNZ). Editable in the page.
-const FACTORS_DEFAULT = { diesel: 2.7, hvo: .35, truck: .11, air: 1.0, sea: .016, rail: .03, flight: .16, train: .035, road: .12, hotel: 15, meat: 3.0, veg: 1.2, vegan: .6, landfill: 470, recycled: 21, compost: 9, incin: 21, kwhPerL: 3 };
-// Talent (artists and their teams) travel as their own group: people × km each way × 2, all by air.
+/* ------------------------------------------------------------------ */
+/* Reference library. Every estimate traces to reference/bundle.json:   */
+/* DESNZ 2026 factors, Ember grid intensity, Defra spend multipliers,   */
+/* published event reports and your own close-out files.               */
+/* ------------------------------------------------------------------ */
+let REFDATA = null, refState = 'loading'; // loading | ready | missing
+async function loadReference() {
+  try { const r = await fetch('reference/bundle.json', { cache: 'no-cache' }); if (!r.ok) throw new Error(String(r.status)); REFDATA = await r.json(); refState = 'ready'; }
+  catch { REFDATA = null; refState = 'missing'; }
+  render();
+}
+// How a planner-entered number is backed. A number counts as sourced only with a basis AND a reference (quote no., invoice, meter log, report).
+const BASIS = { quote: 'Vendor quote', invoice: 'Invoice or actual', measured: 'Metered or measured', supplier: 'Supplier data', brief: 'Client brief', closeout: 'Past close-out', planned: 'Design quantity (drawings, cast list)' };
+function blankSrc() { return { b: '', r: '' }; }
+const sourced = x => !!(x && x.b && BASIS[x.b] && String(x.r || '').trim());
+function srcOf(id) { if (!REFDATA || !id) return null; return REFDATA.sources?.sources?.[id] || REFDATA.datasets?.datasets?.[id] || null; }
+function srcLink(id, label) { const x = srcOf(id); if (!x) return esc(label || id || ''); return `<a href="${esc(x.page || x.url)}" target="_blank" rel="noopener">${esc(label || x.title)}</a>`; }
+function srcText(id) { const x = srcOf(id); return x ? `${x.publisher ? x.publisher + ', ' : ''}${x.title}${x.url ? ' (' + (x.page || x.url) + ')' : ''}` : String(id || ''); }
+const COUNTRY_ALIAS = { 'uk': 'united kingdom', 'great britain': 'united kingdom', 'britain': 'united kingdom', 'england': 'united kingdom', 'scotland': 'united kingdom', 'wales': 'united kingdom', 'northern ireland': 'united kingdom', 'usa': 'united states', 'us': 'united states', 'united states of america': 'united states', 'korea': 'south korea', 'republic of korea': 'south korea', 'uae': 'united arab emirates', 'russian federation': 'russia', 'czechia': 'czech republic', 'turkiye': 'turkey', 'holland': 'netherlands' };
+function countryKey(x) { const n = normCity(x).trim().replace(/\s+/g, ' '); return COUNTRY_ALIAS[n] || n; }
+function lookupCountry(map, country) {
+  if (!map || !country) return null; const want = countryKey(country);
+  for (const [k, v] of Object.entries(map)) if (countryKey(k) === want) return { country: k, ...v };
+  return null;
+}
+const FACTOR_KEYS = ['grid', 'diesel', 'hvo', 'truck', 'air', 'sea', 'rail', 'flight', 'train', 'road', 'coach', 'bus', 'hotel', 'landfill', 'recycled', 'compost', 'incin'];
+const FACTOR_NAME = { grid: ['Grid electricity', 'kg CO2e per kWh'], diesel: ['Generator diesel', 'kg CO2e per litre'], hvo: ['Generator HVO', 'kg CO2e per litre'], truck: ['Road freight', 'kg CO2e per tonne-km'], air: ['Air freight', 'kg CO2e per tonne-km'], sea: ['Sea freight', 'kg CO2e per tonne-km'], rail: ['Rail freight', 'kg CO2e per tonne-km'], flight: ['Flights', 'kg CO2e per passenger-km'], train: ['Train', 'kg CO2e per passenger-km'], road: ['Car', 'kg CO2e per vehicle-km'], coach: ['Coach', 'kg CO2e per passenger-km'], bus: ['Local bus', 'kg CO2e per passenger-km'], hotel: ['Hotel night', 'kg CO2e per room-night'], landfill: ['Waste to landfill', 'kg CO2e per tonne'], recycled: ['Recycled waste', 'kg CO2e per tonne'], compost: ['Composted waste', 'kg CO2e per tonne'], incin: ['Waste to energy', 'kg CO2e per tonne'] };
+// One emission factor for this plan: the reference value, or the planner's override (which needs its own source to count as sourced).
+function factorOf(p, k) {
+  const [label, unit] = FACTOR_NAME[k] || [k, ''];
+  let base = { label, unit, v: null, src: null, detail: '' };
+  if (k === 'grid') { const g = lookupCountry(REFDATA?.['grid-intensity']?.byCountry, p.brief.country); if (g) base = { ...base, v: g.value, src: 'owid-ember-energy', detail: `${g.country}, ${g.year}, lifecycle intensity` }; }
+  else if (k === 'hotel') { const h = lookupCountry(REFDATA?.['emission-factors']?.hotel?.byCountry, p.brief.country); if (h) base = { ...base, v: h.value, src: 'desnz-2026', detail: `${h.country}, DESNZ row ${h.id}` }; }
+  else { const f = REFDATA?.['emission-factors']?.factors?.[k]; if (f) base = { ...base, v: f.value, src: f.source, detail: `${f.method} DESNZ rows ${f.components.map(x => x.id).join(' + ')}.` }; }
+  const o = p.carbon?.factorOverrides?.[k];
+  if (o && o.v !== '' && o.v != null && Number.isFinite(+o.v)) return { ...base, v: +o.v, from: 'override', ok: sourced(o), override: o, refV: base.v };
+  return { ...base, from: base.v == null ? 'none' : 'reference', ok: base.v != null };
+}
+// Currency conversion with the published 2023 average rates (currency per USD). Returns null when a currency has no published rate.
+function convert(amount, from, to) { const fx = REFDATA?.currency?.perUSD; if (from === to) return amount; if (!fx || fx[from] == null || fx[to] == null) return null; return amount / fx[from] * fx[to]; }
+function spendSic(group, category, override) { const sm = REFDATA?.['spend-multipliers']; if (!sm) return null; const code = override || sm.map?.[group]?.[category]?.sic; if (!code || !sm.sic[code]) return null; return { code, ...sm.sic[code] }; }
+// GHG Protocol spend-based method: cost -> 2023 GBP -> x Defra/Leeds multiplier for the SIC group.
+function spendTonnes(amount, cur, group, category, override) {
+  if (amount == null || amount === '' || !Number.isFinite(+amount)) return null;
+  const gbp = convert(+amount, cur, 'GBP'), sic = spendSic(group, category, override);
+  if (gbp == null || !sic) return null;
+  return { t: gbp * sic.value / 1000, sic, gbp };
+}
+const hasCost = x => !!x && x.cost != null && x.cost !== '' && Number.isFinite(+x.cost);
+const tierCost = (e, t) => hasCost(e.tiers[t]) ? +e.tiers[t].cost : 0;
+// CO2e of one element tier: the supplier's own figure if given, otherwise spend-based from the quoted cost, otherwise unknown (null).
+function tierCo2(e, t, p = plan) {
+  const x = e.tiers[t]; if (!x) return { t: null, method: null };
+  if (x.co2s && x.co2s.v !== '' && x.co2s.v != null && Number.isFinite(+x.co2s.v)) return { t: +x.co2s.v, method: 'supplier', ok: sourced(x.co2s) };
+  if (!hasCost(x)) return { t: null, method: null };
+  const r = spendTonnes(+x.cost, p.brief.currency, 'element', e.category, e.sic);
+  return r ? { t: r.t, method: 'spend', ok: sourced(x.src), sic: r.sic } : { t: null, method: 'nofx' };
+}
+const co2T = (e, t, p) => tierCo2(e, t, p).t || 0;
+function tierDelta(e, from, to, p = plan) {
+  const a = tierCo2(e, from, p).t, b = tierCo2(e, to, p).t;
+  return { cost: hasCost(e.tiers[from]) && hasCost(e.tiers[to]) ? tierCost(e, to) - tierCost(e, from) : null, co2: a != null && b != null ? b - a : null };
+}
+function lineCo2(l, p = plan) {
+  const m = l.co2m || 'spend';
+  if (m === 'activity' || m === 'none') return { t: 0, method: m, ok: true };
+  if (m === 'supplier') return { t: Number.isFinite(+l.co2s?.v) ? +l.co2s.v : 0, method: m, ok: sourced(l.co2s) };
+  if (!hasCost(l)) return { t: null, method: 'spend' };
+  const r = spendTonnes(+l.cost, p.brief.currency, 'line', l.category, l.sic);
+  return r ? { t: r.t, method: 'spend', ok: sourced(l.src), sic: r.sic } : { t: null, method: 'nofx' };
+}
+// Internal carbon price from reference/policy.json (UEFA EURO 2024 Climate Fund), converted to the plan currency.
+function carbonPrice(p = plan) {
+  const cp = REFDATA?.policy?.carbonPrice; if (!cp) return null;
+  const v = convert(cp.value, cp.currency, p.brief.currency || 'EUR');
+  return v == null ? null : { v, cp };
+}
+
+/* ------------------------------------------------------------------ */
+/* Carbon calculator: activity data x published factors                 */
+/* ------------------------------------------------------------------ */
+// Talent (artists and their teams) travel as their own group: people x km each way x 2, all by air.
 const talentPkm = c => (+c.talent || 0) * (+c.talentKm || 0) * 2;
-const FACTOR_LABEL = { diesel: ['Diesel', 'kg per litre'], hvo: ['HVO renewable diesel', 'kg per litre'], truck: ['Road freight', 'kg per tonne-km'], air: ['Air freight', 'kg per tonne-km'], sea: ['Sea freight', 'kg per tonne-km'], rail: ['Rail freight', 'kg per tonne-km'], flight: ['Flights', 'kg per passenger-km'], train: ['Train', 'kg per passenger-km'], road: ['Car or van', 'kg per passenger-km'], hotel: ['Hotel night', 'kg per room-night'], meat: ['Meal with meat', 'kg per meal'], veg: ['Vegetarian meal', 'kg per meal'], vegan: ['Vegan meal', 'kg per meal'], landfill: ['Waste to landfill', 'kg per tonne'], recycled: ['Recycled waste', 'kg per tonne'], compost: ['Composted waste', 'kg per tonne'], incin: ['Waste to energy', 'kg per tonne'], kwhPerL: ['Generator output', 'kWh per litre of fuel'] };
-const GRID = { spain: .12, germany: .36, 'united kingdom': .2, uk: .2, france: .05, italy: .26, portugal: .13, turkiye: .42, turkey: .42, hungary: .2, qatar: .5, 'saudi arabia': .55, 'united arab emirates': .45, uae: .45, 'south africa': .9, brazil: .08, argentina: .33, mexico: .42, 'united states': .37, usa: .37, canada: .12, japan: .45, 'south korea': .43, korea: .43, india: .71, australia: .62, netherlands: .3, belgium: .15, poland: .65, greece: .3, austria: .1, switzerland: .03, sweden: .03, norway: .02, denmark: .12 };
-const CARBON_CATS = { materials: 'Materials & fabrication', energy: 'Energy', freight: 'Freight', travel: 'Crew & talent travel', accommodation: 'Accommodation', catering: 'Catering', waste: 'Waste', audience: 'Audience travel', other: 'Other' };
-function defaultCarbon(p) {
-  const cap = +p.brief.capacity || 20000, crew = Math.round(80 + cap / 500);
-  return { gridKWh: Math.round(cap * .25), gridFactor: GRID[normCity(p.brief.country)] ?? .3, dieselL: Math.round(cap * .04), hvoL: 0,
-    truckTkm: Math.round(cap * .8), airTkm: Math.round(cap * .05), seaTkm: 0, railTkm: 0,
-    crew, crewKm: 1200, crewAir: 60, crewRail: 25, talent: 12, talentKm: 2500, hotelNights: crew * 4,
-    mealsMeat: Math.round(cap * .08), mealsVeg: Math.round(cap * .04), mealsVegan: Math.round(cap * .01),
-    landfillT: +(cap * .00005).toFixed(1), recycledT: +(cap * .00008).toFixed(1), compostT: +(cap * .00002).toFixed(1), incinT: 0, factors: { ...FACTORS_DEFAULT } };
+const CARBON_CATS = { materials: 'Purchased goods & services', energy: 'Energy', freight: 'Freight', travel: 'Crew & talent travel', accommodation: 'Accommodation', catering: 'Catering', waste: 'Waste', audience: 'Audience travel', other: 'Other' };
+const CARBON_GROUPS = { energy: ['gridKWh', 'dieselL', 'hvoL', 'genKWh'], freight: ['truckTkm', 'airTkm', 'seaTkm', 'railTkm'], travel: ['crew', 'crewKm', 'talent', 'talentKm'], accommodation: ['hotelNights'], waste: ['landfillT', 'recycledT', 'compostT', 'incinT'] };
+const LINE_CARBON_CAT = { 'Catering': 'catering', 'Accommodation': 'accommodation', 'Logistics & freight': 'freight' };
+const AUDIENCE_MODES = { flight: ['Air', 'flight'], train: ['Rail', 'train'], coach: ['Coach', 'coach'], bus: ['Local bus', 'bus'], car: ['Car', 'road'] };
+function blankCarbon() {
+  return { v: 3, gridKWh: 0, dieselL: 0, hvoL: 0, genKWh: 0, truckTkm: 0, airTkm: 0, seaTkm: 0, railTkm: 0, crew: 0, crewKm: 0, crewAir: 0, crewRail: 0, crewOcc: 1, talent: 0, talentKm: 0, hotelNights: 0, landfillT: 0, recycledT: 0, compostT: 0, incinT: 0,
+    src: Object.fromEntries(Object.keys(CARBON_GROUPS).map(g => [g, blankSrc()])), factorOverrides: {} };
 }
 function calcCarbon(p) {
-  const c = p.carbon || defaultCarbon(p), F = { ...FACTORS_DEFAULT, ...(c.factors || {}) };
-  const elKg = p.elements.filter(e => e.included).reduce((s, e) => s + (e.tiers[e.tier]?.co2 || 0), 0) * 1000, lnKg = linesTotals(p).co2 * 1000;
-  const crewPkm = (+c.crew || 0) * (+c.crewKm || 0) * 2, air = Math.min(100, +c.crewAir || 0), rail = Math.min(100 - air, +c.crewRail || 0);
-  const tr = travelTonnes(p) * 1000;
-  const R = (cat, scope, label, qty, unit, factor, kg) => ({ cat, scope, label, qty, unit, factor, kg: kg ?? qty * factor });
-  const rows = [
-    R('materials', 3, 'Show elements (materials, fabrication, element transport)', elKg / 1000, 't, from element estimates', 1000),
-    R('materials', 3, 'Other budget lines', lnKg / 1000, 't, entered on budget lines', 1000),
-    R('energy', 2, 'Grid electricity', +c.gridKWh || 0, 'kWh', +c.gridFactor || 0),
-    R('energy', 1, 'Generator diesel', +c.dieselL || 0, 'litres', F.diesel),
-    R('energy', 1, 'Generator HVO', +c.hvoL || 0, 'litres', F.hvo),
-    R('freight', 3, 'Road freight', +c.truckTkm || 0, 'tonne-km', F.truck),
-    R('freight', 3, 'Air freight', +c.airTkm || 0, 'tonne-km', F.air),
-    R('freight', 3, 'Sea freight', +c.seaTkm || 0, 'tonne-km', F.sea),
-    R('freight', 3, 'Rail freight', +c.railTkm || 0, 'tonne-km', F.rail),
-    R('travel', 3, 'Crew flights', crewPkm * air / 100, 'passenger-km', F.flight),
-    R('travel', 3, 'Crew trains', crewPkm * rail / 100, 'passenger-km', F.train),
-    R('travel', 3, 'Crew road travel', crewPkm * (100 - air - rail) / 100, 'passenger-km', F.road),
-    R('travel', 3, 'Artist & talent flights', talentPkm(c), 'passenger-km', F.flight),
-    R('accommodation', 3, 'Hotel nights', +c.hotelNights || 0, 'room-nights', F.hotel),
-    R('catering', 3, 'Production meals with meat', +c.mealsMeat || 0, 'meals', F.meat),
-    R('catering', 3, 'Vegetarian meals', +c.mealsVeg || 0, 'meals', F.veg),
-    R('catering', 3, 'Vegan meals', +c.mealsVegan || 0, 'meals', F.vegan),
-    R('waste', 3, 'Waste to landfill', +c.landfillT || 0, 'tonnes', F.landfill),
-    R('waste', 3, 'Recycled waste', +c.recycledT || 0, 'tonnes', F.recycled),
-    R('waste', 3, 'Composted waste', +c.compostT || 0, 'tonnes', F.compost),
-    R('waste', 3, 'Waste to energy', +c.incinT || 0, 'tonnes', F.incin),
-    R('audience', 3, 'Audience travel (estimate below)', +p.brief.capacity || 0, 'guests', (+p.brief.capacity ? tr / +p.brief.capacity : 0), tr)
-  ];
+  const c = p.carbon || blankCarbon(), rows = [];
+  const R = (cat, scope, label, qty, unit, fk) => { const f = factorOf(p, fk); rows.push({ cat, scope, label, qty, unit, fk, f, factor: f.v, kg: f.v == null ? 0 : qty * f.v, missing: qty > 0 && f.v == null }); };
+  const inc = p.elements.filter(e => e.included); let elT = 0, elMissing = 0;
+  inc.forEach(e => { const r = tierCo2(e, e.tier, p); if (r.t == null) elMissing++; else elT += r.t; });
+  rows.push({ cat: 'materials', scope: 3, label: 'Show elements (spend-based from quotes, or supplier figures)', qty: inc.length - elMissing, unit: `of ${inc.length} elements`, factor: null, kg: elT * 1000 });
+  const lc = {}; (p.lines || []).forEach(l => { const r = lineCo2(l, p); if (r.t) { const k = LINE_CARBON_CAT[l.category] || 'materials'; lc[k] = (lc[k] || 0) + r.t; } });
+  Object.entries(lc).forEach(([k, t]) => rows.push({ cat: k, scope: 3, label: `Budget lines: ${CARBON_CATS[k].toLowerCase()} (spend-based or supplier)`, qty: null, unit: '', factor: null, kg: t * 1000 }));
+  R('energy', 2, 'Grid electricity', +c.gridKWh || 0, 'kWh', 'grid');
+  R('energy', 1, 'Generator diesel', +c.dieselL || 0, 'litres', 'diesel');
+  R('energy', 1, 'Generator HVO', +c.hvoL || 0, 'litres', 'hvo');
+  R('freight', 3, 'Road freight', +c.truckTkm || 0, 'tonne-km', 'truck');
+  R('freight', 3, 'Air freight', +c.airTkm || 0, 'tonne-km', 'air');
+  R('freight', 3, 'Sea freight', +c.seaTkm || 0, 'tonne-km', 'sea');
+  R('freight', 3, 'Rail freight', +c.railTkm || 0, 'tonne-km', 'rail');
+  const crewPkm = (+c.crew || 0) * (+c.crewKm || 0) * 2, air = Math.min(100, +c.crewAir || 0), rail = Math.min(100 - air, +c.crewRail || 0), occ = Math.max(1, +c.crewOcc || 1);
+  R('travel', 3, 'Crew flights', crewPkm * air / 100, 'passenger-km', 'flight');
+  R('travel', 3, 'Crew trains', crewPkm * rail / 100, 'passenger-km', 'train');
+  R('travel', 3, `Crew road travel (${occ} per car)`, crewPkm * (100 - air - rail) / 100 / occ, 'vehicle-km', 'road');
+  R('travel', 3, 'Artist & talent flights', talentPkm(c), 'passenger-km', 'flight');
+  R('accommodation', 3, 'Hotel nights', +c.hotelNights || 0, 'room-nights', 'hotel');
+  R('waste', 3, 'Waste to landfill', +c.landfillT || 0, 'tonnes', 'landfill');
+  R('waste', 3, 'Recycled waste', +c.recycledT || 0, 'tonnes', 'recycled');
+  R('waste', 3, 'Composted waste', +c.compostT || 0, 'tonnes', 'compost');
+  R('waste', 3, 'Waste to energy', +c.incinT || 0, 'tonnes', 'incin');
+  const att = +p.brief.capacity || 0;
+  (p.travel?.segments || []).forEach(sg => { const m = AUDIENCE_MODES[sg.mode] || AUDIENCE_MODES.flight, trips = att * (+sg.pct || 0) / 100 * (+sg.km || 0) * 2;
+    R('audience', 3, `Audience, ${sg.label.toLowerCase()}: ${m[0].toLowerCase()}${sg.mode === 'car' ? ` (${Math.max(1, +sg.occ || 1)} per car)` : ''}`, sg.mode === 'car' ? trips / Math.max(1, +sg.occ || 1) : trips, sg.mode === 'car' ? 'vehicle-km' : 'passenger-km', m[1]); });
   const byCat = {}, scope = { 1: 0, 2: 0, 3: 0 };
   rows.forEach(r => { byCat[r.cat] = (byCat[r.cat] || 0) + r.kg; if (r.cat !== 'audience') scope[r.scope] += r.kg; });
-  const showKg = rows.filter(r => r.cat !== 'audience').reduce((s, r) => s + r.kg, 0);
-  return { rows, byCat, scope, showT: showKg / 1000, audienceT: tr / 1000, totalT: (showKg + tr) / 1000, F, c };
+  const showKg = rows.filter(r => r.cat !== 'audience').reduce((x, r) => x + r.kg, 0), audKg = rows.filter(r => r.cat === 'audience').reduce((x, r) => x + r.kg, 0);
+  return { rows, byCat, scope, showT: showKg / 1000, audienceT: audKg / 1000, totalT: (showKg + audKg) / 1000, c, elMissing, missing: rows.filter(r => r.missing) };
 }
+// Each saving is a full switch computed only from published factors. No assumed take-up rates.
 function carbonActions(p) {
-  const { c, F } = calcCarbon(p), out = [];
-  const add = (id, cat, title, detail, kg, apply = true) => { if (kg > 300) out.push({ id, cat, title, detail, saveT: kg / 1000, apply }); };
-  const n = v => Math.round(v).toLocaleString('en');
-  if (c.dieselL > 0) {
-    const kwh = c.dieselL * F.kwhPerL;
-    add('grid', 'energy', 'Plug into grid power instead of generators', `Replace ${n(c.dieselL)} L of diesel with about ${n(kwh)} kWh from the venue grid (${c.gridFactor} kg/kWh). Ask the venue for temporary distribution boards early.`, c.dieselL * F.diesel - kwh * c.gridFactor);
-    add('hvo', 'energy', 'Run any generators you keep on HVO', `HVO renewable diesel cuts lifecycle emissions by roughly 85–90% versus fossil diesel, with no engine changes. Size generators to the real load or add batteries.`, c.dieselL * (F.diesel - F.hvo));
-  }
-  if (c.airTkm > 0) add('freight', 'freight', 'Ship by road or sea, not air', `Move ${n(c.airTkm)} tonne-km of air freight to road. Book fabrication early enough that nothing needs to fly.`, c.airTkm * (F.air - F.truck));
+  const K = calcCarbon(p), c = K.c, out = [], F = k => factorOf(p, k).v;
+  const add = (id, cat, title, detail, kg, apply = true) => { if (kg > 0) out.push({ id, cat, title, detail, saveT: kg / 1000, apply }); };
+  const n = v => Math.round(v).toLocaleString('en'), has = (...k) => k.every(x => F(x) != null);
+  if (c.dieselL > 0 && has('diesel', 'hvo')) add('hvo', 'energy', 'Run the generators on HVO', `Switch all ${n(c.dieselL)} L from diesel (${F('diesel')} kg/L) to HVO (${F('hvo')} kg/L). DESNZ 2026 factors, including well-to-tank. Check the hire company can supply certified HVO.`, c.dieselL * (F('diesel') - F('hvo')));
+  if (c.dieselL > 0 && +c.genKWh > 0 && has('diesel', 'grid')) add('grid', 'energy', 'Plug into grid power instead of generators', `Replace ${n(c.dieselL)} L of diesel with the ${n(c.genKWh)} kWh the generators deliver, drawn from the ${p.brief.country} grid at ${F('grid')} kg/kWh.`, c.dieselL * F('diesel') - c.genKWh * F('grid'));
+  if (c.airTkm > 0 && has('air', 'truck')) add('freight', 'freight', 'Move air freight to road', `Move ${n(c.airTkm)} tonne-km from air (${F('air')}) to road (${F('truck')} kg per tonne-km). Calculated at the same tonne-km; enter the real road distance after switching.`, c.airTkm * (F('air') - F('truck')));
   const crewAirPkm = c.crew * c.crewKm * 2 * c.crewAir / 100;
-  if (crewAirPkm > 0 && c.crewKm <= 1500) add('rail', 'travel', 'Send crew by train for trips under 1,500 km', `Move 80% of crew flights to rail. At ${n(c.crewKm)} km each way, high-speed rail is often door-to-door competitive.`, crewAirPkm * .8 * (F.flight - F.train));
-  if (talentPkm(c) > 0) add('talent', 'travel', 'Book talent already touring nearby', 'Choosing acts and crews already working in the region roughly halves long-haul talent flights.', talentPkm(c) * .5 * F.flight);
-  if (c.mealsMeat > 0) add('food', 'catering', 'Make plant-based the default for production catering', 'Move 70% of meat meals to vegetarian and vegan, with meat on request.', c.mealsMeat * .7 * (F.meat - (F.veg + F.vegan) / 2));
-  if (c.landfillT > 0) add('waste', 'waste', 'Divert landfill waste to recycling and compost', 'Separate at source with staffed bins, and agree reuse partners for set and fabric before the show.', c.landfillT * .8 * (F.landfill - F.recycled));
-  if (c.hotelNights > 0) add('hotel', 'accommodation', 'Book certified hotels close to the venue', 'Certified hotels near the venue cut energy per room-night and remove daily shuttles.', c.hotelNights * F.hotel * .3);
-  libraryGreen(p).swaps.forEach(sw => add('swap:' + sw.elementId + ':' + sw.change.tier, 'materials', sw.title, sw.rationale, -sw.co2Delta * 1000));
-  const t = p.travel, cap = +p.brief.capacity || 0;
-  add('audience', 'audience', 'Bundle public transport with every ticket', `If 10% of international guests switched to rail or coach, audience travel would fall by this much. Partner with rail operators on fares.`, cap * t.intlPct / 100 * .1 * Math.max(0, t.intlKg - t.nationalKg), false);
-  return out.sort((a, b) => b.saveT - a.saveT);
+  if (crewAirPkm > 0 && has('flight', 'train')) add('rail', 'travel', 'Send crew by train instead of flying', `Move all crew flights (${n(crewAirPkm)} passenger-km) to rail at the same distance. Only where a rail route exists.`, crewAirPkm * (F('flight') - F('train')));
+  if (c.landfillT > 0 && has('landfill', 'recycled')) add('waste', 'waste', 'Send landfill waste to recycling', `Move ${c.landfillT} t from landfill (${F('landfill')} kg/t) to closed-loop recycling (${F('recycled')} kg/t), for waste a recycler will accept.`, c.landfillT * (F('landfill') - F('recycled')));
+  libraryGreen(p).swaps.forEach(sw => add('swap:' + sw.elementId + ':' + sw.change.tier, 'materials', sw.title, sw.rationale + ' Saving calculated from the quoted costs of both tiers (spend-based) or the supplier figures.', -sw.co2Delta * 1000));
+  return out.sort((x, y) => y.saveT - x.saveT);
 }
 function applyCarbonAction(p, id) {
-  const c = p.carbon, F = { ...FACTORS_DEFAULT, ...(c.factors || {}) };
-  if (id === 'grid') { c.gridKWh = Math.round((+c.gridKWh || 0) + c.dieselL * F.kwhPerL); c.dieselL = 0; }
+  const c = p.carbon;
+  if (id === 'grid') { c.gridKWh = Math.round((+c.gridKWh || 0) + (+c.genKWh || 0)); c.dieselL = 0; c.genKWh = 0; }
   else if (id === 'hvo') { c.hvoL = (+c.hvoL || 0) + c.dieselL; c.dieselL = 0; }
   else if (id === 'freight') { c.truckTkm = (+c.truckTkm || 0) + c.airTkm; c.airTkm = 0; }
-  else if (id === 'rail') { const mv = c.crewAir * .8; c.crewAir = Math.round(c.crewAir - mv); c.crewRail = Math.round(c.crewRail + mv); }
-  else if (id === 'talent') c.talentKm = Math.round((+c.talentKm || 0) * .5);
-  else if (id === 'food') { const mv = Math.round(c.mealsMeat * .7); c.mealsMeat -= mv; c.mealsVeg += Math.round(mv * .6); c.mealsVegan += mv - Math.round(mv * .6); }
-  else if (id === 'waste') { const mv = +(c.landfillT * .8).toFixed(2); c.landfillT = +(c.landfillT - mv).toFixed(2); c.recycledT = +(c.recycledT + mv * .75).toFixed(2); c.compostT = +(c.compostT + mv * .25).toFixed(2); }
-  else if (id === 'hotel') { c.factors = { ...F, hotel: +(F.hotel * .7).toFixed(1) }; }
+  else if (id === 'rail') { c.crewRail = Math.min(100, (+c.crewRail || 0) + (+c.crewAir || 0)); c.crewAir = 0; }
+  else if (id === 'waste') { c.recycledT = +((+c.recycledT || 0) + (+c.landfillT || 0)).toFixed(2); c.landfillT = 0; }
   else if (id.startsWith('swap:')) { const [, eid, tier] = id.split(':'); const e = p.elements.find(x => x.id === eid); if (e && !e.locked && TIERS.includes(tier)) e.tier = tier; }
+}
+// Fill activity data from committed close-outs: median per attendee x this plan's capacity. Only inputs that past events actually measured.
+function closeoutFill(p) {
+  const pa = REFDATA?.['closeout-benchmarks']?.perAttendee || [], cap = +p.brief.capacity || 0, out = [];
+  if (!cap) return out;
+  pa.forEach(b => { if (b.input in (p.carbon || blankCarbon()) && b.n > 0) out.push({ key: b.input, value: Math.round(b.median * cap * 100) / 100, b }); });
+  return out;
+}
+
+/* ------------------------------------------------------------------ */
+/* Source coverage: what share of the plan is backed by a source        */
+/* ------------------------------------------------------------------ */
+function coverage(p = plan) {
+  const items = [];
+  p.elements.filter(e => e.included).forEach(e => { const x = e.tiers[e.tier]; items.push({ kind: 'Element', name: `${e.name} (${TIER_LABEL[e.tier]})`, amount: hasCost(x) ? +x.cost : null, ok: hasCost(x) && sourced(x.src), step: 'design', id: e.id }); if (x.co2s && x.co2s.v !== '' && x.co2s.v != null && !sourced(x.co2s)) items.push({ kind: 'Supplier CO₂e', name: e.name, amount: null, ok: false, step: 'design', id: e.id }); });
+  (p.lines || []).forEach(l => { items.push({ kind: 'Budget line', name: l.name, amount: hasCost(l) ? +l.cost : null, ok: hasCost(l) && sourced(l.src), step: 'budget' }); if (l.co2m === 'supplier' && !sourced(l.co2s)) items.push({ kind: 'Supplier CO₂e', name: l.name, amount: null, ok: false, step: 'budget' }); });
+  const costed = items.filter(i => i.amount != null), sum = costed.reduce((x, i) => x + i.amount, 0), ok = costed.filter(i => i.ok).reduce((x, i) => x + i.amount, 0);
+  (p.overheads || []).forEach(o => { if (+o.pct > 0 && !sourced(o.src)) items.push({ kind: 'Overhead rate', name: `${o.name} (${o.pct}%)`, amount: null, ok: false, step: 'budget' }); });
+  const c = p.carbon || blankCarbon();
+  Object.entries(CARBON_GROUPS).forEach(([g, keys]) => { if (keys.some(k => +c[k] > 0) && !sourced(c.src?.[g])) items.push({ kind: 'Activity data', name: CARBON_CATS[g], amount: null, ok: false, step: 'sustainability' }); });
+  if ((p.travel?.segments || []).some(sg => +sg.pct > 0) && !sourced(p.travel.src)) items.push({ kind: 'Activity data', name: 'Audience travel', amount: null, ok: false, step: 'sustainability' });
+  FACTOR_KEYS.forEach(k => { const f = factorOf(p, k); if (f.from === 'override' && !f.ok) items.push({ kind: 'Emission factor', name: `${f.label} (your figure)`, amount: null, ok: false, step: 'sustainability' }); });
+  calcCarbon(p).missing.forEach(r => items.push({ kind: 'Emission factor', name: `${r.f.label}: no published factor for ${p.brief.country || 'the event country'}`, amount: null, ok: false, step: 'sustainability' }));
+  return { costPct: sum ? Math.round(ok / sum * 100) : null, sourcedCost: ok, costedTotal: sum, unquoted: items.filter(i => i.amount == null && (i.kind === 'Element' || i.kind === 'Budget line')).length, issues: items.filter(i => !i.ok) };
 }
 
 /* Previous-year report: parse, compare, suggest */
@@ -1470,10 +1575,27 @@ function loadDraft() {
   try { const raw = localStorage.getItem(DRAFT_KEY); if (!raw) return null; const p = JSON.parse(raw); return p && p.brief && Array.isArray(p.elements) ? upgrade(p) : null; } catch { return null; }
 }
 function upgrade(p) {
+  if (p.example && (p.v || 0) < 3) p = examplePlan(); // the old example carried illustrative prices; replace it with the sourced version
   p.priorities ||= { broadcast:3, local:3, global:3, green:3 };
   p.overheads ||= DEFAULT_OVERHEADS();
-  p.travel ||= DEFAULT_TRAVEL();
-  p.acts ||= []; p.concepts ||= []; p.log ||= []; p.images ||= []; p.artists ||= []; if (p.look === undefined) p.look = null; p.local ||= blankLocal(); p.lines ||= []; p.vendors ||= []; p.cues ||= {}; p.sbStep ||= 1; if (p.prevReport === undefined) p.prevReport = null; if (!p.carbon) p.carbon = defaultCarbon(p); if (p.carbon.talent == null) { const pk = +p.carbon.talentPkm || 0; p.carbon.talent = pk ? 1 : 0; p.carbon.talentKm = Math.round(pk / 2); } delete p.carbon.talentPkm; p.carbon.factors = { ...FACTORS_DEFAULT, ...(p.carbon.factors || {}) };
+  p.acts ||= []; p.concepts ||= []; p.log ||= []; p.images ||= []; p.artists ||= []; if (p.look === undefined) p.look = null; p.local ||= blankLocal(); p.lines ||= []; p.vendors ||= []; p.cues ||= {}; p.sbStep ||= 1; if (p.prevReport === undefined) p.prevReport = null;
+  if (p.closeout === undefined) p.closeout = null;
+  if ((p.v || 0) < 3) {
+    // v3: every number carries its source. Earlier plans keep their figures, flagged "No source" until a source is added.
+    p.elements.forEach(e => TIERS.forEach(t => { const x = e.tiers[t] || (e.tiers[t] = blankTier('')); x.src ||= blankSrc(); delete x.co2; /* earlier CO2e figures were estimates; CO2e is now calculated from the quote or a supplier figure */ if (x.co2s === undefined) x.co2s = null; }));
+    p.lines.forEach(l => { l.src ||= blankSrc(); if (l.co2m == null) { if (+l.co2 > 0) { l.co2m = 'supplier'; l.co2s = { v: +l.co2, b: '', r: '' }; } else l.co2m = defaultCo2Method(l.category); } delete l.co2; });
+    p.overheads.forEach(o => { o.src ||= blankSrc(); });
+    const old = p.carbon || {}, nc = blankCarbon();
+    Object.keys(nc).forEach(k => { if (typeof nc[k] === 'number' && k !== 'v' && old[k] != null) nc[k] = +old[k] || 0; });
+    if (old.talent == null && old.talentPkm) { nc.talent = 1; nc.talentKm = Math.round(+old.talentPkm / 2); }
+    p.carbon = nc; // earlier built-in factors are dropped: factors now come from the reference library
+    if (!p.travel || !Array.isArray(p.travel.segments)) p.travel = DEFAULT_TRAVEL(); // earlier per-trip kg figures had no source
+    if (p.sustainability) p.sustainability.swaps = (p.sustainability.swaps || []).filter(sw => TIERS.includes(sw.change?.tier)).map(sw => ({ ...sw, costDelta: undefined, co2Delta: undefined }));
+    p.v = 3;
+  }
+  p.overheads.forEach(o => { o.src ||= blankSrc(); });
+  p.travel ||= DEFAULT_TRAVEL(); p.travel.src ||= blankSrc();
+  p.carbon ||= blankCarbon(); p.carbon.src ||= blankCarbon().src; p.carbon.factorOverrides ||= {};
   return p;
 }
 function writeDraft() { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(plan)); } catch {} }
@@ -1504,12 +1626,12 @@ function valueAt(e, tier, p = plan) {
 function totals(p = plan) {
   const inc = p.elements.filter(e => e.included);
   const lt = linesTotals(p);
-  const elDirect = inc.reduce((s, e) => s + (e.tiers[e.tier]?.cost || 0), 0);
+  const elDirect = inc.reduce((s, e) => s + tierCost(e, e.tier), 0);
   const direct = elDirect + lt.oh;
   const ohPct = p.overheads.reduce((s, o) => s + (+o.pct || 0), 0);
   const overhead = direct * ohPct / 100;
   const total = direct + overhead + lt.no;
-  const co2 = inc.reduce((s, e) => s + (e.tiers[e.tier]?.co2 || 0), 0) + lt.co2;
+  const co2 = inc.reduce((s, e) => s + co2T(e, e.tier, p), 0) + lt.co2;
   const meters = {};
   ['broadcast', 'local', 'global'].forEach(d => {
     const max = p.elements.reduce((s, e) => s + (e.scores?.[d] || 0), 0);
@@ -1519,16 +1641,13 @@ function totals(p = plan) {
   const gMax = p.elements.length * 5;
   meters.green = gMax ? Math.round(inc.reduce((s, e) => s + (e.green?.score || 0), 0) / Math.max(1, inc.length) / 5 * 100) : 0;
   const cap = +p.brief.budgetCap || 0;
-  return { direct, elDirect, linesCost: lt.oh + lt.no, overhead, ohPct, total, co2, meters, cap, over: cap ? total - cap : 0 };
+  return { direct, elDirect, linesCost: lt.oh + lt.no, overhead, ohPct, total, co2, meters, cap, over: cap ? total - cap : 0, unquoted: inc.filter(e => !hasCost(e.tiers[e.tier])).length };
 }
 function scenario(tier, p = plan) {
   const k = 1 + totals(p).ohPct / 100, lt = linesTotals(p);
-  return (p.elements.filter(e => e.included).reduce((s, e) => s + (e.tiers[tier]?.cost || 0), 0) + lt.oh) * k + lt.no;
+  return (p.elements.filter(e => e.included).reduce((s, e) => s + tierCost(e, tier), 0) + lt.oh) * k + lt.no;
 }
-function travelTonnes(p = plan) {
-  const t = p.travel, cap = +p.brief.capacity || 0;
-  return cap * ((t.localPct / 100) * t.localKg + (t.nationalPct / 100) * t.nationalKg + (t.intlPct / 100) * t.intlKg) / 1000;
-}
+function travelTonnes(p = plan) { return calcCarbon(p).audienceT; }
 function weeksUntil(d) { if (!d) return null; const ms = new Date(d) - Date.now(); return Number.isFinite(ms) ? Math.floor(ms / (7 * 864e5)) : null; }
 function money(n, compact = true) {
   const c = plan.brief.currency || 'EUR'; const big = compact && Math.abs(n) >= 100000;
@@ -1536,6 +1655,22 @@ function money(n, compact = true) {
   catch { return c + ' ' + Math.round(n || 0).toLocaleString('en'); }
 }
 const tonnes = n => (Math.round((n || 0) * 10) / 10).toLocaleString('en') + ' t';
+const costLabel = x => hasCost(x) ? money(+x.cost) : 'No quote';
+function srcBadge(x) { return sourced(x) ? `<span class="src ok" title="${esc(BASIS[x.b] + ': ' + x.r)}">${esc(BASIS[x.b])}</span>` : '<span class="src no">No source</span>'; }
+function basisSelect(attrs, cur) { return `<select ${attrs} aria-label="Source type"><option value="">Source type…</option>${Object.entries(BASIS).map(([k, l]) => `<option value="${k}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`; }
+// A source editor: type + reference. data-src="<path>" is resolved by setSrc().
+function srcEditor(path, x, placeholder = 'Reference: quote no., invoice, meter log…') { x ||= blankSrc(); return `<div class="srcrow">${basisSelect(`data-src="${esc(path)}" data-k="b"`, x.b)}<input data-src="${esc(path)}" data-k="r" value="${esc(x.r || '')}" placeholder="${esc(placeholder)}" aria-label="Source reference">${srcBadge(x)}</div>`; }
+function setSrc(p, path, k, v) {
+  const [kind, id, sub] = path.split(':');
+  let o = null;
+  if (kind === 'line') { const l = p.lines.find(x => x.id === id); if (l) o = sub === 'co2' ? (l.co2s ||= { v: '', b: '', r: '' }) : (l.src ||= blankSrc()); }
+  else if (kind === 'oh') { const x = p.overheads.find(y => y.id === id); if (x) o = (x.src ||= blankSrc()); }
+  else if (kind === 'carbon') o = (p.carbon.src[id] ||= blankSrc());
+  else if (kind === 'travel') o = (p.travel.src ||= blankSrc());
+  else if (kind === 'factor') o = (p.carbon.factorOverrides[id] ||= { v: '', b: '', r: '' });
+  else if (kind === 'brief') o = (p.brief.src ||= {}, p.brief.src[id] ||= blankSrc());
+  if (o) o[k] = v;
+}
 function timecode(min) { const m = Math.floor(min), s = Math.round((min - m) * 60); return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0'); }
 
 /* Budget balancing (local, deterministic) */
@@ -1543,17 +1678,21 @@ function fitToBudgetOps() {
   const p = clone(plan), t0 = totals(p);
   if (!t0.cap) return { error: 'Set a budget cap in the brief first.' };
   if (t0.total <= t0.cap) return { error: 'The plan is already within budget.' };
-  const k = 1 + t0.ohPct / 100, gw = p.priorities.green, ops = [];
+  const k = 1 + t0.ohPct / 100, cp = carbonPrice(p)?.v || 0, ops = [];
   for (let guard = 0; guard < 200 && totals(p).total > t0.cap; guard++) {
     let best = null;
     for (const e of p.elements) {
       if (!e.included || e.locked) continue;
       const i = TIERS.indexOf(e.tier);
       if (i > 0) {
-        const lo = TIERS[i - 1], save = (e.tiers[e.tier].cost - e.tiers[lo].cost) * k;
-        if (save > 0) { const loss = valueAt(e, e.tier, p) - valueAt(e, lo, p) - gw * 0.02 * (e.tiers[e.tier].co2 - e.tiers[lo].co2); const r = loss / save; if (!best || r < best.r) best = { r, e, to: lo }; }
+        if (!hasCost(e.tiers[e.tier]) || !hasCost(e.tiers[TIERS[i - 1]])) continue; // only quoted tiers can be traded
+        const lo = TIERS[i - 1], save = (tierCost(e, e.tier) - tierCost(e, lo)) * k;
+        // CO2e saved is valued at the internal carbon price (reference/policy.json), so cleaner downgrades rank first at equal cost.
+        if (save > 0) { const loss = valueAt(e, e.tier, p) - valueAt(e, lo, p); const r = loss / (save + Math.max(0, co2T(e, e.tier, p) - co2T(e, lo, p)) * cp); if (!best || r < best.r) best = { r, e, to: lo }; }
       } else {
-        const save = e.tiers[e.tier].cost * k;
+        if (!hasCost(e.tiers[e.tier])) continue;
+        const save = tierCost(e, e.tier) * k;
+        // A cut loses the element entirely, so it ranks behind any downgrade with the same impact per unit of money.
         if (save > 0) { const r = (valueAt(e, e.tier, p) + 1.5) / save; if (!best || r < best.r) best = { r, e, to: null }; }
       }
     }
@@ -1567,7 +1706,8 @@ function fitToBudgetOps() {
     else if (e.tier !== orig.tier) ops.push({ op: 'set_tier', id: e.id, tier: e.tier });
   });
   const ok = totals(p).total <= t0.cap;
-  return { ops, summary: ok ? 'Downgrades the elements that give the least impact per euro first, keeping locked elements as they are.' : 'Even with every unlocked element at its lowest tier or cut, the plan is still over the cap. Unlock elements or raise the cap.' };
+  const note = t0.unquoted ? ` ${t0.unquoted} element${t0.unquoted === 1 ? ' has' : 's have'} no quote yet and were left out.` : '';
+  return { ops, summary: (ok ? 'Downgrades the quoted elements that give the least impact per unit of cost first (CO₂e saved counts at the EUR 25/t UEFA rate), keeping locked elements as they are.' : 'Even with every unlocked, quoted element at its lowest tier or cut, the plan is still over the cap. Unlock elements, get quotes or raise the cap.') + note };
 }
 function headroomOps() {
   const p = clone(plan), t0 = totals(p);
@@ -1579,8 +1719,8 @@ function headroomOps() {
     for (const e of p.elements) {
       if (e.locked) continue;
       let to, add, gain;
-      if (!e.included) { to = 'lean'; add = e.tiers.lean.cost * k; gain = valueAt(e, 'lean', p); }
-      else { const i = TIERS.indexOf(e.tier); if (i >= 2) continue; to = TIERS[i + 1]; add = (e.tiers[to].cost - e.tiers[e.tier].cost) * k; gain = valueAt(e, to, p) - valueAt(e, e.tier, p); }
+      if (!e.included) { if (!hasCost(e.tiers.lean)) continue; to = 'lean'; add = tierCost(e, 'lean') * k; gain = valueAt(e, 'lean', p); }
+      else { const i = TIERS.indexOf(e.tier); if (i >= 2) continue; to = TIERS[i + 1]; if (!hasCost(e.tiers[to]) || !hasCost(e.tiers[e.tier])) continue; add = (tierCost(e, to) - tierCost(e, e.tier)) * k; gain = valueAt(e, to, p) - valueAt(e, e.tier, p); }
       if (add <= 0 || add > room) continue;
       const r = gain / add; if (!best || r > best.r) best = { r, e, to };
     }
@@ -1601,7 +1741,7 @@ function headroomOps() {
 /* Operations (used by Claude proposals, budget balancing and swaps) */
 function normEl(r, p = plan) {
   const t = r.tiers || {};
-  const tier = k => ({ desc: String(t[k]?.desc || ''), cost: Math.max(0, Math.round(num(t[k]?.cost))), co2: Math.max(0, Math.round(num(t[k]?.co2) * 10) / 10) });
+  const tier = k => blankTier(String(t[k]?.desc || '')); // prices, CO2e and lead times are never taken from a model: they come from quotes
   let act = String(r.act || '');
   if (p.acts.length && !p.acts.some(a => a.name === act)) act = p.acts[0].name;
   return {
@@ -1610,7 +1750,7 @@ function normEl(r, p = plan) {
     scores: { broadcast: clampScore(r.scores?.broadcast), local: clampScore(r.scores?.local), global: clampScore(r.scores?.global) },
     tiers: { lean: tier('lean'), standard: tier('standard'), signature: tier('signature') },
     tier: TIERS.includes(r.tier) ? r.tier : 'standard', included: r.included !== false, locked: false,
-    leadWeeks: Math.max(0, Math.round(num(r.leadWeeks, 8))), sourcing: String(r.sourcing || ''),
+    leadWeeks: null, sourcing: String(r.sourcing || ''),
     green: { score: clampScore(r.green?.score), note: String(r.green?.note || '') }
   };
 }
@@ -1620,9 +1760,8 @@ function mergeEl(e, f, p) {
   if (f.category && CATEGORIES.includes(f.category)) e.category = f.category;
   if (f.act && p.acts.some(a => a.name === f.act)) e.act = f.act;
   if (f.scores) ['broadcast', 'local', 'global'].forEach(d => { if (f.scores[d] != null) e.scores[d] = clampScore(f.scores[d]); });
-  if (f.tiers) TIERS.forEach(t => { const x = f.tiers[t]; if (!x) return; if (x.desc) e.tiers[t].desc = String(x.desc); if (x.cost != null) e.tiers[t].cost = Math.max(0, Math.round(num(x.cost))); if (x.co2 != null) e.tiers[t].co2 = Math.max(0, num(x.co2)); });
+  if (f.tiers) TIERS.forEach(t => { const x = f.tiers[t]; if (!x) return; if (x.desc && x.desc !== e.tiers[t].desc) { e.tiers[t].desc = String(x.desc); e.tiers[t].cost = null; e.tiers[t].src = blankSrc(); e.tiers[t].co2s = null; } }); // a new spec needs a new quote
   if (f.green) { if (f.green.score != null) e.green.score = clampScore(f.green.score); if (f.green.note) e.green.note = String(f.green.note); }
-  if (f.leadWeeks != null) e.leadWeeks = Math.max(0, Math.round(num(f.leadWeeks)));
 }
 function applyOps(p, ops) {
   for (const o of ops) {
@@ -1652,8 +1791,8 @@ function validOps(ops) {
 function describeOp(o) {
   const e = plan.elements.find(x => x.id === o.id); const n = e ? e.name : '';
   switch (o.op) {
-    case 'set_tier': return `${n}: ${TIER_LABEL[e.tier]} → ${TIER_LABEL[o.tier]} (${money(e.tiers[e.tier].cost)} → ${money(e.tiers[o.tier].cost)})`;
-    case 'include': return o.value ? `Add back ${n}` : `Cut ${n} (saves ${money(e.tiers[e.tier].cost)} before overheads)`;
+    case 'set_tier': return `${n}: ${TIER_LABEL[e.tier]} → ${TIER_LABEL[o.tier]} (${costLabel(e.tiers[e.tier])} → ${costLabel(e.tiers[o.tier])})`;
+    case 'include': return o.value ? `Add back ${n}` : `Cut ${n}${hasCost(e.tiers[e.tier]) ? ` (saves ${money(tierCost(e, e.tier))} before overheads)` : ''}`;
     case 'update': return `Rework ${n}` + (o.fields?.name && o.fields.name !== n ? ` as “${o.fields.name}”` : '') + (o.fields?.description ? `: ${o.fields.description}` : '');
     case 'add': return `New element: ${o.element.name || 'Untitled'}` + (o.element.description ? ` (${o.element.description})` : '');
     case 'remove': return `Remove ${n}`;
@@ -1691,9 +1830,11 @@ function briefText(p = plan) {
 }
 function compactElements(p = plan) {
   return p.elements.map(e => ({ id: e.id, name: e.name, act: e.act, category: e.category, included: e.included, locked: e.locked, tier: e.tier, scores: e.scores,
-    tiers: Object.fromEntries(TIERS.map(t => [t, { desc: e.tiers[t].desc, cost: e.tiers[t].cost, co2: e.tiers[t].co2 }])) }));
+    tiers: Object.fromEntries(TIERS.map(t => [t, { desc: e.tiers[t].desc, quotedCost: hasCost(e.tiers[t]) ? +e.tiers[t].cost : null }])) }));
 }
-const ELEMENT_SHAPE = `{"name":"string","act":"one of the act names","category":"one of: ${CATEGORIES.join(' | ')}","description":"one sentence","scores":{"broadcast":1-5,"local":1-5,"global":1-5},"tiers":{"signature":{"desc":"what you get","cost":number,"co2":number},"standard":{"desc":"","cost":number,"co2":number},"lean":{"desc":"","cost":number,"co2":number}},"tier":"lean|standard|signature","leadWeeks":number,"sourcing":"how and where to source it","green":{"score":1-5,"note":"one sentence"}}`;
+const ELEMENT_SHAPE = `{"name":"string","act":"one of the act names","category":"one of: ${CATEGORIES.join(' | ')}","description":"one sentence","scores":{"broadcast":1-5,"local":1-5,"global":1-5},"tiers":{"signature":{"desc":"what you get, with the quantities a vendor needs to quote"},"standard":{"desc":""},"lean":{"desc":""}},"tier":"lean|standard|signature","sourcing":"what to ask vendors to quote for","green":{"score":1-5,"note":"one sentence"}}`;
+// Shared rule for every prompt: the model designs, it never invents numbers.
+const NO_NUMBERS = 'Never give prices, CO2e figures, percentages or lead times of your own. In this tool every number must come from a vendor quote, an invoice, a meter reading, a published standard or a published event report. Describe each tier precisely (sizes, counts, durations) so vendors can quote it.';
 
 async function askClaude(label, prompt, tier = 'default') {
   if (!sample) { toast(claudeState === 'waiting' ? 'Claude is still connecting. Try again in a moment.' : 'Claude is not available in this view. You can still edit everything by hand.'); return null; }
@@ -1794,7 +1935,7 @@ async function runDesign() {
   if (!c) { toast('Choose a concept first.'); return; }
   const prompt = `${ROLE}
 
-Turn the chosen concept into a list of show elements with realistic, market-rate cost estimates.
+Turn the chosen concept into a list of show elements, each specified in three tiers that vendors can quote.
 
 EVENT BRIEF
 ${briefText()}
@@ -1806,29 +1947,25 @@ Acts: ${c.acts.map(a => `${a.name} (${a.minutes} min): ${a.description}`).join('
 Broadcast moment: ${c.broadcastMoment}
 
 Reply with ONLY a JSON object:
-{"elements":[${ELEMENT_SHAPE}],"overheads":[{"name":"","pct":number}]}
+{"elements":[${ELEMENT_SHAPE}]}
 
 Rules:
 - 10 to 14 elements covering performance, staging, music, cast and community, crowd participation, lighting, effects, sound, costume and broadcast as the concept needs.
 - "act" must be exactly one of: ${c.acts.map(a => a.name).join(', ')}.
-- Costs are whole numbers in ${plan.brief.currency}, priced for ${plan.brief.city || 'the location'}, ${plan.brief.country} at current market rates, including fees, hire, fabrication and element crew. Exclude overall production management, insurance and contingency: those are overheads.
-- Three tiers per element: signature is ambitious, standard is solid, lean is the cheapest version that keeps the idea.
-- Aim for standard tiers plus overheads to land near the budget cap of ${plan.brief.budgetCap} ${plan.brief.currency}. Set "tier" to the recommended starting tier for each element.
-- co2 is an estimate in tonnes CO2e for that element (materials, transport, energy, artist travel).
-- overheads: 3 to 5 lines as percentages of element costs (creative direction, production management and crew, insurance/permits/safety, contingency).`;
-  const r = await askClaude('Designing the show and pricing every element…', prompt, 'default');
+- Three tiers per element: signature is ambitious, standard is solid, lean is the simplest version that keeps the idea. Give quantities in each tier description (for example "300 m² printed fabric, 200 cast").
+- Set "tier" to the recommended starting tier. The budget cap is ${plan.brief.budgetCap} ${plan.brief.currency}; scale the ambition of the tiers to it, but do not price them.
+- ${NO_NUMBERS}`;
+  const r = await askClaude('Designing the show element by element…', prompt, 'default');
   if (!r) return;
   const els = arr(r.elements);
   if (!els.length) { toast('No elements came back. Try again.'); return; }
   mutate(p => {
     p.acts = c.acts.map(a => ({ id: uid(), ...a }));
     p.elements = els.map(x => normEl(x, p));
-    const oh = arr(r.overheads).filter(o => o?.name).map(o => ({ id: uid(), name: String(o.name), pct: Math.max(0, num(o.pct)) }));
-    if (oh.length) p.overheads = oh;
     p.production = null; p.sustainability = null;
   }, { log: `Show designed from concept “${c.title}”` });
   go('design');
-  toast('Show design ready. Every element can be changed.');
+  toast('Show design ready. Add vendor quotes to price each tier.');
 }
 
 async function runCommand(text) {
@@ -1844,7 +1981,7 @@ ${briefText()}
 
 ACTS: ${plan.acts.map(a => `${a.name} (${a.minutes} min)`).join(', ')}
 OVERHEADS: ${plan.overheads.map(o => `${o.id} "${o.name}" ${o.pct}%`).join(', ')} (percent of element costs)
-CURRENT TOTAL: ${Math.round(t.total)} ${plan.brief.currency} (cap ${t.cap}); CO2: ${t.co2.toFixed(1)} t
+CURRENT TOTAL OF QUOTED COSTS: ${Math.round(t.total)} ${plan.brief.currency} (cap ${t.cap}); ${t.unquoted} included elements have no quote yet
 
 ELEMENTS (JSON):
 ${JSON.stringify(compactElements())}
@@ -1856,12 +1993,12 @@ Reply with ONLY a JSON object:
 Allowed ops:
 {"op":"set_tier","id":"<element id>","tier":"lean|standard|signature"}
 {"op":"include","id":"<element id>","value":true|false}
-{"op":"update","id":"<element id>","fields":{partial element: name, description, category, act, scores, tiers (per tier desc/cost/co2), green, leadWeeks}}
+{"op":"update","id":"<element id>","fields":{partial element: name, description, category, act, scores, tiers (per tier desc only), green}}
 {"op":"add","element":${ELEMENT_SHAPE}}
 {"op":"remove","id":"<element id>"}
 {"op":"set_cap","value":number}
 {"op":"set_overhead","id":"<overhead id>","pct":number}
-Rules: never touch elements where "locked" is true. Use existing ids. Costs in ${plan.brief.currency}, co2 in tonnes. Keep artistic intent coherent with the concept. If the request is about budget, show the trade-off by changing tiers before cutting elements.`;
+Rules: never touch elements where "locked" is true. Use existing ids. Keep artistic intent coherent with the concept. If the request is about budget, show the trade-off by changing tiers before cutting elements, using only the quotedCost values given (null means no quote yet). Use set_cap or set_overhead only when the producer states the figure in the request. ${NO_NUMBERS}`;
   const r = await askClaude('Working out the changes…', prompt);
   if (!r) return;
   cmdDraft = '';
@@ -1870,7 +2007,7 @@ Rules: never touch elements where "locked" is true. Use existing ids. Costs in $
 
 async function runProduction() {
   if (!plan.elements.some(e => e.included)) { toast('Add show elements first.'); return; }
-  const inc = plan.elements.filter(e => e.included).map(e => ({ id: e.id, name: e.name, tier: e.tier, what: e.tiers[e.tier].desc, cost: e.tiers[e.tier].cost, leadWeeks: e.leadWeeks }));
+  const inc = plan.elements.filter(e => e.included).map(e => ({ id: e.id, name: e.name, tier: e.tier, what: e.tiers[e.tier].desc, confirmedLeadWeeks: e.leadWeeks }));
   const w = weeksUntil(plan.brief.date);
   const prompt = `${ROLE}
 
@@ -1884,14 +2021,13 @@ SELECTED ELEMENTS (JSON):
 ${JSON.stringify(inc)}
 
 Reply with ONLY a JSON object:
-{"phases":[{"name":"","when":"e.g. 26–20 weeks out","tasks":["",""]}],"elementNotes":[{"id":"<element id>","fabrication":"how it is built or sourced","suppliers":"types of suppliers, and whether to use local or specialist ones","localSourcing":"High|Medium|Low with a few words","leadWeeks":number,"risks":"one sentence"}],"criticalPath":["",""]}
-Rules: 5-6 phases from creative lock to load-out; one elementNotes entry per selected element; name supplier types, not specific companies; prefer local fabrication where quality allows; flag anything that cannot be done in the time left.`;
+{"phases":[{"name":"","when":"e.g. 26–20 weeks out","tasks":["",""]}],"elementNotes":[{"id":"<element id>","fabrication":"how it is built or sourced","suppliers":"types of suppliers, and whether to use local or specialist ones","localSourcing":"High|Medium|Low with a few words","askVendors":"what to confirm with vendors, including lead time","risks":"one sentence"}],"criticalPath":["",""]}
+Rules: 5-6 phases from creative lock to load-out; one elementNotes entry per selected element; name supplier types, not specific companies; prefer local fabrication where quality allows; where confirmedLeadWeeks is given, flag anything that cannot be done in the time left. Phase timings are relative to the event date; describe them, do not invent durations for specific suppliers. ${NO_NUMBERS}`;
   const r = await askClaude('Planning production and manufacturing…', prompt);
   if (!r) return;
   mutate(p => {
     const notes = {};
-    arr(r.elementNotes).forEach(n => { if (n?.id && p.elements.some(e => e.id === n.id)) notes[n.id] = { fabrication: String(n.fabrication || ''), suppliers: String(n.suppliers || ''), localSourcing: String(n.localSourcing || ''), leadWeeks: Math.round(num(n.leadWeeks, 0)), risks: String(n.risks || '') }; });
-    Object.entries(notes).forEach(([id, n]) => { const e = p.elements.find(x => x.id === id); if (e && n.leadWeeks) e.leadWeeks = n.leadWeeks; });
+    arr(r.elementNotes).forEach(n => { if (n?.id && p.elements.some(e => e.id === n.id)) notes[n.id] = { fabrication: String(n.fabrication || ''), suppliers: String(n.suppliers || ''), localSourcing: String(n.localSourcing || ''), askVendors: String(n.askVendors || ''), risks: String(n.risks || '') }; });
     p.production = {
       phases: arr(r.phases).map(ph => ({ name: String(ph?.name || ''), when: String(ph?.when || ''), tasks: arr(ph?.tasks).map(String) })).filter(ph => ph.name),
       elementNotes: notes, criticalPath: arr(r.criticalPath).map(String)
@@ -1909,21 +2045,21 @@ Review this show for sustainability. Suggest concrete swaps that cut emissions a
 
 EVENT BRIEF
 ${briefText()}
-Current show CO2 estimate: ${t.co2.toFixed(1)} t. Estimated audience travel: ${Math.round(travelTonnes())} t.
+Calculated footprint so far (DESNZ 2026 factors and spend-based multipliers on quoted costs): show ${t.co2.toFixed(1)} t, audience travel ${travelTonnes().toFixed(1)} t.
 
 ELEMENTS (JSON, "tier" is the current choice):
 ${JSON.stringify(compactElements().filter(e => e.included))}
 
 Reply with ONLY a JSON object:
-{"swaps":[{"elementId":"<id>","title":"short action","change":{"tier":"lean|standard|signature"} OR {"desc":"new version of the current tier","cost":number,"co2":number},"costDelta":number,"co2Delta":number,"rationale":"one sentence on why the show still works"}],"practices":[{"title":"","detail":""}],"reporting":[""]}
-Rules: 3-6 swaps, largest CO2 saving first; costDelta and co2Delta are changes versus the current choice (negative means a saving); do not suggest swaps for locked elements; practices must be specific to ${plan.brief.city || 'the location'} (public transport, local suppliers, venue power, reuse and donation partners); reporting: 2-3 notes on how to report the footprint (GHG Protocol, ISO 20121, the client's CSRD / scope 3 needs where relevant).`;
+{"swaps":[{"elementId":"<id>","title":"short action","change":{"tier":"lean|standard|signature"},"rationale":"one sentence on why the show still works and why the other tier should emit less"}],"practices":[{"title":"","detail":""}],"reporting":[""]}
+Rules: 3-6 swaps, each a change to another existing tier; the app calculates the cost and CO2e difference from quotes, so do not estimate them; do not suggest swaps for locked elements; ${NO_NUMBERS} practices must be specific to ${plan.brief.city || 'the location'} (public transport, local suppliers, venue power, reuse and donation partners); reporting: 2-3 notes on how to report the footprint (GHG Protocol, ISO 20121, the client's CSRD / scope 3 needs where relevant).`;
   const r = await askClaude('Reviewing the footprint…', prompt);
   if (!r) return;
   mutate(p => {
     p.sustainability = {
       swaps: arr(r.swaps).filter(s => s?.elementId && p.elements.some(e => e.id === s.elementId && !e.locked)).map(s => ({
-        id: uid(), elementId: s.elementId, title: String(s.title || ''), change: s.change && typeof s.change === 'object' ? s.change : {},
-        costDelta: num(s.costDelta), co2Delta: num(s.co2Delta), rationale: String(s.rationale || ''), applied: false })),
+        id: uid(), elementId: s.elementId, title: String(s.title || ''), change: TIERS.includes(s.change?.tier) ? { tier: s.change.tier } : {},
+        rationale: String(s.rationale || ''), applied: false })).filter(sw => sw.change.tier),
       practices: items(r.practices), reporting: arr(r.reporting).map(String)
     };
   }, { log: 'Sustainability review generated' });
@@ -2057,16 +2193,16 @@ function render() {
   $('#plan-name').value = plan.name;
   renderTop(); renderNav();
   const views = { brief: vBrief, research: vResearch, concept: vConcept, design: vDesign, look: vLook, budget: vBudget, production: vProduction, sustainability: vSustainability, export: vExport };
-  $('#main').innerHTML = `<div class="wrap">${exampleBanner()}${claudeBanner()}${views[step]()}</div>`;
+  $('#main').innerHTML = `<div class="wrap">${refBanner()}${exampleBanner()}${claudeBanner()}${views[step]()}</div>`;
   renderBusy(); renderSaveState(); paintCanvases();
 }
 function renderTop() {
-  const t = totals();
+  const t = totals(), cov = coverage();
   const cls = !t.cap ? '' : t.total > t.cap ? 'over' : 'under';
   $('#readouts').innerHTML = `
     <div class="readout ${cls}"><span class="k">Budget</span><span class="v">${money(t.total)} / ${t.cap ? money(t.cap) : '—'}</span></div>
     <div class="readout"><span class="k">Production CO₂e</span><span class="v">${tonnes(calcCarbon(plan).showT)}</span></div>
-    <div class="readout"><span class="k">Elements</span><span class="v">${plan.elements.filter(e => e.included).length} / ${plan.elements.length}</span></div>`;
+    <div class="readout ${cov.issues.length ? 'over' : 'under'}"><span class="k">Sourced</span><span class="v">${cov.costPct == null ? '—' : cov.costPct + '% of cost'} · ${cov.issues.length} to fix</span></div>`;
   $('#undo-btn').disabled = !undoStack.length;
 }
 function stepStatus(k) {
@@ -2091,12 +2227,17 @@ function renderNav() {
 }
 function exampleBanner() {
   if (!plan.example) return '';
-  return `<div class="banner"><span><b>Example plan.</b> An independent concept for the 2027 Champions League final kickoff show in Madrid, built from public information as of September 2026. It is not affiliated with or endorsed by UEFA, and costs are illustrative. Change anything, or start your own.</span>
+  return `<div class="banner"><span><b>Example plan.</b> An independent concept for the 2027 Champions League final kickoff show in Madrid, built from public information as of September 2026. It is not affiliated with or endorsed by UEFA. It has no prices: every cost waits for a vendor quote, and CO₂e is calculated from quotes and activity data with published factors. Change anything, or start your own.</span>
     <span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="save-copy">Keep as my plan</button><button class="btn sm primary" data-act="new-plan">Start a new plan</button></span></div>`;
+}
+function refBanner() {
+  if (refState === 'ready') return '';
+  if (refState === 'loading') return '<div class="banner"><span>Loading the reference library…</span></div>';
+  return `<div class="banner"><span><b>Reference library not loaded.</b> Emission factors, grid intensity and spend multipliers come from <span class="mono">reference/bundle.json</span>, which could not be read here, so CO₂e is not calculated. Open the app from its website, or run <span class="mono">python3 scripts/build_reference.py</span> in the repository.</span></div>`;
 }
 function claudeBanner() {
   if (claudeState !== 'off') return '';
-  return `<div class="banner"><span><b>Claude is off in this view.</b> Research and written suggestions need a Claude sign-in. The built-in library still covers show design, pricing, production and sustainability, and you can edit, rebalance and export everything.</span></div>`;
+  return `<div class="banner"><span><b>Claude is off in this view.</b> Research and written suggestions need a Claude sign-in. The built-in library still covers show design, production and sustainability, the reference library still calculates CO₂e, and you can edit, rebalance and export everything.</span></div>`;
 }
 function claudeBtn(act, label, extra = '') {
   if (claudeState === 'off') return '';
@@ -2262,6 +2403,7 @@ function pendingPanel() {
   </section>`;
 }
 function dots(n) { return `<span class="dots" aria-label="${n} of 5">${[1,2,3,4,5].map(i => `<i class="${i <= n ? 'f' : ''}"></i>`).join('')}</span>`; }
+function co2Label(e, t) { const r = tierCo2(e, t); if (r.t == null) return r.method === 'nofx' ? 'CO₂e: no exchange rate for ' + esc(plan.brief.currency) : 'CO₂e after quote'; return `${tonnes(r.t)} CO₂e · ${r.method === 'supplier' ? 'supplier figure' : 'spend-based, SIC ' + esc(r.sic.code)}`; }
 function elCard(e) {
   const cur = e.tiers[e.tier], img = plan.images.find(i => i.scope === 'el:' + e.id);
   return `<article class="el ${e.included ? '' : 'off'}">
@@ -2273,17 +2415,17 @@ function elCard(e) {
         <button class="icon" data-act="edit" data-id="${e.id}" title="Edit" aria-label="Edit ${esc(e.name)}">✎</button>
       </div></div>
     <p class="desc">${esc(e.description)}</p>
-    <div class="seg" role="group" aria-label="Tier for ${esc(e.name)}">${TIERS.map(t => `<button class="${e.tier === t ? 'on' : ''}" data-act="tier" data-id="${e.id}" data-tier="${t}" ${e.locked ? 'disabled' : ''} aria-pressed="${e.tier === t}"><span>${TIER_LABEL[t]}</span><b>${money(e.tiers[t].cost)}</b></button>`).join('')}</div>
+    <div class="seg" role="group" aria-label="Tier for ${esc(e.name)}">${TIERS.map(t => `<button class="${e.tier === t ? 'on' : ''}" data-act="tier" data-id="${e.id}" data-tier="${t}" ${e.locked ? 'disabled' : ''} aria-pressed="${e.tier === t}"><span>${TIER_LABEL[t]}</span><b>${costLabel(e.tiers[t])}</b></button>`).join('')}</div>
     <div class="tierdesc">${esc(cur.desc) || '<span class="muted">No description for this tier</span>'}</div>
     <div class="meta">
       <span class="score">Broadcast ${dots(e.scores.broadcast)}</span><span class="score">Local ${dots(e.scores.local)}</span><span class="score">Global ${dots(e.scores.global)}</span>
     </div>
     <div class="meta"><button class="linkbtn" data-act="copy-prompt" data-kind="element" data-id="${e.id}">Copy image prompt</button>${uploadBtn('el:' + e.id, 'Upload render', true)}${claudeState === 'off' ? '' : `<button class="linkbtn" data-act="sketch" data-scope="el:${e.id}" data-claude>Sketch with Claude</button>`}</div>
-    <div class="meta"><span class="mono">${tonnes(cur.co2)} CO₂e</span><span class="mono">${e.leadWeeks} wk lead time</span>${claudeState === 'off' ? '' : `<button class="linkbtn" data-act="rethink" data-id="${e.id}">Rethink with Claude</button>`}</div>
+    <div class="meta">${hasCost(cur) ? srcBadge(cur.src) : '<span class="src no">Needs a quote</span>'}<span class="mono">${co2Label(e, e.tier)}</span><span class="mono">${e.leadWeeks == null ? 'Lead time: confirm with vendor' : e.leadWeeks + ' wk lead time'}</span>${claudeState === 'off' ? '' : `<button class="linkbtn" data-act="rethink" data-id="${e.id}">Rethink with Claude</button>`}</div>
   </article>`;
 }
 function vDesign() {
-  if (!plan.elements.length) return `${head('Show design', 'Every element of the show, priced in three tiers.')}
+  if (!plan.elements.length) return `${head('Show design', 'Every element of the show, specified in three tiers for vendors to quote.')}
     <div class="empty"><h2>No show design yet</h2><p>${plan.conceptId ? 'Build it from your chosen concept, or add elements by hand.' : 'Choose a concept first, or add elements by hand.'}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${plan.conceptId ? claudeBtn('design', 'Build show design') : claudeState === 'off' ? '' : `<button class="btn" data-act="go" data-step="concept">Go to concepts</button>`}${libBtn('lib-design', 'Start from the show library')}<button class="btn" data-act="add-el">Add element by hand</button></div></div>`;
   const t = totals(); let at = 0;
@@ -2295,19 +2437,21 @@ function vDesign() {
   <section class="panel"><div class="head2" style="margin-bottom:14px"><h2>Run of show · ${plan.acts.reduce((s, a) => s + a.minutes, 0)} min</h2><button class="btn sm" data-act="go" data-step="look">Open the minute-by-minute storyboard →</button></div><div class="ros">${ros || '<p class="muted">No acts yet. Use “Edit acts”.</p>'}</div>
     <div class="meters" style="margin-top:18px">${meters}<div class="meter"><div class="row"><span>Budget used</span><span class="mono">${t.cap ? Math.round(t.total / t.cap * 100) : 0}%</span></div><div class="t"><i style="width:${t.cap ? Math.min(100, t.total / t.cap * 100) : 0}%;background:${t.total > t.cap ? 'var(--bad)' : 'var(--ok)'}"></i></div></div></div>
   </section>
-  ${groups.map(g => { const els = plan.elements.filter(e => e.act === g); if (!els.length) return ''; return `<section class="act-group"><div class="gh"><h2>${esc(g)}</h2><span class="muted mono" style="font-size:13px">${money(els.filter(e => e.included).reduce((s, e) => s + e.tiers[e.tier].cost, 0))}</span></div><div class="els">${els.map(elCard).join('')}</div></section>`; }).join('')}`;
+  ${groups.map(g => { const els = plan.elements.filter(e => e.act === g); if (!els.length) return ''; return `<section class="act-group"><div class="gh"><h2>${esc(g)}</h2><span class="muted mono" style="font-size:13px">${money(els.filter(e => e.included).reduce((s, e) => s + tierCost(e, e.tier), 0))}${els.some(e => e.included && !hasCost(e.tiers[e.tier])) ? ' quoted so far' : ''}</span></div><div class="els">${els.map(elCard).join('')}</div></section>`; }).join('')}`;
 }
 
 /* 05 Budget */
 function vBudget() {
   if (!plan.elements.length) return `${head('Budget', 'Live estimate against your cap.')}<div class="empty"><h2>Nothing to price yet</h2><p>Build the show design first. Every element comes with three priced tiers.</p><button class="btn primary" data-act="go" data-step="design">Go to show design</button></div>`;
   const t = totals(); const max = Math.max(t.total, t.cap) * 1.08 || 1;
-  const byCat = {}; plan.elements.filter(e => e.included).forEach(e => byCat[e.category] = (byCat[e.category] || 0) + e.tiers[e.tier].cost);
-  (plan.lines || []).forEach(l => byCat[l.category] = (byCat[l.category] || 0) + (+l.cost || 0));
+  const byCat = {}; plan.elements.filter(e => e.included).forEach(e => byCat[e.category] = (byCat[e.category] || 0) + tierCost(e, e.tier));
+  (plan.lines || []).forEach(l => byCat[l.category] = (byCat[l.category] || 0) + (hasCost(l) ? +l.cost : 0));
+  const cov = coverage();
   const cats = Object.entries(byCat).sort((a, b) => b[1] - a[1]); const cmax = cats[0]?.[1] || 1;
   const status = !t.cap ? '' : t.total > t.cap ? `<span class="pill bad">${money(t.total - t.cap)} over</span>` : `<span class="pill ok">${money(t.cap - t.total)} headroom</span>`;
-  return `${head('Budget', 'Show elements, other budget lines and overheads, compared with your cap. Change a tier here or on the show design; both stay in sync.', `<button class="btn primary" data-act="fit">Fit to budget</button><button class="btn" data-act="headroom">Use headroom</button>`)}
+  return `${head('Budget', 'Quoted costs only, compared with your cap. Every figure needs a source (vendor quote, invoice or rate card); anything without one is listed below.', `<button class="btn primary" data-act="fit">Fit to budget</button><button class="btn" data-act="headroom">Use headroom</button>`)}
   ${cmdBar()}
+  ${coveragePanel(cov)}
   <section class="panel">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px"><h2>Total vs cap</h2>${status}</div>
     <div class="bigbar" role="img" aria-label="Total ${money(t.total)} against cap ${money(t.cap)}">
@@ -2315,7 +2459,7 @@ function vBudget() {
       ${t.cap ? `<div class="cap" style="left:${t.cap / max * 100}%"><span>Cap ${money(t.cap)}</span></div>` : ''}
     </div>
     <div class="stats" style="margin-top:18px">
-      <div class="stat"><div class="k">Show elements</div><div class="v">${money(t.elDirect)}</div></div>
+      <div class="stat"><div class="k">Show elements${t.unquoted ? ` · ${t.unquoted} unquoted` : ''}</div><div class="v">${money(t.elDirect)}</div></div>
       <div class="stat"><div class="k">Other lines</div><div class="v">${money(t.linesCost)}</div></div>
       <div class="stat"><div class="k">Overheads · ${t.ohPct}%</div><div class="v">${money(t.overhead)}</div></div>
       <div class="stat"><div class="k">Total</div><div class="v ${t.cap && t.total > t.cap ? 'bad' : 'ok'}">${money(t.total)}</div></div>
@@ -2329,15 +2473,33 @@ function vBudget() {
   <div class="grid g2">
     <section class="panel"><h2>By category</h2><div class="hbars">${cats.map(([c, v]) => `<div class="hbar"><span class="l">${esc(c)}</span><span class="t"><i style="width:${v / cmax * 100}%"></i></span><span class="n">${money(v)}</span></div>`).join('')}</div></section>
     <section class="panel"><h2>Overheads</h2><div class="tablewrap"><table><thead><tr><th>Line</th><th class="num">% of costs</th><th class="num">Amount</th><th></th></tr></thead><tbody>
-      ${plan.overheads.map(o => `<tr><td><input aria-label="Overhead name" value="${esc(o.name)}" data-oh="${o.id}" data-k="name" style="width:100%"></td><td class="num"><input type="number" min="0" step="0.5" aria-label="Percent" value="${o.pct}" data-oh="${o.id}" data-k="pct"></td><td class="num">${money(t.direct * o.pct / 100)}</td><td><button class="icon" data-act="del-oh" data-id="${o.id}" aria-label="Remove ${esc(o.name)}">×</button></td></tr>`).join('')}
-    </tbody></table></div><button class="btn sm" data-act="add-oh" style="margin-top:12px">Add overhead line</button></section>
+      ${plan.overheads.map(o => `<tr><td><input aria-label="Overhead name" value="${esc(o.name)}" data-oh="${o.id}" data-k="name" style="width:100%">${srcEditor('oh:' + o.id, o.src, 'Rate card, insurer quote, contract…')}</td><td class="num"><input type="number" min="0" step="0.5" aria-label="Percent" value="${o.pct}" data-oh="${o.id}" data-k="pct"></td><td class="num">${money(t.direct * o.pct / 100)}</td><td><button class="icon" data-act="del-oh" data-id="${o.id}" aria-label="Remove ${esc(o.name)}">×</button></td></tr>`).join('')}
+    </tbody></table></div><button class="btn sm" data-act="add-oh" style="margin-top:12px">Add overhead line</button><p class="note" style="margin-top:8px">Rates start at 0%: enter your own from a rate card, contract or insurer's quote.</p></section>
   </div>
   ${linesPanel(t)}
-  <section class="panel"><h2>Line items</h2><div class="tablewrap"><table><thead><tr><th>In</th><th>Element</th><th>Act</th><th>Tier</th><th class="num">Cost</th><th class="num">With overheads</th><th class="num">CO₂e</th></tr></thead><tbody>
+  <section class="panel"><h2>Line items</h2><div class="tablewrap"><table><thead><tr><th>In</th><th>Element</th><th>Act</th><th>Tier</th><th class="num">Cost</th><th>Source</th><th class="num">With overheads</th><th class="num">CO₂e</th></tr></thead><tbody>
     ${plan.elements.map(e => `<tr style="${e.included ? '' : 'opacity:.55'}"><td><input type="checkbox" aria-label="Include ${esc(e.name)}" data-inc="${e.id}" ${e.included ? 'checked' : ''} ${e.locked ? 'disabled' : ''}></td><td>${esc(e.name)}${e.locked ? ' <span class="chip">Locked</span>' : ''}</td><td class="muted">${esc(e.act)}</td>
       <td><select aria-label="Tier for ${esc(e.name)}" data-tiersel="${e.id}" ${e.locked ? 'disabled' : ''}>${TIERS.map(x => `<option value="${x}" ${x === e.tier ? 'selected' : ''}>${TIER_LABEL[x]}</option>`).join('')}</select></td>
-      <td class="num">${money(e.tiers[e.tier].cost, false)}</td><td class="num">${e.included ? money(e.tiers[e.tier].cost * (1 + t.ohPct / 100), false) : '—'}</td><td class="num">${tonnes(e.tiers[e.tier].co2)}</td></tr>`).join('')}
-  </tbody></table></div><p class="note" style="margin-top:10px">Estimates are planning figures from Claude or your own input. Replace them with supplier quotes as they arrive, using Edit on each element.</p></section>`;
+      <td class="num">${hasCost(e.tiers[e.tier]) ? money(+e.tiers[e.tier].cost, false) : '<span class="muted">No quote</span>'}</td><td>${hasCost(e.tiers[e.tier]) ? srcBadge(e.tiers[e.tier].src) : `<button class="linkbtn" data-act="edit" data-id="${e.id}">Add quote</button>`}</td><td class="num">${e.included && hasCost(e.tiers[e.tier]) ? money(tierCost(e, e.tier) * (1 + t.ohPct / 100), false) : '—'}</td><td class="num">${tierCo2(e, e.tier).t == null ? '—' : tonnes(tierCo2(e, e.tier).t)}</td></tr>`).join('')}
+  </tbody></table></div><p class="note" style="margin-top:10px">Costs are only what you enter from quotes or invoices, using Edit on each element. CO₂e for an element is the supplier's own figure if you have it, otherwise spend-based: the quoted cost converted to 2023 GBP at published exchange rates, times the Defra/Leeds multiplier for its industry group (GHG Protocol spend-based method).</p></section>
+  ${benchmarksPanel()}`;
+}
+function coveragePanel(cov) {
+  if (!cov.issues.length) return `<section class="panel"><h2>Sources</h2><p class="note">Every number in this plan has a source.</p></section>`;
+  const groups = {}; cov.issues.forEach(i => (groups[i.kind] ||= []).push(i));
+  return `<section class="panel"><div class="head2"><h2>Sources · ${cov.costPct == null ? 'no costs yet' : cov.costPct + '% of quoted cost is sourced'}</h2><span class="pill warn">${cov.issues.length} without a source</span></div>
+    <p class="note" style="margin:4px 0 12px">Ceremony Studio does not estimate costs. Add each figure from a quote, invoice, rate card or meter log, with its reference.</p>
+    <div class="list">${Object.entries(groups).map(([k, xs]) => `<div class="risk" style="align-items:flex-start"><div style="min-width:0"><b>${esc(k)}</b><p class="note">${xs.slice(0, 8).map(i => esc(i.name) + (i.amount == null && (k === 'Element' || k === 'Budget line') ? ' (no quote)' : '')).join(' · ')}${xs.length > 8 ? ` · and ${xs.length - 8} more` : ''}</p></div><button class="btn sm" data-act="go" data-step="${xs[0].step}">Open</button></div>`).join('')}</div></section>`;
+}
+function benchmarksPanel() {
+  const B = REFDATA?.['ceremony-budgets']?.budgets || [], C = REFDATA?.['closeout-benchmarks'];
+  if (!B.length && !C?.elementCost?.length) return '';
+  const cur = plan.brief.currency;
+  const close = (C?.elementCost || []).filter(x => x.currency === cur);
+  return `<div class="grid g2">
+    ${close.length ? `<section class="panel"><h2>Your past projects</h2><p class="note" style="margin:-4px 0 12px">Actual invoiced costs from close-out files in reference/closeouts. Median, range and number of projects; not scaled.</p><div class="tablewrap"><table><thead><tr><th>Category</th><th>Tier</th><th class="num">Median</th><th class="num">Range</th><th class="num">n</th></tr></thead><tbody>${close.map(x => `<tr><td>${esc(x.category)}</td><td>${TIER_LABEL[x.tier] || esc(x.tier)}</td><td class="num">${money(x.median, false)}</td><td class="num">${money(x.min)}–${money(x.max)}</td><td class="num" title="${esc(x.files.join(', '))}">${x.n}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+    ${B.length ? `<section class="panel"><h2>Published ceremony budgets</h2><p class="note" style="margin:-4px 0 12px">Whole ceremonies, in the currency reported. Context only: they do not price individual elements.</p><div class="list">${B.map(b => `<div class="risk"><span>${esc(b.name)} <span class="muted">· ${b.year} · ${esc(b.scope)}</span><br><span class="fsrc">${b.sources.map(id => srcLink(id)).join('; ')}${b.verification === 'uncertain' ? ' · attribution uncertain' : ''}</span></span><b class="mono">${Number(b.amount).toLocaleString('en')} ${esc(b.currency)}</b></div>`).join('')}</div></section>` : ''}
+  </div>`;
 }
 
 /* 05 Visuals & talent */
@@ -2420,20 +2582,23 @@ function vLook() {
 
 /* Budget lines panel */
 function linesPanel(t) {
-  const L = plan.lines || [];
-  return `<section class="panel"><div class="head2"><div><h2>Other budget lines</h2><p class="note" style="margin-top:4px">Costs that are not show elements: travel, rehearsals, crew, freight, catering, fees. Tick "Overheads" to add the overhead percentages on top.</p></div><button class="btn sm" data-act="add-line">Add line</button></div>
-    ${L.length ? `<div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Line</th><th>Category</th><th class="num">Cost (${esc(plan.brief.currency)})</th><th class="num">CO₂e (t)</th><th>Overheads</th><th>Note</th><th></th></tr></thead><tbody>
-      ${L.map(l => `<tr><td><input aria-label="Line name" value="${esc(l.name)}" data-line="${l.id}" data-k="name" style="width:100%;min-width:160px"></td>
+  const L = plan.lines || [], cur = esc(plan.brief.currency);
+  const methods = { spend: 'Spend-based', activity: 'Counted in calculator', supplier: 'Supplier figure', none: 'No emissions' };
+  return `<section class="panel"><div class="head2"><div><h2>Other budget lines</h2><p class="note" style="margin-top:4px">Costs that are not show elements: rehearsals, crew, freight, catering, fees. Tick "Overheads" to add the overhead percentages on top.</p></div><button class="btn sm" data-act="add-line">Add line</button></div>
+    ${L.length ? `<div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Line and source</th><th>Category</th><th class="num">Cost (${cur})</th><th>CO₂e method</th><th class="num">CO₂e</th><th>Overheads</th><th></th></tr></thead><tbody>
+      ${L.map(l => { const r = lineCo2(l); return `<tr><td style="min-width:260px"><input aria-label="Line name" value="${esc(l.name)}" data-line="${l.id}" data-k="name" style="width:100%">${srcEditor('line:' + l.id, l.src)}${l.note ? `<div class="fsrc">${esc(l.note)}</div>` : ''}</td>
         <td><select aria-label="Category" data-line="${l.id}" data-k="category">${BUDGET_CATS.map(c => `<option ${c === l.category ? 'selected' : ''}>${c}</option>`).join('')}</select></td>
-        <td class="num"><input type="number" min="0" step="1000" aria-label="Cost" value="${+l.cost || 0}" data-line="${l.id}" data-k="cost" style="width:110px"></td>
-        <td class="num"><input type="number" min="0" step="0.1" aria-label="CO2e" value="${+l.co2 || 0}" data-line="${l.id}" data-k="co2"></td>
+        <td class="num"><input type="number" min="0" step="1" aria-label="Cost" value="${hasCost(l) ? +l.cost : ''}" placeholder="Quote" data-line="${l.id}" data-k="cost" style="width:120px"></td>
+        <td><select aria-label="CO2e method" data-line="${l.id}" data-k="co2m">${Object.entries(methods).map(([k, v]) => `<option value="${k}" ${k === (l.co2m || 'spend') ? 'selected' : ''}>${v}</option>`).join('')}</select>
+          ${l.co2m === 'supplier' ? `<div class="srcrow"><input type="number" min="0" step="0.01" aria-label="Supplier CO2e in tonnes" value="${esc(l.co2s?.v ?? '')}" data-line="${l.id}" data-k="co2v" placeholder="t CO₂e" style="max-width:90px">${basisSelect(`data-src="line:${l.id}:co2" data-k="b"`, l.co2s?.b)}<input data-src="line:${l.id}:co2" data-k="r" value="${esc(l.co2s?.r || '')}" placeholder="Supplier report or EPD" aria-label="Supplier CO2e reference">${srcBadge(l.co2s)}</div>` : ''}
+          ${r.sic ? `<div class="fsrc">SIC ${esc(r.sic.code)}: ${esc(r.sic.label)}, ${r.sic.value} kg/£</div>` : ''}</td>
+        <td class="num">${r.t == null ? (r.method === 'nofx' ? `<span class="muted" title="No published 2023 rate for ${cur}">no rate</span>` : '—') : tonnes(r.t)}</td>
         <td><input type="checkbox" aria-label="Apply overheads" data-line="${l.id}" data-k="oh" ${l.oh !== false ? 'checked' : ''}></td>
-        <td><input aria-label="Note" value="${esc(l.note || '')}" data-line="${l.id}" data-k="note" placeholder="Quote ref, supplier…" style="width:100%;min-width:140px"></td>
-        <td><button class="icon" data-act="del-line" data-id="${l.id}" aria-label="Remove ${esc(l.name)}">×</button></td></tr>`).join('')}
-      <tr><td colspan="2"><b>Total other lines</b></td><td class="num"><b>${money(L.reduce((s, l) => s + (+l.cost || 0), 0), false)}</b></td><td class="num">${tonnes(L.reduce((s, l) => s + (+l.co2 || 0), 0))}</td><td colspan="3"></td></tr>
+        <td><button class="icon" data-act="del-line" data-id="${l.id}" aria-label="Remove ${esc(l.name)}">×</button></td></tr>`; }).join('')}
+      <tr><td colspan="2"><b>Total other lines</b></td><td class="num"><b>${money(L.reduce((x, l) => x + (hasCost(l) ? +l.cost : 0), 0), false)}</b></td><td></td><td class="num">${tonnes(L.reduce((x, l) => x + (lineCo2(l).t || 0), 0))}</td><td colspan="2"></td></tr>
     </tbody></table></div>` : '<p class="muted" style="margin-top:10px;font-size:14px">No extra lines yet.</p>'}
-    <div class="suggest">${LINE_PRESETS.filter(x => !L.some(l => l.name === x[0])).map(([n, c, v]) => `<button type="button" data-act="add-line" data-name="${esc(n)}" data-cat="${esc(c)}" data-cost="${v}">+ ${esc(n)}</button>`).join('')}</div>
-    <p class="note" style="margin-top:8px">Leave CO₂e at 0 for travel, hotels and catering: the sustainability calculator counts those from activity data, so entering them here would count them twice.</p>
+    <div class="suggest">${LINE_PRESETS.filter(x => !L.some(l => l.name === x[0])).map(([n, c]) => `<button type="button" data-act="add-line" data-name="${esc(n)}" data-cat="${esc(c)}">+ ${esc(n)}</button>`).join('')}</div>
+    <p class="note" style="margin-top:8px">Freight and accommodation lines default to "Counted in calculator" so the activity data on the Sustainability step is not counted twice. Spend-based CO₂e uses the Defra/Leeds 2023 multiplier for the category's industry group: ${srcLink('defra-spend-2023', 'source')}.</p>
   </section>`;
 }
 
@@ -2506,51 +2671,63 @@ function saveConcept(id) {
 }
 
 /* Sustainability view */
-function cIn(key, label, unit, step = 1) {
-  const c = plan.carbon; return `<div class="field"><label for="cb-${key}">${label}</label><input id="cb-${key}" type="number" min="0" step="${step}" data-carbon="${key}" value="${+c[key] || 0}"><span class="note">${unit}</span></div>`;
+function cIn(key, label, unit, step = 1, fk = null) {
+  const c = plan.carbon; return `<div class="field"><label for="cb-${key}">${label}</label><input id="cb-${key}" type="number" min="0" step="${step}" data-carbon="${key}" value="${+c[key] || 0}"><span class="note">${unit}</span>${fk ? factorNote(fk) : ''}</div>`;
 }
+function factorNote(k) {
+  const f = factorOf(plan, k);
+  if (f.from === 'override') return `<div class="fsrc">Your figure ${f.v} ${esc(f.unit)} ${srcBadge(f.override)}${f.refV != null ? ` · reference ${f.refV}` : ''}</div>`;
+  if (f.v == null) return `<div class="fsrc" style="color:var(--bad)">No published factor${k === 'grid' || k === 'hotel' ? ` for ${esc(plan.brief.country || 'this country')}` : ''}. Enter a supplier figure under Emission factors.</div>`;
+  return `<div class="fsrc">${f.v} ${esc(f.unit)} · ${srcLink(f.src, f.src === 'desnz-2026' ? 'DESNZ 2026' : 'Ember via OWID')}${f.detail ? ' · ' + esc(f.detail.split('. ')[0]) : ''}</div>`;
+}
+function groupHead(g, title) { return `<h3>${title}</h3>${srcEditor('carbon:' + g, plan.carbon.src?.[g], 'Meter log, supplier data, travel bookings…')}`; }
 function vSustainability() {
-  if (!plan.carbon) plan.carbon = defaultCarbon(plan);
+  if (!plan.carbon) plan.carbon = blankCarbon();
   const K = calcCarbon(plan), S = plan.sustainability, tr = plan.travel;
-  const cats = Object.keys(CARBON_CATS).filter(k => K.byCat[k] > 0);
-  const showCats = cats.filter(k => k !== 'audience').sort((a, b) => K.byCat[b] - K.byCat[a]), cmax = Math.max(1, ...showCats.map(k => K.byCat[k]));
-  const both = Math.max(K.audienceT, K.showT) || 1, cap = +plan.brief.capacity || 1;
-  const acts = carbonActions(plan), potential = acts.filter(a => a.apply).reduce((s, a) => s + a.saveT, 0);
-  const tIn = (k, label, unit) => `<div class="field"><label for="tr-${k}">${label}</label><input id="tr-${k}" type="number" min="0" data-travel="${k}" value="${tr[k]}"><span class="note">${unit}</span></div>`;
-  const cmp = compareReport(plan);
-  const fmtQ = v => (Math.round(v * 10) / 10).toLocaleString('en');
-  return `${head('Sustainability', 'A full carbon estimate: activity data times emission factors, by category and scope. Every input and factor can be edited, and every saving can be applied.', libBtn('reset-carbon', 'Re-estimate from plan') + libBtn('lib-green', 'Practices & reporting') + claudeBtn('green', S ? 'Refresh element review' : 'Review elements'))}
+  const showCats = Object.keys(CARBON_CATS).filter(k => k !== 'audience' && K.byCat[k] > 0).sort((a, b) => K.byCat[b] - K.byCat[a]), cmax = Math.max(1, ...showCats.map(k => K.byCat[k]));
+  const both = Math.max(K.audienceT, K.showT) || 1, cap = +plan.brief.capacity || 0;
+  const acts = carbonActions(plan), potential = acts.filter(a => a.apply).reduce((x, a) => x + a.saveT, 0);
+  const cmp = compareReport(plan), fill = closeoutFill(plan), cp = carbonPrice();
+  const fmtQ = v => v == null ? '' : (Math.round(v * 100) / 100).toLocaleString('en');
+  const seg = (sg, i) => `<div class="field"><label>${esc(sg.label)} (% of guests)</label><input type="number" min="0" max="100" data-seg="${i}" data-k="pct" value="${+sg.pct || 0}" aria-label="${esc(sg.label)} share"><span class="note">km each way <input type="number" min="0" data-seg="${i}" data-k="km" value="${+sg.km || 0}" style="width:80px" aria-label="${esc(sg.label)} distance"> by <select data-seg="${i}" data-k="mode" aria-label="${esc(sg.label)} mode">${Object.entries(AUDIENCE_MODES).map(([k, m]) => `<option value="${k}" ${k === sg.mode ? 'selected' : ''}>${m[0]}</option>`).join('')}</select>${sg.mode === 'car' ? ` · <input type="number" min="1" step="0.1" data-seg="${i}" data-k="occ" value="${+sg.occ || 1}" style="width:60px" aria-label="People per car"> per car` : ''}</span></div>`;
+  const ev = REFDATA?.events;
+  return `${head('Sustainability', 'Activity data you enter, times published emission factors (UK DESNZ 2026, Ember grid intensity), by category and scope. Show elements and budget lines add spend-based CO₂e from their quotes. Nothing here is assumed: empty inputs count as zero and are flagged.', (fill.length ? `<button class="btn" data-act="fill-closeout">Fill from past close-outs <span class="spark">Library</span></button>` : '') + libBtn('lib-green', 'Practices & reporting') + claudeBtn('green', S ? 'Refresh element review' : 'Review elements'))}
   <section class="panel"><div class="stats">
     <div class="stat"><div class="k">Production footprint</div><div class="v">${tonnes(K.showT)}</div></div>
     <div class="stat"><div class="k">Audience travel</div><div class="v">${tonnes(K.audienceT)}</div></div>
-    <div class="stat"><div class="k">Per guest, all in</div><div class="v">${(K.totalT * 1000 / cap).toFixed(1)} kg</div></div>
-    <div class="stat"><div class="k">Savings available</div><div class="v ok">${tonnes(potential)}</div></div>
+    <div class="stat"><div class="k">Per guest, all in</div><div class="v">${cap ? (K.totalT * 1000 / cap).toFixed(1) + ' kg' : '—'}</div></div>
+    <div class="stat"><div class="k">Residual at ${cp ? money(cp.v, false) : '—'}/t</div><div class="v">${cp ? money(K.totalT * cp.v) : '—'}</div></div>
   </div>
   <div class="scen" style="margin-top:18px"><div><span>Scope 1 · fuel burned on site</span><b>${tonnes(K.scope[1] / 1000)}</b></div><div><span>Scope 2 · grid electricity</span><b>${tonnes(K.scope[2] / 1000)}</b></div><div><span>Scope 3 · everything else</span><b>${tonnes(K.scope[3] / 1000)}</b></div><div><span>Scope 3 · audience travel</span><b>${tonnes(K.audienceT)}</b></div></div>
   <div class="hbars" style="margin-top:20px">
     <div class="hbar"><span class="l">Production</span><span class="t"><i class="r" style="width:${K.showT / both * 100}%"></i></span><span class="n">${tonnes(K.showT)}</span></div>
     <div class="hbar"><span class="l">Audience travel</span><span class="t"><i style="width:${K.audienceT / both * 100}%"></i></span><span class="n">${tonnes(K.audienceT)}</span></div>
   </div>
-  <p class="note" style="margin-top:12px">At big events, audience travel is usually the largest share. Factors are approximate planning values in the style of published conversion factors (such as the UK government's); replace them with your own where you have better data.</p></section>
+  <p class="note" style="margin-top:12px">${K.elMissing ? `${K.elMissing} included element${K.elMissing === 1 ? ' has' : 's have'} no quote, so ${K.elMissing === 1 ? 'its' : 'their'} CO₂e is not counted yet. ` : ''}${cp ? `Residual emissions are priced at ${esc(cp.cp.value + ' ' + cp.cp.currency)} per tonne, the ${srcLink(cp.cp.sources[0], 'UEFA EURO 2024 Climate Fund rate')}${plan.brief.currency !== cp.cp.currency ? `, converted at the 2023 average rate` : ''}.` : ''}</p></section>
   <div class="grid g2">
-    <section class="panel"><h2>Production footprint by category</h2><div class="hbars">${showCats.map(k => `<div class="hbar"><span class="l">${CARBON_CATS[k]}</span><span class="t"><i style="width:${K.byCat[k] / cmax * 100}%"></i></span><span class="n">${tonnes(K.byCat[k] / 1000)}</span></div>`).join('')}</div></section>
-    <section class="panel"><h2>Ways to reduce</h2><div class="list">${acts.map(a => `<div class="risk" style="align-items:flex-start"><div style="min-width:0"><b>${esc(a.title)}</b><p class="note">${esc(a.detail)}</p></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0"><span class="pill ok">−${tonnes(a.saveT)}</span>${a.apply ? `<button class="btn sm" data-act="apply-carbon" data-id="${esc(a.id)}">Apply</button>` : '<span class="note">Policy</span>'}</div></div>`).join('') || '<p class="muted">No savings left above 0.3 t.</p>'}</div></section>
+    <section class="panel"><h2>Production footprint by category</h2><div class="hbars">${showCats.map(k => `<div class="hbar"><span class="l">${CARBON_CATS[k]}</span><span class="t"><i style="width:${K.byCat[k] / cmax * 100}%"></i></span><span class="n">${tonnes(K.byCat[k] / 1000)}</span></div>`).join('') || '<p class="muted">Enter activity data below, or add quotes to elements.</p>'}</div></section>
+    <section class="panel"><h2>Ways to reduce</h2><div class="list">${acts.map(a => `<div class="risk" style="align-items:flex-start"><div style="min-width:0"><b>${esc(a.title)}</b><p class="note">${esc(a.detail)}</p></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0"><span class="pill ok">−${tonnes(a.saveT)}</span>${a.apply ? `<button class="btn sm" data-act="apply-carbon" data-id="${esc(a.id)}">Apply</button>` : '<span class="note">Policy</span>'}</div></div>`).join('') || '<p class="muted">Savings appear once there is activity data or quoted tiers to compare.</p>'}${acts.length ? `<p class="note">Total if all applied: ${tonnes(potential)}.</p>` : ''}</div></section>
   </div>
-  <section class="panel"><h2>Activity data</h2><p class="note" style="margin:-6px 0 14px">Estimated from your plan; replace with real figures from suppliers and the venue. Production catering means cast and crew, not audience concessions.</p>
+  <section class="panel"><h2>Activity data</h2><p class="note" style="margin:-6px 0 14px">Enter figures from the venue, suppliers, bookings and meters, and say where each group comes from. ${fill.length ? 'Or fill them from your past close-outs (median per guest × capacity).' : ''}</p>
     <div class="cgroups">
-      <div><h3>Energy</h3><div class="form">${cIn('gridKWh', 'Grid electricity', 'kWh', 100)}<div class="field"><label for="cb-gridFactor">Grid factor</label><input id="cb-gridFactor" type="number" min="0" step="0.01" data-carbon="gridFactor" value="${plan.carbon.gridFactor}"><span class="note">kg per kWh${GRID[normCity(plan.brief.country)] != null ? `, ${esc(plan.brief.country)} average` : ''}</span></div>${cIn('dieselL', 'Generator diesel', 'litres', 50)}${cIn('hvoL', 'Generator HVO', 'litres', 50)}</div></div>
-      <div><h3>Freight</h3><div class="form">${cIn('truckTkm', 'Road', 'tonne-km', 1000)}${cIn('airTkm', 'Air', 'tonne-km', 100)}${cIn('seaTkm', 'Sea', 'tonne-km', 1000)}${cIn('railTkm', 'Rail', 'tonne-km', 1000)}</div></div>
-      <div><h3>Crew & talent travel</h3><div class="form">${cIn('crew', 'Travelling crew', 'people')}${cIn('crewKm', 'Average trip', 'km each way', 50)}${cIn('crewAir', 'By air', '% of crew trips')}${cIn('crewRail', 'By rail', '% (rest by road)')}${cIn('talent', 'Travelling talent', 'artists and their teams, not in crew')}${cIn('talentKm', 'Talent trip', 'km each way, by air', 50)}</div></div>
-      <div><h3>Hotels & catering</h3><div class="form">${cIn('hotelNights', 'Hotel nights', 'room-nights', 10)}${cIn('mealsMeat', 'Meals with meat', 'meals', 50)}${cIn('mealsVeg', 'Vegetarian meals', 'meals', 50)}${cIn('mealsVegan', 'Vegan meals', 'meals', 50)}</div></div>
-      <div><h3>Waste</h3><div class="form">${cIn('landfillT', 'To landfill', 'tonnes', .1)}${cIn('recycledT', 'Recycled', 'tonnes', .1)}${cIn('compostT', 'Composted', 'tonnes', .1)}${cIn('incinT', 'To energy', 'tonnes', .1)}</div></div>
-      <div><h3>Audience travel</h3><div class="form">${tIn('localPct', 'Local (%)', 'within ~50 km')}${tIn('nationalPct', 'National (%)', 'rail or car')}${tIn('intlPct', 'International (%)', 'mostly flights')}${tIn('localKg', 'Local kg / trip', 'return')}${tIn('nationalKg', 'National kg / trip', 'return')}${tIn('intlKg', 'International kg / trip', 'return')}</div></div>
+      <div>${groupHead('energy', 'Energy')}<div class="form">${cIn('gridKWh', 'Grid electricity', 'kWh', 100, 'grid')}${cIn('dieselL', 'Generator diesel', 'litres', 50, 'diesel')}${cIn('hvoL', 'Generator HVO', 'litres', 50, 'hvo')}${cIn('genKWh', 'Generator output', 'kWh, from the hire company (needed for the grid comparison)', 100)}</div></div>
+      <div>${groupHead('freight', 'Freight')}<div class="form">${cIn('truckTkm', 'Road', 'tonne-km', 1000, 'truck')}${cIn('airTkm', 'Air', 'tonne-km', 100, 'air')}${cIn('seaTkm', 'Sea', 'tonne-km', 1000, 'sea')}${cIn('railTkm', 'Rail', 'tonne-km', 1000, 'rail')}</div></div>
+      <div>${groupHead('travel', 'Crew & talent travel')}<div class="form">${cIn('crew', 'Travelling crew', 'people')}${cIn('crewKm', 'Average trip', 'km each way', 50)}${cIn('crewAir', 'By air', '% of crew trips')}${cIn('crewRail', 'By rail', '% (rest by road)')}${cIn('crewOcc', 'Crew per car', 'for road trips', .5)}${cIn('talent', 'Travelling talent', 'artists and their teams, not in crew')}${cIn('talentKm', 'Talent trip', 'km each way, by air', 50, 'flight')}${factorNote('train')}${factorNote('road')}</div></div>
+      <div>${groupHead('accommodation', 'Hotels')}<div class="form">${cIn('hotelNights', 'Hotel nights', 'room-nights', 10, 'hotel')}</div><p class="note" style="margin-top:10px">Catering has no published per-meal factor in the reference datasets. Add catering as a budget line (spend-based) or enter the caterer's own figure there.</p></div>
+      <div>${groupHead('waste', 'Waste')}<div class="form">${cIn('landfillT', 'To landfill', 'tonnes', .1, 'landfill')}${cIn('recycledT', 'Recycled', 'tonnes', .1, 'recycled')}${cIn('compostT', 'Composted', 'tonnes', .1, 'compost')}${cIn('incinT', 'To energy', 'tonnes', .1, 'incin')}</div></div>
+      <div><h3>Audience travel</h3>${srcEditor('travel:x', tr.src, 'Ticketing data, fan survey…')}<div class="form">${tr.segments.map(seg).join('')}</div><p class="note" style="margin-top:10px">Uses the capacity in the brief (${cap ? cap.toLocaleString('en') : 'not set'}) as the number of guests. Return trips: km each way × 2.</p></div>
     </div>
   </section>
-  <section class="panel"><h2>The calculation</h2><div class="tablewrap"><table class="calc"><thead><tr><th>Source</th><th>Scope</th><th class="num">Activity</th><th>Unit</th><th class="num">Factor (kg)</th><th class="num">t CO₂e</th></tr></thead><tbody>
-    ${K.rows.filter(r => r.kg > 0 || r.qty > 0).map(r => `<tr><td>${esc(r.label)}</td><td class="mono">${r.scope}</td><td class="num">${fmtQ(r.qty)}</td><td class="muted">${esc(r.unit)}</td><td class="num">${fmtQ(r.factor)}</td><td class="num"><b>${tonnes(r.kg / 1000)}</b></td></tr>`).join('')}
-    <tr><td colspan="5"><b>Total, including audience travel</b></td><td class="num"><b>${tonnes(K.totalT)}</b></td></tr></tbody></table></div>
-    <details class="prompt" style="margin-top:14px"><summary>Emission factors (editable)</summary><div class="form" style="margin-top:12px">${Object.keys(FACTORS_DEFAULT).map(k => `<div class="field"><label for="ef-${k}">${FACTOR_LABEL[k][0]}</label><input id="ef-${k}" type="number" min="0" step="0.001" data-factor="${k}" value="${K.F[k]}"><span class="note">${FACTOR_LABEL[k][1]}</span></div>`).join('')}</div><button class="btn sm" data-act="reset-factors" style="margin-top:12px">Reset factors</button></details>
+  <section class="panel"><h2>The calculation</h2><div class="tablewrap"><table class="calc"><thead><tr><th>Source</th><th>Scope</th><th class="num">Activity</th><th>Unit</th><th class="num">Factor (kg)</th><th>Factor source</th><th class="num">t CO₂e</th></tr></thead><tbody>
+    ${K.rows.filter(r => r.kg > 0 || r.qty > 0).map(r => `<tr><td>${esc(r.label)}</td><td class="mono">${r.scope}</td><td class="num">${fmtQ(r.qty)}</td><td class="muted">${esc(r.unit)}</td><td class="num">${r.factor == null ? (r.f ? '<span class="src no">none</span>' : '') : fmtQ(r.factor)}</td><td class="fsrc">${r.f ? (r.f.from === 'override' ? srcBadge(r.f.override) : r.f.src ? srcLink(r.f.src, r.f.src === 'desnz-2026' ? 'DESNZ 2026' : 'Ember via OWID') : '') : 'Quotes × ' + srcLink('defra-spend-2023', 'Defra/Leeds multipliers')}</td><td class="num"><b>${tonnes(r.kg / 1000)}</b></td></tr>`).join('')}
+    <tr><td colspan="6"><b>Total, including audience travel</b></td><td class="num"><b>${tonnes(K.totalT)}</b></td></tr></tbody></table></div>
+    <details class="prompt" style="margin-top:14px"><summary>Emission factors and their sources</summary>
+      <p class="note" style="margin:10px 0">Reference values come from ${srcLink('desnz-2026', 'UK DESNZ conversion factors 2026')} (direct + well-to-tank, flights with radiative forcing) and ${srcLink('owid-ember-energy', 'Ember grid intensity via Our World in Data')}. Override one only with a supplier-specific figure, and give its source.</p>
+      <div class="tablewrap"><table><thead><tr><th>Factor</th><th class="num">Reference</th><th>Unit</th><th>Your figure (optional) and source</th></tr></thead><tbody>
+      ${FACTOR_KEYS.map(k => { const f = factorOf(plan, k), o = plan.carbon.factorOverrides[k] || {}; const base = f.from === 'override' ? f.refV : f.v; return `<tr><td>${esc(f.label)}<div class="fsrc">${esc((f.detail || '').slice(0, 220))}</div></td><td class="num">${base == null ? '<span class="src no">none</span>' : base}</td><td class="muted">${esc(f.unit)}</td><td style="min-width:260px"><div class="srcrow"><input type="number" min="0" step="0.0001" data-factor="${k}" value="${esc(o.v ?? '')}" placeholder="—" style="max-width:110px" aria-label="Override ${esc(f.label)}">${basisSelect(`data-src="factor:${k}" data-k="b"`, o.b)}<input data-src="factor:${k}" data-k="r" value="${esc(o.r || '')}" placeholder="Supplier certificate, EPD…" aria-label="Source for ${esc(f.label)}"></div></td></tr>`; }).join('')}
+      </tbody></table></div><button class="btn sm" data-act="reset-factors" style="margin-top:12px">Clear my overrides</button></details>
   </section>
+  ${ev?.events?.length ? `<section class="panel"><h2>Published event footprints</h2><p class="note" style="margin:-4px 0 12px">Whole events (venues, operations, travel), for context only: none of them isolates a ceremony. Status and boundary as published.</p><div class="tablewrap"><table><thead><tr><th>Event</th><th class="num">t CO₂e</th><th>Status</th><th>Boundary</th><th>Source</th></tr></thead><tbody>${ev.events.map(x => `<tr><td>${esc(x.name)}</td><td class="num">${Number(x.tCO2e).toLocaleString('en')}${x.tCO2e_high ? '–' + Number(x.tCO2e_high).toLocaleString('en') : ''}</td><td>${esc(x.status)}</td><td class="fsrc">${esc(x.boundary || '')}</td><td class="fsrc">${x.sources.map(id => srcLink(id)).join('; ')}${x.verification === 'uncertain' ? ' · attribution uncertain' : ''}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
   ${comparePanel(cmp)}
   ${S ? `<div class="grid g2">
     <section class="panel"><h2>Practices for ${esc(plan.brief.city || 'this event')}</h2><div class="list">${S.practices.map(x => `<div class="item"><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p></div>`).join('')}</div></section>
@@ -2651,8 +2828,10 @@ function vendorModal() {
 function vProduction() {
   const P = plan.production; const w = weeksUntil(plan.brief.date);
   const inc = plan.elements.filter(e => e.included);
-  const risks = inc.map(e => ({ e, lead: e.leadWeeks })).sort((a, b) => b.lead - a.lead);
+  const LB = REFDATA?.['closeout-benchmarks']?.leadWeeks || [];
+  const risks = inc.map(e => ({ e, lead: e.leadWeeks })).sort((a, b) => (b.lead ?? 1e9) - (a.lead ?? 1e9));
   const riskRows = risks.map(({ e, lead }) => {
+    if (lead == null) { const bm = LB.find(x => x.category === e.category); return `<div class="risk"><span>${esc(e.name)} <span class="muted" style="font-size:12.5px">· lead time not confirmed${bm ? ` · your past ${esc(e.category).toLowerCase()} jobs: median ${bm.median} wk (n=${bm.n})` : ''}</span></span><button class="btn sm" data-act="edit" data-id="${e.id}">Add</button></div>`; }
     let pill = '<span class="pill ok">On track</span>';
     if (w != null) { const slack = w - lead; pill = slack < 0 ? `<span class="pill bad">${-slack} wk short</span>` : slack < 4 ? `<span class="pill warn">${slack} wk slack</span>` : `<span class="pill ok">${slack} wk slack</span>`; }
     return `<div class="risk"><span>${esc(e.name)} <span class="muted mono" style="font-size:12.5px">· ${lead} wk</span></span>${pill}</div>`;
@@ -2662,7 +2841,7 @@ function vProduction() {
   if (!P) return `${top}<div class="grid g2"><div class="empty"><h2>No production plan yet</h2><p>Claude maps the phases from creative lock to load-out for your exact show, suggests how each element is built and sourced, and flags the critical path. The standard template gives you the same structure without Claude.</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${claudeBtn('production', 'Plan production')}${libBtn('lib-production', 'Use standard template')}</div></div>${leadPanel}</div>${vendorsPanel()}`;
   const line = (k, v) => v ? `<p><b style="color:var(--ink)">${k}:</b> ${esc(v)}</p>` : '';
   const notes = inc.map(e => { const n = P.elementNotes[e.id]; if (!n) return ''; return `<div class="item panel" style="padding:16px;display:flex;flex-direction:column;gap:4px"><h3>${esc(e.name)} <span class="chip">${TIER_LABEL[e.tier]}</span></h3>
-    ${line('Build', n.fabrication)}${line('Suppliers', n.suppliers)}${line('Local sourcing', n.localSourcing)}${line('Risk', n.risks)}${line('Vendors', (plan.vendors || []).filter(v => v.elementId === e.id).map(v => v.name + ' (' + v.status.toLowerCase() + ')').join(', '))}</div>`; }).join('');
+    ${line('Build', n.fabrication)}${line('Suppliers', n.suppliers)}${line('Local sourcing', n.localSourcing)}${line('Ask vendors', n.askVendors)}${line('Risk', n.risks)}${line('Vendors', (plan.vendors || []).filter(v => v.elementId === e.id).map(v => v.name + ' (' + v.status.toLowerCase() + ')').join(', '))}</div>`; }).join('');
   const stale = inc.some(e => !P.elementNotes[e.id]);
   return `${top}
   ${stale ? `<div class="banner"><span>Some elements changed since this plan was made. Refresh it to cover them.</span></div>` : ''}
@@ -2693,11 +2872,11 @@ function toMarkdown() {
   L.push('## Final look image prompt', imagePrompt('final'), '');
   if (plan.elements.length) {
     L.push('## Show elements', '| Element | Act | Tier | What | Cost | CO₂e |', '|---|---|---|---|---:|---:|');
-    plan.elements.filter(e => e.included).forEach(e => L.push(`| ${e.name} | ${e.act} | ${TIER_LABEL[e.tier]} | ${e.tiers[e.tier].desc.replace(/\|/g, '/')} | ${money(e.tiers[e.tier].cost, false)} | ${tonnes(e.tiers[e.tier].co2)} |`));
+    plan.elements.filter(e => e.included).forEach(e => { const x = e.tiers[e.tier], r = tierCo2(e, e.tier); L.push(`| ${e.name} | ${e.act} | ${TIER_LABEL[e.tier]} | ${x.desc.replace(/\|/g, '/')} | ${hasCost(x) ? money(+x.cost, false) + (sourced(x.src) ? ` (${BASIS[x.src.b]}: ${x.src.r.replace(/\|/g, '/')})` : ' (no source)') : 'No quote'} | ${r.t == null ? '—' : tonnes(r.t) + (r.method === 'spend' ? ' spend-based' : ' supplier')} |`); });
     const cut = plan.elements.filter(e => !e.included); if (cut.length) L.push('', 'Cut from this version: ' + cut.map(e => e.name).join(', '));
-    L.push('', '## Budget', `- Elements: ${money(t.direct, false)}`, ...plan.overheads.map(o => `- ${o.name} (${o.pct}%): ${money(t.direct * o.pct / 100, false)}`), `- **Total: ${money(t.total, false)}** against a cap of ${money(t.cap, false)} (${t.total > t.cap ? money(t.total - t.cap, false) + ' over' : money(t.cap - t.total, false) + ' headroom'})`, '');
+    L.push('', '## Budget', `- Quoted elements and lines: ${money(t.direct, false)}${t.unquoted ? ` (${t.unquoted} element${t.unquoted === 1 ? '' : 's'} not yet quoted)` : ''}`, ...plan.overheads.map(o => `- ${o.name} (${o.pct}%): ${money(t.direct * o.pct / 100, false)}`), `- **Total: ${money(t.total, false)}** against a cap of ${money(t.cap, false)} (${t.total > t.cap ? money(t.total - t.cap, false) + ' over' : money(t.cap - t.total, false) + ' headroom'})`, '');
   }
-  if ((plan.lines || []).length) L.push('## Other budget lines', ...plan.lines.map(l => `- ${l.name} (${l.category}): ${money(+l.cost || 0, false)}${l.oh === false ? ', no overheads' : ''}${l.note ? ' (' + l.note + ')' : ''}`), '');
+  if ((plan.lines || []).length) L.push('## Other budget lines', ...plan.lines.map(l => `- ${l.name} (${l.category}): ${hasCost(l) ? money(+l.cost, false) + (sourced(l.src) ? ` (${BASIS[l.src.b]}: ${l.src.r})` : ' (no source)') : 'no quote'}${l.oh === false ? ', no overheads' : ''}${l.note ? '. ' + l.note : ''}`), '');
   const sbKeys = Object.keys(plan.cues || {}).filter(k => plan.cues[k]).sort((a, b) => +a - +b);
   if (sbKeys.length) L.push('## Storyboard cues', ...sbKeys.map(k => `- ${timecode(+k)}: ${plan.cues[k]}`), '');
   if (plan.production) { const P = plan.production; L.push('## Production', ...P.phases.flatMap(ph => [`### ${ph.name} (${ph.when})`, ...ph.tasks.map(x => `- ${x}`)]), '### Critical path', ...P.criticalPath.map(x => `- ${x}`), ''); }
@@ -2705,14 +2884,56 @@ function toMarkdown() {
   L.push('## Sustainability', `- Production footprint: ${tonnes(K.showT)} CO₂e (scope 1 ${tonnes(K.scope[1] / 1000)}, scope 2 ${tonnes(K.scope[2] / 1000)}, scope 3 ${tonnes(K.scope[3] / 1000)})`, `- Audience travel estimate: ${tonnes(K.audienceT)} CO₂e`, ...Object.keys(CARBON_CATS).filter(k => k !== 'audience' && K.byCat[k] > 0).map(k => `- ${CARBON_CATS[k]}: ${tonnes(K.byCat[k] / 1000)}`), '### Ways to reduce', ...carbonActions(plan).map(a => `- ${a.title}: about ${tonnes(a.saveT)}`));
   if (plan.prevReport) L.push('', compareMarkdown().replace(/^# /, '### '));
   if ((plan.vendors || []).length) L.push('', '## Vendors', ...plan.vendors.map(v => `- **${v.name}** (${v.category}, ${v.city}): ${v.desc}${v.website ? ' ' + v.website : ''}. Status: ${v.status}.`));
-  if (plan.sustainability) { const S = plan.sustainability; L.push('### Swaps', ...S.swaps.map(s => `- ${s.applied ? '[applied] ' : ''}${s.title}: ${s.rationale} (${money(s.costDelta, false)}, ${tonnes(s.co2Delta)})`), '### Practices', ...S.practices.map(x => `- **${x.title}**: ${x.detail}`), '### Reporting', ...S.reporting.map(r => `- ${r}`)); }
-  L.push('', `_Planning estimates generated with Ceremony Studio on ${new Date().toLocaleDateString('en-GB')}. Verify facts and replace estimates with supplier quotes._`);
+  if (plan.sustainability) { const S = plan.sustainability; L.push('### Swaps', ...S.swaps.map(sw => { const e = plan.elements.find(x => x.id === sw.elementId), d = e && TIERS.includes(sw.change?.tier) ? tierDelta(e, e.tier, sw.change.tier) : {}; return `- ${sw.applied ? '[applied] ' : ''}${sw.title}: ${sw.rationale}${d.cost != null ? ` (${money(d.cost, false)}` + (d.co2 != null ? `, ${tonnes(d.co2)})` : ')') : ' (needs quotes for both tiers to compare)'}`; }), '### Practices', ...S.practices.map(x => `- **${x.title}**: ${x.detail}`), '### Reporting', ...S.reporting.map(r => `- ${r}`)); }
+  L.push('', ...sourcesMarkdown());
+  L.push('', `_Generated with Ceremony Studio on ${new Date().toLocaleDateString('en-GB')}. Every figure is either backed by a source listed here or flagged as unsourced._`);
   return L.join('\n');
+}
+function sourcesMarkdown(p = plan) {
+  const L = ['## Sources and methods'];
+  if (!REFDATA) { L.push('- The reference library was not loaded, so no CO₂e was calculated.'); return L; }
+  const ds = REFDATA.datasets?.datasets || {};
+  L.push('Emission factors and multipliers:', ...Object.entries(ds).map(([id, d]) => `- ${d.publisher}, *${d.title}* (${d.licence}). ${d.url} (accessed ${d.accessed}, SHA-256 ${d.sha256.slice(0, 12)}…)`));
+  L.push('', 'Methods:', '- Activity data × DESNZ 2026 factors (direct + well-to-tank; flights include radiative forcing). GHG Protocol activity-based method.', '- Grid electricity: lifecycle intensity for the event country (Ember via Our World in Data).', `- Show elements and budget lines without activity data: quoted cost → 2023 GBP at FRED average exchange rates → × Defra/Leeds spend-based multiplier for the industry group (GHG Protocol spend-based method). ${srcText('ghgp-scope3-technical')}`);
+  const cp = REFDATA.policy?.carbonPrice; if (cp) L.push(`- Carbon price: ${cp.value} ${cp.currency} per tonne, ${cp.label}. ${srcText(cp.sources[0])}`);
+  const ov = FACTOR_KEYS.map(k => factorOf(p, k)).filter(f => f.from === 'override');
+  if (ov.length) L.push('', 'Factors replaced with supplier figures:', ...ov.map(f => `- ${f.label}: ${f.v} ${f.unit} (${sourced(f.override) ? BASIS[f.override.b] + ': ' + f.override.r : 'NO SOURCE'}); reference value ${f.refV ?? 'none'}`));
+  const cov = coverage(p);
+  L.push('', '## Figures without a source', ...(cov.issues.length ? cov.issues.map(i => `- ${i.kind}: ${i.name}${i.amount == null && (i.kind === 'Element' || i.kind === 'Budget line') ? ' (no quote)' : ''}`) : ['- None.']));
+  return L;
+}
+/* Close-out: actuals from a finished show, exported as a file to commit to reference/closeouts/ */
+function closeoutOf(p = plan) { return p.closeout || { attendance: '', els: {}, lines: {} }; }
+const optN = v => v === '' || v == null || !Number.isFinite(+v) ? null : +v;
+function closeoutJSON(p = plan) {
+  const co = closeoutOf(p), c = p.carbon, K = calcCarbon(p);
+  const measured = {};
+  Object.entries(CARBON_GROUPS).forEach(([g, keys]) => { const x = c.src?.[g]; if (sourced(x) && (x.b === 'measured' || x.b === 'invoice')) keys.forEach(k => { if (+c[k] > 0) measured[k] = +c[k]; }); });
+  return {
+    schema: 'ceremony-studio/closeout@1', exportedAt: new Date().toISOString(), referenceBuiltAt: REFDATA?.builtAt || null,
+    plan: { id: p.id, name: p.name, eventType: p.brief.eventType, city: p.brief.city, country: p.brief.country, venue: p.brief.venue, date: p.brief.date, capacity: optN(p.brief.capacity), attendance: optN(co.attendance), currency: p.brief.currency },
+    elements: p.elements.filter(e => e.included).map(e => { const x = e.tiers[e.tier], a = co.els[e.id] || {}; return { name: e.name, category: e.category, tier: e.tier, spec: x.desc, quotedCost: hasCost(x) ? +x.cost : null, quoteRef: sourced(x.src) ? `${BASIS[x.src.b]}: ${x.src.r}` : null, actualCost: optN(a.cost), actualRef: String(a.ref || '').trim() || null, confirmedLeadWeeks: e.leadWeeks ?? null, actualLeadWeeks: optN(a.lead) }; }),
+    lines: (p.lines || []).map(l => { const a = co.lines[l.id] || {}; return { name: l.name, category: l.category, quotedCost: hasCost(l) ? +l.cost : null, actualCost: optN(a.cost), actualRef: String(a.ref || '').trim() || null }; }),
+    carbon: { measured, sources: c.src, showT: K.showT, audienceT: K.audienceT, factorsUsed: Object.fromEntries(FACTOR_KEYS.map(k => { const f = factorOf(p, k); return [k, { v: f.v, from: f.from, source: f.from === 'override' ? f.override : f.src }]; })) }
+  };
+}
+function closeoutPanel() {
+  const co = closeoutOf(), inc = plan.elements.filter(e => e.included), cur = esc(plan.brief.currency);
+  const meas = Object.entries(CARBON_GROUPS).filter(([g]) => sourced(plan.carbon.src?.[g]) && ['measured', 'invoice'].includes(plan.carbon.src[g].b)).map(([g]) => CARBON_CATS[g]);
+  return `<section class="panel"><div class="head2"><div><h2>Close-out</h2><p class="note" style="margin-top:4px">After the show, record what it actually cost and took. The file you download goes into <span class="mono">reference/closeouts/</span> in the repository; run <span class="mono">python3 scripts/build_reference.py closeouts</span> and commit. Future plans then show these actuals as benchmarks, with the number of projects behind each one.</p></div><button class="btn primary" data-act="dl-closeout" ${downloads ? '' : 'disabled'}>Download close-out file</button></div>
+    <div class="form" style="margin:12px 0"><div class="field"><label for="co-att">Actual attendance</label><input id="co-att" type="number" min="0" data-co="attendance" value="${esc(co.attendance ?? '')}" placeholder="From ticket scans"></div></div>
+    ${inc.length ? `<div class="tablewrap"><table><thead><tr><th>Element</th><th class="num">Quoted (${cur})</th><th class="num">Actual (${cur})</th><th>Invoice reference</th><th class="num">Actual lead time (wk)</th></tr></thead><tbody>
+      ${inc.map(e => { const a = co.els[e.id] || {}; return `<tr><td>${esc(e.name)} <span class="muted">· ${TIER_LABEL[e.tier]}</span></td><td class="num">${costLabel(e.tiers[e.tier])}</td><td class="num"><input type="number" min="0" data-co="el:${e.id}" data-k="cost" value="${esc(a.cost ?? '')}" style="width:110px" aria-label="Actual cost of ${esc(e.name)}"></td><td><input data-co="el:${e.id}" data-k="ref" value="${esc(a.ref || '')}" placeholder="Invoice no." aria-label="Invoice for ${esc(e.name)}"></td><td class="num"><input type="number" min="0" data-co="el:${e.id}" data-k="lead" value="${esc(a.lead ?? '')}" style="width:70px" aria-label="Actual lead time of ${esc(e.name)}"></td></tr>`; }).join('')}
+      ${(plan.lines || []).map(l => { const a = co.lines[l.id] || {}; return `<tr><td>${esc(l.name)} <span class="muted">· budget line</span></td><td class="num">${costLabel(l)}</td><td class="num"><input type="number" min="0" data-co="line:${l.id}" data-k="cost" value="${esc(a.cost ?? '')}" style="width:110px" aria-label="Actual cost of ${esc(l.name)}"></td><td><input data-co="line:${l.id}" data-k="ref" value="${esc(a.ref || '')}" placeholder="Invoice no." aria-label="Invoice for ${esc(l.name)}"></td><td></td></tr>`; }).join('')}
+    </tbody></table></div>` : '<p class="muted">No elements in the show yet.</p>'}
+    <p class="note" style="margin-top:10px">Only actual costs with an invoice reference become benchmarks. Activity data is exported as measured only for groups marked "Metered or measured" or "Invoice or actual" on the Sustainability step${meas.length ? ` (now: ${meas.map(esc).join(', ')})` : ' (none yet)'}.</p>
+  </section>`;
 }
 function vExport() {
   const md = toMarkdown();
   return `${head('Export', 'The whole plan as one document: brief, research, concept, run of show, budget, production and sustainability.', `<button class="btn primary" data-act="dl-md" ${downloads ? '' : 'disabled'}>Download .md</button><button class="btn" data-act="dl-json" ${downloads ? '' : 'disabled'}>Download .json</button><button class="btn" data-act="copy-md">Copy text</button>`)}
   ${downloads ? '' : '<p class="note">Downloads are not available in this view. Use Copy text instead.</p>'}
+  ${closeoutPanel()}
   <pre class="md" id="md-out">${esc(md)}</pre>`;
 }
 
@@ -2740,17 +2961,20 @@ let confirmFn = null;
 function editElementModal(id) {
   const e = id ? plan.elements.find(x => x.id === id) : normEl({ name: '', act: plan.acts[0]?.name || '', tiers: { lean: {}, standard: {}, signature: {} } });
   const acts = plan.acts.length ? plan.acts.map(a => a.name) : [e.act || 'Main'];
-  const tf = t => `<fieldset><legend>${TIER_LABEL[t]}</legend>
-      <div class="field"><label for="m-${t}-desc">What you get</label><textarea id="m-${t}-desc" rows="2">${esc(e.tiers[t].desc)}</textarea></div>
-      <div class="field"><label for="m-${t}-cost">Cost (${esc(plan.brief.currency)})</label><input id="m-${t}-cost" type="number" min="0" value="${e.tiers[t].cost}"></div>
-      <div class="field"><label for="m-${t}-co2">CO₂e (t)</label><input id="m-${t}-co2" type="number" min="0" step="0.1" value="${e.tiers[t].co2}"></div></fieldset>`;
+  const tf = t => { const x = e.tiers[t], r = id ? tierCo2(e, t) : { t: null }; return `<fieldset><legend>${TIER_LABEL[t]}</legend>
+      <div class="field"><label for="m-${t}-desc">What you get</label><textarea id="m-${t}-desc" rows="2">${esc(x.desc)}</textarea></div>
+      <div class="field"><label for="m-${t}-cost">Quoted cost (${esc(plan.brief.currency)})</label><input id="m-${t}-cost" type="number" min="0" value="${hasCost(x) ? +x.cost : ''}" placeholder="From a quote"></div>
+      <div class="field"><label for="m-${t}-b">Source</label>${basisSelect(`id="m-${t}-b"`, x.src?.b)}<input id="m-${t}-r" value="${esc(x.src?.r || '')}" placeholder="Vendor and quote number, invoice…" style="margin-top:6px"></div>
+      <div class="field"><label for="m-${t}-co2">Supplier CO₂e (t, optional)</label><input id="m-${t}-co2" type="number" min="0" step="0.01" value="${esc(x.co2s?.v ?? '')}" placeholder="${r.t != null && r.method === 'spend' ? 'Spend-based: ' + (Math.round(r.t * 100) / 100) : 'Calculated from the quote'}">${basisSelect(`id="m-${t}-cb"`, x.co2s?.b)}<input id="m-${t}-cr" value="${esc(x.co2s?.r || '')}" placeholder="Supplier footprint report, EPD…" style="margin-top:6px"></div></fieldset>`; };
+  const sm = REFDATA?.['spend-multipliers'], sicOpts = sm ? Object.entries(sm.sic).map(([k, v]) => `<option value="${esc(k)}" ${k === e.sic ? 'selected' : ''}>${esc(k)}: ${esc(v.label)}</option>`).join('') : '';
   const sc = (k, l) => `<div class="field"><label for="m-s-${k}">${l} (0–5)</label><input id="m-s-${k}" type="number" min="0" max="5" value="${k === 'green' ? e.green.score : e.scores[k]}"></div>`;
   openModal(`<div class="mh"><h2>${id ? 'Edit element' : 'Add element'}</h2><button class="icon" data-act="close" aria-label="Close">×</button></div>
     <div class="form">
       <div class="field"><label for="m-name">Name</label><input id="m-name" value="${esc(e.name)}"></div>
       <div class="field"><label for="m-act">Act</label><select id="m-act">${acts.map(a => `<option ${a === e.act ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>
       <div class="field"><label for="m-cat">Category</label><select id="m-cat">${CATEGORIES.map(c => `<option ${c === e.category ? 'selected' : ''}>${c}</option>`).join('')}</select></div>
-      <div class="field"><label for="m-lead">Lead time (weeks)</label><input id="m-lead" type="number" min="0" value="${e.leadWeeks}"></div>
+      <div class="field"><label for="m-lead">Lead time confirmed by the vendor (weeks)</label><input id="m-lead" type="number" min="0" value="${e.leadWeeks ?? ''}" placeholder="Ask the vendor"></div>
+      ${sm ? `<div class="field wide"><label for="m-sic">Industry group for spend-based CO₂e</label><select id="m-sic"><option value="">Default for the category${sm.map.element[e.category] ? ' (SIC ' + esc(sm.map.element[e.category].sic) + ': ' + esc(sm.map.element[e.category].reason) + ')' : ''}</option>${sicOpts}</select></div>` : ''}
       <div class="field wide"><label for="m-desc">Description</label><textarea id="m-desc" rows="2">${esc(e.description)}</textarea></div>
     </div>
     <div class="tiergrid">${TIERS.map(tf).join('')}</div>
@@ -2761,13 +2985,14 @@ function editElementModal(id) {
 }
 function saveElementFromModal(id) {
   const g = s => $('#m-' + s)?.value ?? '';
-  const data = { name: g('name').trim() || 'Untitled element', act: g('act'), category: g('cat'), description: g('desc'), leadWeeks: num(g('lead'), 8), sourcing: g('sourcing'),
+  const optNum = v => v === '' || v == null || !Number.isFinite(+v) ? null : Math.max(0, +v);
+  const data = { name: g('name').trim() || 'Untitled element', act: g('act'), category: g('cat'), description: g('desc'), leadWeeks: optNum(g('lead')), sourcing: g('sourcing'), sic: g('sic') || undefined,
     scores: { broadcast: clampScore(g('s-broadcast')), local: clampScore(g('s-local')), global: clampScore(g('s-global')) },
     green: { score: clampScore(g('s-green')), note: g('gnote') },
-    tiers: Object.fromEntries(TIERS.map(t => [t, { desc: g(t + '-desc'), cost: Math.max(0, Math.round(num(g(t + '-cost')))), co2: Math.max(0, num(g(t + '-co2'))) }])) };
+    tiers: Object.fromEntries(TIERS.map(t => { const co2 = optNum(g(t + '-co2')); return [t, { desc: g(t + '-desc'), cost: optNum(g(t + '-cost')), src: { b: g(t + '-b'), r: g(t + '-r').trim() }, co2s: co2 == null ? null : { v: co2, b: g(t + '-cb'), r: g(t + '-cr').trim() } }]; })) };
   mutate(p => {
-    if (id) { const e = p.elements.find(x => x.id === id); Object.assign(e, { name: data.name, act: data.act, category: data.category, description: data.description, leadWeeks: data.leadWeeks, sourcing: data.sourcing, scores: data.scores, green: data.green, tiers: data.tiers }); }
-    else { if (!p.acts.length) p.acts.push({ id: uid(), name: data.act || 'Main', minutes: +p.brief.showMinutes || 10, description: '' }); p.elements.push({ ...normEl({ ...data, act: data.act || p.acts[0].name }, p), tiers: data.tiers }); }
+    if (id) { const e = p.elements.find(x => x.id === id); Object.assign(e, { name: data.name, act: data.act, category: data.category, description: data.description, leadWeeks: data.leadWeeks, sourcing: data.sourcing, sic: data.sic, scores: data.scores, green: data.green, tiers: data.tiers }); }
+    else { if (!p.acts.length) p.acts.push({ id: uid(), name: data.act || 'Main', minutes: +p.brief.showMinutes || 10, description: '' }); p.elements.push({ ...normEl({ ...data, act: data.act || p.acts[0].name }, p), tiers: data.tiers, leadWeeks: data.leadWeeks, sic: data.sic }); }
   }, { log: (id ? 'Edited ' : 'Added ') + data.name });
   closeModal();
 }
@@ -2838,7 +3063,7 @@ const actions = {
       <div class="mf"><button class="btn" data-act="close">Cancel</button><button class="btn primary" data-act="save-artist">Add artist</button></div>`),
   'save-artist': () => { const g = id => $('#' + id)?.value || ''; if (!g('ar-name').trim()) { toast('Add a name first.'); return; } mutate(p => p.artists.push({ id: uid(), manual: true, name: g('ar-name').trim(), origin: g('ar-origin'), role: g('ar-role'), why: g('ar-why'), audience: '', feeBand: g('ar-fee'), act: '', risks: '' }), { log: 'Artist added' }); closeModal(); },
   'lib-design': () => {
-    const run = () => { mutate(p => { const d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS(); }, { log: 'Show design started from the built-in library' }); go('design'); toast(`Twelve elements priced for ${Number(plan.brief.capacity || 0).toLocaleString('en')} guests. Rename and reshape them to fit your concept.`); };
+    const run = () => { mutate(p => { const d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS(); }, { log: 'Show design started from the built-in library' }); go('design'); toast('Twelve elements from the library, each specified in three tiers. Add vendor quotes to price them.'); };
     if (plan.elements.length) confirmBox('Replace the current show design with the built-in library?', 'Replace', run); else run();
   },
   'lib-research': () => {
@@ -2858,7 +3083,7 @@ const actions = {
   'lib-artists': () => { const list = libraryArtists(plan); if (!list.length) { toast('Add local artists to the local profile first.'); return; } mutate(p => { p.artists = [...p.artists.filter(a => a.manual || !a.library), ...list]; }, { log: 'Artists from city profile' }); },
   'load-pack': b => mutate(p => { p.local = localFromPack(CITY_PACKS.find(x => x.k === b.dataset.k)); }, { log: 'City profile loaded' }),
   'clear-local': () => mutate(p => { p.local = blankLocal(); }, { log: 'Local profile cleared' }),
-  'add-line': b => mutate(p => p.lines.push({ id: uid(), name: b.dataset.name || 'New line', category: b.dataset.cat || 'Other', cost: num(b.dataset.cost, 0), co2: 0, oh: true, note: '' }), { log: 'Budget line added' }),
+  'add-line': b => mutate(p => { const cat = b.dataset.cat || 'Other'; p.lines.push({ id: uid(), name: b.dataset.name || 'New line', category: cat, cost: null, src: blankSrc(), co2m: defaultCo2Method(cat), co2s: null, oh: true, note: '' }); }, { log: 'Budget line added' }),
   'del-line': b => mutate(p => { p.lines = p.lines.filter(l => l.id !== b.dataset.id); }, { log: 'Budget line removed' }),
   'sb-step': b => mutate(p => { p.sbStep = +b.dataset.v; }),
   'sb-cam': b => { sbCam = b.dataset.v; render(); },
@@ -2867,8 +3092,14 @@ const actions = {
   'new-concept': () => conceptModal(null),
   'save-concept': b => saveConcept(b.dataset.id || null),
   'del-concept': b => { const id = b.dataset.id; closeModal(); mutate(p => { p.concepts = p.concepts.filter(c => c.id !== id); if (p.conceptId === id) p.conceptId = null; }, { log: 'Concept deleted' }); toast('Concept deleted. Use Undo to bring it back.'); },
-  'reset-carbon': () => mutate(p => { p.carbon = defaultCarbon(p); }, { log: 'Carbon inputs re-estimated' }),
-  'reset-factors': () => mutate(p => { p.carbon.factors = { ...FACTORS_DEFAULT }; }),
+  'fill-closeout': () => mutate(p => {
+    const f = closeoutFill(p); if (!f.length) return;
+    f.forEach(x => { p.carbon[x.key] = x.value; });
+    const files = [...new Set(f.flatMap(x => x.b.files))];
+    Object.entries(CARBON_GROUPS).forEach(([g, keys]) => { if (f.some(x => keys.includes(x.key))) p.carbon.src[g] = { b: 'closeout', r: `Median per guest × capacity ${p.brief.capacity}, from ${files.join(', ')}` }; });
+  }, { log: 'Activity data filled from past close-outs' }),
+  'reset-factors': () => mutate(p => { p.carbon.factorOverrides = {}; }),
+  'dl-closeout': () => save(`${slug()}-closeout.json`, JSON.stringify(closeoutJSON(plan), null, 2)),
   'apply-carbon': b => { const before = calcCarbon(plan).totalT; mutate(p => applyCarbonAction(p, b.dataset.id), { log: 'Carbon saving applied' }); toast(`Applied. Footprint ${tonnes(before)} → ${tonnes(calcCarbon(plan).totalT)}.`); },
   'prev-parse': () => { const t = $('#prev-text')?.value || ''; if (!t.trim()) { toast('Paste a report or load a file first.'); return; } const r = parseReport(t); if (!r.rows.length) { toast('No categories with figures found. Try a table of category and tonnes' + (claudeState === 'off' ? '.' : ', or Read with Claude.')); return; } mutate(p => { p.prevReport = r; }, { log: 'Previous report compared' }); requestAnimationFrame(() => $('#compare')?.scrollIntoView({ block: 'start' })); },
   'prev-claude': () => { const t = $('#prev-text')?.value || ''; if (!t.trim()) { toast('Paste the report text first, or load a screenshot.'); return; } runReadReport(t, null); },
@@ -2898,12 +3129,11 @@ const actions = {
   'discard-pending': () => { pending = null; render(); },
   fit: () => { const r = fitToBudgetOps(); if (r.error) toast(r.error); else propose('Fit to budget', r.summary, r.ops); },
   headroom: () => { const r = headroomOps(); if (r.error) toast(r.error); else propose('Use headroom', r.summary, r.ops); },
-  'add-oh': () => mutate(p => p.overheads.push({ id: uid(), name: 'New line', pct: 1 })),
+  'add-oh': () => mutate(p => p.overheads.push({ id: uid(), name: 'New line', pct: 0, src: blankSrc() })),
   'del-oh': b => mutate(p => { p.overheads = p.overheads.filter(o => o.id !== b.dataset.id); }),
   'apply-swap': b => mutate(p => {
     const s = p.sustainability.swaps.find(x => x.id === b.dataset.id); const e = p.elements.find(x => x.id === s?.elementId); if (!s || !e || e.locked) return;
     if (TIERS.includes(s.change.tier)) e.tier = s.change.tier;
-    else { const cur = e.tiers[e.tier]; if (s.change.desc) cur.desc = String(s.change.desc); if (s.change.cost != null) cur.cost = Math.max(0, Math.round(num(s.change.cost))); if (s.change.co2 != null) cur.co2 = Math.max(0, num(s.change.co2)); }
     s.applied = true;
   }, { log: 'Sustainability swap applied' }),
   'edit-acts': actsModal,
@@ -2959,9 +3189,17 @@ document.addEventListener('input', ev => {
 document.addEventListener('change', ev => {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
-  if (el.dataset.line) { mutate(p => { const l = p.lines.find(x => x.id === el.dataset.line); if (!l) return; const k = el.dataset.k; l[k] = k === 'oh' ? el.checked : k === 'cost' || k === 'co2' ? Math.max(0, num(el.value)) : el.value; }); return; }
+  if (el.dataset.src) { mutate(p => setSrc(p, el.dataset.src, el.dataset.k, el.dataset.k === 'r' ? el.value.trim() : el.value)); return; }
+  if (el.dataset.line) { mutate(p => { const l = p.lines.find(x => x.id === el.dataset.line); if (!l) return; const k = el.dataset.k;
+    if (k === 'oh') l.oh = el.checked;
+    else if (k === 'cost') l.cost = el.value === '' ? null : Math.max(0, num(el.value));
+    else if (k === 'co2v') { l.co2s ||= { v: '', b: '', r: '' }; l.co2s.v = el.value === '' ? '' : Math.max(0, num(el.value)); }
+    else if (k === 'category') { const wasDefault = (l.co2m || 'spend') === defaultCo2Method(l.category); l.category = el.value; if (wasDefault) l.co2m = defaultCo2Method(el.value); }
+    else l[k] = el.value; }); return; }
   if (el.dataset.carbon) { mutate(p => { p.carbon[el.dataset.carbon] = Math.max(0, num(el.value)); }); return; }
-  if (el.dataset.factor) { mutate(p => { p.carbon.factors[el.dataset.factor] = Math.max(0, num(el.value)); }); return; }
+  if (el.dataset.factor) { mutate(p => { const o = p.carbon.factorOverrides[el.dataset.factor] ||= { v: '', b: '', r: '' }; o.v = el.value === '' ? '' : Math.max(0, num(el.value)); }); return; }
+  if (el.dataset.seg != null) { mutate(p => { const sg = p.travel.segments[+el.dataset.seg]; if (!sg) return; const k = el.dataset.k; sg[k] = k === 'mode' ? el.value : Math.max(k === 'occ' ? 1 : 0, num(el.value)); if (k === 'pct') sg.pct = Math.min(100, sg.pct); }); return; }
+  if (el.dataset.co) { mutate(p => { p.closeout ||= { attendance: '', els: {}, lines: {} }; const co = p.closeout; if (el.dataset.co === 'attendance') { co.attendance = el.value === '' ? '' : Math.max(0, num(el.value)); return; } const [kind, id] = el.dataset.co.split(':'); const bag = kind === 'el' ? co.els : co.lines; const r = bag[id] ||= {}; r[el.dataset.k] = el.dataset.k === 'ref' ? el.value.trim() : el.value === '' ? '' : Math.max(0, num(el.value)); }); return; }
   if (el.dataset.vendor) { mutate(p => { const v = p.vendors.find(x => x.id === el.dataset.vendor); if (v) v[el.dataset.k] = el.value; }); return; }
   if (el.dataset.prevrow != null) { mutate(p => { const r = p.prevReport.rows[+el.dataset.prevrow]; if (!r) return; if (el.dataset.k === 't') r.t = num(el.value); else r.cat = el.value; }); return; }
   if (el.dataset.prev) { mutate(p => { p.prevReport[el.dataset.prev] = el.dataset.prev === 'attendance' ? num(el.value) : el.value; }); return; }
@@ -2974,13 +3212,13 @@ document.addEventListener('change', ev => {
   if (el.dataset.oh) { mutate(p => { const o = p.overheads.find(x => x.id === el.dataset.oh); if (o) o[el.dataset.k] = el.dataset.k === 'pct' ? Math.max(0, num(el.value)) : el.value; }); return; }
   if (el.dataset.inc) { mutate(p => { const e = p.elements.find(x => x.id === el.dataset.inc); if (e) e.included = el.checked; }); return; }
   if (el.dataset.tiersel) { mutate(p => { const e = p.elements.find(x => x.id === el.dataset.tiersel); if (e) e.tier = el.value; }); return; }
-  if (el.dataset.travel) { mutate(p => { p.travel[el.dataset.travel] = Math.max(0, num(el.value)); }); return; }
 });
 
 /* ------------------------------------------------------------------ */
 /* Boot                                                                */
 /* ------------------------------------------------------------------ */
 render();
+loadReference();
 (async () => {
   const c = window.claude;
   if (!c?.use) { claudeState = 'off'; downloads = browserDownloads; render(); return; }

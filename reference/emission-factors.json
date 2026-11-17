@@ -1,0 +1,492 @@
+{
+  "_about": "Emission factors used by the carbon calculator. Each value is the sum of the listed DESNZ 2026 rows (direct + well-to-tank where published).",
+  "source": "desnz-2026",
+  "factorYear": 2026,
+  "factors": {
+    "diesel": {
+      "value": 3.28564,
+      "label": "Generator diesel",
+      "unit": "kg CO2e per litre",
+      "method": "Diesel (100% mineral diesel) combustion + WTT. Mineral diesel rather than the UK forecourt blend, because generator fuel outside the UK is not the UK blend; this is the higher of the two.",
+      "components": [
+        {
+          "id": "1_101_1012_8_1",
+          "scope": "Scope 1",
+          "path": "Fuels > Liquid fuels > Diesel (100% mineral diesel)",
+          "unit": "litres",
+          "value": 2.66155
+        },
+        {
+          "id": "11_101_1012_8_1",
+          "scope": "Scope 3",
+          "path": "WTT- fuels > Liquid fuels > Diesel (100% mineral diesel)",
+          "unit": "litres",
+          "value": 0.62409
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "hvo": {
+      "value": 0.59997,
+      "label": "Generator HVO",
+      "unit": "kg CO2e per litre",
+      "method": "Biodiesel HVO + WTT. DESNZ reports biogenic CO2 separately as outside of scopes.",
+      "components": [
+        {
+          "id": "2_103_1036_8_1",
+          "scope": "Scope 1",
+          "path": "Bioenergy > Biofuel > Biodiesel HVO",
+          "unit": "litres",
+          "value": 0.03558
+        },
+        {
+          "id": "12_900_1036_8_1",
+          "scope": "Scope 3",
+          "path": "WTT- bioenergy > WTT- biofuel > Biodiesel HVO",
+          "unit": "litres",
+          "value": 0.56439
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "truck": {
+      "value": 0.12715,
+      "label": "Road freight",
+      "unit": "kg CO2e per tonne-km",
+      "method": "HGV (non-refrigerated, all diesel), average of all HGVs, average laden, + WTT.",
+      "components": [
+        {
+          "id": "27_304_3140_14_1",
+          "scope": "Scope 3",
+          "path": "Freighting goods > HGV (non-refrigerated, all diesel) > Average non-refrigerated HGVs > Average laden",
+          "unit": "tonne.km",
+          "value": 0.10356
+        },
+        {
+          "id": "28_907_3140_14_1",
+          "scope": "Scope 3",
+          "path": "WTT- delivery vehs & freight > WTT- HGV (non-refrigerated, all diesel) > Average non-refrigerated HGVs > Average laden",
+          "unit": "tonne.km",
+          "value": 0.02359
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "air": {
+      "value": 1.03455,
+      "label": "Air freight",
+      "unit": "kg CO2e per tonne-km",
+      "method": "Freight flights, international to/from non-UK, with radiative forcing (RF), + WTT.",
+      "components": [
+        {
+          "id": "27_317_3158_14_1",
+          "scope": "Scope 3",
+          "path": "Freighting goods > Freight flights > International, to/from non-UK > With RF",
+          "unit": "tonne.km",
+          "value": 0.89939
+        },
+        {
+          "id": "28_913_3158_14_1",
+          "scope": "Scope 3",
+          "path": "WTT- delivery vehs & freight > WTT- freight flights > International, to/from non-UK > With RF",
+          "unit": "tonne.km",
+          "value": 0.13516
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "sea": {
+      "value": 0.01977,
+      "label": "Sea freight",
+      "unit": "kg CO2e per tonne-km",
+      "method": "Container ship, average size, + WTT.",
+      "components": [
+        {
+          "id": "27_320_3235_14_1",
+          "scope": "Scope 3",
+          "path": "Freighting goods > Cargo ship > Container ship > Average",
+          "unit": "tonne.km",
+          "value": 0.01612
+        },
+        {
+          "id": "28_916_3235_14_1",
+          "scope": "Scope 3",
+          "path": "WTT- delivery vehs & freight > WTT- cargo ship > Container ship > Average",
+          "unit": "tonne.km",
+          "value": 0.00365
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "rail": {
+      "value": 0.03274,
+      "label": "Rail freight",
+      "unit": "kg CO2e per tonne-km",
+      "method": "Freight train + WTT.",
+      "components": [
+        {
+          "id": "27_315_3151_14_1",
+          "scope": "Scope 3",
+          "path": "Freighting goods > Rail > Freight train",
+          "unit": "tonne.km",
+          "value": 0.02583
+        },
+        {
+          "id": "28_911_3151_14_1",
+          "scope": "Scope 3",
+          "path": "WTT- delivery vehs & freight > WTT- rail > Freight train",
+          "unit": "tonne.km",
+          "value": 0.00691
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "flight": {
+      "value": 0.16415,
+      "label": "Flights",
+      "unit": "kg CO2e per passenger-km",
+      "method": "Flights international to/from non-UK, average passenger, with RF, + WTT. DESNZ includes an uplift for indirect routing.",
+      "components": [
+        {
+          "id": "21_316_3178_11_1",
+          "scope": "Scope 3",
+          "path": "Business travel- air > Flights > International, to/from non-UK > Average passenger > With RF",
+          "unit": "passenger.km",
+          "value": 0.14253
+        },
+        {
+          "id": "22_912_3178_11_1",
+          "scope": "Scope 3",
+          "path": "WTT- business travel- air > WTT- flights > International, to/from non-UK > Average passenger > With RF",
+          "unit": "passenger.km",
+          "value": 0.02162
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "train": {
+      "value": 0.03989,
+      "label": "Train",
+      "unit": "kg CO2e per passenger-km",
+      "method": "UK national rail + WTT. UK-specific: use a national operator factor where you have one.",
+      "components": [
+        {
+          "id": "25_315_3147_11_1",
+          "scope": "Scope 3",
+          "path": "Business travel- land > Rail > National rail",
+          "unit": "passenger.km",
+          "value": 0.03092
+        },
+        {
+          "id": "26_911_3147_11_1",
+          "scope": "Scope 3",
+          "path": "WTT- pass vehs & travel- land > WTT- rail > National rail",
+          "unit": "passenger.km",
+          "value": 0.00897
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "road": {
+      "value": 0.2099,
+      "label": "Car",
+      "unit": "kg CO2e per vehicle-km",
+      "method": "Average car, unknown fuel, + WTT. Per vehicle-km: the app counts each road traveller as one vehicle unless you enter shared trips, which can only overstate.",
+      "components": [
+        {
+          "id": "25_301_3074_4_1",
+          "scope": "Scope 3",
+          "path": "Business travel- land > Cars (by size) > Average car > Unknown",
+          "unit": "km",
+          "value": 0.16591
+        },
+        {
+          "id": "26_904_3074_4_1",
+          "scope": "Scope 3",
+          "path": "WTT- pass vehs & travel- land > WTT- cars (by size) > Average car > Unknown",
+          "unit": "km",
+          "value": 0.04399
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "coach": {
+      "value": 0.04604,
+      "label": "Coach",
+      "unit": "kg CO2e per passenger-km",
+      "method": "Coach + WTT.",
+      "components": [
+        {
+          "id": "25_314_3146_11_1",
+          "scope": "Scope 3",
+          "path": "Business travel- land > Bus > Coach",
+          "unit": "passenger.km",
+          "value": 0.03948
+        },
+        {
+          "id": "26_910_3146_11_1",
+          "scope": "Scope 3",
+          "path": "WTT- pass vehs & travel- land > WTT- bus > Coach",
+          "unit": "passenger.km",
+          "value": 0.00656
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "bus": {
+      "value": 0.128,
+      "label": "Local bus",
+      "unit": "kg CO2e per passenger-km",
+      "method": "Average local bus + WTT.",
+      "components": [
+        {
+          "id": "25_314_3145_11_1",
+          "scope": "Scope 3",
+          "path": "Business travel- land > Bus > Average local bus",
+          "unit": "passenger.km",
+          "value": 0.10151
+        },
+        {
+          "id": "26_910_3145_11_1",
+          "scope": "Scope 3",
+          "path": "WTT- pass vehs & travel- land > WTT- bus > Average local bus",
+          "unit": "passenger.km",
+          "value": 0.02649
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "landfill": {
+      "value": 520.58023,
+      "label": "Waste to landfill",
+      "unit": "kg CO2e per tonne",
+      "method": "Commercial and industrial waste, landfill.",
+      "components": [
+        {
+          "id": "20_507_5313_15_1",
+          "scope": "Scope 3",
+          "path": "Waste disposal > Refuse > Commercial and industrial waste > Landfill",
+          "unit": "tonnes",
+          "value": 520.58023
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "recycled": {
+      "value": 4.65358,
+      "label": "Recycled waste",
+      "unit": "kg CO2e per tonne",
+      "method": "Commercial and industrial waste, closed-loop recycling.",
+      "components": [
+        {
+          "id": "20_507_5310_15_1",
+          "scope": "Scope 3",
+          "path": "Waste disposal > Refuse > Commercial and industrial waste > Closed-loop",
+          "unit": "tonnes",
+          "value": 4.65358
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "compost": {
+      "value": 9.00687,
+      "label": "Composted waste",
+      "unit": "kg CO2e per tonne",
+      "method": "Organic: mixed food and garden waste, composting.",
+      "components": [
+        {
+          "id": "20_507_5305_15_1",
+          "scope": "Scope 3",
+          "path": "Waste disposal > Refuse > Organic: mixed food and garden waste > Composting",
+          "unit": "tonnes",
+          "value": 9.00687
+        }
+      ],
+      "source": "desnz-2026"
+    },
+    "incin": {
+      "value": 4.65358,
+      "label": "Waste to energy",
+      "unit": "kg CO2e per tonne",
+      "method": "Commercial and industrial waste, combustion.",
+      "components": [
+        {
+          "id": "20_507_5311_15_1",
+          "scope": "Scope 3",
+          "path": "Waste disposal > Refuse > Commercial and industrial waste > Combustion",
+          "unit": "tonnes",
+          "value": 4.65358
+        }
+      ],
+      "source": "desnz-2026"
+    }
+  },
+  "hotel": {
+    "label": "Hotel stay",
+    "unit": "kg CO2e per room-night",
+    "source": "desnz-2026",
+    "method": "DESNZ hotel stay factor for the country of the event. No fallback: a country not in the list needs a supplier figure.",
+    "byCountry": {
+      "Australia": {
+        "value": 35.0,
+        "id": "29_600_4003_13_1"
+      },
+      "Belgium": {
+        "value": 12.2,
+        "id": "29_600_4005_13_1"
+      },
+      "Brazil": {
+        "value": 8.7,
+        "id": "29_600_4006_13_1"
+      },
+      "Canada": {
+        "value": 7.4,
+        "id": "29_600_4007_13_1"
+      },
+      "Chile": {
+        "value": 27.6,
+        "id": "29_600_4008_13_1"
+      },
+      "China": {
+        "value": 53.5,
+        "id": "29_600_4009_13_1"
+      },
+      "Colombia": {
+        "value": 14.7,
+        "id": "29_600_4010_13_1"
+      },
+      "Costa Rica": {
+        "value": 4.7,
+        "id": "29_600_4011_13_1"
+      },
+      "Egypt": {
+        "value": 44.2,
+        "id": "29_600_4013_13_1"
+      },
+      "France": {
+        "value": 6.7,
+        "id": "29_600_4016_13_1"
+      },
+      "Germany": {
+        "value": 13.2,
+        "id": "29_600_4017_13_1"
+      },
+      "Hong Kong, China": {
+        "value": 51.5,
+        "id": "29_600_4019_13_1"
+      },
+      "India": {
+        "value": 58.9,
+        "id": "29_600_4020_13_1"
+      },
+      "Indonesia": {
+        "value": 62.7,
+        "id": "29_600_4021_13_1"
+      },
+      "Italy": {
+        "value": 14.3,
+        "id": "29_600_4024_13_1"
+      },
+      "Japan": {
+        "value": 39.0,
+        "id": "29_600_4025_13_1"
+      },
+      "Jordan": {
+        "value": 68.9,
+        "id": "29_600_4026_13_1"
+      },
+      "Korea": {
+        "value": 55.8,
+        "id": "29_600_4028_13_1"
+      },
+      "Malaysia": {
+        "value": 61.5,
+        "id": "29_600_4030_13_1"
+      },
+      "Maldives": {
+        "value": 152.2,
+        "id": "29_600_4031_13_1"
+      },
+      "Mexico": {
+        "value": 19.3,
+        "id": "29_600_4032_13_1"
+      },
+      "Netherlands": {
+        "value": 14.8,
+        "id": "29_600_4033_13_1"
+      },
+      "Oman": {
+        "value": 90.3,
+        "id": "29_600_4035_13_1"
+      },
+      "Philippines": {
+        "value": 54.3,
+        "id": "29_600_4038_13_1"
+      },
+      "Portugal": {
+        "value": 19.0,
+        "id": "29_600_4040_13_1"
+      },
+      "Qatar": {
+        "value": 86.2,
+        "id": "29_600_4041_13_1"
+      },
+      "Russian Federation": {
+        "value": 24.2,
+        "id": "29_600_4043_13_1"
+      },
+      "Saudi Arabia": {
+        "value": 106.4,
+        "id": "29_600_4044_13_1"
+      },
+      "Singapore": {
+        "value": 24.5,
+        "id": "29_600_4045_13_1"
+      },
+      "South Africa": {
+        "value": 51.4,
+        "id": "29_600_4046_13_1"
+      },
+      "Spain": {
+        "value": 7.0,
+        "id": "29_600_4047_13_1"
+      },
+      "Switzerland": {
+        "value": 6.6,
+        "id": "29_600_4048_13_1"
+      },
+      "Thailand": {
+        "value": 43.4,
+        "id": "29_600_4050_13_1"
+      },
+      "Turkey": {
+        "value": 32.1,
+        "id": "29_600_4051_13_1"
+      },
+      "UK": {
+        "value": 10.4,
+        "id": "29_600_4000_13_1"
+      },
+      "UK (London)": {
+        "value": 11.5,
+        "id": "29_600_4001_13_1"
+      },
+      "United Arab Emirates": {
+        "value": 63.8,
+        "id": "29_600_4052_13_1"
+      },
+      "United States": {
+        "value": 16.1,
+        "id": "29_600_4053_13_1"
+      },
+      "Vietnam": {
+        "value": 38.5,
+        "id": "29_600_4054_13_1"
+      }
+    }
+  },
+  "notCovered": {
+    "meals": "DESNZ publishes no per-meal factor. Catering is estimated from catering spend with the spend-based multiplier, or from a per-meal figure supplied by the caterer.",
+    "generatorOutput": "DESNZ publishes fuel factors, not generator efficiency. The grid-versus-generator comparison needs the generator output in kWh from the hire company's sizing or logs."
+  }
+}
