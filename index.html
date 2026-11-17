@@ -2198,7 +2198,7 @@ function render() {
 }
 function renderTop() {
   const t = totals(), cov = coverage();
-  const cls = !t.cap ? '' : t.total > t.cap ? 'over' : 'under';
+  const cls = !t.cap ? '' : t.total > t.cap ? 'over' : t.unquoted ? '' : 'under';
   $('#readouts').innerHTML = `
     <div class="readout ${cls}"><span class="k">Budget</span><span class="v">${money(t.total)} / ${t.cap ? money(t.cap) : '—'}</span></div>
     <div class="readout"><span class="k">Production CO₂e</span><span class="v">${tonnes(calcCarbon(plan).showT)}</span></div>
@@ -2212,7 +2212,7 @@ function stepStatus(k) {
     case 'research': return plan.research ? ['done', 'Done'] : ['todo', '—'];
     case 'concept': return plan.conceptId ? ['done', 'Chosen'] : plan.concepts.length ? ['todo', plan.concepts.length + ' ideas'] : ['todo', '—'];
     case 'design': return plan.elements.length ? ['done', plan.elements.length] : ['todo', '—'];
-    case 'budget': return !plan.elements.length ? ['todo', '—'] : t.cap && t.total > t.cap ? ['over', 'Over'] : ['done', 'Fits'];
+    case 'budget': return !plan.elements.length ? ['todo', '—'] : t.cap && t.total > t.cap ? ['over', 'Over'] : t.unquoted ? ['todo', t.unquoted + ' unquoted'] : ['done', 'Fits'];
     case 'look': return plan.artists.length || validLook(plan.look) || plan.images.length ? ['done', 'Set'] : ['todo', '—'];
     case 'production': return plan.production ? ['done', 'Done'] : ['todo', '—'];
     case 'sustainability': return plan.sustainability || plan.prevReport ? ['done', 'Done'] : ['todo', '—'];
@@ -2448,7 +2448,7 @@ function vBudget() {
   (plan.lines || []).forEach(l => byCat[l.category] = (byCat[l.category] || 0) + (hasCost(l) ? +l.cost : 0));
   const cov = coverage();
   const cats = Object.entries(byCat).sort((a, b) => b[1] - a[1]); const cmax = cats[0]?.[1] || 1;
-  const status = !t.cap ? '' : t.total > t.cap ? `<span class="pill bad">${money(t.total - t.cap)} over</span>` : `<span class="pill ok">${money(t.cap - t.total)} headroom</span>`;
+  const status = !t.cap ? '' : t.total > t.cap ? `<span class="pill bad">${money(t.total - t.cap)} over${t.unquoted ? ', before unquoted elements' : ''}</span>` : t.unquoted ? `<span class="pill warn">${money(t.cap - t.total)} left, but ${t.unquoted} element${t.unquoted === 1 ? ' is' : 's are'} not quoted yet</span>` : `<span class="pill ok">${money(t.cap - t.total)} headroom</span>`;
   return `${head('Budget', 'Quoted costs only, compared with your cap. Every figure needs a source (vendor quote, invoice or rate card); anything without one is listed below.', `<button class="btn primary" data-act="fit">Fit to budget</button><button class="btn" data-act="headroom">Use headroom</button>`)}
   ${cmdBar()}
   ${coveragePanel(cov)}
