@@ -424,6 +424,15 @@ def check():
     for k, v in load('policy.json', {}).items():
         if not k.startswith('_'):
             need(f'policy.{k}', v.get('sources'))
+    cer = load('ceremonies.json')
+    if cer:
+        need('ceremonies.json', cer.get('source'))
+        for c in cer['ceremonies']:
+            if not c.get('url'):
+                problems.append(f'ceremonies.{c.get("id")}: no article URL')
+            for i, st in enumerate(c['statements']):
+                if not any(r.get('url') or r.get('title') for r in st.get('refs', [])):
+                    problems.append(f'ceremonies.{c["id"]}.statements[{i}]: no cited source')
     if problems:
         print('Reference check FAILED:')
         for p in problems:

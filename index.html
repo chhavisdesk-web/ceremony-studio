@@ -1024,9 +1024,11 @@ function linesTotals(p) {
 /* published event reports and your own close-out files.               */
 /* ------------------------------------------------------------------ */
 let REFDATA = null, refState = 'loading'; // loading | ready | missing
+let CEREMONIES = null; // reference/ceremonies.json: published ceremony figures with their citations
 async function loadReference() {
   try { const r = await fetch('reference/bundle.json', { cache: 'no-cache' }); if (!r.ok) throw new Error(String(r.status)); REFDATA = await r.json(); refState = 'ready'; }
   catch { REFDATA = null; refState = 'missing'; }
+  try { const r = await fetch('reference/ceremonies.json', { cache: 'no-cache' }); if (r.ok) CEREMONIES = await r.json(); } catch { CEREMONIES = null; }
   render();
 }
 // How a planner-entered number is backed. A number counts as sourced only with a basis AND a reference (quote no., invoice, meter log, report).
@@ -2338,7 +2340,7 @@ function vResearch() {
   const actions = libBtn('lib-research', R ? 'Rebuild research' : 'Build research') + claudeBtn('research', 'Deep research') + (R ? libBtn('lib-concepts', 'Generate concepts →') : '');
   if (!R) return `${head('Research', 'Local culture, global story hooks, what works on broadcast, and lessons from past ceremonies.', actions)}
     <div class="empty"><h2>No research yet</h2><p><b>Build research</b> uses the local profile below, a library of past ceremonies and broadcast rules for your brief. It needs no Claude account. <b>Deep research</b> asks Claude for more.</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}</div></div>
-    ${localPanel()}${checklist}`;
+    ${ceremonyPanel()}${localPanel()}${checklist}`;
   const src = R.source === 'library' ? 'Built from the local profile, the reference library and broadcast rules for your brief. No Claude credits used.' : R.source === 'web' ? 'Compiled from public web sources in September 2026. Check facts before they go into a client document.' : 'From Claude\'s own knowledge, without live web search. Check facts before they go into a client document.';
   const list = xs => xs.map(x => `<div class="item"><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p></div>`).join('');
   return `${head('Research', src, actions)}
@@ -2351,7 +2353,31 @@ function vResearch() {
     <div class="ref"><div><div class="ev">${esc(r.event)}</div><div class="yr">${esc(r.year)}</div></div>
     <div class="tk"><b>What happened</b>${esc(r.highlight)}</div><div class="tk"><b>Takeaway</b>${esc(r.takeaway)}</div></div>`).join('')}</div></section>
   ${R.watchouts.length ? `<section class="panel"><h2>Watch out for</h2><ul class="watch">${R.watchouts.map(w => `<li>${esc(w)}</li>`).join('')}</ul></section>` : ''}
+  ${ceremonyPanel()}
   ${localPanel()}`;
+}
+
+/* Published ceremony figures (reference/ceremonies.json) */
+let cerFilter = { type: '', metric: 'budget', q: '', ctx: false };
+const CER_METRIC = { budget: 'Budget or cost', cast: 'Cast and volunteers', audience: 'TV audience', duration: 'Duration', attendance: 'Attendance' };
+function cerRef(r) { const label = r.work || r.title || 'source'; return r.url ? `<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(label)}</a>${r.date ? ' · ' + esc(r.date) : ''}` : esc(label); }
+function ceremonyPanel() {
+  const C = CEREMONIES?.ceremonies;
+  if (!C?.length) return '';
+  const types = [...new Set(C.map(c => c.type))].sort();
+  const q = cerFilter.q.trim().toLowerCase();
+  const list = C.filter(c => (!cerFilter.type || c.type === cerFilter.type) && (!q || (c.title + ' ' + (c.facts?.location || '')).toLowerCase().includes(q)))
+    .map(c => ({ c, st: c.statements.filter(s => (!cerFilter.metric || s.metric === cerFilter.metric) && (cerFilter.ctx || s.scope !== 'context')) })).filter(x => x.st.length).sort((a, b) => b.c.year - a.c.year);
+  const total = list.reduce((n, x) => n + x.st.length, 0), shown = list.slice(0, 40);
+  return `<section class="panel" id="ceremonies"><div class="head2"><div><h2>Published ceremony figures</h2><p class="note" style="margin-top:4px">${C.length} ceremonies since ${CEREMONIES.fromYear}, ${C.reduce((n, c) => n + c.statements.length, 0)} cited figures. Each is the sentence as published on Wikipedia with the source it cites. Nothing is averaged or scaled; check the source before quoting it to a client.</p></div></div>
+    <div class="form" style="margin:12px 0"><div class="field"><label for="cer-type">Ceremony type</label><select id="cer-type" data-cerf="type"><option value="">All types</option>${types.map(t => `<option ${t === cerFilter.type ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select></div>
+      <div class="field"><label for="cer-metric">Figure</label><select id="cer-metric" data-cerf="metric"><option value="">All figures</option>${Object.entries(CER_METRIC).map(([k, l]) => `<option value="${k}" ${k === cerFilter.metric ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+      <div class="field"><label for="cer-q">Search</label><input id="cer-q" data-cerf="q" value="${esc(cerFilter.q)}" placeholder="City, year or event"></div>
+      <div class="field"><label><input type="checkbox" data-cerctx ${cerFilter.ctx ? 'checked' : ''}> Include wider context</label><span class="note">Figures about the whole event or its city, not the ceremony itself</span></div></div>
+    ${list.length ? `<div class="list">${shown.map(({ c, st }) => `<div class="item" style="border-top:1px solid var(--line);padding-top:10px"><h3>${esc(c.title)} <span class="muted mono" style="font-size:12px">${c.year}${c.facts?.location ? ' · ' + esc(c.facts.location) : ''}</span></h3>
+      ${st.map(s => `<p style="margin-top:6px"><span class="chip">${esc(CER_METRIC[s.metric])}: ${esc(s.figures.join(', '))}</span>${s.otherEvent ? ' <span class="pill warn">may describe another event</span>' : ''}${s.scope === 'context' ? ' <span class="pill">wider context</span>' : ''}<br>“${esc(s.text)}”<br><span class="fsrc">Cited: ${s.refs.map(cerRef).join('; ')} · <a href="${esc(c.permalink || c.url)}" target="_blank" rel="noopener">Wikipedia</a></span></p>`).join('')}</div>`).join('')}</div>
+      ${list.length > shown.length ? `<p class="note" style="margin-top:10px">Showing 40 of ${list.length} ceremonies (${total} figures). Narrow the filters to see the rest.</p>` : ''}` : '<p class="muted">No cited figures match these filters.</p>'}
+  </section>`;
 }
 
 /* 03 Concept */
@@ -2493,11 +2519,13 @@ function coveragePanel(cov) {
 }
 function benchmarksPanel() {
   const B = REFDATA?.['ceremony-budgets']?.budgets || [], C = REFDATA?.['closeout-benchmarks'];
-  if (!B.length && !C?.elementCost?.length) return '';
+  const nb = (CEREMONIES?.ceremonies || []).reduce((n, c) => n + c.statements.filter(s => s.metric === 'budget' && s.scope !== 'context').length, 0);
+  if (!B.length && !C?.elementCost?.length && !nb) return '';
   const cur = plan.brief.currency;
   const close = (C?.elementCost || []).filter(x => x.currency === cur);
   return `<div class="grid g2">
     ${close.length ? `<section class="panel"><h2>Your past projects</h2><p class="note" style="margin:-4px 0 12px">Actual invoiced costs from close-out files in reference/closeouts. Median, range and number of projects; not scaled.</p><div class="tablewrap"><table><thead><tr><th>Category</th><th>Tier</th><th class="num">Median</th><th class="num">Range</th><th class="num">n</th></tr></thead><tbody>${close.map(x => `<tr><td>${esc(x.category)}</td><td>${TIER_LABEL[x.tier] || esc(x.tier)}</td><td class="num">${money(x.median, false)}</td><td class="num">${money(x.min)}–${money(x.max)}</td><td class="num" title="${esc(x.files.join(', '))}">${x.n}</td></tr>`).join('')}</tbody></table></div></section>` : ''}
+    ${nb ? `<section class="panel"><h2>Ceremony budgets on record</h2><p class="note">${nb} cited budget and cost statements from past ceremonies, with their sources. Context only: they cover whole ceremonies, in the currency and year stated.</p><button class="btn sm" data-act="cer-budgets" style="margin-top:10px">Browse them</button></section>` : ''}
     ${B.length ? `<section class="panel"><h2>Published ceremony budgets</h2><p class="note" style="margin:-4px 0 12px">Whole ceremonies, in the currency reported. Context only: they do not price individual elements.</p><div class="list">${B.map(b => `<div class="risk"><span>${esc(b.name)} <span class="muted">· ${b.year} · ${esc(b.scope)}</span><br><span class="fsrc">${b.sources.map(id => srcLink(id)).join('; ')}${b.verification === 'uncertain' ? ' · attribution uncertain' : ''}</span></span><b class="mono">${Number(b.amount).toLocaleString('en')} ${esc(b.currency)}</b></div>`).join('')}</div></section>` : ''}
   </div>`;
 }
@@ -2896,6 +2924,7 @@ function sourcesMarkdown(p = plan) {
   L.push('Emission factors and multipliers:', ...Object.entries(ds).map(([id, d]) => `- ${d.publisher}, *${d.title}* (${d.licence}). ${d.url} (accessed ${d.accessed}, SHA-256 ${d.sha256.slice(0, 12)}…)`));
   L.push('', 'Methods:', '- Activity data × DESNZ 2026 factors (direct + well-to-tank; flights include radiative forcing). GHG Protocol activity-based method.', '- Grid electricity: lifecycle intensity for the event country (Ember via Our World in Data).', `- Show elements and budget lines without activity data: quoted cost → 2023 GBP at FRED average exchange rates → × Defra/Leeds spend-based multiplier for the industry group (GHG Protocol spend-based method). ${srcText('ghgp-scope3-technical')}`);
   const cp = REFDATA.policy?.carbonPrice; if (cp) L.push(`- Carbon price: ${cp.value} ${cp.currency} per tonne, ${cp.label}. ${srcText(cp.sources[0])}`);
+  if (CEREMONIES?.ceremonies?.length) L.push(`- Past-ceremony figures: ${CEREMONIES.ceremonies.length} ceremonies since ${CEREMONIES.fromYear}, quoted from English Wikipedia (${CEREMONIES.license}) with the sources each article cites; built ${CEREMONIES.builtAt}. Used as context only, never as an estimate.`);
   const ov = FACTOR_KEYS.map(k => factorOf(p, k)).filter(f => f.from === 'override');
   if (ov.length) L.push('', 'Factors replaced with supplier figures:', ...ov.map(f => `- ${f.label}: ${f.v} ${f.unit} (${sourced(f.override) ? BASIS[f.override.b] + ': ' + f.override.r : 'NO SOURCE'}); reference value ${f.refV ?? 'none'}`));
   const cov = coverage(p);
@@ -3092,6 +3121,7 @@ const actions = {
   'new-concept': () => conceptModal(null),
   'save-concept': b => saveConcept(b.dataset.id || null),
   'del-concept': b => { const id = b.dataset.id; closeModal(); mutate(p => { p.concepts = p.concepts.filter(c => c.id !== id); if (p.conceptId === id) p.conceptId = null; }, { log: 'Concept deleted' }); toast('Concept deleted. Use Undo to bring it back.'); },
+  'cer-budgets': () => { cerFilter = { type: '', metric: 'budget', q: '', ctx: false }; go('research'); requestAnimationFrame(() => $('#ceremonies')?.scrollIntoView({ block: 'start' })); },
   'fill-closeout': () => mutate(p => {
     const f = closeoutFill(p); if (!f.length) return;
     f.forEach(x => { p.carbon[x.key] = x.value; });
@@ -3174,6 +3204,7 @@ document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && $('#over
 document.addEventListener('input', ev => {
   const el = ev.target;
   if (el.id === 'cmd-input') { cmdDraft = el.value; return; }
+  if (el.dataset.cerf === 'q') { cerFilter.q = el.value; const box = $('#ceremonies'); if (box) { const pos = el.selectionStart; box.outerHTML = ceremonyPanel(); const n = $('#cer-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } } return; }
   if (el.dataset.bind) {
     const path = el.dataset.bind.split('.'); let o = plan; for (let i = 0; i < path.length - 1; i++) o = o[path[i]];
     o[path.at(-1)] = el.type === 'number' ? num(el.value) : el.value;
@@ -3189,6 +3220,8 @@ document.addEventListener('input', ev => {
 document.addEventListener('change', ev => {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
+  if (el.dataset.cerctx != null) { cerFilter.ctx = el.checked; const y = scrollY; render(); scrollTo(0, y); return; }
+  if (el.dataset.cerf && el.tagName === 'SELECT') { cerFilter[el.dataset.cerf] = el.value; const y = scrollY; render(); scrollTo(0, y); return; }
   if (el.dataset.src) { mutate(p => setSrc(p, el.dataset.src, el.dataset.k, el.dataset.k === 'r' ? el.value.trim() : el.value)); return; }
   if (el.dataset.line) { mutate(p => { const l = p.lines.find(x => x.id === el.dataset.line); if (!l) return; const k = el.dataset.k;
     if (k === 'oh') l.oh = el.checked;

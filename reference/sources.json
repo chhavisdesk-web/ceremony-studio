@@ -152,6 +152,14 @@
       "publisher": "CBS News",
       "year": 2024,
       "url": "https://www.cbsnews.com/news/do-super-bowl-halftime-performers-get-paid"
+    },
+    "wikipedia-en": {
+      "title": "English Wikipedia ceremony articles (each figure keeps the source the article cites, plus the article revision)",
+      "publisher": "Wikipedia contributors",
+      "year": 2026,
+      "url": "https://en.wikipedia.org/",
+      "licence": "CC BY-SA 4.0",
+      "used_for": "reference/ceremonies.json, built by scripts/build_ceremonies.py"
     }
   }
 }

@@ -14,6 +14,7 @@ This folder holds everything the app relies on. The app loads `bundle.json` when
 | `currency.json` | 2023 average exchange rates, used only to bring costs into the multipliers' price basis | US Federal Reserve H.10 via FRED |
 | `events.json` | Published whole-event footprints (Olympics, World Cups, EURO 2024 and others) | Organiser reports and press, one or more sources per figure |
 | `ceremony-budgets.json` | Published ceremony and show budgets | Press and government reporting |
+| `ceremonies.json` | Cited figures from past ceremonies since 2000: budget or cost, cast and volunteers, TV audience, duration and attendance. Each figure is stored with its sentence, the source the article cites, and the article revision | English Wikipedia (CC BY-SA 4.0), built by `scripts/build_ceremonies.py` |
 | `policy.json` | The internal carbon price (EUR 25/t) | UEFA EURO 2024 Climate Fund |
 | `closeouts/` | Close-out files exported from finished projects | Your own invoices, delivery dates and meter readings |
 | `closeout-benchmarks.json` | Medians, ranges and sample sizes built from `closeouts/` | Generated |
@@ -40,6 +41,23 @@ Anything without a source is marked **No source** in the app, is listed in the e
 - Grid intensity is lifecycle (it includes upstream emissions), so it is higher than generation-only factors.
 - There is no published per-meal factor in these datasets, so catering uses catering spend or the caterer's own figure.
 - `events.json` and `ceremony-budgets.json` were transcribed from search excerpts because the build environment could not open those sites. Each entry says how sure the attribution is (`verification`). Open the cited page before quoting a figure to a client.
+
+### Past-ceremony figures
+`scripts/build_ceremonies.py` covers these ceremonies since 2000:
+- Olympic opening and closing ceremonies, listed from Wikidata
+- the Wikipedia categories for FIFA World Cup, Commonwealth Games, Asian Games, multi-sport and Cricket World Cup opening ceremonies, Super Bowl halftime shows and closing ceremonies
+- a short list of state and royal ceremonies
+
+It reads each article and keeps only the sentences that state a figure AND carry a citation. Each stored figure has the sentence, the figure as written, the cited source (URL, publication, date) and a permalink to the article revision. It never averages, converts or scales a figure.
+
+A sentence that names a different year is flagged as possibly about another event. For example, the London 2012 article quotes Beijing's budget. The app shows every figure with its sentence and source, so a reader can judge it.
+
+```bash
+python3 scripts/build_ceremonies.py
+```
+```bash
+python3 scripts/build_reference.py closeouts
+```
 
 ## Updating
 
