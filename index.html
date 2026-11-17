@@ -386,7 +386,7 @@ const TEMPLATES = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Example plan (clearly marked; estimates are illustrative)           */
+/* Example plan (clearly marked; no prices until quotes are added)     */
 /* ------------------------------------------------------------------ */
 // Tiers carry descriptions only. Costs come from vendor quotes (with their reference); CO2e is calculated from them.
 const blankTier = desc => ({ desc: desc || '', cost: null, src: blankSrc(), co2s: null });
@@ -496,9 +496,9 @@ function examplePlan() {
         { name:'Show week', when:'1–5 June 2027', tasks:['Card placement crew in the stands','Dress rehearsal','Show at about 17:45 CEST','Roll off, then collect the fabric and cards for reuse and recycling'] }
       ],
       elementNotes: {
-        e2: { fabrication:'Reuse an existing modular deck and add a mirrored vinyl skin with anti-slip diamond texture.', suppliers:'Stage builders with pitch-certified rolling systems', localSourcing:'Medium: specialist builders, Spanish crew', leadWeeks:16, risks:'Turf load and the two-minute rollout.' },
-        e3: { fabrication:'Panels printed on recycled PET, sewn with quick-release seams and folded for a timed unfurl.', suppliers:'Large-format textile printers in Spain', localSourcing:'High', leadWeeks:16, risks:'Wind on an open pitch; rehearse with weights and a fold plan.' },
-        e6: { fabrication:'Recycled-paper cards laid seat by seat, with instructions printed on the back.', suppliers:'Madrid printers and a placement crew', localSourcing:'High', leadWeeks:10, risks:'Placement takes a full crew shift on match day.' }
+        e2: { fabrication:'Reuse an existing modular deck and add a mirrored vinyl skin with anti-slip diamond texture.', suppliers:'Stage builders with pitch-certified rolling systems', localSourcing:'Medium: specialist builders, Spanish crew', risks:'Turf load and the two-minute rollout.' },
+        e3: { fabrication:'Panels printed on recycled PET, sewn with quick-release seams and folded for a timed unfurl.', suppliers:'Large-format textile printers in Spain', localSourcing:'High', risks:'Wind on an open pitch; rehearse with weights and a fold plan.' },
+        e6: { fabrication:'Recycled-paper cards laid seat by seat, with instructions printed on the back.', suppliers:'Madrid printers and a placement crew', localSourcing:'High', risks:'Placement takes a full crew shift on match day.' }
       },
       criticalPath: ['Headliner contract', 'Noise and effects permission from Madrid city council', 'Pitch-load and rollout sign-off', 'Fabric sun wind test']
     },
@@ -934,7 +934,7 @@ function libraryArtists(p) {
 /* ------------------------------------------------------------------ */
 /* Built-in library: works with no Claude account at all               */
 /* ------------------------------------------------------------------ */
-// Base prices: European market, 70,000-seat stadium, in EUR. Scaled by capacity and converted at rough rates.
+// Show library: element ideas and tier specifications only. No prices: costs come from vendor quotes.
 const LIB_ACTS = [['Opening', .15, 'Set the scene and give the cameras their first big image.'], ['Build', .35, 'Cast, music and set build the story.'], ['Peak', .3, 'Headline performance and effects.'], ['Finale', .2, 'The reveal, the crowd moment and the handover.']];
 const LIB = [
   ['Headline performance',2,'Performance','A headline act at the peak of the show.',[5,2,5],['Global star with a large dance company'],['Established international act with dancers'],['Leading national act with a small dance group'],null,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer acts already touring nearby.'],
@@ -1247,7 +1247,7 @@ function compareReport(p) {
   const growing = new Set(scopeRows.filter(r => r.delta > 0).map(r => r.cat));
   const biggest = [...scopeRows].sort((a, b) => b.cur - a.cur).slice(0, 2).map(r => r.cat);
   const actions = carbonActions(p).filter(a => growing.has(a.cat) || biggest.includes(a.cat)).slice(0, 6);
-  return { rows, prevT, curT, hasAud, insights, actions, target: prevT * .9 };
+  return { rows, prevT, curT, hasAud, insights, actions };
 }
 const SAMPLE_REPORT = `Sample event, last year (fictional figures)
 Category,tCO2e
@@ -2104,11 +2104,11 @@ ${briefText()}
 ${conceptText()}
 ACTS: ${plan.acts.map(a => a.name).join(', ') || 'not set'}
 ${plan.research ? 'LOCAL CONTEXT: ' + plan.research.localContext.map(x => x.title).join('; ') : ''}
-${perf ? `HEADLINE FEE BANDS (${plan.brief.currency}): lean about ${perf.tiers.lean.cost}, standard about ${perf.tiers.standard.cost}, signature about ${perf.tiers.signature.cost}` : ''}
+${perf ? `HEADLINE QUOTES SO FAR (${plan.brief.currency}): ${TIERS.map(t => `${t} ${hasCost(perf.tiers[t]) ? +perf.tiers[t].cost : 'not quoted'}`).join(', ')}` : ''}
 
 Reply with ONLY a JSON object:
 {"artists":[{"name":"","origin":"city/country","role":"one of ${ROLES.join('|')}","why":"one sentence on why they fit this concept and place","audience":"where their biggest audiences are","feeBand":"lean|standard|signature","act":"one of the acts","risks":"one short sentence: touring, availability, language, controversy"}]}
-Rules: 8-10 real, currently active artists. At least 3 from the host country or city. At least one pairing of a local and an international artist (list both names in one entry). One surprise guest or legend. Prefer artists with broad reach across Europe and the likely finalists' markets. Do not claim anyone is booked or available; fee bands are estimates.`;
+Rules: 8-10 real, currently active artists. At least 3 from the host country or city. At least one pairing of a local and an international artist (list both names in one entry). One surprise guest or legend. Prefer artists with broad reach across Europe and the likely finalists' markets. Do not claim anyone is booked or available. feeBand is only which tier of the headline element the artist would fit (lean, standard or signature); never state a fee.`;
   const r = await askClaude('Finding artists…', prompt);
   if (!r) return;
   const list = arr(r.artists).filter(a => a?.name).map(a => ({ id: uid(), name: String(a.name), origin: String(a.origin || ''), role: String(a.role || 'Global headliner'), why: String(a.why || ''), audience: String(a.audience || ''), feeBand: TIERS.includes(a.feeBand) ? a.feeBand : 'standard', act: String(a.act || ''), risks: String(a.risks || '') }));
@@ -2264,7 +2264,7 @@ function vBrief() {
   const pr = plan.priorities;
   const slider = (k, label) => `<div class="slider"><div class="row"><label for="p-${k}">${label}</label><span class="mono" id="pv-${k}">${pr[k]}/5</span></div><input type="range" id="p-${k}" min="1" max="5" step="1" value="${pr[k]}" data-prio="${k}"></div>`;
   const types = [...new Set([plan.brief.eventType, ...TEMPLATES.map(t => t.eventType)])];
-  return `${head('The brief', 'Where, what and for whom. Everything downstream (research, concepts, prices and the sustainability review) is built from this.', `${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}`)}
+  return `${head('The brief', 'Where, what and for whom. Everything downstream (research, concepts, show design and the sustainability review) is built from this.', `${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}`)}
   <p class="note">Buttons marked <b>Claude</b> use the Claude account of whoever is using the page. Buttons marked <b>Library</b> use the built-in show library and need no Claude account.</p>
   <section class="panel"><h2>Event</h2><div class="form">
     ${field('Event name', 'brief.eventName', { ph: 'e.g. Cup Final pre-match show' })}
@@ -2376,7 +2376,7 @@ function vConcept() {
       </div>
     </article>`;
   }).join('');
-  return `${head('Concept', 'Choose a direction. Building the show design turns it into priced elements, each with three tiers.', libBtn('lib-concepts', 'New concepts') + claudeBtn('concepts', 'Write with Claude') + '<button class="btn" data-act="new-concept">Write your own</button>')}
+  return `${head('Concept', 'Choose a direction. Building the show design turns it into elements, each specified in three tiers for vendors to quote.', libBtn('lib-concepts', 'New concepts') + claudeBtn('concepts', 'Write with Claude') + '<button class="btn" data-act="new-concept">Write your own</button>')}
     <div class="grid g3">${cards}</div>`;
 }
 
@@ -2442,7 +2442,7 @@ function vDesign() {
 
 /* 05 Budget */
 function vBudget() {
-  if (!plan.elements.length) return `${head('Budget', 'Live estimate against your cap.')}<div class="empty"><h2>Nothing to price yet</h2><p>Build the show design first. Every element comes with three priced tiers.</p><button class="btn primary" data-act="go" data-step="design">Go to show design</button></div>`;
+  if (!plan.elements.length) return `${head('Budget', 'Quoted costs against your cap.')}<div class="empty"><h2>Nothing to price yet</h2><p>Build the show design first. Every element has three tiers for vendors to quote.</p><button class="btn primary" data-act="go" data-step="design">Go to show design</button></div>`;
   const t = totals(); const max = Math.max(t.total, t.cap) * 1.08 || 1;
   const byCat = {}; plan.elements.filter(e => e.included).forEach(e => byCat[e.category] = (byCat[e.category] || 0) + tierCost(e, e.tier));
   (plan.lines || []).forEach(l => byCat[l.category] = (byCat[l.category] || 0) + (hasCost(l) ? +l.cost : 0));
@@ -2573,9 +2573,9 @@ function vLook() {
       <div class="prompts">${prompt('Final look', 'final')}${plan.concepts.map(c => prompt('Concept: ' + c.title, 'concept', c.id)).join('')}${plan.elements.filter(e => e.included).map(e => prompt(e.name, 'element', e.id)).join('')}</div>
     </section>
   </div>
-  <section class="panel"><div class="head2"><div><h2>Artist recommendations</h2>${perf ? `<p class="note" style="margin-top:4px">Headline fee bands from your budget: Lean ${money(perf.tiers.lean.cost)} · Standard ${money(perf.tiers.standard.cost)} · Signature ${money(perf.tiers.signature.cost)}</p>` : ''}</div>
+  <section class="panel"><div class="head2"><div><h2>Artist recommendations</h2>${perf ? `<p class="note" style="margin-top:4px">Headline quotes so far: Lean ${costLabel(perf.tiers.lean)} · Standard ${costLabel(perf.tiers.standard)} · Signature ${costLabel(perf.tiers.signature)}</p>` : ''}</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${plan.local?.artists ? libBtn('lib-artists', 'Suggest from city profile') : ''}${claudeBtn('artists', plan.artists.length ? 'Refresh with Claude' : 'Recommend with Claude')}<button class="btn" data-act="add-artist">Add artist</button></div></div>
-    ${plan.artists.length ? `<div class="grid g3" style="margin-top:14px">${plan.artists.map(a => artistCard(a, perf)).join('')}</div>` : `<div class="empty" style="margin-top:14px"><p>${claudeState === 'off' ? 'Add artists by hand. Sign in to Claude for named suggestions.' : 'Claude suggests a mix: global headliners, local heroes, a local and international pairing, and a surprise guest, each matched to a fee band in your budget.'}</p></div>`}
+    ${plan.artists.length ? `<div class="grid g3" style="margin-top:14px">${plan.artists.map(a => artistCard(a, perf)).join('')}</div>` : `<div class="empty" style="margin-top:14px"><p>${claudeState === 'off' ? 'Add artists by hand. Sign in to Claude for named suggestions.' : 'Claude suggests a mix: global headliners, local heroes, a local and international pairing, and a surprise guest, each matched to a tier of the headline element.'}</p></div>`}
     <p class="note" style="margin-top:12px">Suggestions only. Availability, fees and willingness are unconfirmed until an agent replies.</p>
   </section>`;
 }
@@ -2749,7 +2749,7 @@ function comparePanel(cmp) {
   const r = cmp;
   return `<section class="panel" id="compare"><div class="head2"><div><h2>Compared with ${esc(P.label)}</h2><p class="note" style="margin-top:4px">${P.source === 'claude' ? 'Read by Claude.' : 'Read in your browser.'} Check the categories below; you can change any value or category.</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${downloads ? '<button class="btn sm" data-act="prev-download">Download comparison</button>' : ''}<button class="btn sm ghost" data-act="prev-clear">Remove report</button></div></div>
-    <div class="stats" style="margin-top:14px"><div class="stat"><div class="k">${esc(P.label)}</div><div class="v">${tonnes(r.prevT)}</div></div><div class="stat"><div class="k">This plan</div><div class="v ${r.curT > r.prevT ? 'bad' : 'ok'}">${tonnes(r.curT)}</div></div><div class="stat"><div class="k">Change</div><div class="v ${r.curT > r.prevT ? 'bad' : 'ok'}">${r.prevT ? ((r.curT - r.prevT) / r.prevT * 100 > 0 ? '+' : '') + ((r.curT - r.prevT) / r.prevT * 100).toFixed(0) + '%' : '—'}</div></div><div class="stat"><div class="k">10% reduction target</div><div class="v">${tonnes(r.target)}</div></div></div>
+    <div class="stats" style="margin-top:14px"><div class="stat"><div class="k">${esc(P.label)}</div><div class="v">${tonnes(r.prevT)}</div></div><div class="stat"><div class="k">This plan</div><div class="v ${r.curT > r.prevT ? 'bad' : 'ok'}">${tonnes(r.curT)}</div></div><div class="stat"><div class="k">Change</div><div class="v ${r.curT > r.prevT ? 'bad' : 'ok'}">${r.prevT ? ((r.curT - r.prevT) / r.prevT * 100 > 0 ? '+' : '') + ((r.curT - r.prevT) / r.prevT * 100).toFixed(0) + '%' : '—'}</div></div></div>
     <ul class="watch" style="margin-top:14px">${r.insights.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
     <div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Category</th><th class="num">${esc(P.label)}</th><th class="num">This plan</th><th class="num">Change</th><th class="num">%</th></tr></thead><tbody>
       ${r.rows.map(x => `<tr${!r.hasAud && x.cat === 'audience' ? ' style="opacity:.55"' : ''}><td>${CARBON_CATS[x.cat]}</td><td class="num">${tonnes(x.prev)}</td><td class="num">${tonnes(x.cur)}</td><td class="num ${x.delta > 0 ? 'pos' : 'neg'}">${x.delta > 0 ? '+' : ''}${tonnes(x.delta)}</td><td class="num">${x.pct == null ? 'new' : (x.pct > 0 ? '+' : '') + x.pct.toFixed(0) + '%'}</td></tr>`).join('')}
@@ -2770,7 +2770,7 @@ function compareMarkdown() {
   const r = compareReport(plan), P = plan.prevReport; if (!r) return '';
   return [`# Emissions comparison: ${plan.name} vs ${P.label}`, '', ...r.insights.map(x => `- ${x}`), '', '| Category | ' + P.label + ' (t) | This plan (t) | Change (t) | % |', '|---|---:|---:|---:|---:|',
     ...r.rows.map(x => `| ${CARBON_CATS[x.cat]} | ${x.prev.toFixed(1)} | ${x.cur.toFixed(1)} | ${x.delta.toFixed(1)} | ${x.pct == null ? 'new' : x.pct.toFixed(0) + '%'} |`), '',
-    `Target: ${tonnes(r.target)} (10% below last time).`, '', '## Suggestions', ...r.actions.map(a => `- **${a.title}** (saves about ${tonnes(a.saveT)}): ${a.detail}`), '', '_Planning estimate. Factors are approximate; verify with measured data._'].join('\n');
+    '## Suggestions', ...r.actions.map(a => `- **${a.title}** (saves about ${tonnes(a.saveT)}): ${a.detail}`), '', '_This plan uses UK DESNZ 2026 factors and Ember grid intensity; see the plan export for sources. Last year\'s figures are as read from its report._'].join('\n');
 }
 async function runReadReport(text, image) {
   const prompt = `You are a sustainability analyst for live events. Read this event emissions report and extract the emissions by category in tonnes of CO2e.
@@ -3053,7 +3053,7 @@ const actions = {
   'copy-prompt': async b => { const k = b.dataset.kind, id = b.dataset.id; const t = imagePrompt(k, k === 'concept' ? plan.concepts.find(c => c.id === id) : k === 'element' ? plan.elements.find(e => e.id === id) : null); try { await navigator.clipboard.writeText(t); toast('Prompt copied. Paste it into your image tool.'); } catch { openModal(`<div class="mh"><h2>Image prompt</h2><button class="icon" data-act="close" aria-label="Close">×</button></div><textarea class="field" style="width:100%;min-height:180px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2)" readonly id="prompt-text">${esc(t)}</textarea><p class="note">Select the text and copy it.</p>`); $('#prompt-text')?.select(); } },
   zoom: b => { const i = plan.images.find(x => x.id === b.dataset.id); if (i) openModal(`<div class="mh"><h2>${esc(i.caption || 'Render')}</h2><button class="icon" data-act="close" aria-label="Close">×</button></div><img src="${esc(i.url)}" alt="${esc(i.caption || 'Render')}" style="width:100%;border-radius:8px">`); },
   'del-img': b => mutate(p => { p.images = p.images.filter(i => i.id !== b.dataset.id); }, { log: 'Image removed' }),
-  book: b => { const a = plan.artists.find(x => x.id === b.dataset.id), perf = plan.elements.find(e => e.category === 'Performance'); if (!a || !perf) return; if (perf.locked) { toast('The headline element is locked. Unlock it first.'); return; } propose('Artist', `Make ${a.name} the headline act, priced at the ${TIER_LABEL[a.feeBand]} fee band.`, [{ op: 'update', id: perf.id, fields: { tiers: { [a.feeBand]: { desc: `${a.name}${a.role ? ' (' + a.role.toLowerCase() + ')' : ''}` } } } }, { op: 'set_tier', id: perf.id, tier: a.feeBand }]); },
+  book: b => { const a = plan.artists.find(x => x.id === b.dataset.id), perf = plan.elements.find(e => e.category === 'Performance'); if (!a || !perf) return; if (perf.locked) { toast('The headline element is locked. Unlock it first.'); return; } propose('Artist', `Make ${a.name} the headline act, as the ${TIER_LABEL[a.feeBand]} tier. That tier needs a new quote.`, [{ op: 'update', id: perf.id, fields: { tiers: { [a.feeBand]: { desc: `${a.name}${a.role ? ' (' + a.role.toLowerCase() + ')' : ''}` } } } }, { op: 'set_tier', id: perf.id, tier: a.feeBand }]); },
   'del-artist': b => mutate(p => { p.artists = p.artists.filter(a => a.id !== b.dataset.id); }),
   'add-artist': () => openModal(`<div class="mh"><h2>Add artist</h2><button class="icon" data-act="close" aria-label="Close">×</button></div><div class="form">
       <div class="field"><label for="ar-name">Name</label><input id="ar-name"></div><div class="field"><label for="ar-origin">From</label><input id="ar-origin"></div>
