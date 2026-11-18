@@ -5,7 +5,8 @@ For every country (sovereign states, plus England, Scotland, Wales and Northern 
 host city in the catalogue, it collects from Wikidata:
   - the flag's colours with their sRGB hex codes (flag P163 -> color P462 -> hex P465)
   - the anthem (P85), the motto (P1451) and other official symbols (P2238), such as a national flower
-  - elements on the UNESCO intangible cultural heritage lists (P3259), with their UNESCO page (P10221)
+  - elements on the UNESCO intangible cultural heritage lists (P3259), with their UNESCO page (P10221);
+    the Register of Good Safeguarding Practices is left out: it lists programmes, not traditions
 It also builds a small motif dictionary: for each motif, the sentences from its English Wikipedia
 article that say what it symbolises, and Iconclass entries that name it as a symbol (Iconclass is CC0).
 
@@ -34,7 +35,6 @@ ICH_LISTS = {
     'Q110319947': 'Representative List of the Intangible Cultural Heritage of Humanity',
     'Q17323370': 'List of Intangible Cultural Heritage in Need of Urgent Safeguarding',
     'Q877988': 'Masterpieces of the Oral and Intangible Heritage of Humanity',
-    'Q17325849': 'Register of Good Safeguarding Practices',
 }
 
 # Motifs to look up (the only hand-written list): the Wikipedia article for each, and the app motif it suits.
@@ -49,6 +49,7 @@ MOTIFS = [
     ('Bridge', 'Bridge', None), ('Wheel', 'Wheel', 'rings'), ('Spiral', 'Spiral', 'rings'), ('Labyrinth', 'Labyrinth', 'grid'),
     ('Mandala', 'Mandala', 'petals'), ('Butterfly', 'Butterfly', None), ('Lantern', 'Sky_lantern', None), ('Wave', 'Wave_(heraldry)', 'waves'),
 ]
+TOURISM_SLOGAN = 'Q96036107'
 ICONCLASS_FILES = ['txt_en_2_3.txt', 'txt_en_4.txt', 'txt_en_5_6_7_8.txt', 'txt_en_9.txt']  # nature, society, ideas, history, myth (not the religious sections)
 ICONCLASS_RAW = 'https://raw.githubusercontent.com/iconclass/data/main/txt/en/'
 
@@ -88,11 +89,15 @@ def entities(ids=(), titles=()):
             for k, e in api(q, f'ent:{field}:{chunk}').get('entities', {}).items():
                 if 'missing' not in e:
                     out[e.get('id', k)] = e
+                    if field == 'ids':
+                        out[k] = e  # a redirected id points at its target
     return out
 
 
 def label(e):
-    return (e or {}).get('labels', {}).get('en', {}).get('value')
+    """English label, else the English Wikipedia article title."""
+    e = e or {}
+    return e.get('labels', {}).get('en', {}).get('value') or e.get('sitelinks', {}).get('enwiki', {}).get('title')
 
 
 def desc(e):
@@ -132,7 +137,12 @@ def collect(ents, ich_props):
                   'flag': next((commons(value(c)) for c in claims(e, 'P41')), None), 'coatOfArms': next((commons(value(c)) for c in claims(e, 'P94')), None),
                   'anthem': None, 'mottos': [], 'colours': [], 'symbols': [], 'traditions': []}
         for c in claims(e, 'P1451'):
+            roles = [q.get('datavalue', {}).get('value', {}).get('id') for q in c.get('qualifiers', {}).get('P3831', [])]
+            if TOURISM_SLOGAN in roles:
+                continue  # Wikidata stores tourism slogans as mottos; they are not civic symbols
             v = value(c)
+            if isinstance(v, dict) and v.get('language') == 'cy' and q != 'Q25':
+                continue  # unsourced Welsh translations of other countries' slogans
             if isinstance(v, dict) and v.get('text') and v['text'] not in [m['text'] for m in out[q]['mottos']]:
                 out[q]['mottos'].append({'text': v['text'], 'lang': v.get('language', '')})
     refs = set()
@@ -169,7 +179,7 @@ def collect(ents, ich_props):
                 continue
             o['symbols'].append({'name': label(se), 'description': desc(se), 'types': [label(allx.get(value(t))) for t in claims(se, 'P31') if label(allx.get(value(t)))],
                                  'wikidata': wd_url(sq), 'article': article(se)})
-    # UNESCO intangible heritage: every listed element, tied to the entity by country (P17) or location (P131/P276)
+    # UNESCO intangible heritage: every listed element, tied to a country by country (P17) or country of origin (P495), to a city by location (P131/P276)
     for lq, lname in ICH_LISTS.items():
         for xq, x in entities(ids=search(f'haswbstatement:P3259={lq}')).items():
             if not label(x):
@@ -184,8 +194,14 @@ def collect(ents, ich_props):
                     o = out.get(value(c))
                     if o and item['wikidata'] not in [t['wikidata'] for t in o['traditions']]:
                         o['traditions'].append(item)
+    shared = {}
     for e in out.values():
-        e['traditions'].sort(key=lambda x: (x['year'] or 0), reverse=True)
+        for t in e['traditions']:
+            shared[t['wikidata']] = shared.get(t['wikidata'], 0) + 1
+    for e in out.values():
+        e['traditions'] = [{**t, 'sharedWith': shared[t['wikidata']] - 1} for t in e['traditions']]
+        # this place's own traditions first, then those it shares with others; newest first within each
+        e['traditions'].sort(key=lambda x: (x['sharedWith'] > 0, -(x['year'] or 0)))
     return out
 
 
@@ -240,7 +256,7 @@ def motifs():
 def main():
     print('countries ...')
     ids = search('haswbstatement:P31=Q3624078 -haswbstatement:P576') + ['Q21', 'Q22', 'Q25', 'Q26']
-    countries = collect(entities(ids=ids), ('P17',))
+    countries = collect(entities(ids=ids), ('P17', 'P495'))  # country, or country of origin
     places = json.load(open(os.path.join(ROOT, 'reference', 'places.json'), encoding='utf-8'))
     print('cities ...')
     cents = entities(titles=[v['title'] for v in places['cities'].values()])

@@ -1092,7 +1092,7 @@ function symColours(e, of) {
   if (!e?.colours?.length) return '';
   const src = e.flagItem ? `<a href="${esc(e.flagItem)}" target="_blank" rel="noopener">Wikidata</a>` : `<a href="${esc(e.wikidata)}" target="_blank" rel="noopener">Wikidata</a>`;
   return `<div class="symrow"><div class="symsw">${e.colours.map(c => `<span class="sw" title="${esc(c.name || '')} ${c.hex}"><i style="background:${c.hex}"></i><span>${esc(c.name || '')}<br><span class="mono">${c.hex}</span></span></span>`).join('')}</div>
-    <div class="symact"><button class="btn sm" data-act="sym-palette" data-of="${of}">Use as palette</button><span class="fsrc">${e.colours[0].via === 'flag' ? 'Flag colours' : 'Official colours'} of ${esc(e.name)}, hex codes from ${src}</span></div></div>`;
+    <div class="symact"><button class="btn sm" data-act="sym-palette" data-of="${of}">Use as palette</button><span class="fsrc">${e.colours[0].via === 'flag' ? 'Flag colours' : 'Official colours'} of ${esc(e.name)}, as hex values of the named colours on ${src}. Check the official flag specification for exact shades.</span></div></div>`;
 }
 function symIdentity(e) {
   if (!e) return '';
@@ -1109,7 +1109,7 @@ function symTraditions(S) {
   const shown = symShowAll ? list : list.slice(0, 8);
   return `<h3 style="margin:18px 0 6px">Traditions on the UNESCO lists · ${list.length}</h3>
     <div class="symtrad">${shown.map(t => { const k = symKey('tradition', t); return `<article class="item"><h3>${esc(t.name)}</h3>${t.description ? `<p class="note">${esc(t.description.charAt(0).toUpperCase() + t.description.slice(1))}</p>` : ''}
-      <p class="fsrc">${esc(t.list)}${t.year ? ', ' + t.year : ''} · ${esc(t.where)} · ${symLinks(t)}</p>
+      <p class="fsrc">${esc(t.list)}${t.year ? ', ' + t.year : ''} · ${esc(t.where)}${t.sharedWith ? ` and ${t.sharedWith} other${t.sharedWith === 1 ? '' : 's'}` : ''} · ${symLinks(t)}</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn sm" data-act="sym-element" data-k="${esc(k)}">Add as cast idea</button>${symAddBtn(k)}</div></article>`; }).join('')}</div>
     ${list.length > 8 ? `<button class="linkbtn" data-act="sym-all" style="margin-top:8px">${symShowAll ? 'Show fewer' : `Show all ${list.length}`}</button>` : ''}`;
 }
@@ -1170,7 +1170,7 @@ function symElement(k) {
       green: { score: 4, note: 'Local performers travel less.' } });
     if (!(p.symbols || []).some(s => s.key === k)) (p.symbols ||= []).push({ ...symRef(t), key: k });
   }, { log: `Added ${t.name} as a cast idea` });
-  toast(`${t.name} added to ${act}, unpriced. Get a quote from the performers.`);
+  toast(`${t.name} added to ${act}, unpriced. Shape it with the community that keeps it, then get a quote.`);
 }
 
 /* Venue photos: reference/photos.json, one freely licensed Commons photo per catalogue venue */
@@ -1937,7 +1937,7 @@ function drawShow(cv, p, opts = {}) {
 function imagePrompt(kind, target) {
   const b = plan.brief, look = lookOf(plan, kind === 'concept' ? target : null), colors = look.palette.join(', ');
   const place = `${b.venue || b.venueType || 'the venue'} in ${b.city || 'the host city'}${b.country ? ', ' + b.country : ''}`;
-  const refs = (plan.symbols || []).length ? ` Local references: ${plan.symbols.map(x => x.name + (x.kind === 'tradition' ? ' (traditional performance)' : '')).join('; ')}.` : '';
+  const refs = (plan.symbols || []).length ? ` Local references: ${plan.symbols.map(x => x.name + (x.kind === 'tradition' ? ' (local tradition)' : '')).join('; ')}.` : '';
   const safe = refs + ' No text, no logos, no official competition branding, no real people\'s likeness.';
   if (kind === 'final') {
     const inc = plan.elements.filter(e => e.included).map(e => `${e.name.toLowerCase()}: ${e.tiers[e.tier].desc.toLowerCase()}`).join('; ');
