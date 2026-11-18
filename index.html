@@ -302,6 +302,23 @@ td a{color:var(--ink)}
 .toast{position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:45;max-width:min(380px,calc(100vw - 32px));padding:12px 16px;border-radius:10px;background:var(--surface);border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.18);font-size:14px}
 .scrim{position:fixed;inset:0;z-index:50;background:rgba(8,10,20,.5);display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto}
 .modal{background:var(--surface);border-radius:12px;border:1px solid var(--line);width:min(720px,100%);padding:22px;display:flex;flex-direction:column;gap:16px}
+.modal.wide{width:min(1180px,100%)}
+.three-wrap{width:100%;aspect-ratio:16/9;background:#0b0d18;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.three-wrap canvas{display:block;width:100%!important;height:100%!important;cursor:grab}
+.vphoto{margin:0;display:flex;flex-direction:column;gap:6px}
+.vphoto img{width:100%;max-height:420px;object-fit:cover;border-radius:10px;display:block;background:var(--line)}
+.vphoto.sm img{max-height:200px}
+.vphoto figcaption{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.symrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:10px 0}
+.symsw{display:flex;flex-wrap:wrap;gap:10px}
+.symsw .sw{display:flex;gap:6px;align-items:center;font-size:12px;line-height:1.25}
+.symsw .sw i{width:28px;height:28px;border-radius:6px;border:1px solid var(--line);display:inline-block;flex:none}
+.symact{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.symit{padding:6px 0;border-top:1px solid var(--line);font-size:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.symtrad{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:8px}
+.symtrad .item{display:flex;flex-direction:column;gap:6px}
+.symmotifs{margin-top:16px}
+.symmotifs summary{cursor:pointer}
 .modal .mh{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .modal .mf{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
 .tiergrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px}
@@ -1045,6 +1062,284 @@ function libraryDesign(p) {
     tier: 'standard', included: true, locked: false, leadWeeks: null, sourcing: x.sourcing, green: { score: x.green[0], note: x.green[1] } }));
   return { acts, elements, ctx };
 }
+/* ------------------------------------------------------------------ */
+/* Local symbols & traditions: reference/symbols.json                  */
+/* Flag colours, anthems, mottos and official symbols from Wikidata,   */
+/* UNESCO-listed traditions, motif meanings from Wikipedia and Iconclass */
+/* ------------------------------------------------------------------ */
+let symShowAll = false;
+let SYM_ITEMS = {}; // rendered items by key, so buttons can refer to them
+function symCountry(name) {
+  const C = SYMBOLS?.countries; if (!C || !name) return null;
+  const k = normCity(name), alias = { 'uk': 'united kingdom', 'usa': 'united states', 'us': 'united states', 'united states of america': 'united states', 'czechia': 'czech republic', 'turkiye': 'turkey', 'korea': 'south korea', 'holland': 'netherlands', 'uae': 'united arab emirates' }[k] || k;
+  return Object.values(C).find(e => normCity(e.name) === alias) || Object.values(C).find(e => normCity(e.name).endsWith(' ' + alias) && /^kingdom of|^republic of|^state of/.test(normCity(e.name))) || null;
+}
+function symbolsFor(p = plan) {
+  if (!SYMBOLS) return null;
+  return { country: symCountry(p.brief.country), city: placeOf(SYMBOLS.cities, p.brief.city) };
+}
+function symKey(kind, item) { const k = kind + ':' + (item.wikidata || item.article || item.name); SYM_ITEMS[k] = { kind, ...item }; return k; }
+function symLinks(x) {
+  const L = [];
+  if (x.unesco) L.push(`<a href="${esc(x.unesco)}" target="_blank" rel="noopener">UNESCO</a>`);
+  if (x.article) L.push(`<a href="${esc(x.article)}" target="_blank" rel="noopener">Wikipedia</a>`);
+  if (x.wikidata) L.push(`<a href="${esc(x.wikidata)}" target="_blank" rel="noopener">Wikidata</a>`);
+  return L.join(' · ');
+}
+const chosenSym = k => (plan.symbols || []).some(s => s.key === k);
+function symAddBtn(k) { return chosenSym(k) ? '<span class="chip">In references</span>' : `<button class="linkbtn" data-act="sym-add" data-k="${esc(k)}">Add to references</button>`; }
+function symColours(e, of) {
+  if (!e?.colours?.length) return '';
+  const src = e.flagItem ? `<a href="${esc(e.flagItem)}" target="_blank" rel="noopener">Wikidata</a>` : `<a href="${esc(e.wikidata)}" target="_blank" rel="noopener">Wikidata</a>`;
+  return `<div class="symrow"><div class="symsw">${e.colours.map(c => `<span class="sw" title="${esc(c.name || '')} ${c.hex}"><i style="background:${c.hex}"></i><span>${esc(c.name || '')}<br><span class="mono">${c.hex}</span></span></span>`).join('')}</div>
+    <div class="symact"><button class="btn sm" data-act="sym-palette" data-of="${of}">Use as palette</button><span class="fsrc">${e.colours[0].via === 'flag' ? 'Flag colours' : 'Official colours'} of ${esc(e.name)}, hex codes from ${src}</span></div></div>`;
+}
+function symIdentity(e) {
+  if (!e) return '';
+  const rows = [];
+  if (e.anthem) rows.push(`<div class="symit"><b>Anthem</b> ${esc(e.anthem.name)} <span class="fsrc">${symLinks(e.anthem)}</span> ${symAddBtn(symKey('anthem', { ...e.anthem, of: e.name }))}</div>`);
+  (e.mottos || []).slice(0, 2).forEach(m => rows.push(`<div class="symit"><b>Motto</b> <q lang="${esc(m.lang)}">${esc(m.text)}</q> <span class="fsrc"><a href="${esc(e.wikidata)}" target="_blank" rel="noopener">Wikidata</a></span> ${symAddBtn(symKey('motto', { name: m.text, wikidata: e.wikidata + '#P1451-' + m.lang, of: e.name }))}</div>`));
+  (e.symbols || []).forEach(x => rows.push(`<div class="symit"><b>${esc(x.types?.[0] ? x.types[0].charAt(0).toUpperCase() + x.types[0].slice(1) : 'Official symbol')}</b> ${esc(x.name)}${x.description ? ` <span class="muted">· ${esc(x.description)}</span>` : ''} <span class="fsrc">${symLinks(x)}</span> ${symAddBtn(symKey('symbol', { ...x, of: e.name }))}</div>`));
+  return rows.join('');
+}
+function symTraditions(S) {
+  const seen = new Set(), list = [];
+  [[S.city, 'city'], [S.country, 'country']].forEach(([e, w]) => (e?.traditions || []).forEach(t => { if (!seen.has(t.wikidata)) { seen.add(t.wikidata); list.push({ ...t, where: w === 'city' ? e.name : e.name }); } }));
+  if (!list.length) return '';
+  const shown = symShowAll ? list : list.slice(0, 8);
+  return `<h3 style="margin:18px 0 6px">Traditions on the UNESCO lists · ${list.length}</h3>
+    <div class="symtrad">${shown.map(t => { const k = symKey('tradition', t); return `<article class="item"><h3>${esc(t.name)}</h3>${t.description ? `<p class="note">${esc(t.description.charAt(0).toUpperCase() + t.description.slice(1))}</p>` : ''}
+      <p class="fsrc">${esc(t.list)}${t.year ? ', ' + t.year : ''} · ${esc(t.where)} · ${symLinks(t)}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="btn sm" data-act="sym-element" data-k="${esc(k)}">Add as cast idea</button>${symAddBtn(k)}</div></article>`; }).join('')}</div>
+    ${list.length > 8 ? `<button class="linkbtn" data-act="sym-all" style="margin-top:8px">${symShowAll ? 'Show fewer' : `Show all ${list.length}`}</button>` : ''}`;
+}
+function symMotifs() {
+  const M = SYMBOLS?.motifs || []; if (!M.length) return '';
+  return `<details class="symmotifs"><summary><b>Motif meanings</b> <span class="muted">· ${M.length} motifs, from Wikipedia and Iconclass</span></summary><div class="symtrad">${M.map(m => { const k = symKey('motif', { name: m.name, article: m.article, appMotif: m.appMotif, sentence: m.sentences?.[0] || '' });
+    return `<article class="item"><h3>${esc(m.name)}</h3>${(m.sentences || []).slice(0, 2).map(s => `<p class="note">“${esc(s)}”</p>`).join('')}
+      ${m.iconclass?.length ? `<p class="fsrc">Iconclass: ${m.iconclass.slice(0, 2).map(i => `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.notation)}</a> ${esc(i.text)}`).join('; ')}</p>` : ''}
+      <p class="fsrc"><a href="${esc(m.article)}" target="_blank" rel="noopener">Wikipedia</a></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">${m.appMotif ? `<button class="btn sm" data-act="sym-motif" data-m="${esc(m.appMotif)}">Use ${esc(MOTIF_LABEL[m.appMotif].toLowerCase())} pattern</button>` : ''}${symAddBtn(k)}</div></article>`; }).join('')}</div></details>`;
+}
+function symChosen() {
+  const S = plan.symbols || []; if (!S.length) return '';
+  return `<h3 style="margin:18px 0 6px">References chosen for this show · ${S.length}</h3><div class="list">${S.map(s => `<div class="risk"><span><b>${esc(s.name)}</b> <span class="muted">· ${esc(s.label)}</span><br><span class="fsrc">${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.url.replace(/^https:\/\/(www\.)?/, '').slice(0, 60))}</a>` : ''}</span></span><button class="icon" data-act="sym-del" data-k="${esc(s.key)}" aria-label="Remove ${esc(s.name)}">×</button></div>`).join('')}</div>
+    <p class="note" style="margin-top:6px">These go into the image prompts and the exported plan, with their links.</p>`;
+}
+function symbolsPanel() {
+  if (!SYMBOLS) return '';
+  SYM_ITEMS = {};
+  const S = symbolsFor(), b = plan.brief;
+  const who = [S.city?.name, S.country?.name].filter(Boolean).join(', ');
+  const body = !S.country && !S.city
+    ? `<p class="note">${b.country || b.city ? `${esc(b.city || b.country)} is not in the symbols library yet. Check the spelling of the country in the Brief.` : 'Set the host city and country in the Brief to see flag colours, anthem, official symbols and the traditions on UNESCO\'s lists.'}</p>`
+    : `${symColours(S.city, 'city')}${symColours(S.country, 'country')}
+       ${S.city?.symbols?.length || S.city?.anthem || S.city?.mottos?.length ? `<h3 style="margin:16px 0 6px">${esc(S.city.name)}</h3>${symIdentity(S.city)}` : ''}
+       ${S.country ? `<h3 style="margin:16px 0 6px">${esc(S.country.name)}</h3>${symIdentity(S.country)}` : ''}
+       ${symTraditions(S)}`;
+  return `<section class="panel"><div class="head2"><div><h2>Local symbols & traditions${who ? ' · ' + esc(who) : ''}</h2><p class="note" style="margin-top:4px">From Wikidata, UNESCO's intangible heritage lists, Wikipedia and Iconclass, refreshed when the library is rebuilt. Each item links to its source.</p></div></div>
+    ${body}${symMotifs()}${symChosen()}
+    <p class="note" style="margin-top:12px">A tradition belongs to the community that keeps it. Involve its bearers and local cultural advisers before it goes into a show, and check how flags and anthems may be used under local law and the rights holder's rules.</p></section>`;
+}
+function symRef(it) {
+  const label = { anthem: `Anthem of ${it.of}`, motto: `Motto of ${it.of}`, symbol: `${it.types?.[0] || 'Official symbol'} of ${it.of}`, tradition: `${it.list}${it.year ? ', ' + it.year : ''}`, motif: 'Motif' }[it.kind] || it.kind;
+  return { key: '', name: it.name, label, kind: it.kind, url: it.unesco || it.article || it.wikidata || '', note: it.sentence || it.description || '' };
+}
+function symAdd(k) {
+  const it = SYM_ITEMS[k]; if (!it || chosenSym(k)) return;
+  mutate(p => { (p.symbols ||= []).push({ ...symRef(it), key: k }); }, { log: `Added ${it.name} to the show's references` });
+}
+function symPalette(of) {
+  const S = symbolsFor(), e = of === 'city' ? S?.city : S?.country; if (!e?.colours?.length) return;
+  const cur = lookOf(plan).palette, cols = e.colours.map(c => c.hex).filter(h => /^#[0-9A-F]{6}$/i.test(h));
+  // Keep the current first colour (the night sky and background), then the flag colours, then the rest of the current palette.
+  const pal = [cur[0], ...cols, ...cur.slice(1)].filter((c, i, a) => a.indexOf(c) === i).slice(0, 5);
+  while (pal.length < 5) pal.push(cur[pal.length] || '#FFFFFF');
+  mutate(p => { const L = ensureLook(p); L.palette = pal; }, { log: `Palette set from the colours of ${e.name}` });
+  toast(`Palette set from the colours of ${e.name}. See it on Visuals.`);
+}
+function symElement(k) {
+  const t = SYM_ITEMS[k]; if (!t) return;
+  const act = plan.acts[1]?.name || plan.acts[0]?.name || 'Show';
+  const desc = `${t.description ? t.description.charAt(0).toUpperCase() + t.description.slice(1) + '. ' : ''}Inscribed on UNESCO's ${t.list}${t.year ? ' in ' + t.year : ''}.`;
+  mutate(p => {
+    p.elements.push({ id: uid(), name: t.name, act, category: 'Cast & community', description: desc,
+      scores: { broadcast: 3, local: 5, global: 3 }, tiers: { signature: blankTier('Full company of tradition bearers'), standard: blankTier('Core company'), lean: blankTier('Small ensemble') },
+      tier: 'standard', included: true, locked: false, leadWeeks: null,
+      sourcing: `Work with the community that keeps this tradition and its cultural organisations. UNESCO listing: ${t.unesco || t.wikidata}`,
+      green: { score: 4, note: 'Local performers travel less.' } });
+    if (!(p.symbols || []).some(s => s.key === k)) (p.symbols ||= []).push({ ...symRef(t), key: k });
+  }, { log: `Added ${t.name} as a cast idea` });
+  toast(`${t.name} added to ${act}, unpriced. Get a quote from the performers.`);
+}
+
+/* Venue photos: reference/photos.json, one freely licensed Commons photo per catalogue venue */
+function venuePhoto(p = plan) {
+  const P = PHOTOS?.photos; if (!P || !p.brief.venue) return null;
+  return placeOf(P, p.brief.venue) || (CATALOG ? placeOf(P, venueList().find(v => normCity(v.label) === normCity(p.brief.venue))?.name) : null);
+}
+function photoCredit(x) {
+  return `Photo: ${esc(x.author)} · <a href="${esc(x.licenseUrl || x.page)}" target="_blank" rel="noopener">${esc(x.license)}</a> · <a href="${esc(x.page)}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+}
+function venuePhotoPanel() {
+  const x = venuePhoto(); if (!x) return '';
+  return `<figure class="vphoto"><img src="${esc(x.file)}" alt="${esc(x.description || plan.brief.venue)}" loading="lazy" width="${x.width || 960}" height="${x.height || 640}"><figcaption><b>${esc(plan.brief.venue)} today</b><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>`;
+}
+
+/* 3D venue model (three.js, loaded only when opened) */
+const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
+let threeMod = null, view3d = null;
+function venueDims(kind) {
+  // Field sizes from published standards; stands, stage and effects are schematic.
+  if (kind === 'arena') return { fw: 60, fd: 30, floor: '#3a3f52', src: 'iihf-rulebook', label: 'Floor drawn as a 60 × 30 m ice rink (IIHF rule book), the floor most multi-purpose arenas are built around.' };
+  if (kind === 'stadium') return { fw: 105, fd: 68, floor: '#2f7d3a', src: 'fifa-stadium-guidelines', label: 'Field of play drawn at the FIFA-recommended 105 × 68 m.' };
+  return { fw: 80, fd: 50, floor: '#2b2e38', src: null, label: 'Open site drawn schematically: no standard size applies.' };
+}
+function open3D() {
+  const ctx = libraryContext(plan), d = venueDims(ctx.venue), x = venuePhoto();
+  openModal(`<div class="head2"><h2>3D model · ${esc(plan.brief.venue || plan.brief.venueType || 'Venue')}</h2><button class="icon" data-act="close" aria-label="Close">×</button></div>
+    <div class="three-wrap" id="three-wrap"><p class="muted" id="three-msg">Loading the 3D view…</p></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <div class="frames" role="group" aria-label="Camera">${[['main', 'Main camera'], ['stage', 'Stage camera'], ['top', 'Top-down'], ['fan', 'Fan view']].map(([k, l], i) => `<button data-act="cam3d" data-v="${k}" class="${i ? '' : 'on'}" aria-pressed="${!i}">${l}</button>`).join('')}</div>
+      <button class="btn sm" data-act="png3d">Save PNG</button>
+    </div>
+    <p class="note">Drag to orbit, scroll or pinch to zoom. ${esc(d.label)}${d.src ? ' ' + srcLink(d.src, 'Source') + '.' : ''} Stands, stage, cast and effects are drawn at the tiers you picked but not to scale.</p>
+    ${x ? `<figure class="vphoto sm"><img src="${esc(x.file)}" alt="${esc(x.description || plan.brief.venue)}" loading="lazy"><figcaption><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>` : ''}`);
+  $('#overlay .modal')?.classList.add('wide');
+  start3D().catch(err => { const m = $('#three-msg'); if (m) m.textContent = 'The 3D view could not load here (' + (err?.message || 'network') + '). The 2D renders still work.'; });
+}
+async function start3D() {
+  threeMod ||= await import(THREE_URL);
+  const wrap = $('#three-wrap'); if (!wrap) return;
+  view3d?.stop?.();
+  view3d = build3D(threeMod, plan, wrap);
+}
+function build3D(T, p, wrap) {
+  const ctx = libraryContext(p), kind = ctx.venue, D = venueDims(kind), look = lookOf(p), pal = look.palette, f = features(p, null);
+  const light = ctx.light, R = rng(hash((p.id || 'x') + '|3d'));
+  wrap.innerHTML = '';
+  const W = wrap.clientWidth || 960, H = Math.round(W * 9 / 16);
+  const renderer = new T.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); renderer.setSize(W, H);
+  wrap.appendChild(renderer.domElement); renderer.domElement.setAttribute('aria-label', '3D model of the show in the venue'); renderer.domElement.setAttribute('role', 'img');
+  const scene = new T.Scene();
+  const sky = light === 'day' ? '#9cc3e6' : light === 'dusk' ? '#5a3a6a' : mix(pal[0], '#000000', .6);
+  scene.background = new T.Color(sky); scene.fog = new T.Fog(sky, 260, 700);
+  scene.add(new T.HemisphereLight(light === 'day' ? 0xffffff : 0x8888aa, 0x222233, light === 'day' ? 1.1 : light === 'dusk' ? .55 : .25));
+  if (light !== 'night') { const sun = new T.DirectionalLight(light === 'day' ? 0xffffff : 0xffa060, light === 'day' ? 1.2 : .8); sun.position.set(-120, light === 'day' ? 200 : 40, 80); scene.add(sun); }
+  const col = c => new T.Color(c);
+  const tex = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; return t; };
+
+  // Field: grass stripes, or the projection / pitch-art pattern in the show palette
+  const showPattern = f.projection > 0;
+  const fieldTex = tex(1024, Math.round(1024 * D.fd / D.fw), (g, w, h) => {
+    if (showPattern) { for (let y = 0; y < h; y += 8) for (let x = 0; x < w; x += 8) { g.fillStyle = pal[1 + motifIdx(look.motif, x / w * 2 - 1, y / h * 2 - 1, Math.min(4, pal.length - 1))]; g.globalAlpha = light === 'day' ? .85 : 1; g.fillRect(x, y, 8, 8); } g.globalAlpha = 1; }
+    else { for (let i = 0; i < 12; i++) { g.fillStyle = i % 2 ? D.floor : mix(D.floor, '#ffffff', .08); g.fillRect(i * w / 12, 0, w / 12 + 1, h); } }
+    if (kind === 'stadium' && !showPattern) { g.strokeStyle = 'rgba(255,255,255,.8)'; g.lineWidth = 3; g.strokeRect(6, 6, w - 12, h - 12); g.beginPath(); g.moveTo(w / 2, 6); g.lineTo(w / 2, h - 6); g.stroke(); g.beginPath(); g.arc(w / 2, h / 2, h * .135, 0, Math.PI * 2); g.stroke(); }
+  });
+  const field = new T.Mesh(new T.PlaneGeometry(D.fw, D.fd), new T.MeshStandardMaterial({ map: fieldTex, emissive: showPattern && light !== 'day' ? 0xffffff : 0x000000, emissiveMap: showPattern && light !== 'day' ? fieldTex : null, emissiveIntensity: .55, roughness: .9 }));
+  field.rotation.x = -Math.PI / 2; scene.add(field);
+  const ground = new T.Mesh(new T.PlaneGeometry(900, 900), new T.MeshStandardMaterial({ color: kind === 'stadium' ? mix(D.floor, '#000000', .35) : kind === 'outdoor' ? '#20232c' : '#262935', roughness: 1 }));
+  ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; scene.add(ground);
+
+  // Stands: a raked bowl around the field (schematic), with the crowd or a crowd mosaic as its texture
+  const crowdTex = tex(2048, 256, (g, w, h) => {
+    g.fillStyle = light === 'day' ? '#565a66' : '#15161d'; g.fillRect(0, 0, w, h);
+    if (f.crowd && f.crowdKind !== 'phones') { // card or LED mosaic in the show palette
+      for (let y = 0; y < h; y += 4) for (let x = 0; x < w; x += 4) { g.fillStyle = pal[1 + motifIdx(look.motif, x / w * 6 - 3, y / h * 2 - 1, Math.min(4, pal.length - 1))]; g.fillRect(x, y, 3, 3); }
+    } else for (let i = 0; i < 90000; i++) {
+      g.fillStyle = f.crowdKind === 'phones' && light !== 'day' && R() < .35 ? '#fff6d8' : ['#c9c3b8', '#3b4a6b', '#8a2e2e', '#e0d7c6', '#2c2c2c', '#6d6a63'][Math.floor(R() * 6)];
+      g.fillRect(R() * w, R() * h, 1, 1);
+    }
+  });
+  crowdTex.wrapS = T.RepeatWrapping;
+  if (kind !== 'outdoor') {
+    const inner = kind === 'arena' ? [D.fw / 2 + 8, D.fd / 2 + 8] : [D.fw / 2 + 14, D.fd / 2 + 14];
+    const prof = kind === 'arena' ? [[1, 0], [1, 1.5], [1.55, 16], [1.7, 26]] : [[1, 0], [1, 2], [1.5, 20], [1.55, 22], [1.95, 42]];
+    const lathe = new T.LatheGeometry(prof.map(([r, y]) => new T.Vector2(r, y)), 96);
+    const bowl = new T.Mesh(lathe, new T.MeshStandardMaterial({ map: crowdTex, side: T.DoubleSide, roughness: 1, emissive: f.crowd && light !== 'day' ? 0xffffff : 0x000000, emissiveMap: f.crowd && light !== 'day' ? crowdTex : null, emissiveIntensity: f.crowdKind === 'led' ? .9 : .35 }));
+    bowl.scale.set(inner[0], 1, inner[1]); scene.add(bowl);
+    // Roof ring (schematic), where the light rig hangs
+    const top = prof[prof.length - 1], ring = new T.Mesh(new T.TorusGeometry(1, .02, 6, 96), new T.MeshStandardMaterial({ color: '#c9ccd6', metalness: .4, roughness: .5 }));
+    ring.rotation.x = Math.PI / 2; ring.scale.set(inner[0] * top[0] * .92, inner[1] * top[0] * .92, 1); ring.position.y = top[1] + 6; scene.add(ring);
+    var rigY = top[1] + 6, rigA = inner[0] * top[0] * .92, rigB = inner[1] * top[0] * .92;
+  } else {
+    // Audience field in front of the stage, and a schematic skyline behind it
+    const aud = new T.Mesh(new T.PlaneGeometry(D.fw * 1.6, 90), new T.MeshStandardMaterial({ map: crowdTex, roughness: 1, emissive: f.crowd && light !== 'day' ? 0xffffff : 0x000000, emissiveMap: f.crowd && light !== 'day' ? crowdTex : null, emissiveIntensity: .4 }));
+    aud.rotation.x = -Math.PI / 2; aud.position.set(0, .02, 75); scene.add(aud);
+    for (let i = 0; i < 40; i++) { const h = 15 + R() * 60, b = new T.Mesh(new T.BoxGeometry(12 + R() * 18, h, 12 + R() * 10), new T.MeshStandardMaterial({ color: light === 'day' ? '#8d93a3' : '#0c0d14', roughness: 1 })); b.position.set(-260 + i * 13 + R() * 6, h / 2, -120 - R() * 60); scene.add(b); }
+    var rigY = 35, rigA = D.fw / 2 + 10, rigB = 30;
+  }
+
+  // Stage at the far end of the field
+  const stageW = [0, 18, 26, 36][f.stage] || 18, stageZ = kind === 'outdoor' ? -D.fd / 2 + 6 : -D.fd / 2 + 8;
+  const stage = new T.Mesh(new T.BoxGeometry(stageW, 2.2, 12), new T.MeshStandardMaterial({ color: '#2a2d38', roughness: .6 }));
+  stage.position.set(0, 1.1, stageZ); scene.add(stage);
+  if (f.stage >= 2 || kind === 'outdoor') { const screen = new T.Mesh(new T.PlaneGeometry(stageW * .9, stageW * .4), new T.MeshBasicMaterial({ color: col(pal[2] || pal[1]) })); screen.position.set(0, 2.2 + stageW * .22, stageZ - 5.5); scene.add(screen); }
+  if (f.performer) { const per = new T.Mesh(new T.CapsuleGeometry(.5, 1.2, 4, 8), new T.MeshStandardMaterial({ color: '#ffffff', emissive: 0xffffff, emissiveIntensity: .6 })); per.position.set(0, 3.3, stageZ + 2); scene.add(per); }
+
+  // Cast on the field, in the palette
+  if (f.cast) {
+    const n = 140 * f.cast, geo = new T.CylinderGeometry(.35, .35, 1.7, 6), mats = pal.slice(1).map(c => new T.MeshStandardMaterial({ color: col(c), emissive: light === 'day' ? 0x000000 : col(c), emissiveIntensity: .35 }));
+    for (let i = 0; i < n; i++) { const a = R() * Math.PI * 2, r = Math.sqrt(R()) * .42; const m = new T.Mesh(geo, mats[i % mats.length]); m.position.set(Math.cos(a) * r * D.fw, .85, Math.sin(a) * r * D.fd + 4); scene.add(m); }
+  }
+  // Reveal at the centre spot
+  if (f.reveal) { const h = 6 + f.reveal * 5, rv = new T.Mesh(new T.ConeGeometry(h * .35, h, 5), new T.MeshStandardMaterial({ color: col(pal[1]), emissive: col(pal[1]), emissiveIntensity: light === 'day' ? .1 : .6, metalness: .3 })); rv.position.set(0, h / 2, 0); scene.add(rv); }
+  // Light beams from the rig into the field
+  const beams = [];
+  if (f.lights && light !== 'day') {
+    const n = 8 * f.lights;
+    for (let i = 0; i < n; i++) {
+      const a = i / n * Math.PI * 2, from = new T.Vector3(Math.cos(a) * rigA, rigY, Math.sin(a) * rigB), to = new T.Vector3((R() - .5) * D.fw * .7, 0, (R() - .5) * D.fd * .7);
+      const len = from.distanceTo(to), cone = new T.Mesh(new T.ConeGeometry(2.6, len, 16, 1, true), new T.MeshBasicMaterial({ color: col(pal[1 + i % (pal.length - 1)]), transparent: true, opacity: .1, blending: T.AdditiveBlending, depthWrite: false, side: T.DoubleSide }));
+      cone.position.copy(from.clone().add(to).multiplyScalar(.5)); cone.lookAt(to); cone.rotateX(Math.PI / 2); scene.add(cone); beams.push(cone);
+    }
+  }
+  // Drones: a formation above the field
+  let drones = null;
+  if (f.drones) {
+    const n = 300 * f.drones, pos = new Float32Array(n * 3), cols = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, r = 30 * (1 + .4 * Math.cos(a * 5)) * (.6 + .4 * R()); pos.set([Math.cos(a) * r, 70 + Math.sin(a) * r * .6, -10 + (R() - .5) * 6], i * 3); const c = col(pal[1 + i % (pal.length - 1)]); cols.set([c.r, c.g, c.b], i * 3); }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('color', new T.BufferAttribute(cols, 3));
+    drones = new T.Points(g, new T.PointsMaterial({ size: 1.4, vertexColors: true, blending: T.AdditiveBlending, depthWrite: false, transparent: true })); scene.add(drones);
+  }
+  // Pyro: bursts over the rig
+  if (f.pyro && light !== 'day') {
+    const n = 4 * f.pyro, pts = [], cs = [];
+    for (let b = 0; b < n; b++) { const a = b / n * Math.PI * 2, cx = Math.cos(a) * rigA * .9, cz = Math.sin(a) * rigB * .9, c = col(pal[1 + b % (pal.length - 1)]);
+      for (let i = 0; i < 160; i++) { const u = R() * Math.PI * 2, v = Math.acos(2 * R() - 1), r = 9 + R() * 3; pts.push(cx + r * Math.sin(v) * Math.cos(u), rigY + 30 + r * Math.cos(v), cz + r * Math.sin(v) * Math.sin(u)); cs.push(c.r, c.g, c.b); } }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pts, 3)); g.setAttribute('color', new T.Float32BufferAttribute(cs, 3));
+    scene.add(new T.Points(g, new T.PointsMaterial({ size: 1.2, vertexColors: true, blending: T.AdditiveBlending, depthWrite: false, transparent: true })));
+  }
+
+  // Camera with a simple orbit control
+  const cam = new T.PerspectiveCamera(42, W / H, .5, 2000);
+  const target = new T.Vector3(), sph = { r: 160, th: 0, ph: 1.1 };
+  // Main camera: high in the long-side stand; stage camera: field level facing the stage; fan view: low in a corner.
+  const PRESETS = kind === 'outdoor'
+    ? { main: [130, 0, 1.15, 0, 0, 10], stage: [45, 0, 1.3, 0, 4, stageZ], top: [190, 0, 0.02, 0, 0, 20], fan: [70, -0.25, 1.45, 0, 5, 0] }
+    : { main: [kind === 'arena' ? 52 : 78, 0, 1.03, 0, 0, 0], stage: [45, 0, 1.3, 0, 4, stageZ], top: [kind === 'arena' ? 120 : 190, 0, 0.02, 0, 0, 0], fan: [kind === 'arena' ? 40 : 66, -0.75, 1.3, 0, 4, 0] };
+  const place = () => { cam.position.set(target.x + sph.r * Math.sin(sph.ph) * Math.sin(sph.th), target.y + sph.r * Math.cos(sph.ph), target.z + sph.r * Math.sin(sph.ph) * Math.cos(sph.th)); cam.lookAt(target); };
+  const preset = k => { const [r, th, ph, x, y, z] = PRESETS[k] || PRESETS.main; Object.assign(sph, { r, th, ph }); target.set(x, y, z); place(); };
+  preset('main');
+  const el = renderer.domElement; let drag = null, pinch0 = null; const touches = new Map();
+  el.style.touchAction = 'none';
+  el.addEventListener('pointerdown', e => { touches.set(e.pointerId, [e.clientX, e.clientY]); drag = [e.clientX, e.clientY]; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => {
+    if (!touches.has(e.pointerId)) return;
+    touches.set(e.pointerId, [e.clientX, e.clientY]);
+    if (touches.size === 2) { const [a, b] = [...touches.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch0) sph.r = Math.min(600, Math.max(20, sph.r * pinch0 / d)); pinch0 = d; place(); return; }
+    sph.th -= (e.clientX - drag[0]) * .006; sph.ph = Math.min(1.5, Math.max(.02, sph.ph - (e.clientY - drag[1]) * .006)); drag = [e.clientX, e.clientY]; place();
+  });
+  const up = e => { touches.delete(e.pointerId); pinch0 = null; drag = touches.size ? [...touches.values()][0] : null; };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  el.addEventListener('wheel', e => { e.preventDefault(); sph.r = Math.min(600, Math.max(20, sph.r * (1 + Math.sign(e.deltaY) * .08))); place(); }, { passive: false });
+  let alive = true, t0 = performance.now();
+  const loop = () => { if (!alive || !el.isConnected) { alive = false; renderer.dispose(); return; } const t = (performance.now() - t0) / 1000; if (drones) drones.rotation.y = Math.sin(t * .3) * .2; beams.forEach((b, i) => { b.material.opacity = .08 + .04 * Math.sin(t * 2 + i); }); renderer.render(scene, cam); requestAnimationFrame(loop); };
+  loop();
+  return { preset, stop: () => { alive = false; }, png: () => new Promise(res => { renderer.render(scene, cam); el.toBlob(res, 'image/png'); }) };
+}
+
 function libraryProduction(p) {
   const notes = {};
   p.elements.filter(e => e.included).forEach(e => { notes[e.id] = { fabrication: e.sourcing, suppliers: '', localSourcing: '', leadWeeks: e.leadWeeks, risks: '' }; });
@@ -1112,12 +1407,16 @@ let REFDATA = null, refState = 'loading'; // loading | ready | missing
 let CEREMONIES = null; // reference/ceremonies.json: published ceremony figures with their citations
 let CATALOG = null; // reference/catalog.json: real events for Brief autocomplete, each field with its source
 let PLACES = null; // reference/places.json: Wikipedia summaries of catalogue cities and venues
+let SYMBOLS = null; // reference/symbols.json: flag colours, anthems, official symbols, UNESCO traditions, motif meanings
+let PHOTOS = null; // reference/photos.json: one freely licensed Commons photo per catalogue venue
 async function loadReference() {
   try { const r = await fetch('reference/bundle.json', { cache: 'no-cache' }); if (!r.ok) throw new Error(String(r.status)); REFDATA = await r.json(); refState = 'ready'; }
   catch { REFDATA = null; refState = 'missing'; }
   try { const r = await fetch('reference/ceremonies.json', { cache: 'no-cache' }); if (r.ok) CEREMONIES = await r.json(); } catch { CEREMONIES = null; }
   try { const r = await fetch('reference/catalog.json', { cache: 'no-cache' }); if (r.ok) CATALOG = await r.json(); } catch { CATALOG = null; }
   try { const r = await fetch('reference/places.json', { cache: 'no-cache' }); if (r.ok) PLACES = await r.json(); } catch { PLACES = null; }
+  try { const r = await fetch('reference/symbols.json', { cache: 'no-cache' }); if (r.ok) SYMBOLS = await r.json(); } catch { SYMBOLS = null; }
+  try { const r = await fetch('reference/photos.json', { cache: 'no-cache' }); if (r.ok) PHOTOS = await r.json(); } catch { PHOTOS = null; }
   render();
 }
 // How a planner-entered number is backed. A number counts as sourced only with a basis AND a reference (quote no., invoice, meter log, report).
@@ -1638,7 +1937,8 @@ function drawShow(cv, p, opts = {}) {
 function imagePrompt(kind, target) {
   const b = plan.brief, look = lookOf(plan, kind === 'concept' ? target : null), colors = look.palette.join(', ');
   const place = `${b.venue || b.venueType || 'the venue'} in ${b.city || 'the host city'}${b.country ? ', ' + b.country : ''}`;
-  const safe = 'No text, no logos, no official competition branding, no real people\'s likeness.';
+  const refs = (plan.symbols || []).length ? ` Local references: ${plan.symbols.map(x => x.name + (x.kind === 'tradition' ? ' (traditional performance)' : '')).join('; ')}.` : '';
+  const safe = refs + ' No text, no logos, no official competition branding, no real people\'s likeness.';
   if (kind === 'final') {
     const inc = plan.elements.filter(e => e.included).map(e => `${e.name.toLowerCase()}: ${e.tiers[e.tier].desc.toLowerCase()}`).join('; ');
     return `Photo-real wide broadcast-camera render, high angle from the main stand, of a ${String(b.eventType).toLowerCase()} at ${place}, ${Number(b.capacity || 0).toLocaleString('en')} spectators, ${String(b.showLight || 'night').toLowerCase() === 'daylight' ? 'in late-afternoon daylight' : String(b.showLight || 'night').toLowerCase() === 'dusk' ? 'at dusk' : 'at night'}. The climax of the show: ${inc || 'stage, projection, light show and crowd mosaic'}. Colour palette ${colors}; ${MOTIF_LABEL[look.motif].toLowerCase()} pattern across the pitch and the crowd. ${plan.look?.finalLook || ''} Volumetric light beams, light haze, cinematic, 16:9. ${safe}`.replace(/\s+/g, ' ');
@@ -1671,6 +1971,7 @@ function upgrade(p) {
   p.overheads ||= DEFAULT_OVERHEADS();
   p.acts ||= []; p.concepts ||= []; p.log ||= []; p.images ||= []; p.artists ||= []; if (p.look === undefined) p.look = null; p.local ||= blankLocal(); p.lines ||= []; p.vendors ||= []; p.cues ||= {}; p.sbStep ||= 1; if (p.prevReport === undefined) p.prevReport = null;
   if (p.closeout === undefined) p.closeout = null;
+  p.symbols ||= [];
   if ((p.v || 0) < 3) {
     // v3: every number carries its source. Earlier plans keep their figures, flagged "No source" until a source is added.
     p.elements.forEach(e => TIERS.forEach(t => { const x = e.tiers[t] || (e.tiers[t] = blankTier('')); x.src ||= blankSrc(); delete x.co2; /* earlier CO2e figures were estimates; CO2e is now calculated from the quote or a supplier figure */ if (x.co2s === undefined) x.co2s = null; }));
@@ -2779,7 +3080,7 @@ function elCard(e) {
 function vDesign() {
   if (!plan.elements.length) return `${head('Show design', 'Every element of the show, specified in three tiers for vendors to quote.')}
     <div class="empty"><h2>No show design yet</h2><p>${plan.conceptId ? 'Build it from your chosen concept, or add elements by hand.' : 'Choose a concept first, or add elements by hand.'}</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${plan.conceptId ? claudeBtn('design', 'Build show design') : claudeState === 'off' ? '' : `<button class="btn" data-act="go" data-step="concept">Go to concepts</button>`}${libBtn('lib-design', 'Start from the show library')}<button class="btn" data-act="add-el">Add element by hand</button></div></div>`;
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${plan.conceptId ? claudeBtn('design', 'Build show design') : claudeState === 'off' ? '' : `<button class="btn" data-act="go" data-step="concept">Go to concepts</button>`}${libBtn('lib-design', 'Start from the show library')}<button class="btn" data-act="add-el">Add element by hand</button></div></div>${symbolsPanel()}`;
   const t = totals(); let at = 0;
   const ros = plan.acts.map(a => { const s = at; at += a.minutes; return `<div class="act" style="flex:${Math.max(1, a.minutes)}"><div class="render" style="margin-bottom:8px"><canvas data-render="act:${esc(a.name)}" width="1280" height="720" role="img" aria-label="Render of ${esc(a.name)}"></canvas></div><div class="tc">${timecode(s)}–${timecode(at)}</div><div class="an">${esc(a.name)}</div><div class="ad">${esc(a.description)}</div></div>`; }).join('');
   const groups = [...plan.acts.map(a => a.name), ...new Set(plan.elements.map(e => e.act).filter(n => !plan.acts.some(a => a.name === n)))];
@@ -2789,6 +3090,7 @@ function vDesign() {
   <section class="panel"><div class="head2" style="margin-bottom:14px"><h2>Run of show · ${plan.acts.reduce((s, a) => s + a.minutes, 0)} min</h2><button class="btn sm" data-act="go" data-step="look">Open the minute-by-minute storyboard →</button></div><div class="ros">${ros || '<p class="muted">No acts yet. Use “Edit acts”.</p>'}</div>
     <div class="meters" style="margin-top:18px">${meters}<div class="meter"><div class="row"><span>Budget used</span><span class="mono">${t.cap ? Math.round(t.total / t.cap * 100) : 0}%</span></div><div class="t"><i style="width:${t.cap ? Math.min(100, t.total / t.cap * 100) : 0}%;background:${t.total > t.cap ? 'var(--bad)' : 'var(--ok)'}"></i></div></div></div>
   </section>
+  ${symbolsPanel()}
   ${groups.map(g => { const els = plan.elements.filter(e => e.act === g); if (!els.length) return ''; return `<section class="act-group"><div class="gh"><h2>${esc(g)}</h2><span class="muted mono" style="font-size:13px">${money(els.filter(e => e.included).reduce((s, e) => s + tierCost(e, e.tier), 0))}${els.some(e => e.included && !hasCost(e.tiers[e.tier])) ? ' quoted so far' : ''}</span></div><div class="els">${els.map(elCard).join('')}</div></section>`; }).join('')}`;
 }
 
@@ -2911,6 +3213,8 @@ function vLook() {
     <div class="render big"><canvas data-render="main" width="1280" height="720" role="img" aria-label="Render of the show from the main broadcast camera"></canvas><span class="cap">${renderFrame === 'final' ? 'Final look' : esc(renderFrame)} · main camera</span></div>
     ${L.finalLook ? `<p><b>The final image:</b> ${esc(L.finalLook)}</p>` : ''}
     <p class="note">A schematic render from the main broadcast camera. It shows stage size, projection, light beams, effects, crowd mosaic and the reveal at the tiers you picked. For photo-real images, copy a prompt below into your image tool${assets ? ' or upload your design team\'s renders' : ''}.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-act="open3d">Open 3D model</button></div>
+    ${venuePhotoPanel()}
   </section>
   ${storyboardPanel()}
   <div class="grid g2">
@@ -3253,6 +3557,8 @@ function sourcesMarkdown(p = plan) {
   if (CEREMONIES?.ceremonies?.length) L.push(`- Past-ceremony figures: ${CEREMONIES.ceremonies.length} ceremonies since ${CEREMONIES.fromYear}, quoted from English Wikipedia (${CEREMONIES.license}) with the sources each article cites; built ${CEREMONIES.builtAt}. Used as context only, never as an estimate.`);
   const ov = FACTOR_KEYS.map(k => factorOf(p, k)).filter(f => f.from === 'override');
   if (ov.length) L.push('', 'Factors replaced with supplier figures:', ...ov.map(f => `- ${f.label}: ${f.v} ${f.unit} (${sourced(f.override) ? BASIS[f.override.b] + ': ' + f.override.r : 'NO SOURCE'}); reference value ${f.refV ?? 'none'}`));
+  if ((p.symbols || []).length) L.push('', '## Local references', ...p.symbols.map(x => `- ${x.name} (${x.label})${x.url ? ': ' + x.url : ''}`), '- Symbols from Wikidata (CC0); traditions from the UNESCO intangible cultural heritage lists; motif meanings from English Wikipedia (CC BY-SA 4.0) and Iconclass (CC0).');
+  const ph = venuePhoto(p); if (ph) L.push('', '## Venue photo', `- ${ph.title}: ${ph.author}, ${ph.license}${ph.licenseUrl ? ' (' + ph.licenseUrl + ')' : ''}, via Wikimedia Commons: ${ph.page}`);
   const cov = coverage(p);
   L.push('', '## Figures without a source', ...(cov.issues.length ? cov.issues.map(i => `- ${i.kind}: ${i.name}${i.amount == null && (i.kind === 'Element' || i.kind === 'Budget line') ? ' (no quote)' : ''}`) : ['- None.']));
   return L;
@@ -3508,6 +3814,17 @@ const actions = {
   'dl-json': () => save(`${slug()}.json`, JSON.stringify(plan, null, 2)),
   'copy-md': async () => { try { await navigator.clipboard.writeText(toMarkdown()); toast('Copied'); } catch { const r = document.createRange(); r.selectNodeContents($('#md-out')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Text selected. Press Ctrl/Cmd+C to copy.'); } }
 };
+Object.assign(actions, {
+  'sym-add': b => symAdd(b.dataset.k),
+  'sym-del': b => mutate(p => { p.symbols = (p.symbols || []).filter(x => x.key !== b.dataset.k); }),
+  'sym-palette': b => symPalette(b.dataset.of),
+  'sym-motif': b => { mutate(p => { ensureLook(p).motif = b.dataset.m; }, { log: 'Pattern set to ' + MOTIF_LABEL[b.dataset.m] }); toast('Pattern set to ' + MOTIF_LABEL[b.dataset.m].toLowerCase() + '. See it on Visuals.'); },
+  'sym-element': b => symElement(b.dataset.k),
+  'sym-all': () => { symShowAll = !symShowAll; render(); },
+  open3d: () => open3D(),
+  cam3d: b => { view3d?.preset(b.dataset.v); document.querySelectorAll('#overlay [data-act=cam3d]').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); }); },
+  png3d: async b => { if (!view3d) return; const blob = await view3d.png(); if (!blob) return; const cam = $('#overlay [data-act=cam3d].on')?.dataset.v || 'main'; try { await (downloads || browserDownloads).save({ filename: `${slug()}-3d-${cam}.png`, data: blob }); } catch (e) { if (e?.code !== 'declined') toast('Could not save the image.'); } }
+});
 const slug = () => (plan.name || 'ceremony-plan').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'ceremony-plan';
 /* Outside claude.ai (a local file or a public website) files download through the browser instead. */
 const browserDownloads = { save: async ({ filename, data }) => {

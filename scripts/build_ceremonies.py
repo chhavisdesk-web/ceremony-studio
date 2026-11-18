@@ -93,7 +93,8 @@ def get(url, accept=None, tries=4):
                 return r.read().decode('utf-8')
         except urllib.error.HTTPError as e:
             if e.code in (429, 503) and i < tries - 1:
-                time.sleep(10 * (i + 1))
+                wait = e.headers.get('Retry-After', '')
+                time.sleep(min(120, int(wait)) if wait.isdigit() else 10 * (i + 1))
                 continue
             if e.code == 404:
                 return None

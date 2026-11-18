@@ -30,6 +30,16 @@ Picking one fills these fields from published records:
 
 Auto-filled fields are tinted green and tagged "Auto-filled", with their source under them. Empty fields the plan needs have a red dashed outline and a "Needed" tag. Fields you filled yourself look normal. Typing over a field replaces the source with your own value. Choosing another event never overwrites what you typed. Budget, show length and the written brief are always yours to fill in.
 
+## Design references and images
+
+- **Local symbols & traditions** (Show design step): the host country's and city's flag colours with their hex codes, anthem, motto and official symbols, from Wikidata. Also the traditions on UNESCO's intangible cultural heritage lists, and what common motifs mean, from Wikipedia and Iconclass. Every item links to its source. You can use the flag colours as the palette, add a tradition as an unpriced cast idea, or add items to the show's references. References go into the image prompts and the export.
+- **Venue photo** (Visuals step): a freely licensed photo of the venue from Wikimedia Commons, credited to its author with its licence.
+- **3D model** (Visuals step → Open 3D model): the venue with your show in it, at the tiers you picked. You can orbit, switch between four camera positions and save a PNG. A stadium's field is drawn at FIFA's recommended 105 × 68 m and an arena floor as a 60 × 30 m ice rink (IIHF). Stands, stage and effects are schematic, not to scale. The 3D library (three.js) loads from jsDelivr when the model is first opened.
+
+## Keeping the library current
+
+`.github/workflows/refresh-reference.yml` rebuilds `reference/` on the 2nd of every month and opens a pull request with what changed. Nothing reaches the app until someone merges it, and the build fails if any value lacks a source. It runs once the workflow file is on the default branch and "Allow GitHub Actions to create and approve pull requests" is turned on (Settings → Actions → General). You can also run it by hand from the Actions tab.
+
 ## How it works
 
 - `index.html` is the whole app. It loads `reference/bundle.json` at start-up.

@@ -1,0 +1,97 @@
+# Rebuilds the reference library once a month and opens a pull request with what changed.
+# Nothing reaches the app until someone reviews and merges the pull request.
+# The build refuses to finish if any value lacks a source (scripts/build_reference.py check).
+#
+# Needs: Settings > Actions > General > Workflow permissions > "Allow GitHub Actions to create
+# and approve pull requests". Runs from the default branch once this file is merged there.
+name: Refresh reference data
+
+on:
+  schedule:
+    - cron: '17 3 2 * *'   # 03:17 UTC on the 2nd of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-reference
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Each builder fetches fresh data (no cache is restored). A builder that fails, for example
+      # because a site is rate-limiting, leaves its previous file in place; the pull request says so.
+      - name: Past ceremonies (Wikipedia)
+        id: ceremonies
+        continue-on-error: true
+        run: python3 -u scripts/build_ceremonies.py
+
+      - name: Event catalogue (Wikipedia, Wikidata)
+        id: catalog
+        continue-on-error: true
+        run: python3 -u scripts/build_catalog.py
+
+      - name: City and venue summaries (Wikipedia)
+        id: places
+        continue-on-error: true
+        run: python3 -u scripts/build_places.py
+
+      - name: Local symbols and traditions (Wikidata, UNESCO lists, Iconclass)
+        id: symbols
+        continue-on-error: true
+        run: python3 -u scripts/build_symbols.py
+
+      - name: Venue photos (Wikimedia Commons)
+        id: photos
+        continue-on-error: true
+        run: python3 -u scripts/build_photos.py
+
+      - name: Emission factors, grid, multipliers, exchange rates, bundle and source check
+        run: python3 -u scripts/build_reference.py
+
+      - name: Open a pull request if anything changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTCOMES: |
+            - Past ceremonies: ${{ steps.ceremonies.outcome }}
+            - Event catalogue: ${{ steps.catalog.outcome }}
+            - City and venue summaries: ${{ steps.places.outcome }}
+            - Local symbols and traditions: ${{ steps.symbols.outcome }}
+            - Venue photos: ${{ steps.photos.outcome }}
+        run: |
+          if [ -z "$(git status --porcelain reference)" ]; then
+            echo "No changes."; exit 0
+          fi
+          branch="reference/refresh-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add reference
+          git commit -m "Refresh reference data $(date -u +%Y-%m-%d)"
+          git push -u origin "$branch"
+          {
+            echo "Monthly rebuild of the reference library. Every value passed the source check."
+            echo
+            echo "Builders (a failed one kept its previous file):"
+            echo "$OUTCOMES"
+            echo
+            echo "Files changed:"
+            echo '```'
+            git diff --stat HEAD~1 -- reference | tail -40
+            echo '```'
+            echo
+            echo "Review new traditions, symbols and photos before merging: open the linked sources for anything that will go in front of a client."
+          } > pr-body.md
+          gh pr create --base "${{ github.event.repository.default_branch }}" --head "$branch" \
+            --title "Refresh reference data $(date -u +%Y-%m-%d)" --body-file pr-body.md

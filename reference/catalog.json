@@ -280,9 +280,6 @@
       "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
       "revision": 1382713366
      }
-    },
-    "country": {
-     "value": "CF10 1NS"
     }
    },
    "venueRef": "Millennium Stadium"
@@ -1731,7 +1728,14 @@
      }
     },
     "country": {
-     "value": "100 00"
+     "value": "Czech Republic"
+    },
+    "currency": {
+     "value": "CZK",
+     "from": {
+      "title": "Wikidata: currency (P38) of Czech Republic",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Fortuna Arena"
@@ -2125,9 +2129,6 @@
       "url": "https://en.wikipedia.org/wiki/Mapei_Stadium_%E2%80%93_Citt%C3%A0_del_Tricolore",
       "revision": 1377074329
      }
-    },
-    "country": {
-     "value": "42122 Reggio Emilia (RE)"
     }
    },
    "venueRef": "Mapei Stadium – Città del Tricolore"
@@ -2768,9 +2769,6 @@
       "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
       "revision": 1382713366
      }
-    },
-    "country": {
-     "value": "CF10 1NS"
     }
    },
    "venueRef": "Millennium Stadium"
@@ -3691,7 +3689,14 @@
      }
     },
     "country": {
-     "value": "E20 2ST"
+     "value": "England"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of England",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "London Stadium"
@@ -4080,6 +4085,13 @@
     },
     "country": {
      "value": "China"
+    },
+    "currency": {
+     "value": "CNY",
+     "from": {
+      "title": "Wikidata: currency (P38) of China",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Beijing National Stadium"
@@ -4254,7 +4266,14 @@
      }
     },
     "country": {
-     "value": "E20 2ST"
+     "value": "England"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of England",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "London Stadium"
@@ -4631,6 +4650,13 @@
     },
     "country": {
      "value": "China"
+    },
+    "currency": {
+     "value": "CNY",
+     "from": {
+      "title": "Wikidata: currency (P38) of China",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Beijing National Stadium"
@@ -4775,7 +4801,14 @@
      }
     },
     "country": {
-     "value": "Queensland"
+     "value": "Australia"
+    },
+    "currency": {
+     "value": "AUD",
+     "from": {
+      "title": "Wikidata: currency (P38) of Australia",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Carrara Stadium"
@@ -4801,7 +4834,7 @@
      "value": "Alexander Stadium"
     },
     "city": {
-     "value": "Perry Park"
+     "value": "Birmingham"
     },
     "capacity": {
      "value": 18000,
@@ -4812,7 +4845,14 @@
      }
     },
     "country": {
-     "value": "Birmingham"
+     "value": "England"
+    },
+    "currency": {
+     "value": "GBP",
+     "from": {
+      "title": "Wikidata: currency (P38) of England",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Alexander Stadium"
@@ -5031,6 +5071,13 @@
     },
     "country": {
      "value": "China"
+    },
+    "currency": {
+     "value": "CNY",
+     "from": {
+      "title": "Wikidata: currency (P38) of China",
+      "url": "https://query.wikidata.org/"
+     }
     }
    },
    "venueRef": "Hangzhou Olympic Sports Expo Center"
@@ -6707,7 +6754,7 @@
    "capacity": 18000,
    "capacityText": "18,000 40,000 (2022 Commonwealth Games)",
    "capacityCite": null,
-   "country": "Birmingham",
+   "country": null,
    "city": "Perry Park",
    "usedBy": [
     "cwg-2022"
@@ -6731,7 +6778,7 @@
     "date": "July 10, 2020",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Nevada",
    "usedBy": [
     "sb-2024",
@@ -7036,7 +7083,7 @@
     "date": "",
     "archive": "https://web.archive.org/web/20140221185008/http://superdome.com/uploads/SUPERDOMEMEDIAKIT5.3.12FINAL.pdf"
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Louisiana",
    "usedBy": [
     "sb-2025"
@@ -7108,7 +7155,7 @@
     "date": "2 March 2020",
     "archive": ""
    },
-   "country": "Queensland",
+   "country": null,
    "city": "Carrara",
    "usedBy": [
     "cwg-2018"
@@ -7307,8 +7354,8 @@
     "date": "",
     "archive": ""
    },
-   "country": "100 00",
-   "city": "Czech Republic",
+   "country": "Czech Republic",
+   "city": "Prague",
    "usedBy": [
     "uecl-2023"
    ],
@@ -7457,7 +7504,7 @@
     "date": "",
     "archive": "https://web.archive.org/web/20150612143057/http://www.newmiamistadium.com/faqs/"
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Florida",
    "usedBy": [
     "sb-2020"
@@ -7633,7 +7680,7 @@
     "date": "",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "California",
    "usedBy": [
     "sb-2016",
@@ -7676,8 +7723,8 @@
     "date": "",
     "archive": ""
    },
-   "country": "E20 2ST",
-   "city": "England",
+   "country": "England",
+   "city": "London",
    "usedBy": [
     "summer-2012",
     "spara-2012"
@@ -7701,7 +7748,7 @@
     "date": "",
     "archive": "https://web.archive.org/web/20100302205334/http://www.usctrojans.com/facilities/usc-memorial-coliseum.html"
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "California",
    "usedBy": [
     "summer-2028",
@@ -7756,7 +7803,7 @@
    "capacity": 21525,
    "capacityText": "21,525",
    "capacityCite": null,
-   "country": "42122 Reggio Emilia (RE)",
+   "country": null,
    "city": "P.le Atleti Azzurri d'Italia",
    "usedBy": [
     "uwcl-2016"
@@ -7804,8 +7851,8 @@
     "date": "July 14, 2017",
     "archive": ""
    },
-   "country": "U.S.",
-   "city": "Georgia",
+   "country": "United States",
+   "city": "Atlanta",
    "usedBy": [
     "sb-2019",
     "sb-2028"
@@ -7854,7 +7901,7 @@
     "date": "14 February 2019",
     "archive": ""
    },
-   "country": "CF10 1NS",
+   "country": null,
    "city": "Cardiff",
    "usedBy": [
     "ucl-2017",
@@ -7879,7 +7926,7 @@
     "date": "August 6, 2018",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Texas",
    "usedBy": [
     "sb-2017"
@@ -7964,7 +8011,7 @@
    "capacity": 60000,
    "capacityText": "60,000",
    "capacityCite": null,
-   "country": "U.S.",
+   "country": "United States",
    "city": "Tennessee",
    "usedBy": [
     "sb-2030"
@@ -8208,7 +8255,7 @@
    "capacity": 69218,
    "capacityText": "69,218 (2022–present, expandable to 75,000) Former capacity: collapsible list * 65,618 (2016–2021) * 65,890 (2013–2015) * 65,856 (2008–2012) * 65,657 (2001–2007",
    "capacityCite": null,
-   "country": "U.S.",
+   "country": "United States",
    "city": "Florida",
    "usedBy": [
     "sb-2021"
@@ -8280,7 +8327,7 @@
     "date": "",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Utah",
    "usedBy": [
     "winter-2034"
@@ -8389,7 +8436,7 @@
     "date": "November 17, 2016",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "California",
    "usedBy": [
     "sb-2022",
@@ -8528,7 +8575,7 @@
     "date": "February 9, 2008",
     "archive": ""
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Arizona",
    "usedBy": [
     "sb-2015",
@@ -8577,7 +8624,7 @@
     "date": "",
     "archive": "https://web.archive.org/web/20250525151438/https://static.clubs.nfl.com/image/upload/vikings/basfjo3vggnuukwhmbkf"
    },
-   "country": "U.S.",
+   "country": "United States",
    "city": "Minnesota",
    "usedBy": [
     "sb-2018"
@@ -8737,12 +8784,6 @@
   }
  ],
  "currencyByCountry": {
-  "Malta": [
-   "EUR"
-  ],
-  "Monaco": [
-   "EUR"
-  ],
   "Montenegro": [
    "EUR"
   ],
@@ -8751,16 +8792,6 @@
   ],
   "San Marino": [
    "EUR"
-  ],
-  "Ireland": [
-   "EUR"
-  ],
-  "Spain": [
-   "EUR"
-  ],
-  "Panama": [
-   "PAB",
-   "USD"
   ],
   "Zimbabwe": [
    "AUD",
@@ -8773,8 +8804,21 @@
    "ZAR",
    "ZWG"
   ],
+  "Bulgaria": [
+   "EUR"
+  ],
+  "Ireland": [
+   "EUR"
+  ],
+  "Spain": [
+   "EUR"
+  ],
   "Liberia": [
    "LRD",
+   "USD"
+  ],
+  "Panama": [
+   "PAB",
    "USD"
   ],
   "Kingdom of the Netherlands": [
@@ -8833,6 +8877,12 @@
   "Ukraine": [
    "UAH"
   ],
+  "Gabon": [
+   "XAF"
+  ],
+  "Cameroon": [
+   "XAF"
+  ],
   "Central African Republic": [
    "XAF"
   ],
@@ -8842,26 +8892,8 @@
   "Equatorial Guinea": [
    "XAF"
   ],
-  "Gabon": [
-   "XAF"
-  ],
-  "Cameroon": [
-   "XAF"
-  ],
   "Chad": [
    "XAF"
-  ],
-  "Mali": [
-   "XOF"
-  ],
-  "Togo": [
-   "XOF"
-  ],
-  "Benin": [
-   "XOF"
-  ],
-  "Burkina Faso": [
-   "XOF"
   ],
   "Guinea-Bissau": [
    "XOF"
@@ -8875,237 +8907,17 @@
   "Senegal": [
    "XOF"
   ],
-  "North Korea": [
-   "KPW"
+  "Mali": [
+   "XOF"
   ],
-  "Canada": [
-   "CAD"
+  "Togo": [
+   "XOF"
   ],
-  "Sweden": [
-   "SEK"
+  "Benin": [
+   "XOF"
   ],
-  "Poland": [
-   "PLN"
-  ],
-  "Albania": [
-   "ALL"
-  ],
-  "Armenia": [
-   "AMD"
-  ],
-  "Czech Republic": [
-   "CZK"
-  ],
-  "Israel": [
-   "ILS"
-  ],
-  "Palestine": [
-   "EGP",
-   "ILS",
-   "JOD"
-  ],
-  "Iceland": [
-   "ISK"
-  ],
-  "Romania": [
-   "RON"
-  ],
-  "Norway": [
-   "NOK"
-  ],
-  "Cook Islands": [
-   "NZD"
-  ],
-  "Niue": [
-   "NZD"
-  ],
-  "New Zealand": [
-   "NZD"
-  ],
-  "Chile": [
-   "CLF",
-   "CLP"
-  ],
-  "Malaysia": [
-   "MYR"
-  ],
-  "Eritrea": [
-   "ERN"
-  ],
-  "Philippines": [
-   "PHP"
-  ],
-  "Serbia": [
-   "RSD"
-  ],
-  "Northern Cyprus": [
-   "TRL",
-   "TRY"
-  ],
-  "Turkey": [
-   "TRL",
-   "TRY"
-  ],
-  "Brazil": [
-   "BRL"
-  ],
-  "Kazakhstan": [
-   "KZT"
-  ],
-  "North Macedonia": [
-   "MKD"
-  ],
-  "Thailand": [
-   "THB"
-  ],
-  "Bosnia and Herzegovina": [
-   "BAM"
-  ],
-  "Moldova": [
-   "MDL"
-  ],
-  "Lesotho": [
-   "LSL",
-   "ZAR"
-  ],
-  "Namibia": [
-   "NAD",
-   "ZAR"
-  ],
-  "South Africa": [
-   "ZAR"
-  ],
-  "Mongolia": [
-   "MNT"
-  ],
-  "Ghana": [
-   "GHS"
-  ],
-  "Botswana": [
-   "BWP"
-  ],
-  "Pakistan": [
-   "PKR"
-  ],
-  "Pahlavi Iran": [
-   "IRR"
-  ],
-  "Iran": [
-   "IRR"
-  ],
-  "Libya": [
-   "LYD"
-  ],
-  "Singapore": [
-   "SGD"
-  ],
-  "Vietnam": [
-   "VND"
-  ],
-  "Iraq": [
-   "IQD"
-  ],
-  "Kuwait": [
-   "KWD"
-  ],
-  "São Tomé and Príncipe": [
-   "STN"
-  ],
-  "The Bahamas": [
-   "BSD"
-  ],
-  "Barbados": [
-   "BBD"
-  ],
-  "Bangladesh": [
-   "BDT"
-  ],
-  "Egypt": [
-   "EGP"
-  ],
-  "Afghanistan": [
-   "AFN"
-  ],
-  "Argentina": [
-   "ARS"
-  ],
-  "Algeria": [
-   "DZD"
-  ],
-  "Saudi Arabia": [
-   "SAR"
-  ],
-  "Tajikistan": [
-   "TJS"
-  ],
-  "Laos": [
-   "LAK"
-  ],
-  "Morocco": [
-   "MAD"
-  ],
-  "United Arab Emirates": [
-   "AED"
-  ],
-  "Angola": [
-   "AOA"
-  ],
-  "Bolivia": [
-   "BOB"
-  ],
-  "Mozambique": [
-   "MZN"
-  ],
-  "Papua New Guinea": [
-   "PGK"
-  ],
-  "Bhutan": [
-   "BTN"
-  ],
-  "Bahrain": [
-   "BHD"
-  ],
-  "Myanmar": [
-   "MMK"
-  ],
-  "Lebanon": [
-   "LBP"
-  ],
-  "Suriname": [
-   "SRD"
-  ],
-  "South Korea": [
-   "KRW"
-  ],
-  "Kenya": [
-   "KES"
-  ],
-  "The Gambia": [
-   "GMD"
-  ],
-  "Nepal": [
-   "NPR"
-  ],
-  "Nigeria": [
-   "NGN"
-  ],
-  "Jordan": [
-   "JOD"
-  ],
-  "Haiti": [
-   "HTG"
-  ],
-  "Peru": [
-   "PEN"
-  ],
-  "Cambodia": [
-   "KHR"
-  ],
-  "Ethiopia": [
-   "ETB"
-  ],
-  "Brunei": [
-   "BND"
+  "Burkina Faso": [
+   "XOF"
   ],
   "Qatar": [
    "QAR"
@@ -9127,6 +8939,10 @@
   ],
   "Vanuatu": [
    "VUV"
+  ],
+  "Lesotho": [
+   "LSL",
+   "ZAR"
   ],
   "Uruguay": [
    "UYU"
@@ -9345,9 +9161,6 @@
   "Portugal": [
    "EUR"
   ],
-  "Bulgaria": [
-   "EUR"
-  ],
   "Kosovo": [
    "EUR"
   ],
@@ -9374,6 +9187,240 @@
   ],
   "Cyprus": [
    "EUR"
+  ],
+  "Malta": [
+   "EUR"
+  ],
+  "Monaco": [
+   "EUR"
+  ],
+  "North Korea": [
+   "KPW"
+  ],
+  "Canada": [
+   "CAD"
+  ],
+  "Sweden": [
+   "SEK"
+  ],
+  "Poland": [
+   "PLN"
+  ],
+  "Albania": [
+   "ALL"
+  ],
+  "Armenia": [
+   "AMD"
+  ],
+  "Czech Republic": [
+   "CZK"
+  ],
+  "Palestine": [
+   "EGP",
+   "ILS",
+   "JOD"
+  ],
+  "Israel": [
+   "ILS"
+  ],
+  "Iceland": [
+   "ISK"
+  ],
+  "Romania": [
+   "RON"
+  ],
+  "Norway": [
+   "NOK"
+  ],
+  "Cook Islands": [
+   "NZD"
+  ],
+  "Niue": [
+   "NZD"
+  ],
+  "New Zealand": [
+   "NZD"
+  ],
+  "Chile": [
+   "CLF",
+   "CLP"
+  ],
+  "Malaysia": [
+   "MYR"
+  ],
+  "Eritrea": [
+   "ERN"
+  ],
+  "Philippines": [
+   "PHP"
+  ],
+  "Serbia": [
+   "RSD"
+  ],
+  "Northern Cyprus": [
+   "TRL",
+   "TRY"
+  ],
+  "Turkey": [
+   "TRL",
+   "TRY"
+  ],
+  "Brazil": [
+   "BRL"
+  ],
+  "Kazakhstan": [
+   "KZT"
+  ],
+  "North Macedonia": [
+   "MKD"
+  ],
+  "Thailand": [
+   "THB"
+  ],
+  "Bosnia and Herzegovina": [
+   "BAM"
+  ],
+  "Moldova": [
+   "MDL"
+  ],
+  "Namibia": [
+   "NAD",
+   "ZAR"
+  ],
+  "South Africa": [
+   "ZAR"
+  ],
+  "Mongolia": [
+   "MNT"
+  ],
+  "Ghana": [
+   "GHS"
+  ],
+  "Botswana": [
+   "BWP"
+  ],
+  "Pakistan": [
+   "PKR"
+  ],
+  "Pahlavi Iran": [
+   "IRR"
+  ],
+  "Iran": [
+   "IRR"
+  ],
+  "Libya": [
+   "LYD"
+  ],
+  "Singapore": [
+   "SGD"
+  ],
+  "Vietnam": [
+   "VND"
+  ],
+  "Iraq": [
+   "IQD"
+  ],
+  "Kuwait": [
+   "KWD"
+  ],
+  "São Tomé and Príncipe": [
+   "STN"
+  ],
+  "The Bahamas": [
+   "BSD"
+  ],
+  "Barbados": [
+   "BBD"
+  ],
+  "Bangladesh": [
+   "BDT"
+  ],
+  "Egypt": [
+   "EGP"
+  ],
+  "Afghanistan": [
+   "AFN"
+  ],
+  "Argentina": [
+   "ARS"
+  ],
+  "Algeria": [
+   "DZD"
+  ],
+  "Saudi Arabia": [
+   "SAR"
+  ],
+  "Tajikistan": [
+   "TJS"
+  ],
+  "Laos": [
+   "LAK"
+  ],
+  "Morocco": [
+   "MAD"
+  ],
+  "United Arab Emirates": [
+   "AED"
+  ],
+  "Angola": [
+   "AOA"
+  ],
+  "Bolivia": [
+   "BOB"
+  ],
+  "Mozambique": [
+   "MZN"
+  ],
+  "Papua New Guinea": [
+   "PGK"
+  ],
+  "Bhutan": [
+   "BTN"
+  ],
+  "Bahrain": [
+   "BHD"
+  ],
+  "Myanmar": [
+   "MMK"
+  ],
+  "Lebanon": [
+   "LBP"
+  ],
+  "Suriname": [
+   "SRD"
+  ],
+  "South Korea": [
+   "KRW"
+  ],
+  "Kenya": [
+   "KES"
+  ],
+  "The Gambia": [
+   "GMD"
+  ],
+  "Nepal": [
+   "NPR"
+  ],
+  "Nigeria": [
+   "NGN"
+  ],
+  "Jordan": [
+   "JOD"
+  ],
+  "Haiti": [
+   "HTG"
+  ],
+  "Peru": [
+   "PEN"
+  ],
+  "Cambodia": [
+   "KHR"
+  ],
+  "Ethiopia": [
+   "ETB"
+  ],
+  "Brunei": [
+   "BND"
   ]
  },
  "currencySource": "Wikidata: sovereign states (Q6256) with currency (P38) and ISO 4217 code (P498); currencies or ISO codes with an end time, and abolished currencies (P576), excluded"

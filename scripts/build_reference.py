@@ -449,6 +449,31 @@ def check():
             for name, e in pl[kind].items():
                 if not e.get('permalink'):
                     problems.append(f'places.{kind}.{name}: no article link')
+    sym = load('symbols.json')
+    if sym:
+        need('symbols.json', sym.get('source'))
+        for kind in ('countries', 'cities'):
+            for name, e in sym[kind].items():
+                for c in e.get('colours', []):
+                    if not c.get('wikidata') or not re.fullmatch(r'#[0-9A-F]{6}', c.get('hex', '')):
+                        problems.append(f'symbols.{kind}.{name}: colour without a Wikidata hex code')
+                for t in e.get('traditions', []):
+                    if not (t.get('unesco') or t.get('wikidata')):
+                        problems.append(f'symbols.{kind}.{name}.{t.get("name")}: no UNESCO or Wikidata link')
+                for x in e.get('symbols', []):
+                    if not x.get('wikidata'):
+                        problems.append(f'symbols.{kind}.{name}.{x.get("name")}: no Wikidata link')
+        for m in sym.get('motifs', []):
+            if not m.get('article') or not (m.get('sentences') or m.get('iconclass')):
+                problems.append(f'symbols.motifs.{m.get("name")}: no sourced meaning')
+    ph = load('photos.json')
+    if ph:
+        need('photos.json', ph.get('source'))
+        for name, x in ph['photos'].items():
+            if not (x.get('page') and x.get('license') and x.get('author')):
+                problems.append(f'photos.{name}: missing Commons page, licence or author')
+            if not os.path.exists(os.path.join(REF, x['file'].split('/', 1)[1])):
+                problems.append(f'photos.{name}: file {x["file"]} missing')
     if problems:
         print('Reference check FAILED:')
         for p in problems:

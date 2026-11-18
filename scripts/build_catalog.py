@@ -165,6 +165,22 @@ def link_target(v, prefer=None):
     return (links[0][0].strip(), (links[0][1] or links[0][0]).strip()) if links else (None, None)
 
 
+UK_PARTS = {'England', 'Scotland', 'Wales', 'Northern Ireland'}
+COUNTRY_ALIAS = {'U.S.': 'United States', 'US': 'United States', 'USA': 'United States', 'United States of America': 'United States', 'UK': 'United Kingdom', 'Czechia': 'Czech Republic'}
+
+
+WIKIDATA_NAME = {'China': "People's Republic of China"}  # common name -> Wikidata label, for the currency lookup
+
+
+def known_country(parts, countries):
+    """The last part of a location that is a country Wikidata knows (skips postcodes, states and regions)."""
+    for x in reversed(parts):
+        x = COUNTRY_ALIAS.get(x, x)
+        if x in countries or x in UK_PARTS or WIKIDATA_NAME.get(x) in countries:
+            return x
+    return None
+
+
 def article(title):
     return {'title': title.replace('_', ' '), 'url': 'https://en.wikipedia.org/wiki/' + urllib.parse.quote(title),
             'revision': revision(title)}
@@ -211,7 +227,7 @@ def main():
             if parts:
                 put('city', parts[0])
             hosts = [clean(f[k]) for k in ('country', 'country2', 'country3', 'country4') if f.get(k)]
-            country = parts[-1] if len(parts) > 1 else (hosts[0] if len(hosts) == 1 else '')
+            country = (known_country(parts[1:], currency) if len(parts) > 1 else None) or (COUNTRY_ALIAS.get(hosts[0], hosts[0]) if len(hosts) == 1 else '')
             if len(hosts) > 1:
                 ev['hosts'] = hosts  # several host countries: the ceremony's country is left for the user
             if 'attendance' in f and re.search(r'\d', clean(f['attendance'])) and y <= 2026:
@@ -227,7 +243,7 @@ def main():
                     vloc = [p.strip() for p in clean(vf.get('location', '')).split(',') if p.strip()]
                     venues[vt] = {'name': vtitle.replace('_', ' '), 'source': article(vtitle) if vtext else None,
                                   'capacity': int(capnum.group(0).replace(',', '')) if capnum else None, 'capacityText': plain(re.sub(r'\{\{|\}\}|\|', ' ', capraw))[:160] if cap else None,
-                                  'capacityCite': first_ref(cap) if cap else None, 'country': vloc[-1] if len(vloc) > 1 else None, 'city': next((x for x in reversed(vloc[:-1]) if not re.search(r'\d', x)), None) if len(vloc) > 1 else None}
+                                  'capacityCite': first_ref(cap) if cap else None, 'country': known_country(vloc[1:], currency), 'city': next((x for x in reversed(vloc[:-1]) if not re.search(r'\d', x) and x not in currency and x not in UK_PARTS), None) if len(vloc) > 1 else None}
                 v = venues[vt]
                 ev['venueRef'] = vt
                 if v['capacity']:
@@ -238,9 +254,8 @@ def main():
                 if v.get('city') and (not ev['fields'].get('city') or ev['fields']['city']['value'] in (country, v['country'])):
                     put('city', v['city'])
             if country:
-                country = re.sub(r'^(U\.S\.|US|USA)$', 'United States', country)
                 put('country', country)
-                codes = currency.get(country) or currency.get({'England': 'United Kingdom', 'Scotland': 'United Kingdom', 'Wales': 'United Kingdom', 'Northern Ireland': 'United Kingdom'}.get(country, ''), [])
+                codes = currency.get(country) or currency.get(WIKIDATA_NAME.get(country, '')) or currency.get({'England': 'United Kingdom', 'Scotland': 'United Kingdom', 'Wales': 'United Kingdom', 'Northern Ireland': 'United Kingdom'}.get(country, ''), [])
                 if len(codes) == 1:
                     put('currency', codes[0])
                     ev['fields']['currency']['from'] = {'title': 'Wikidata: currency (P38) of ' + country, 'url': 'https://query.wikidata.org/'}
