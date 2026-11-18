@@ -869,14 +869,56 @@ function findPack(city, venue) {
   return CITY_PACKS.find(p => p.aka.some(a => { const n = normCity(a); return c === n || (n.length > 3 && (c.includes(n) || v.includes(n))); })) || null;
 }
 const LOCAL_KEYS = ['storyTitle', 'story', 'symbols', 'music', 'dance', 'places', 'community', 'sensitivities', 'artists', 'sound', 'danceShort', 'club'];
-function blankLocal() { return { source: '', sound: '', danceShort: '', club: '', storyTitle: '', story: '', symbols: '', music: '', dance: '', places: '', community: '', sensitivities: '', artists: '', colors: null, motif: 'rays', climate: null, transport: '' }; }
-function localFromPack(pk) { const sh = PACK_SHORT[pk.k] || []; return { source: pk.k, sound: sh[0] || '', danceShort: sh[1] || '', club: sh[2] || '', storyTitle: pk.storyTitle, story: pk.story, symbols: pk.symbols, music: pk.music, dance: pk.dance, places: pk.places, community: pk.community, sensitivities: pk.sensitivities, artists: pk.artists, colors: [...pk.colors], motif: pk.motif, climate: [...pk.climate], transport: pk.transport }; }
+function blankLocal() { return { source: '', city: '', sound: '', danceShort: '', club: '', storyTitle: '', story: '', symbols: '', music: '', dance: '', places: '', community: '', sensitivities: '', artists: '', colors: null, motif: 'rays', climate: null, transport: '' }; }
+function localFromPack(pk) { const sh = PACK_SHORT[pk.k] || []; return { source: pk.k, city: pk.city, sound: sh[0] || '', danceShort: sh[1] || '', club: sh[2] || '', storyTitle: pk.storyTitle, story: pk.story, symbols: pk.symbols, music: pk.music, dance: pk.dance, places: pk.places, community: pk.community, sensitivities: pk.sensitivities, artists: pk.artists, colors: [...pk.colors], motif: pk.motif, climate: [...pk.climate], transport: pk.transport }; }
 function localFromPlace(city) {
   const pc = placeOf(PLACES?.cities, city); if (!pc) return null;
   const first = (pc.summary.match(/^.*?[.!?](?=\s|$)/) || [pc.summary])[0];
-  return { ...blankLocal(), source: 'wikipedia', sourceUrl: pc.permalink, storyTitle: city, story: first, music: '', dance: '', sound: '', danceShort: '', club: '' };
+  return { ...blankLocal(), source: 'wikipedia', city, sourceUrl: pc.permalink, storyTitle: city, story: first, music: '', dance: '', sound: '', danceShort: '', club: '' };
 }
 function localEmpty(L) { return !L || LOCAL_KEYS.every(k => !String(L[k] || '').trim()); }
+// Which city a local profile describes: built-in packs and Wikipedia profiles know theirs; hand-written ones take the brief's city when first edited.
+function localCity(L) { return L?.city || CITY_PACKS.find(x => x.k === L?.source)?.city || ''; }
+function sameCity(a, b) {
+  const x = normCity(a), y = normCity(b); if (!x || !y) return false; if (x === y) return true;
+  const pk = CITY_PACKS.find(pk => normCity(pk.city) === x); return !!pk && pk.aka.some(n => normCity(n) === y);
+}
+// True when the profile is empty or written for another city than the brief's
+function localStale(p) {
+  const c = localCity(p.local), b = p.brief; if (localEmpty(p.local)) return true; if (!c) return false;
+  if (b.city) return !sameCity(c, b.city);
+  const cc = placeCountry('city', c); return !!(cc && b.country && countryKey(cc) !== countryKey(b.country)); // no city yet, but the profile's city is in another country
+}
+// The best starting profile for the brief's city: built-in profile, else Wikipedia's article, else blank
+function freshLocal(p) {
+  const pk = findPack(p.brief.city, p.brief.venue);
+  if (pk) return { L: localFromPack(pk), label: pk.city };
+  const w = localFromPlace(p.brief.city); if (w) return { L: w, label: p.brief.city + ' (from Wikipedia)' };
+  return { L: { ...blankLocal(), city: p.brief.city || '' }, label: null };
+}
+// Swap a profile written for another city; keep the look only if the user changed it from the old profile's colours.
+function ensureLocal(p) {
+  if (!localStale(p)) return null;
+  const old = localCity(p.local), oldCols = Array.isArray(p.local?.colors) ? p.local.colors.join() : null, f = freshLocal(p);
+  p.local = f.L;
+  if (validLook(p.look) && oldCols && p.look.palette.join() === oldCols) { if (Array.isArray(f.L.colors)) { p.look.palette = [...f.L.colors]; p.look.motif = f.L.motif; } else p.look = null; }
+  return { old: old && !sameCity(old, p.brief.city || '') ? old : null, label: f.label };
+}
+// The country a known city or venue is in, from the catalogue and Wikipedia data
+function placeCountry(kind, name) {
+  if (!name) return null;
+  if (kind === 'city') return placeOf(PLACES?.cities, name)?.country || CITY_PACKS.find(pk => sameCity(pk.city, name))?.country || null;
+  const n = normCity(name), v = CATALOG ? venueList().find(v => normCity(v.name) === n || normCity(v.label) === n) : null; return v?.country || null;
+}
+// After the country changes, clear a city, venue and capacity that belong to another country.
+function clearOtherCountry(b, keepCity = false) {
+  const cleared = [], other = (kind, name) => { const c = placeCountry(kind, name); return c && b.country && countryKey(c) !== countryKey(b.country) ? c : null; };
+  const vc = other('venue', b.venue), cc = keepCity ? null : other('city', b.city);
+  if (!vc && cc && b.venue && !placeCountry('venue', b.venue) && (b.src?.venue || sameCity(placeOf(PLACES?.venues, b.venue) ? cc : '', cc))) { cleared.push(b.venue); b.venue = ''; if (b.src?.capacity) { b.capacity = ''; delete b.src.capacity; } delete b.src?.venue; }
+  if (vc) { cleared.push(b.venue); b.venue = ''; if (b.src?.capacity) { b.capacity = ''; delete b.src.capacity; } delete b.src?.venue; }
+  if (cc) { cleared.push(b.city); b.city = ''; delete b.src?.city; }
+  return cleared.length ? `Cleared ${cleared.join(' and ')}: ${cleared.length > 1 ? 'they are' : 'it is'} in ${vc || cc}.` : '';
+}
 function parseTitled(text) { return String(text || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const i = l.indexOf(':'); return i > 0 && i < 60 ? { title: l.slice(0, i).trim(), detail: l.slice(i + 1).trim() } : { title: l.length > 40 ? l.slice(0, 40) + '…' : l, detail: l }; }); }
 const splitList = s => String(s || '').split(/,|\n/).map(x => x.trim()).filter(Boolean);
 const lines = s => String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
@@ -926,6 +968,11 @@ function libraryResearch(p) {
   if (L.dance) localContext.push({ title: 'Dance', detail: L.dance });
   if (L.places) localContext.push({ title: 'Places people love', detail: `${L.places}. Use them as shapes, colours and film moments rather than literal models.` });
   if (L.community) localContext.push({ title: 'Who can take part', detail: `Recruit the cast from ${L.community}. A local cast gives the show ownership and costs little in travel.` });
+  // Living traditions of the host city and country, from UNESCO's lists (reference/symbols.json)
+  const S = symbolsFor(p), trad = [], seenT = new Set();
+  [S?.city, S?.country].forEach(e => (e?.traditions || []).forEach(t => { if (!seenT.has(t.wikidata) && !t.sharedWith) { seenT.add(t.wikidata); trad.push(t); } }));
+  trad.slice(0, 4).forEach(t => localContext.push({ title: t.name.charAt(0).toUpperCase() + t.name.slice(1), detail: `${t.description ? t.description.charAt(0).toUpperCase() + t.description.slice(1) + '. ' : ''}On UNESCO's ${t.list}${t.year ? ' since ' + t.year : ''}. Involve the community that keeps it before it goes into a show.`, url: t.unesco || t.wikidata, src: t.unesco ? 'UNESCO' : 'Wikidata' }));
+  if (S?.country?.anthem || S?.country?.mottos?.length) localContext.push({ title: `National symbols of ${S.country.name}`, detail: [S.country.anthem ? `Anthem: ${S.country.anthem.name}.` : '', S.country.mottos?.[0] ? `Motto: “${S.country.mottos[0].text}”.` : '', S.country.colours?.length ? `Flag colours: ${S.country.colours.map(c => c.name).filter(Boolean).join(', ')}.` : ''].filter(Boolean).join(' ') + ' Check the rules on using them in a show.', url: S.country.wikidata, src: 'Wikidata' });
   const hooks = {
     final: [['The journey to the final', 'Every travelling fan has made a journey to get here. A story about arriving needs no translation.'], ['Neutral until the handover', 'Keep both finalists\' colours equal and bring them in only at the end, so neither fan base feels sidelined.'], ['A global voice with a local guest', 'Pair a headliner with reach in the finalists\' markets with a star from the host city.']],
     opening: [['Welcome the world', 'The host city opens its doors. Show what it is proud of, through its people.'], ['One story without words', 'Most viewers will not share a language with the host. Tell the story in images and music.'], ['A host star and a global guest', 'Pair a home-nation favourite with an artist the visiting nations know.']],
@@ -2826,7 +2873,7 @@ function applyCatalogEvent(ev) {
     if (F.currency && canFill(b, 'currency')) { b.currency = F.currency.value; b.src.currency = { b: 'published', r: F.currency.from?.title || 'Wikidata', url: 'https://www.wikidata.org/wiki/Property:P38' }; filled.push('currency'); }
     else { const c = fillCurrency(b); if (c) filled.push(c); }
     if (p.name.startsWith('New ')) p.name = ev.name;
-    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+    { const sw = ensureLocal(p); if (sw?.label) filled.push('local profile'); }
   }, { log: `Brief filled from ${ev.source.title}` });
   const multi = ev.currencyOptions || currencyOptions(plan.brief.country);
   toast((filled.length ? `Filled ${filled.join(', ')} from published records. Each shows its source; change any of them.` : `${ev.name} chosen. Your own entries were kept.`)
@@ -2845,27 +2892,31 @@ function applyVenue(v) {
     if (v.capacity && canFill(b, 'capacity')) { b.capacity = v.capacity; b.src.capacity = { b: 'published', r: `Wikipedia: ${v.source.title} (venue capacity)`, url: perm(v.source), cite: v.capacityCite || null }; filled.push('capacity'); }
     if (v.venueType && canFill(b, 'venueType')) { b.venueType = v.venueType; b.src.venueType = { b: 'published', r: `Venue of ${v.events.slice(0, 2).join(', ')}`, url: v.source.url }; filled.push('venue type'); }
     const c = fillCurrency(b); if (c) filled.push(c);
-    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+    { const sw = ensureLocal(p); if (sw?.label) filled.push('local profile'); }
   }, { log: `Venue set to ${v.label}` });
   toast(filled.length ? `Filled ${filled.join(', ')} from published records. Each shows its source.` : `${v.label} chosen. Your own entries were kept.`);
 }
 function applyCountry(c) {
-  let cur = null;
-  mutate(p => { const b = p.brief; b.src ||= {}; b.country = c.name; delete b.src.country; cur = fillCurrency(b); });
+  let cur = null, cleared = '';
+  mutate(p => { const b = p.brief; b.src ||= {}; b.country = c.name; delete b.src.country; cleared = clearOtherCountry(b); cur = fillCurrency(b); });
   const multi = currencyOptions(c.name);
-  toast([cur ? `Currency set to ${plan.brief.currency} (Wikidata).` : multi ? `Wikidata lists ${multi.join(' and ')} for ${c.name}: choose the currency.` : '',
+  toast([cleared, cur ? `Currency set to ${plan.brief.currency} (Wikidata).` : multi ? `Wikidata lists ${multi.join(' and ')} for ${c.name}: choose the currency.` : '',
     c.gridV == null ? `No published grid factor for ${c.name}: grid electricity will need a supplier figure.` : `Grid factor ${c.gridV} kg CO₂e/kWh (Ember).`].filter(Boolean).join(' '));
 }
 function applyCity(c) {
-  const filled = [];
+  const filled = [], note = [];
   mutate(p => {
     const b = p.brief; b.src ||= {};
     b.city = c.city; delete b.src.city;
-    if (c.country && canFill(b, 'country')) { b.country = c.country; b.src.country = { b: 'published', r: `Wikipedia: ${c.from.source.title}`, url: c.from.source.url }; filled.push('country'); }
+    if (c.country && (canFill(b, 'country') || countryKey(b.country) !== countryKey(c.country))) {
+      if (b.country && countryKey(b.country) !== countryKey(c.country)) { note.push(`Country changed from ${b.country} to ${c.country}, where ${c.city} is.`); if (b.src?.currency?.b === 'published' || !b.src?.currency) { b.currency = ''; delete b.src.currency; } }
+      b.country = c.country; b.src.country = { b: 'published', r: `Wikipedia: ${c.from.source.title}`, url: c.from.source.url }; filled.push('country');
+    }
+    const cl = clearOtherCountry(b, true); if (cl) note.push(cl);
     const cur = fillCurrency(b); if (cur) filled.push(cur);
-    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+    { const sw = ensureLocal(p); if (sw?.label) filled.push('local profile'); }
   });
-  if (filled.length) toast(`Filled ${filled.join(', ')}. Each shows its source.`);
+  if (filled.length || note.length) toast([...note, filled.length ? `Filled ${filled.join(', ')}. Each shows its source.` : ''].filter(Boolean).join(' '));
 }
 function needsPanel() {
   const items = briefNeeds(), open = items.filter(i => i.status !== 'ok');
@@ -2930,7 +2981,8 @@ function localPanel() {
   const L = plan.local, pk = findPack(plan.brief.city, plan.brief.venue), cur = CITY_PACKS.find(x => x.k === L.source);
   const cols = Array.isArray(L.colors) && L.colors.length === 5 ? L.colors : lookOf(plan).palette;
   const f = (label, key, rows, ph) => `<div class="field ${rows ? 'wide' : ''}"><label for="lc-${key}">${label}</label>${rows ? `<textarea id="lc-${key}" rows="${rows}" data-local="${key}" placeholder="${esc(ph)}">${esc(L[key] || '')}</textarea>` : `<input id="lc-${key}" data-local="${key}" value="${esc(L[key] || '')}" placeholder="${esc(ph)}">`}</div>`;
-  const status = cur ? `Using the built-in profile for <b>${esc(cur.city)}</b>. Edit anything below.` : L.source === 'wikipedia' ? `Started from <a href="${esc(safeUrl(L.sourceUrl))}" target="_blank" rel="noopener">Wikipedia's article on ${esc(plan.brief.city)}</a>. Add music, dance and local groups you know.` : pk ? `A built-in profile for <b>${esc(pk.city)}</b> is available.` : `No built-in profile for <b>${esc(plan.brief.city || 'this city')}</b> yet. Fill in what you know. Every field feeds the research and the concepts.`;
+  const lc = localCity(L), wrongCity = lc && plan.brief.city && !sameCity(lc, plan.brief.city);
+  const status = wrongCity ? `<span class="pill warn">This profile is for ${esc(lc)}, but the brief is for ${esc(plan.brief.city)}.</span> Build research again to replace it.` : cur ? `Using the built-in profile for <b>${esc(cur.city)}</b>. Edit anything below.` : L.source === 'wikipedia' ? `Started from <a href="${esc(safeUrl(L.sourceUrl))}" target="_blank" rel="noopener">Wikipedia's article on ${esc(plan.brief.city)}</a>. Add music, dance and local groups you know.` : pk ? `A built-in profile for <b>${esc(pk.city)}</b> is available.` : `No built-in profile for <b>${esc(plan.brief.city || 'this city')}</b> yet. Fill in what you know. Every field feeds the research and the concepts.`;
   return `<section class="panel"><div class="head2"><div><h2>Local profile</h2><p class="note" style="margin-top:4px">${status}</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${pk && (!cur || cur.k !== pk.k) ? `<button class="btn sm" data-act="load-pack" data-k="${pk.k}">Load ${esc(pk.city)} profile</button>` : ''}<button class="btn sm ghost" data-act="clear-local">Clear</button></div></div>
     <div class="form" style="margin-top:14px">
@@ -2970,7 +3022,10 @@ function vResearch() {
     ${ceremonyPanel()}${localPanel()}${checklist}`;
   const src = R.source === 'library' ? 'Built from Wikipedia summaries of the city and venue, cited records of past ceremonies, your local profile and broadcast rules for your brief. No Claude account needed.' : R.source === 'web' ? 'Compiled from public web sources in September 2026. Check facts before they go into a client document.' : 'From Claude\'s own knowledge, without live web search. Check facts before they go into a client document.';
   const list = xs => xs.map(x => `<div class="item"><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p>${x.url ? `<p class="fsrc"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.src || 'Source')}</a></p>` : ''}</div>`).join('');
+  const forCity = R.forCity ?? localCity(plan.local), forCountry = R.forCountry ?? '';
+  const stale = (forCity && plan.brief.city && !sameCity(forCity, plan.brief.city)) || (forCountry && plan.brief.country && countryKey(forCountry) !== countryKey(plan.brief.country)) || (forCity && !plan.brief.city && localStale(plan)) || (R.forCountry != null && !forCity && !!plan.brief.city);
   return `${head('Research', src, actions)}
+  ${stale ? `<div class="banner warn" role="status"><span>This research was built for <b>${esc([forCity, forCountry].filter(Boolean).join(', '))}</b>. The brief is now for <b>${esc([plan.brief.city, plan.brief.country].filter(Boolean).join(', '))}</b>.</span>${libBtn('lib-research', 'Rebuild for ' + (plan.brief.city || plan.brief.country))}</div>` : ''}
   <div class="grid g3">
     <section class="panel"><div class="eyebrow">For the people in the stands</div><h2 style="margin:4px 0 14px">Local connection</h2><div class="list">${list(R.localContext) || '<p class="muted">Fill in the local profile below, then rebuild.</p>'}</div></section>
     <section class="panel"><div class="eyebrow">For the world watching</div><h2 style="margin:4px 0 14px">Global hooks</h2><div class="list">${list(R.globalHooks)}</div></section>
@@ -3728,17 +3783,17 @@ const actions = {
     if (plan.elements.length) confirmBox('Replace the current show design with the built-in library?', 'Replace', run); else run();
   },
   'lib-research': () => {
-    let loaded = null;
+    let loaded = null, swapped = null;
     mutate(p => {
-      if (localEmpty(p.local)) { const pk = findPack(p.brief.city, p.brief.venue); if (pk) { p.local = localFromPack(pk); loaded = pk.city; } else { const w = localFromPlace(p.brief.city); if (w) { p.local = w; loaded = p.brief.city + ' (from Wikipedia)'; } } }
-      p.research = libraryResearch(p);
+      swapped = ensureLocal(p); loaded = swapped?.label || null;
+      p.research = { ...libraryResearch(p), forCity: p.brief.city || '', forCountry: p.brief.country || '' };
       if (!validLook(p.look) && Array.isArray(p.local.colors)) p.look = { ...(p.look || {}), palette: [...p.local.colors], motif: p.local.motif };
     }, { log: 'Research built from the library' });
     if (step !== 'research') go('research');
-    toast(loaded ? `Research built with the ${loaded} profile. No Claude credits used.` : localEmpty(plan.local) ? 'Research built. Fill in the local profile for richer local ideas, then rebuild.' : 'Research rebuilt from your local profile.');
+    toast(swapped?.old ? `Research rebuilt for ${plan.brief.city || plan.brief.country || 'the new brief'}: the ${swapped.old} profile was replaced${loaded ? ' with the ' + loaded + ' profile' : ''}. Undo brings it back.` : loaded ? `Research built with the ${loaded} profile. No Claude credits used.` : localEmpty(plan.local) ? 'Research built. Fill in the local profile for richer local ideas, then rebuild.' : 'Research rebuilt from your local profile.');
   },
   'lib-concepts': () => {
-    const run = () => { mutate(p => { if (localEmpty(p.local)) { const pk = findPack(p.brief.city, p.brief.venue); if (pk) p.local = localFromPack(pk); } p.concepts = libraryConcepts(p); p.conceptId = null; }, { log: 'Concepts generated from the library' }); go('concept'); toast('Three concepts ready. Choose one to build the show.'); };
+    const run = () => { mutate(p => { ensureLocal(p); p.concepts = libraryConcepts(p); p.conceptId = null; }, { log: 'Concepts generated from the library' }); go('concept'); toast('Three concepts ready. Choose one to build the show.'); };
     if (plan.conceptId) confirmBox('Replace the current concepts with three new ones?', 'Replace', run); else run();
   },
   'lib-artists': () => { const list = libraryArtists(plan); if (!list.length) { toast('Add local artists to the local profile first.'); return; } mutate(p => { p.artists = [...p.artists.filter(a => a.manual || !a.library), ...list]; }, { log: 'Artists from city profile' }); },
@@ -3868,7 +3923,7 @@ document.addEventListener('input', ev => {
     refreshFieldState(el);
     touched(); renderTop(); renderNav(); return;
   }
-  if (el.dataset.local) { plan.local[el.dataset.local] = el.value; touched(); return; }
+  if (el.dataset.local) { plan.local[el.dataset.local] = el.value; if (!localCity(plan.local)) plan.local.city = plan.brief.city || ''; touched(); return; }
   if (el.dataset.localcolor) { if (!Array.isArray(plan.local.colors)) plan.local.colors = [...lookOf(plan).palette]; plan.local.colors[+el.dataset.localcolor] = el.value; const sp = el.parentElement.querySelector('.mono'); if (sp) sp.textContent = el.value; touched(); return; }
   if (el.dataset.cue != null) { plan.cues[el.dataset.cue] = el.value; touched(); return; }
   if (el.dataset.lookfield) { ensureLook()[el.dataset.lookfield] = el.value; touched(); return; }
@@ -3881,7 +3936,7 @@ document.addEventListener('change', ev => { if (rendering) { const t = ev.target
 function onChange(ev) {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
-  if (el.dataset.bind === 'brief.country') { const c = fillCurrency(plan.brief); if (c) { touched(); render(); toast(`Currency set to ${plan.brief.currency} for ${plan.brief.country} (Wikidata). Change it if quotes come in another currency.`); return; } const m = currencyOptions(plan.brief.country); if (m) toast(`Wikidata lists ${m.join(' and ')} for ${plan.brief.country}: choose the currency.`); }
+  if (el.dataset.bind === 'brief.country') { const cl = clearOtherCountry(plan.brief); if (cl) { touched(); render(); toast(cl); } const c = fillCurrency(plan.brief); if (c) { touched(); render(); toast(`Currency set to ${plan.brief.currency} for ${plan.brief.country} (Wikidata). Change it if quotes come in another currency.`); return; } const m = currencyOptions(plan.brief.country); if (m) toast(`Wikidata lists ${m.join(' and ')} for ${plan.brief.country}: choose the currency.`); }
   if (el.dataset.bind === 'brief.eventName') { const hit = catalogEvents().find(e => e.name.toLowerCase() === el.value.trim().toLowerCase()); if (hit) { applyCatalogEvent(hit); return; } }
   if (el.dataset.bind && $('#brief-needs')) { $('#brief-needs').outerHTML = needsPanel(); return; }
   if (el.dataset.cerctx != null) { cerFilter.ctx = el.checked; const y = scrollY; render(); scrollTo(0, y); return; }

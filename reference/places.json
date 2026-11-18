@@ -26,7 +26,7 @@
    "permalink": "https://en.wikipedia.org/w/index.php?title=Cardiff&oldid=1384245635",
    "summary": "Cardiff is the capital and largest city of Wales. Cardiff had a population of in and forms a principal area officially known as the City and County of Cardiff. The city is the eleventh largest in the United Kingdom.",
    "culture": "",
-   "country": "CF10 1NS"
+   "country": null
   },
   "Kyiv": {
    "title": "Kyiv",
@@ -226,7 +226,7 @@
    "permalink": "https://en.wikipedia.org/w/index.php?title=Prague&oldid=1384753359",
    "summary": "Prague is the capital and largest city of the Czech Republic and the historical capital of Bohemia. Located on the Vltava River, the city has a population of about 1.4 million, making it the twelfth-largest city in the European Union. Its metropolitan area is home to approximately 2.3 million people.",
    "culture": "The city is traditionally one of the cultural centres of Europe, hosting many cultural events. Some of the significant cultural institutions include the National Theatre (Národní Divadlo) and the Estates Theatre (Stavovské or Tylovo or Nosticovo divadlo), where the premières of Mozart's Don Giovanni and La clemenza di Tito were held. Other major cultural institutions are the Rudolfinum, which is home to the Czech Philharmonic Orchestra, and the Municipal House, which is home to the Prague Symphony Orchestra.",
-   "country": "100 00"
+   "country": "Czech Republic"
   },
   "Athens": {
    "title": "Athens",
@@ -266,7 +266,7 @@
    "permalink": "https://en.wikipedia.org/w/index.php?title=Reggio_Emilia&oldid=1383439716",
    "summary": "Reggio nell'Emilia, usually referred to as Reggio Emilia, or simply Reggio by its inhabitants, and known until 1861 as Reggio di Lombardia, is a city in the region of Emilia-Romagna in northeast Italy. With a population of 172,921, it is the 4th-largest city in Emilia-Romagna and the 21st-largest in Italy. The inhabitants of Reggio nell'Emilia are called Reggiani, while the inhabitants of Reggio di Calabria, in the southwest of the country, are called Reggini.",
    "culture": "",
-   "country": "42122 Reggio Emilia (RE)"
+   "country": null
   },
   "San Sebastián": {
    "title": "San Sebastián",
@@ -394,7 +394,15 @@
    "permalink": "https://en.wikipedia.org/w/index.php?title=Gold_Coast%2C_Queensland&oldid=1383999544",
    "summary": "The Gold Coast, also known by its initials, GC, is a coastal city and region in the state of Queensland, Australia, located approximately 66 km south-southeast of the centre of the state capital, Brisbane. It is on the central eastern coast of Australia adjoining the Pacific Ocean. It is Queensland's second-largest city after Brisbane, as well as Australia's sixth-largest city and the most populous non-capital city.",
    "culture": "The Gold Coast's culture has been affected by rapid development and traditional marketing programs orbiting around 'sun, sand, surf and sex.'",
-   "country": "Queensland"
+   "country": "Australia"
+  },
+  "Birmingham": {
+   "title": "Birmingham",
+   "url": "https://en.wikipedia.org/wiki/Birmingham",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Birmingham&oldid=1385573007",
+   "summary": "Birmingham is a city and metropolitan borough in the centre of the West Midlands region of England. It is the largest local authority district in England by population and the second-largest city in Britain – commonly referred to as the second city of the United Kingdom – with a population of 1.2 million people in the city proper in. Birmingham is the centre of the ceremonial West Midlands county, and borders the Black Country to its west and, together with the city of Wolverhampton and towns including Walsall, West Bromwich, Dudley and Solihull, forms the West Midlands conurbation.",
+   "culture": "Birmingham has two major public art collections. Birmingham Museum & Art Gallery is best known for its works by the Pre-Raphaelites, a collection \"of outstanding importance\". It also holds a significant selection of old masters – including major works by Bellini, Rubens, Canaletto and Claude – and particularly strong collections of 17th-century Italian Baroque painting and English watercolours.",
+   "country": "England"
   },
   "Ahmedabad": {
    "title": "Ahmedabad",
