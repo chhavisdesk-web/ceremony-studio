@@ -1276,9 +1276,14 @@ function venuePhoto(p = plan) {
 function photoCredit(x) {
   return `Photo: ${esc(x.author)} · <a href="${esc(x.licenseUrl || x.page)}" target="_blank" rel="noopener">${esc(x.license)}</a> · <a href="${esc(x.page)}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
 }
+function photoImg(x, sized) {
+  // Local copy first when the build has one, then the same image on Wikimedia Commons; hide the figure if neither loads.
+  const src = x.file || x.url, alt = x.url && x.file ? x.url : '';
+  return `<img src="${esc(src)}" data-alt="${esc(alt)}" alt="${esc(x.description || plan.brief.venue)}" loading="lazy" referrerpolicy="no-referrer"${sized ? ` width="${x.width || 960}" height="${x.height || 640}"` : ''} onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else{this.closest('figure').hidden=true}">`;
+}
 function venuePhotoPanel() {
   const x = venuePhoto(); if (!x) return '';
-  return `<figure class="vphoto"><img src="${esc(x.file)}" alt="${esc(x.description || plan.brief.venue)}" loading="lazy" width="${x.width || 960}" height="${x.height || 640}"><figcaption><b>${esc(plan.brief.venue)} today</b><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>`;
+  return `<figure class="vphoto">${photoImg(x, true)}<figcaption><b>${esc(plan.brief.venue)} today</b><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>`;
 }
 
 /* 3D venue model (three.js, loaded only when opened) */
@@ -1299,7 +1304,7 @@ function open3D() {
       <button class="btn sm" data-act="png3d">Save PNG</button>
     </div>
     <p class="note">Drag to orbit, scroll or pinch to zoom. ${esc(d.label)}${d.src ? ' ' + srcLink(d.src, 'Source') + '.' : ''} Stands, stage, cast and effects are drawn at the tiers you picked but not to scale.</p>
-    ${x ? `<figure class="vphoto sm"><img src="${esc(x.file)}" alt="${esc(x.description || plan.brief.venue)}" loading="lazy"><figcaption><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>` : ''}`);
+    ${x ? `<figure class="vphoto sm">${photoImg(x)}<figcaption><span class="fsrc">${photoCredit(x)}</span></figcaption></figure>` : ''}`);
   $('#overlay .modal')?.classList.add('wide');
   start3D().catch(err => { const m = $('#three-msg'); if (m) m.textContent = 'The 3D view could not load here (' + (err?.message || 'network') + '). The 2D renders still work.'; });
 }

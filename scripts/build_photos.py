@@ -6,8 +6,13 @@ infobox, asks Wikimedia Commons for its licence, author and a 960-pixel-wide cop
 when the licence allows reuse (public domain, CC0, CC BY or CC BY-SA). Each photo is stored with its
 author, licence, licence link and Commons page, so the app can credit it wherever it is shown.
 
-Usage:  python3 scripts/build_photos.py   (after build_catalog.py)
-Network: en.wikipedia.org, commons.wikimedia.org, upload.wikimedia.org
+The app shows each photo from upload.wikimedia.org ('url'). A local copy ('file') is optional and is
+used first when present: Wikimedia rate-limits bulk thumbnail downloads, so copies are fetched within
+a time budget and the rest are picked up on later runs.
+
+Usage:  python3 scripts/build_photos.py                  (after build_catalog.py; credits and URLs only)
+        python3 scripts/build_photos.py --download 20    (also fetch missing local copies for up to 20 minutes)
+Network: en.wikipedia.org, commons.wikimedia.org, upload.wikimedia.org (only with --download)
 """
 import html
 import json
@@ -64,10 +69,12 @@ def infos(names):
     return out
 
 
-def download(url, path):
+def download(url, path, deadline):
     if os.path.exists(path):
         return True
     for i in range(4):
+        if time.time() > deadline:
+            return False
         try:
             req = urllib.request.Request(url, headers={'User-Agent': UA})
             with urllib.request.urlopen(req, timeout=90) as r:
@@ -77,12 +84,14 @@ def download(url, path):
         except urllib.error.HTTPError as e:
             if e.code == 429:
                 wait = e.headers.get('Retry-After', '')
-                time.sleep(min(120, int(wait)) if wait.isdigit() else 15 * (i + 1)); continue
+                time.sleep(max(0, min(120, int(wait) if wait.isdigit() else 15 * (i + 1), deadline - time.time()))); continue
             print('   download failed', e.code); return False
     return False
 
 
 def main():
+    minutes = float(sys.argv[sys.argv.index('--download') + 1]) if '--download' in sys.argv else 0
+    deadline = time.time() + minutes * 60
     catalog = json.load(open(os.path.join(ROOT, 'reference', 'catalog.json'), encoding='utf-8'))
     os.makedirs(DIR, exist_ok=True)
     photos, wanted = {}, []
@@ -104,26 +113,27 @@ def main():
         thumb = (ii.get('thumburl') or ii.get('url')).split('?')[0].replace('://thumb.wikimedia.org/', '://upload.wikimedia.org/')  # same file on the upload host
         ext = os.path.splitext(urllib.parse.urlparse(thumb).path)[1].lower() or '.jpg'
         local = slug(v['name']) + ext
-        if not download(thumb, os.path.join(DIR, local)):
-            continue
-        time.sleep(1)
+        path = os.path.join(DIR, local)
+        if minutes and not os.path.exists(path) and time.time() < deadline:
+            download(thumb, path, deadline); time.sleep(1)
         photos[v['name']] = {
-            'file': 'reference/photos/' + local, 'width': ii.get('thumbwidth') or ii.get('width'), 'height': ii.get('thumbheight') or ii.get('height'),
+            'url': thumb, 'file': 'reference/photos/' + local if os.path.exists(path) else None, 'width': ii.get('thumbwidth') or ii.get('width'), 'height': ii.get('thumbheight') or ii.get('height'),
             'title': name, 'page': ii.get('descriptionurl'), 'author': text(md.get('Artist')) or text(md.get('Credit')) or 'See the Commons page',
             'license': lic, 'licenseUrl': md.get('LicenseUrl') or '', 'description': text(md.get('ImageDescription'))[:240],
             'date': text(md.get('DateTimeOriginal'))[:40], 'from': {'title': title.replace('_', ' '), 'url': 'https://en.wikipedia.org/wiki/' + urllib.parse.quote(title)},
         }
         print(f"  {v['name']}: {name} ({lic})")
-    keep = {os.path.basename(p['file']) for p in photos.values()}
+    keep = {os.path.basename(p['file']) for p in photos.values() if p['file']}
     for f in os.listdir(DIR):  # photos of venues no longer in the catalogue
         if f not in keep:
             os.remove(os.path.join(DIR, f))
-    data = {'_about': 'One photo per catalogue venue: the image in the venue\'s English Wikipedia infobox, as published on Wikimedia Commons, kept only under a reusable licence. Credit the author and licence wherever a photo is shown.',
+    data = {'_about': 'One photo per catalogue venue: the image in the venue\'s English Wikipedia infobox, as published on Wikimedia Commons, kept only under a reusable licence. Credit the author and licence wherever a photo is shown. url is the Commons copy; file, when set, is a local copy of the same image.',
             'source': 'wikimedia-commons', 'builtAt': now(), 'width': WIDTH, 'photos': photos}
     with open(OUT, 'w', encoding='utf-8') as fh:
         json.dump(data, fh, ensure_ascii=False, indent=1); fh.write('\n')
     size = sum(os.path.getsize(os.path.join(DIR, f)) for f in os.listdir(DIR))
-    print(f'wrote reference/photos.json: {len(photos)} photos, {size / 1e6:.1f} MB')
+    local = sum(1 for p in photos.values() if p['file'])
+    print(f'wrote reference/photos.json: {len(photos)} photos, {local} with local copies ({size / 1e6:.1f} MB)')
 
 
 if __name__ == '__main__':

@@ -472,7 +472,9 @@ def check():
         for name, x in ph['photos'].items():
             if not (x.get('page') and x.get('license') and x.get('author')):
                 problems.append(f'photos.{name}: missing Commons page, licence or author')
-            if not os.path.exists(os.path.join(REF, x['file'].split('/', 1)[1])):
+            if not str(x.get('url', '')).startswith('https://upload.wikimedia.org/'):
+                problems.append(f'photos.{name}: no Commons image URL')
+            if x.get('file') and not os.path.exists(os.path.join(REF, x['file'].split('/', 1)[1])):
                 problems.append(f'photos.{name}: file {x["file"]} missing')
     if problems:
         print('Reference check FAILED:')
