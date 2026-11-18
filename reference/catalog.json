@@ -2,7 +2,7 @@
  "_about": "Real events for Brief autocomplete. Each field value comes from the event's English Wikipedia infobox (date, venue, city, country), the venue's article (capacity, with its citation when the infobox gives one) or Wikidata (currency of the country). Missing fields are left empty, never estimated.",
  "source": "wikipedia-en",
  "license": "Wikipedia text CC BY-SA 4.0; Wikidata CC0",
- "builtAt": "2026-11-17",
+ "builtAt": "2026-11-18",
  "series": [
   {
    "key": "ucl",
@@ -6671,6 +6671,2071 @@
    "venueRef": "Arena Burgas"
   }
  ],
+ "venues": [
+  {
+   "key": "Agia Sophia Stadium",
+   "name": "Agia Sophia Stadium",
+   "source": {
+    "title": "Agia Sophia Stadium",
+    "url": "https://en.wikipedia.org/wiki/Agia_Sophia_Stadium",
+    "revision": 1385647999
+   },
+   "capacity": 31100,
+   "capacityText": "31,100",
+   "capacityCite": {
+    "url": "https://diavgeia.gov.gr/doc/%CE%A81567%CE%9B7-7%CE%98%CE%9F?inline=true",
+    "title": "Θέμα: Άδεια Διεξαγωγής Αθλητικών Συναντήσεων Ποδοσφαίρισης",
+    "work": "diavgeia.gov.gr",
+    "date": "17 August 2023",
+    "archive": ""
+   },
+   "country": "Greece",
+   "city": "Athens",
+   "usedBy": [
+    "uecl-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Alexander Stadium",
+   "name": "Alexander Stadium",
+   "source": {
+    "title": "Alexander Stadium",
+    "url": "https://en.wikipedia.org/wiki/Alexander_Stadium",
+    "revision": 1381706913
+   },
+   "capacity": 18000,
+   "capacityText": "18,000 40,000 (2022 Commonwealth Games)",
+   "capacityCite": null,
+   "country": "Birmingham",
+   "city": "Perry Park",
+   "usedBy": [
+    "cwg-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Allegiant Stadium",
+   "name": "Allegiant Stadium",
+   "source": {
+    "title": "Allegiant Stadium",
+    "url": "https://en.wikipedia.org/wiki/Allegiant_Stadium",
+    "revision": 1385129867
+   },
+   "capacity": 65000,
+   "capacityText": "NFL: 65,000(expandable to 71,835)Soccer: 61,000",
+   "capacityCite": {
+    "url": "https://www.nfl.com/news/jon-gruden-on-allegiant-stadium-greatest-thing-i-ve-ever-seen",
+    "title": "Jon Gruden on Allegiant Stadium: 'Greatest thing I've ever seen'",
+    "work": "NFL.com",
+    "date": "July 10, 2020",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "Nevada",
+   "usedBy": [
+    "sb-2024",
+    "sb-2029"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Allianz Arena",
+   "name": "Allianz Arena",
+   "source": {
+    "title": "Allianz Arena",
+    "url": "https://en.wikipedia.org/wiki/Allianz_Arena",
+    "revision": 1385867579
+   },
+   "capacity": 75024,
+   "capacityText": "75,024 (domestic matches) 70,000 (international and European matches) Collapsible list title=Capacity history 66,000 (2005) cn date=January 2024 69,901 (2006–20",
+   "capacityCite": null,
+   "country": "Germany",
+   "city": "Bavaria",
+   "usedBy": [
+    "ucl-2025",
+    "ucl-2028"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Anoeta Stadium",
+   "name": "Anoeta Stadium",
+   "source": {
+    "title": "Anoeta Stadium",
+    "url": "https://en.wikipedia.org/wiki/Anoeta_Stadium",
+    "revision": 1384161826
+   },
+   "capacity": 40000,
+   "capacityText": "40,000",
+   "capacityCite": null,
+   "country": "Spain",
+   "city": "Gipuzkoa",
+   "usedBy": [
+    "uwcl-2020"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Arena Burgas",
+   "name": "Arena Burgas",
+   "source": {
+    "title": "Arena Burgas",
+    "url": "https://en.wikipedia.org/wiki/Arena_Burgas",
+    "revision": 1385429541
+   },
+   "capacity": 4100,
+   "capacityText": "* 4,100–6,100 (sports) * 15,000 (concerts)",
+   "capacityCite": {
+    "url": "https://www.segabg.com/hot/category-sport/ima-nova-svetlina-tunela-na-arena-burgas",
+    "title": "Има нова светлина в тунела на \"Арена Бургас\"",
+    "work": "Sega",
+    "date": "27 March 2023",
+    "archive": ""
+   },
+   "country": "Bulgaria",
+   "city": "Burgas",
+   "usedBy": [
+    "esc-2027"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Arena Kombëtare",
+   "name": "Arena Kombëtare",
+   "source": {
+    "title": "Arena Kombëtare",
+    "url": "https://en.wikipedia.org/wiki/Arena_Komb%C3%ABtare",
+    "revision": 1377821527
+   },
+   "capacity": 22500,
+   "capacityText": "22,500",
+   "capacityCite": null,
+   "country": "Albania",
+   "city": "Tirana",
+   "usedBy": [
+    "uecl-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Arena Națională",
+   "name": "Arena Națională",
+   "source": {
+    "title": "Arena Națională",
+    "url": "https://en.wikipedia.org/wiki/Arena_Na%C8%9Bional%C4%83",
+    "revision": 1385016270
+   },
+   "capacity": 55634,
+   "capacityText": "55,634 (Association football football)",
+   "capacityCite": {
+    "url": "http://www.gsp.ro/international/steaua-chelsea/am-cucerit-europa-si-n-tribune-steaua-chelsea-a-fost-urmarit-de-cei-mai-multi-suporteri-dintre-meciurile-din-optimile-europa-league-392899.html",
+    "title": "Am cucerit Europa şi-n tribune! – Steaua – Chelsea a fost urmărit de cei mai mulţi suporteri dintre meciurile din optimile Europa League",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Romania",
+   "city": "Bucharest",
+   "usedBy": [
+    "uel-2028"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Atatürk Olympic Stadium",
+   "name": "Atatürk Olympic Stadium",
+   "source": {
+    "title": "Atatürk Olympic Stadium",
+    "url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
+    "revision": 1381689706
+   },
+   "capacity": 77563,
+   "capacityText": "77,563 Collapsible list title=Capacity history 80,597 (2002–2005)76,092 (2005–2019)76,761 (2019–2020)75,145 (2020–2021)74,753 (2021–2022)77,563 (2022–)",
+   "capacityCite": {
+    "url": "http://www.tff.org/Default.aspx?pageID=394&stadID=110",
+    "title": "Stat Arama Detay",
+    "work": "",
+    "date": "",
+    "archive": "https://web.archive.org/web/20150104140346/http://www.tff.org/Default.aspx?pageId=394&stadId=110"
+   },
+   "country": "Turkey",
+   "city": "Istanbul",
+   "usedBy": [
+    "ucl-2023"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Avicii Arena",
+   "name": "Avicii Arena",
+   "source": {
+    "title": "Avicii Arena",
+    "url": "https://en.wikipedia.org/wiki/Avicii_Arena",
+    "revision": 1377046752
+   },
+   "capacity": 13950,
+   "capacityText": "13,950 (ice hockey)16,000 (concerts)",
+   "capacityCite": null,
+   "country": "Sweden",
+   "city": "Stockholm",
+   "usedBy": [
+    "esc-2016"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Aviva Stadium",
+   "name": "Aviva Stadium",
+   "source": {
+    "title": "Aviva Stadium",
+    "url": "https://en.wikipedia.org/wiki/Aviva_Stadium",
+    "revision": 1385969435
+   },
+   "capacity": 51711,
+   "capacityText": "bull 51,711 (rugby union, association football) br bull 49,000 (American football) br bull 65,000 (concerts)",
+   "capacityCite": {
+    "url": "http://www.avivastadium.ie/stadium-info",
+    "title": "Stadium Info",
+    "work": "Aviva Stadium",
+    "date": "",
+    "archive": ""
+   },
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "uel-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Baku Olympic Stadium",
+   "name": "Baku Olympic Stadium",
+   "source": {
+    "title": "Baku Olympic Stadium",
+    "url": "https://en.wikipedia.org/wiki/Baku_Olympic_Stadium",
+    "revision": 1380324542
+   },
+   "capacity": 69870,
+   "capacityText": "69,870",
+   "capacityCite": {
+    "url": "https://editorial.uefa.com/resources/0279-161fb68b3ca5-f10bf774dc62-1000/top-division_clubs_in_europe_2022-23.pdf",
+    "title": "First Division Clubs in Europe 2022/23",
+    "work": "UEFA",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Azerbaijan",
+   "city": "Baku",
+   "usedBy": [
+    "uel-2019"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Beijing National Stadium",
+   "name": "Beijing National Stadium",
+   "source": {
+    "title": "Beijing National Stadium",
+    "url": "https://en.wikipedia.org/wiki/Beijing_National_Stadium",
+    "revision": 1383816290
+   },
+   "capacity": 91000,
+   "capacityText": "91,000",
+   "capacityCite": {
+    "url": "https://www.n-s.cn/enshownews.jsp?type1=20",
+    "title": "[https://www.n-s.cn/enshownews.jsp?type1=20]",
+    "work": "",
+    "date": "July 2026",
+    "archive": ""
+   },
+   "country": "China",
+   "city": "Beijing",
+   "usedBy": [
+    "winter-2022",
+    "wpara-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Belgrade",
+   "name": "Belgrade",
+   "source": {
+    "title": "Belgrade",
+    "url": "https://en.wikipedia.org/wiki/Belgrade",
+    "revision": 1386227556
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "uel-2029"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Beşiktaş Stadium",
+   "name": "Beşiktaş Stadium",
+   "source": {
+    "title": "Beşiktaş Stadium",
+    "url": "https://en.wikipedia.org/wiki/Be%C5%9Fikta%C5%9F_Stadium",
+    "revision": 1372219790
+   },
+   "capacity": 42684,
+   "capacityText": "42,684",
+   "capacityCite": {
+    "url": "http://www.tff.org/Default.aspx?pageID=394&stadID=6097",
+    "title": "Stat Arama Detay TFF",
+    "work": "Tff.org",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Turkey",
+   "city": "Istanbul",
+   "usedBy": [
+    "uel-2026",
+    "uecl-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Brisbane Stadium",
+   "name": "Brisbane Stadium",
+   "source": {
+    "title": "Brisbane Stadium",
+    "url": "https://en.wikipedia.org/wiki/Brisbane_Stadium",
+    "revision": 1385990876
+   },
+   "capacity": 63000,
+   "capacityText": "63,000 (seated)",
+   "capacityCite": null,
+   "country": "Australia",
+   "city": "Queensland",
+   "usedBy": [
+    "summer-2032",
+    "spara-2032"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Caesars Superdome",
+   "name": "Caesars Superdome",
+   "source": {
+    "title": "Caesars Superdome",
+    "url": "https://en.wikipedia.org/wiki/Caesars_Superdome",
+    "revision": 1386069144
+   },
+   "capacity": 73208,
+   "capacityText": "American football Football: 73,208 (expandable to 76,468)Basketball: 73,432Baseball: 56,941",
+   "capacityCite": {
+    "url": "http://superdome.com/uploads/SUPERDOMEMEDIAKIT5.3.12FINAL.pdf",
+    "title": "The Superdome – An Icon Transformed",
+    "work": "State of Louisiana",
+    "date": "",
+    "archive": "https://web.archive.org/web/20140221185008/http://superdome.com/uploads/SUPERDOMEMEDIAKIT5.3.12FINAL.pdf"
+   },
+   "country": "U.S.",
+   "city": "Louisiana",
+   "usedBy": [
+    "sb-2025"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Camp Nou",
+   "name": "Camp Nou",
+   "source": {
+    "title": "Camp Nou",
+    "url": "https://en.wikipedia.org/wiki/Camp_Nou",
+    "revision": 1381738003
+   },
+   "capacity": 62652,
+   "capacityText": "idp *62,652 (current) *105,000 (expected)",
+   "capacityCite": {
+    "url": "https://www.theguardian.com/football/2013/dec/10/barcelona-new-stadium-extend-spotify-camp-nou-105000",
+    "title": "Barcelona to build new stadium unless Camp Nou gets 105,000 capacity",
+    "work": "The Guardian",
+    "date": "10 December 2013",
+    "archive": "https://web.archive.org/web/20200203175903/https://www.theguardian.com/football/2013/dec/10/barcelona-new-stadium-extend-camp-nou-105000"
+   },
+   "country": "Spain",
+   "city": "Catalonia",
+   "usedBy": [
+    "ucl-2029"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Cardiff City Stadium",
+   "name": "Cardiff City Stadium",
+   "source": {
+    "title": "Cardiff City Stadium",
+    "url": "https://en.wikipedia.org/wiki/Cardiff_City_Stadium",
+    "revision": 1381740089
+   },
+   "capacity": 33280,
+   "capacityText": "33,280",
+   "capacityCite": {
+    "url": "http://www.cardiffcityfc.co.uk/tickets/stadium_visitors/",
+    "title": "Stadium Visitors",
+    "work": "Cardiff City F.C.",
+    "date": "",
+    "archive": "https://web.archive.org/web/20150504163133/http://www.cardiffcityfc.co.uk/tickets/stadium_visitors/"
+   },
+   "country": "Wales",
+   "city": "Cardiff",
+   "usedBy": [
+    "uwcl-2017"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Carrara Stadium",
+   "name": "Carrara Stadium",
+   "source": {
+    "title": "Carrara Stadium",
+    "url": "https://en.wikipedia.org/wiki/Carrara_Stadium",
+    "revision": 1385969335
+   },
+   "capacity": 50000,
+   "capacityText": "Concerts: 50,000Australian Football League AFL: 25,000Cricket: 21,000",
+   "capacityCite": {
+    "url": "http://www.mygc.com.au/gold-coasts-queen-concert-deemed-a-7m-success/",
+    "title": "Gold Coast's QUEEN concert deemed a $7M success",
+    "work": "myGC.com.au",
+    "date": "2 March 2020",
+    "archive": ""
+   },
+   "country": "Queensland",
+   "city": "Carrara",
+   "usedBy": [
+    "cwg-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Celtic Park",
+   "name": "Celtic Park",
+   "source": {
+    "title": "Celtic Park",
+    "url": "https://en.wikipedia.org/wiki/Celtic_Park",
+    "revision": 1385795820
+   },
+   "capacity": null,
+   "capacityText": "SPFL-stadiums celtic",
+   "capacityCite": {
+    "url": "https://spfl.co.uk/clubs/celtic/",
+    "title": "Celtic Football Club",
+    "work": "spfl.co.uk",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Scotland",
+   "city": "Glasgow",
+   "usedBy": [
+    "cwg-2014"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Estadio Nacional Julio Martínez Prádanos",
+   "name": "Julio Martínez Prádanos National Stadium",
+   "source": {
+    "title": "Julio Martínez Prádanos National Stadium",
+    "url": "https://en.wikipedia.org/wiki/Julio_Mart%C3%ADnez_Pr%C3%A1danos_National_Stadium",
+    "revision": 1383906115
+   },
+   "capacity": 48745,
+   "capacityText": "48,745",
+   "capacityCite": {
+    "url": "https://parqueestadionacional.cl/?page_id=24",
+    "title": "Estadio Nacional Julio Martínez Prádanos",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Chile",
+   "city": "Ñuñoa",
+   "usedBy": [
+    "pan-2023"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Estádio José Alvalade",
+   "name": "Estádio José Alvalade",
+   "source": {
+    "title": "Estádio José Alvalade",
+    "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jos%C3%A9_Alvalade",
+    "revision": 1385859221
+   },
+   "capacity": 52095,
+   "capacityText": "52,095",
+   "capacityCite": null,
+   "country": "Portugal",
+   "city": "Lisbon",
+   "usedBy": [
+    "uwcl-2025"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Estádio da Luz",
+   "name": "Estádio da Luz",
+   "source": {
+    "title": "Estádio da Luz",
+    "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_da_Luz",
+    "revision": 1385859337
+   },
+   "capacity": 68100,
+   "capacityText": "68,100",
+   "capacityCite": {
+    "url": "https://www.slbenfica.pt/pt-pt/agora/media-list/videos/2025/07/11/clube-futebol-benfica-estadio-da-luz-aumento-lugares-video",
+    "title": "Estádio da Luz ainda mais imponente",
+    "work": "www.slbenfica.pt",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Portugal",
+   "city": "Lisbon",
+   "usedBy": [
+    "ucl-2020"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Estádio do Dragão",
+   "name": "Estádio do Dragão",
+   "source": {
+    "title": "Estádio do Dragão",
+    "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Drag%C3%A3o",
+    "revision": 1385729563
+   },
+   "capacity": 50033,
+   "capacityText": "50,033",
+   "capacityCite": null,
+   "country": "Portugal",
+   "city": "Porto",
+   "usedBy": [
+    "ucl-2021"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Estádio do Maracanã",
+   "name": "Maracanã Stadium",
+   "source": {
+    "title": "Maracanã Stadium",
+    "url": "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
+    "revision": 1385584231
+   },
+   "capacity": 73139,
+   "capacityText": "73,139",
+   "capacityCite": {
+    "url": "https://digitalhub.fifa.com/m/7dad0d3009710ee7/original/The-Brazilian-Bid-Book-FIFA-Women-s-World-Cup-2027.pdf",
+    "title": "The Brazilian Bid for the FIFA Women's World Cup 2027",
+    "work": "FIFA",
+    "date": "8 December 2023",
+    "archive": ""
+   },
+   "country": "Brazil",
+   "city": "Rio de Janeiro",
+   "usedBy": [
+    "summer-2016"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Expo Tel Aviv",
+   "name": "Expo Tel Aviv",
+   "source": {
+    "title": "Expo Tel Aviv",
+    "url": "https://en.wikipedia.org/wiki/Expo_Tel_Aviv",
+    "revision": 1368569718
+   },
+   "capacity": 5990,
+   "capacityText": "* 5,990 (Pavilion 1) * 9,200 (Pavilion 2) * 3,420 (Pavilion 10)",
+   "capacityCite": null,
+   "country": "Israel",
+   "city": "Tel Aviv",
+   "usedBy": [
+    "esc-2019"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Fisht Olympic Stadium",
+   "name": "Fisht Olympic Stadium",
+   "source": {
+    "title": "Fisht Olympic Stadium",
+    "url": "https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium",
+    "revision": 1381756906
+   },
+   "capacity": 45994,
+   "capacityText": "45,994 (Russian Premier League RPL) 44,287 (2018 FIFA World Cup)",
+   "capacityCite": {
+    "url": "https://premierliga.ru/clubs/sochi/?category=stadium",
+    "title": "Сочи Футбольный клуб | РПЛ",
+    "work": "Premierliga.ru",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Russia",
+   "city": "Krasnodar Krai",
+   "usedBy": [
+    "winter-2014",
+    "wpara-2014"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Fortuna Arena",
+   "name": "Fortuna Arena",
+   "source": {
+    "title": "Fortuna Arena",
+    "url": "https://en.wikipedia.org/wiki/Fortuna_Arena",
+    "revision": 1385206399
+   },
+   "capacity": 19370,
+   "capacityText": "19,370",
+   "capacityCite": {
+    "url": "https://en.slavia.cz/zobraz.asp?t=klub-sinobo-stadium",
+    "title": "About Sinobo Stadium",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "100 00",
+   "city": "Czech Republic",
+   "usedBy": [
+    "uecl-2023"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Friedrich-Ludwig-Jahn-Sportpark",
+   "name": "Friedrich-Ludwig-Jahn-Sportpark",
+   "source": {
+    "title": "Friedrich-Ludwig-Jahn-Sportpark",
+    "url": "https://en.wikipedia.org/wiki/Friedrich-Ludwig-Jahn-Sportpark",
+    "revision": 1382887812
+   },
+   "capacity": 19708,
+   "capacityText": "19,708 citation needed date=May 2026 most recently reduced to 10,490 Collapsible list title=Capacity history 30,000 (1951–1987) 24,000 (1987–1998) refn group=nb",
+   "capacityCite": {
+    "url": "https://www.fcc-supporters.org/fuwo/files/FUWO%201990/FUWO%201990%2006.pdf",
+    "title": "Visitenkarte",
+    "work": "DFV der DDR",
+    "date": "6 February 1990",
+    "archive": ""
+   },
+   "country": "Germany",
+   "city": null,
+   "usedBy": [
+    "uwcl-2015"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Gamla Ullevi",
+   "name": "Gamla Ullevi",
+   "source": {
+    "title": "Gamla Ullevi",
+    "url": "https://en.wikipedia.org/wiki/Gamla_Ullevi",
+    "revision": 1372181574
+   },
+   "capacity": 18416,
+   "capacityText": "18,416, of which 15,000 are seated and 3,416 are standing (2,400 on a combined sitting/standing terrace)",
+   "capacityCite": {
+    "url": "http://www.gamlaullevi.se/arenan/",
+    "title": "Arenan | Gamla Ullevi",
+    "work": "",
+    "date": "",
+    "archive": "https://web.archive.org/web/20141012100246/http://www.gamlaullevi.se/arenan/"
+   },
+   "country": "Sweden",
+   "city": "Gothenburg",
+   "usedBy": [
+    "uwcl-2021"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Gdańsk Stadium",
+   "name": "Gdańsk Stadium",
+   "source": {
+    "title": "Gdańsk Stadium",
+    "url": "https://en.wikipedia.org/wiki/Gda%C5%84sk_Stadium",
+    "revision": 1381744490
+   },
+   "capacity": 41620,
+   "capacityText": "41,620",
+   "capacityCite": null,
+   "country": "Poland",
+   "city": null,
+   "usedBy": [
+    "uel-2021"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Gelora Bung Karno Stadium",
+   "name": "Gelora Bung Karno Stadium",
+   "source": {
+    "title": "Gelora Bung Karno Stadium",
+    "url": "https://en.wikipedia.org/wiki/Gelora_Bung_Karno_Stadium",
+    "revision": 1385335160
+   },
+   "capacity": 77193,
+   "capacityText": "77,193 efn Capacity history: 110,000 (1962–2007), 88,306 (2007–2016), 77,193 (2018–present)",
+   "capacityCite": {
+    "url": "https://reservation.gbk.id/venue/id_stadion-utama-gelora-bung-karno",
+    "title": "E-Booking Stadion Utama Gelora Bung Karno",
+    "work": "gbk.id",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Indonesia",
+   "city": "Central Jakarta",
+   "usedBy": [
+    "asian-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Groupama Arena",
+   "name": "Ferencváros Stadion",
+   "source": {
+    "title": "Ferencváros Stadion",
+    "url": "https://en.wikipedia.org/wiki/Ferencv%C3%A1ros_Stadion",
+    "revision": 1385395210
+   },
+   "capacity": 23700,
+   "capacityText": "23,700 (22,122 for international matches)",
+   "capacityCite": null,
+   "country": "Hungary",
+   "city": "Budapest",
+   "usedBy": [
+    "uwcl-2019"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Hangzhou Olympic Sports Expo Center",
+   "name": "Hangzhou Olympic Expo Center",
+   "source": {
+    "title": "Hangzhou Olympic Expo Center",
+    "url": "https://en.wikipedia.org/wiki/Hangzhou_Olympic_Expo_Center",
+    "revision": 1377787678
+   },
+   "capacity": 80000,
+   "capacityText": "80,000-seat main stadium, 10,000-seat tennis center for final field, 2*2,000-seat tennis center for semifinal field, 6,000-seat swimming center.",
+   "capacityCite": null,
+   "country": "China",
+   "city": "Zhejiang Province",
+   "usedBy": [
+    "asian-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Hard Rock Stadium",
+   "name": "Hard Rock Stadium",
+   "source": {
+    "title": "Hard Rock Stadium",
+    "url": "https://en.wikipedia.org/wiki/Hard_Rock_Stadium",
+    "revision": 1385366599
+   },
+   "capacity": 64767,
+   "capacityText": "American football American Football: 64,767Tennis: 14,000Original: 75,0002026 FIFA World Cup: 64,478",
+   "capacityCite": {
+    "url": "http://www.newmiamistadium.com/faqs/",
+    "title": "FAQs",
+    "work": "Miami Dolphins",
+    "date": "",
+    "archive": "https://web.archive.org/web/20150612143057/http://www.newmiamistadium.com/faqs/"
+   },
+   "country": "U.S.",
+   "city": "Florida",
+   "usedBy": [
+    "sb-2020"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Inalpi Arena",
+   "name": "Inalpi Arena",
+   "source": {
+    "title": "Inalpi Arena",
+    "url": "https://en.wikipedia.org/wiki/Inalpi_Arena",
+    "revision": 1381709270
+   },
+   "capacity": 14350,
+   "capacityText": "14,350 (ice hockey)16,600 (basketball)15,800 (volleyball)15,657 (center stage)13,347 (end stage)",
+   "capacityCite": {
+    "url": "http://www.euroleague.net/news/i/67119/180",
+    "title": "Euroleague Final Four bound for Turin, Italy in 2011!",
+    "work": "",
+    "date": "",
+    "archive": "https://web.archive.org/web/20100219231251/http://www.euroleague.net/news/i/67119/180"
+   },
+   "country": "Italy",
+   "city": "Turin",
+   "usedBy": [
+    "esc-2022"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Incheon Asiad Main Stadium",
+   "name": "Incheon Asiad Main Stadium",
+   "source": {
+    "title": "Incheon Asiad Main Stadium",
+    "url": "https://en.wikipedia.org/wiki/Incheon_Asiad_Main_Stadium",
+    "revision": 1381783359
+   },
+   "capacity": 29465,
+   "capacityText": "29,46561,074 (2014 Asian Games)",
+   "capacityCite": {
+    "url": "https://web.archive.org/web/20140708010103/http://www.incheon2014apg.org/open_content/eng/stadium/seogu.jsp",
+    "title": "",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "South Korea",
+   "city": "Incheon",
+   "usedBy": [
+    "asian-2014"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "International Exhibition Centre",
+   "name": "International Exhibition Centre",
+   "source": {
+    "title": "International Exhibition Centre",
+    "url": "https://en.wikipedia.org/wiki/International_Exhibition_Centre",
+    "revision": 1376380267
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": "Ukraine",
+   "city": "Kyiv",
+   "usedBy": [
+    "esc-2017"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Japan National Stadium",
+   "name": "Japan National Stadium",
+   "source": {
+    "title": "Japan National Stadium",
+    "url": "https://en.wikipedia.org/wiki/Japan_National_Stadium",
+    "revision": 1378899630
+   },
+   "capacity": 67750,
+   "capacityText": "67,750",
+   "capacityCite": {
+    "url": "https://jns-e.com/stadium/facility/",
+    "title": "施設概要",
+    "work": "MUFGスタジアム公式サイト",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Japan",
+   "city": "Tokyo",
+   "usedBy": [
+    "summer-2020",
+    "spara-2020"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Jardins du Trocadéro",
+   "name": "Jardins du Trocadéro",
+   "source": {
+    "title": "Jardins du Trocadéro",
+    "url": "https://en.wikipedia.org/wiki/Jardins_du_Trocad%C3%A9ro",
+    "revision": 1373728880
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": "France",
+   "city": null,
+   "usedBy": [
+    "summer-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Juventus Stadium",
+   "name": "Juventus Stadium",
+   "source": {
+    "title": "Juventus Stadium",
+    "url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
+    "revision": 1386097269
+   },
+   "capacity": 41689,
+   "capacityText": "41,689",
+   "capacityCite": {
+    "url": "https://www.juventus.com/en/allianz-stadium/our-home",
+    "title": "Our home",
+    "work": "juventus.com",
+    "date": "24 June 2020",
+    "archive": ""
+   },
+   "country": "Italy",
+   "city": "Turin",
+   "usedBy": [
+    "uecl-2028",
+    "uwcl-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Khalifa International Stadium",
+   "name": "Khalifa International Stadium",
+   "source": {
+    "title": "Khalifa International Stadium",
+    "url": "https://en.wikipedia.org/wiki/Khalifa_International_Stadium",
+    "revision": 1372210129
+   },
+   "capacity": 45857,
+   "capacityText": "45,857",
+   "capacityCite": null,
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "asian-2030"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Levi's Stadium",
+   "name": "Levi's Stadium",
+   "source": {
+    "title": "Levi's Stadium",
+    "url": "https://en.wikipedia.org/wiki/Levi%27s_Stadium",
+    "revision": 1385932644
+   },
+   "capacity": 68500,
+   "capacityText": "68,50068,827 (2026 FIFA World Cup)",
+   "capacityCite": {
+    "url": "https://levisstadium.com/levis-stadium-events/",
+    "title": "About Levi's® Stadium",
+    "work": "LevisStadium.com",
+    "date": "",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "California",
+   "usedBy": [
+    "sb-2016",
+    "sb-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Liverpool Arena",
+   "name": "Liverpool Arena",
+   "source": {
+    "title": "Liverpool Arena",
+    "url": "https://en.wikipedia.org/wiki/Liverpool_Arena",
+    "revision": 1383188974
+   },
+   "capacity": 7513,
+   "capacityText": "7,513 to 10,600 (all seated)11,000 (with standing)",
+   "capacityCite": null,
+   "country": "England",
+   "city": "Liverpool",
+   "usedBy": [
+    "esc-2023"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "London Stadium",
+   "name": "London Stadium",
+   "source": {
+    "title": "London Stadium",
+    "url": "https://en.wikipedia.org/wiki/London_Stadium",
+    "revision": 1385930381
+   },
+   "capacity": 62500,
+   "capacityText": "62,500 (regulated capacity) 68,013 (seated capacity) 80,000 (concerts)",
+   "capacityCite": {
+    "url": "https://www.whufc.com/news/important-supporter-update-capacity-increase-west-stand-reconfiguration-202223-ticketing",
+    "title": "Important supporter update – capacity increase, West Stand reconfiguration & 2022/23 ticketing {{pipe",
+    "work": "Whufc.com",
+    "date": "",
+    "archive": ""
+   },
+   "country": "E20 2ST",
+   "city": "England",
+   "usedBy": [
+    "summer-2012",
+    "spara-2012"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Los Angeles Memorial Coliseum",
+   "name": "Los Angeles Memorial Coliseum",
+   "source": {
+    "title": "Los Angeles Memorial Coliseum",
+    "url": "https://en.wikipedia.org/wiki/Los_Angeles_Memorial_Coliseum",
+    "revision": 1386294329
+   },
+   "capacity": 77500,
+   "capacityText": "77,50093,607 (pre–2018)",
+   "capacityCite": {
+    "url": "http://www.usctrojans.com/facilities/usc-memorial-coliseum.html",
+    "title": "Memorial Coliseum",
+    "work": "University of Southern California",
+    "date": "",
+    "archive": "https://web.archive.org/web/20100302205334/http://www.usctrojans.com/facilities/usc-memorial-coliseum.html"
+   },
+   "country": "U.S.",
+   "city": "California",
+   "usedBy": [
+    "summer-2028",
+    "spara-2028"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "MEO Arena",
+   "name": "MEO Arena",
+   "source": {
+    "title": "MEO Arena",
+    "url": "https://en.wikipedia.org/wiki/MEO_Arena",
+    "revision": 1381783875
+   },
+   "capacity": 20100,
+   "capacityText": "20,100 (concerts)15,000 (futsal)",
+   "capacityCite": null,
+   "country": "Portugal",
+   "city": "Rossio dos Olivais",
+   "usedBy": [
+    "esc-2018"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Malmö Arena",
+   "name": "Malmö Arena",
+   "source": {
+    "title": "Malmö Arena",
+    "url": "https://en.wikipedia.org/wiki/Malm%C3%B6_Arena",
+    "revision": 1372083586
+   },
+   "capacity": 12600,
+   "capacityText": "Sports: 12,600Concerts: 15,500",
+   "capacityCite": null,
+   "country": "Sweden",
+   "city": "Malmö",
+   "usedBy": [
+    "esc-2024"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Mapei Stadium – Città del Tricolore",
+   "name": "Mapei Stadium – Città del Tricolore",
+   "source": {
+    "title": "Mapei Stadium – Città del Tricolore",
+    "url": "https://en.wikipedia.org/wiki/Mapei_Stadium_%E2%80%93_Citt%C3%A0_del_Tricolore",
+    "revision": 1377074329
+   },
+   "capacity": 21525,
+   "capacityText": "21,525",
+   "capacityCite": null,
+   "country": "42122 Reggio Emilia (RE)",
+   "city": "P.le Atleti Azzurri d'Italia",
+   "usedBy": [
+    "uwcl-2016"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Maracanã Stadium",
+   "name": "Maracanã Stadium",
+   "source": {
+    "title": "Maracanã Stadium",
+    "url": "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
+    "revision": 1385584231
+   },
+   "capacity": 73139,
+   "capacityText": "73,139",
+   "capacityCite": {
+    "url": "https://digitalhub.fifa.com/m/7dad0d3009710ee7/original/The-Brazilian-Bid-Book-FIFA-Women-s-World-Cup-2027.pdf",
+    "title": "The Brazilian Bid for the FIFA Women's World Cup 2027",
+    "work": "FIFA",
+    "date": "8 December 2023",
+    "archive": ""
+   },
+   "country": "Brazil",
+   "city": "Rio de Janeiro",
+   "usedBy": [
+    "spara-2016"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Mercedes-Benz Stadium",
+   "name": "Mercedes-Benz Stadium",
+   "source": {
+    "title": "Mercedes-Benz Stadium",
+    "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_Stadium",
+    "revision": 1385306999
+   },
+   "capacity": 71000,
+   "capacityText": "American football: 71,000 (Expandable to 75,000)Soccer: 42,500(Expandable to 71,000, standing room to at least 73,019)",
+   "capacityCite": {
+    "url": "https://www.atlutd.com/post/2017/07/14/atlanta-united-single-match-tickets-go-sale-mercedes-benz-stadium",
+    "title": "Atlanta United Single-Match Tickets to Go On-Sale for Mercedes-Benz Stadium",
+    "work": "",
+    "date": "July 14, 2017",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "Georgia",
+   "usedBy": [
+    "sb-2019",
+    "sb-2028"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Metropolitano Stadium",
+   "name": "Metropolitano Stadium",
+   "source": {
+    "title": "Metropolitano Stadium",
+    "url": "https://en.wikipedia.org/wiki/Metropolitano_Stadium",
+    "revision": 1385994982
+   },
+   "capacity": 70813,
+   "capacityText": "70,813 (football)60,000 (concerts)",
+   "capacityCite": {
+    "url": "https://www.atleticodemadrid.com/noticias/record-de-asistencia-al-riyadh-air-metropolitano",
+    "title": "Club Atlético de Madrid - Récord de asistencia al Riyadh Air Metropolitano",
+    "work": "Club Atlético de Madrid",
+    "date": "2026-09-20",
+    "archive": ""
+   },
+   "country": "Spain",
+   "city": "Madrid",
+   "usedBy": [
+    "ucl-2019",
+    "ucl-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Millennium Stadium",
+   "name": "Millennium Stadium",
+   "source": {
+    "title": "Millennium Stadium",
+    "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
+    "revision": 1382713366
+   },
+   "capacity": 73931,
+   "capacityText": "73,931 (rugby union and football)78,000 (boxing)",
+   "capacityCite": {
+    "url": "https://www.bbc.co.uk/news/uk-wales-47242138",
+    "title": "Principality Stadium: Disabled spaces increased by 30%",
+    "work": "BBC News",
+    "date": "14 February 2019",
+    "archive": ""
+   },
+   "country": "CF10 1NS",
+   "city": "Cardiff",
+   "usedBy": [
+    "ucl-2017",
+    "uwcl-2029"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "NRG Stadium",
+   "name": "Reliant Stadium",
+   "source": {
+    "title": "Reliant Stadium",
+    "url": "https://en.wikipedia.org/wiki/Reliant_Stadium",
+    "revision": 1383923742
+   },
+   "capacity": 72220,
+   "capacityText": "72,220 (2018–present)Expandable to 80,000 for special events Former capacity: collapsible list * 71,795 (2014–2017) * 71,054 (2003–2013) * 69,500 (2002) * 68,77",
+   "capacityCite": {
+    "url": "https://nflcommunications.com/Documents/2018%20Record%20and%20Fact%20Book%20(8.6.18).pdf",
+    "title": "Official 2018 National Football League Record & Fact Book",
+    "work": "National Football League",
+    "date": "August 6, 2018",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "Texas",
+   "usedBy": [
+    "sb-2017"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Narendra Modi Stadium",
+   "name": "Narendra Modi Stadium",
+   "source": {
+    "title": "Narendra Modi Stadium",
+    "url": "https://en.wikipedia.org/wiki/Narendra_Modi_Stadium",
+    "revision": 1381737562
+   },
+   "capacity": 132000,
+   "capacityText": "132,000 (total) Efn According to the architects, the capacity of the stadium is 110,000 (2020–present)",
+   "capacityCite": {
+    "url": "https://www.bbc.com/news/world-asia-india-66991540",
+    "title": "An epic battle in Narendra Modi Stadium",
+    "work": "BBC News",
+    "date": "",
+    "archive": ""
+   },
+   "country": "India",
+   "city": "Gujarat",
+   "usedBy": [
+    "cwg-2030"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "National Stadium of Peru",
+   "name": "National Stadium of Peru",
+   "source": {
+    "title": "National Stadium of Peru",
+    "url": "https://en.wikipedia.org/wiki/National_Stadium_of_Peru",
+    "revision": 1384432290
+   },
+   "capacity": 40272,
+   "capacityText": "40,272",
+   "capacityCite": null,
+   "country": "Peru",
+   "city": "Lima",
+   "usedBy": [
+    "pan-2019",
+    "pan-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "National Stadium, Warsaw",
+   "name": "Stadion Narodowy",
+   "source": {
+    "title": "Stadion Narodowy",
+    "url": "https://en.wikipedia.org/wiki/Stadion_Narodowy",
+    "revision": 1381750791
+   },
+   "capacity": 58000,
+   "capacityText": "over 58,000 (official seating capacity)56,826 (UEFA capacity)over 80,000 (official concert capacity)",
+   "capacityCite": {
+    "url": "https://www.pgenarodowy.pl/o-stadionie",
+    "title": "PGE National Stadium official website",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Poland",
+   "city": "Warsaw",
+   "usedBy": [
+    "uel-2015"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Nissan Stadium (2027)",
+   "name": "Nissan Stadium (2027)",
+   "source": {
+    "title": "Nissan Stadium (2027)",
+    "url": "https://en.wikipedia.org/wiki/Nissan_Stadium_%282027%29",
+    "revision": 1384037091
+   },
+   "capacity": 60000,
+   "capacityText": "60,000",
+   "capacityCite": null,
+   "country": "U.S.",
+   "city": "Tennessee",
+   "usedBy": [
+    "sb-2030"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "OVO Hydro",
+   "name": "OVO Hydro",
+   "source": {
+    "title": "OVO Hydro",
+    "url": "https://en.wikipedia.org/wiki/OVO_Hydro",
+    "revision": 1382925450
+   },
+   "capacity": 12306,
+   "capacityText": "12,306 (fully seated)14,700 (seated and standing)",
+   "capacityCite": null,
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "cwg-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Olimpiyskiy National Sports Complex",
+   "name": "Olympic Stadium (Kyiv)",
+   "source": {
+    "title": "Olympic Stadium (Kyiv)",
+    "url": "https://en.wikipedia.org/wiki/Olympic_Stadium_%28Kyiv%29",
+    "revision": 1372222762
+   },
+   "capacity": 50000,
+   "capacityText": "50,000 (1941)47,756 (1949)100,062 (1967)82,893 (1999)70,050 (2011)",
+   "capacityCite": {
+    "url": "http://nsc-olimpiyskiy.com.ua/en/stadium/history/",
+    "title": "Great history of NSC \"Olimpiyskiy\"",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Ukraine",
+   "city": "Kyiv",
+   "usedBy": [
+    "ucl-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Olympiastadion (Berlin)",
+   "name": "Olympiastadion (Berlin)",
+   "source": {
+    "title": "Olympiastadion (Berlin)",
+    "url": "https://en.wikipedia.org/wiki/Olympiastadion_%28Berlin%29",
+    "revision": 1386081636
+   },
+   "capacity": 74475,
+   "capacityText": "74,475",
+   "capacityCite": {
+    "url": "http://olympiastadion.berlin/en/stadion-2/",
+    "title": "Stadion",
+    "work": "olympiastadion-berlin.de",
+    "date": "n.d.",
+    "archive": "https://web.archive.org/web/20170312064505/http://olympiastadion.berlin/en/stadion-2/"
+   },
+   "country": "Germany",
+   "city": "Berlin",
+   "usedBy": [
+    "ucl-2015"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Paloma Mizuho Stadium (2026)",
+   "name": "Paloma Mizuho Stadium (2026)",
+   "source": {
+    "title": "Paloma Mizuho Stadium (2026)",
+    "url": "https://en.wikipedia.org/wiki/Paloma_Mizuho_Stadium_%282026%29",
+    "revision": 1381810415
+   },
+   "capacity": 30000,
+   "capacityText": "30,000",
+   "capacityCite": null,
+   "country": "Japan",
+   "city": "Aichi Prefecture",
+   "usedBy": [
+    "asian-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Parc Olympique Lyonnais",
+   "name": "Parc Olympique Lyonnais",
+   "source": {
+    "title": "Parc Olympique Lyonnais",
+    "url": "https://en.wikipedia.org/wiki/Parc_Olympique_Lyonnais",
+    "revision": 1374907290
+   },
+   "capacity": 59186,
+   "capacityText": "59,186",
+   "capacityCite": {
+    "url": "https://www.groupama-stadium.com/presentation/",
+    "title": "Bienvenue au Groupama Stadium",
+    "work": "Groupama Stadium",
+    "date": "",
+    "archive": "https://web.archive.org/web/20210327022938/https://www.groupama-stadium.com/presentation/"
+   },
+   "country": "France",
+   "city": "Metropolis of Lyon",
+   "usedBy": [
+    "uel-2018",
+    "uwcl-2028"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Philips Stadion",
+   "name": "Philips Stadion",
+   "source": {
+    "title": "Philips Stadion",
+    "url": "https://en.wikipedia.org/wiki/Philips_Stadion",
+    "revision": 1372214207
+   },
+   "capacity": 35119,
+   "capacityText": "35,119",
+   "capacityCite": {
+    "url": "http://stadiumdb.com/stadiums/ned/philips_stadion",
+    "title": "Philips Stadion",
+    "work": "StadiumDB.com",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Netherlands",
+   "city": "Eindhoven",
+   "usedBy": [
+    "uwcl-2023"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Place de la Concorde",
+   "name": "Place de la Concorde",
+   "source": {
+    "title": "Place de la Concorde",
+    "url": "https://en.wikipedia.org/wiki/Place_de_la_Concorde",
+    "revision": 1368423900
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "spara-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Puskás Aréna",
+   "name": "Puskás Aréna",
+   "source": {
+    "title": "Puskás Aréna",
+    "url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+    "revision": 1381786180
+   },
+   "capacity": 67215,
+   "capacityText": "67,215",
+   "capacityCite": {
+    "url": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+    "title": "https://www.facebook.com/puskasarena/photos/a.215194175625674/719869725158114/?type=3&theater",
+    "work": "",
+    "date": "March 2022",
+    "archive": ""
+   },
+   "country": "Hungary",
+   "city": "Budapest",
+   "usedBy": [
+    "ucl-2026",
+    "uel-2023",
+    "uecl-2029"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Pyeongchang Olympic Stadium",
+   "name": "Pyeongchang Olympic Stadium",
+   "source": {
+    "title": "Pyeongchang Olympic Stadium",
+    "url": "https://en.wikipedia.org/wiki/Pyeongchang_Olympic_Stadium",
+    "revision": 1372222379
+   },
+   "capacity": 35000,
+   "capacityText": "35,000",
+   "capacityCite": {
+    "url": "http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/",
+    "title": "PyeongChang Olympic Stadium : PyeongChang 2018 Venue",
+    "work": "",
+    "date": "",
+    "archive": "https://web.archive.org/web/20180216075001/http://2018winterolympicswiki.com/pyeongchang-olympic-stadium-pyeongchang-2018-venue/87/"
+   },
+   "country": "South Korea",
+   "city": "Pyeongchang",
+   "usedBy": [
+    "winter-2018",
+    "wpara-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Ramón Sánchez Pizjuán Stadium",
+   "name": "Ramón Sánchez-Pizjuán Stadium",
+   "source": {
+    "title": "Ramón Sánchez-Pizjuán Stadium",
+    "url": "https://en.wikipedia.org/wiki/Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n_Stadium",
+    "revision": 1374243072
+   },
+   "capacity": 43751,
+   "capacityText": "43,751",
+   "capacityCite": {
+    "url": "https://www.sevillafc.es/en/the-club/organization/sevilla-fc",
+    "title": "Sevilla F.C. The organization",
+    "work": "www.sevillafc.es",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Spain",
+   "city": "Andalusia",
+   "usedBy": [
+    "uel-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Raymond James Stadium",
+   "name": "Raymond James Stadium",
+   "source": {
+    "title": "Raymond James Stadium",
+    "url": "https://en.wikipedia.org/wiki/Raymond_James_Stadium",
+    "revision": 1383818412
+   },
+   "capacity": 69218,
+   "capacityText": "69,218 (2022–present, expandable to 75,000) Former capacity: collapsible list * 65,618 (2016–2021) * 65,890 (2013–2015) * 65,856 (2008–2012) * 65,657 (2001–2007",
+   "capacityCite": null,
+   "country": "U.S.",
+   "city": "Florida",
+   "usedBy": [
+    "sb-2021"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Red Bull Arena (Leipzig)",
+   "name": "Red Bull Arena (Leipzig)",
+   "source": {
+    "title": "Red Bull Arena (Leipzig)",
+    "url": "https://en.wikipedia.org/wiki/Red_Bull_Arena_%28Leipzig%29",
+    "revision": 1386009742
+   },
+   "capacity": 47800,
+   "capacityText": "47,800 (league matches)45,228 (international matches)",
+   "capacityCite": {
+    "url": "https://rbleipzig.com/en/stadium/red-bull-arena/facts-and-stats",
+    "title": "Red Bull Arena in Leipzig: All the facts and stats",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "uecl-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "RheinEnergieStadion",
+   "name": "RheinEnergieStadion",
+   "source": {
+    "title": "RheinEnergieStadion",
+    "url": "https://en.wikipedia.org/wiki/RheinEnergieStadion",
+    "revision": 1375754601
+   },
+   "capacity": 50000,
+   "capacityText": "50,000 (league matches)45,965 (international matches)",
+   "capacityCite": {
+    "url": "https://fc.de/en/club/about-the-club/playing-and-training-ground/rheinenergiestadion",
+    "title": "RheinEnergieSTADION",
+    "work": "fc.de",
+    "date": "",
+    "archive": ""
+   },
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "uel-2020"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Rice–Eccles Stadium",
+   "name": "Rice–Eccles Stadium",
+   "source": {
+    "title": "Rice–Eccles Stadium",
+    "url": "https://en.wikipedia.org/wiki/Rice%E2%80%93Eccles_Stadium",
+    "revision": 1385311114
+   },
+   "capacity": 54383,
+   "capacityText": "54,383 (2024–present) Collapsible list title = Former capacity * 45,807 (2014–2020) * 45,017 (2003–2013) * 45,634 (1998–2002)",
+   "capacityCite": {
+    "url": "https://utahutes.com/facilities/rice-eccles-stadium/3",
+    "title": "Rice-Eccles Stadium - Facilities - University of Utah Athletics",
+    "work": "University of Utah Athletics Department",
+    "date": "",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "Utah",
+   "usedBy": [
+    "winter-2034"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Rogers Centre",
+   "name": "Rogers Centre",
+   "source": {
+    "title": "Rogers Centre",
+    "url": "https://en.wikipedia.org/wiki/Rogers_Centre",
+    "revision": 1385928528
+   },
+   "capacity": 39150,
+   "capacityText": "Baseball: 39,150Concerts: 10,000–55,000",
+   "capacityCite": null,
+   "country": "Canada",
+   "city": "Ontario",
+   "usedBy": [
+    "pan-2015"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Rotterdam Ahoy",
+   "name": "Rotterdam Ahoy",
+   "source": {
+    "title": "Rotterdam Ahoy",
+    "url": "https://en.wikipedia.org/wiki/Rotterdam_Ahoy",
+    "revision": 1381499488
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": null,
+   "city": null,
+   "usedBy": [
+    "esc-2021"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "San Mamés Stadium (2013)",
+   "name": "San Mamés Stadium (2013)",
+   "source": {
+    "title": "San Mamés Stadium (2013)",
+    "url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium_%282013%29",
+    "revision": 1381759671
+   },
+   "capacity": 53331,
+   "capacityText": "53,331",
+   "capacityCite": {
+    "url": "https://www.athletic-club.eus/en/san-mames/the-stadium",
+    "title": "The Stadium",
+    "work": "www.athletic-club.eus",
+    "date": "",
+    "archive": "https://web.archive.org/web/20190414111222/https://www.athletic-club.eus/en/san-mames/the-stadium"
+   },
+   "country": "Spain",
+   "city": "Basque Country",
+   "usedBy": [
+    "uel-2025",
+    "uwcl-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "San Siro",
+   "name": "San Siro",
+   "source": {
+    "title": "San Siro",
+    "url": "https://en.wikipedia.org/wiki/San_Siro",
+    "revision": 1384793549
+   },
+   "capacity": 75817,
+   "capacityText": "75,817 (limited capacity) 80,018 (maximum)",
+   "capacityCite": {
+    "url": "https://www.sansirostadium.com/en/stadium/Structure",
+    "title": "Structure",
+    "work": "sansirostadium.com",
+    "date": "",
+    "archive": "https://web.archive.org/web/20221207043417/https://www.sansirostadium.com/en/stadium/Structure"
+   },
+   "country": "Italy",
+   "city": "Milan",
+   "usedBy": [
+    "ucl-2016"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "SoFi Stadium",
+   "name": "SoFi Stadium",
+   "source": {
+    "title": "SoFi Stadium",
+    "url": "https://en.wikipedia.org/wiki/SoFi_Stadium",
+    "revision": 1385953459
+   },
+   "capacity": 70240,
+   "capacityText": "70,240 (expandable to over 100,240 for major events)",
+   "capacityCite": {
+    "url": "https://www.latimes.com/sports/rams/la-sp-rams-ground-breaking-20161117-story.html",
+    "title": "Los Angeles Rams Break Ground on $2.6-billion Inglewood Stadium, 'New Era' of NFL",
+    "work": "Los Angeles Times",
+    "date": "November 17, 2016",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "California",
+   "usedBy": [
+    "sb-2022",
+    "sb-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "St. Jakob-Park",
+   "name": "St. Jakob-Park",
+   "source": {
+    "title": "St. Jakob-Park",
+    "url": "https://en.wikipedia.org/wiki/St._Jakob-Park",
+    "revision": 1382438671
+   },
+   "capacity": 38512,
+   "capacityText": "38,512 (Soccer Football) 37,500 (for international matches) 40,000 (Concerts)",
+   "capacityCite": {
+    "url": "http://www.fcb.ch/Club/StadiumSt.JakobPark",
+    "title": "Figures and facts",
+    "work": "FC Basel 1893",
+    "date": "",
+    "archive": "https://web.archive.org/web/20120203010621/http://www.fcb.ch/Club/StadiumSt.JakobPark"
+   },
+   "country": "Switzerland",
+   "city": "Basel",
+   "usedBy": [
+    "uel-2016"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "St. Jakobshalle",
+   "name": "St. Jakobshalle",
+   "source": {
+    "title": "St. Jakobshalle",
+    "url": "https://en.wikipedia.org/wiki/St._Jakobshalle",
+    "revision": 1372232449
+   },
+   "capacity": 8000,
+   "capacityText": "8,000 seated, 12,400 with standing (main arena)",
+   "capacityCite": null,
+   "country": "Switzerland",
+   "city": "Münchenstein",
+   "usedBy": [
+    "esc-2025"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Stade de France",
+   "name": "Stade de France",
+   "source": {
+    "title": "Stade de France",
+    "url": "https://en.wikipedia.org/wiki/Stade_de_France",
+    "revision": 1385619266
+   },
+   "capacity": 81338,
+   "capacityText": "81,338 (football, rugby)77,083 (athletics)",
+   "capacityCite": {
+    "url": "https://stadiumdb.com/stadiums/fra/stade_de_france",
+    "title": "\"Stade de France\". Stadiumdb.com",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "France",
+   "city": "Île-de-France",
+   "usedBy": [
+    "ucl-2022"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Stadio San Siro",
+   "name": "San Siro",
+   "source": {
+    "title": "San Siro",
+    "url": "https://en.wikipedia.org/wiki/San_Siro",
+    "revision": 1384793549
+   },
+   "capacity": 75817,
+   "capacityText": "75,817 (limited capacity) 80,018 (maximum)",
+   "capacityCite": {
+    "url": "https://www.sansirostadium.com/en/stadium/Structure",
+    "title": "Structure",
+    "work": "sansirostadium.com",
+    "date": "",
+    "archive": "https://web.archive.org/web/20221207043417/https://www.sansirostadium.com/en/stadium/Structure"
+   },
+   "country": "Italy",
+   "city": "Milan",
+   "usedBy": [
+    "winter-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Stadion Narodowy",
+   "name": "Stadion Narodowy",
+   "source": {
+    "title": "Stadion Narodowy",
+    "url": "https://en.wikipedia.org/wiki/Stadion_Narodowy",
+    "revision": 1381750791
+   },
+   "capacity": 58000,
+   "capacityText": "over 58,000 (official seating capacity)56,826 (UEFA capacity)over 80,000 (official concert capacity)",
+   "capacityCite": {
+    "url": "https://www.pgenarodowy.pl/o-stadionie",
+    "title": "PGE National Stadium official website",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Poland",
+   "city": "Warsaw",
+   "usedBy": [
+    "uwcl-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "State Farm Stadium",
+   "name": "State Farm Stadium",
+   "source": {
+    "title": "State Farm Stadium",
+    "url": "https://en.wikipedia.org/wiki/State_Farm_Stadium",
+    "revision": 1385888712
+   },
+   "capacity": 63400,
+   "capacityText": "63,400 (expandable to 72,200;standing room to 78,600) <!--",
+   "capacityCite": {
+    "url": "http://www.buccaneers.com/news/newsdetail.aspx?newsid=6289",
+    "title": "The Big Game On the Horizon",
+    "work": "Buccaneers.com",
+    "date": "February 9, 2008",
+    "archive": ""
+   },
+   "country": "U.S.",
+   "city": "Arizona",
+   "usedBy": [
+    "sb-2015",
+    "sb-2023"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Strawberry Arena",
+   "name": "Nationalarenan",
+   "source": {
+    "title": "Nationalarenan",
+    "url": "https://en.wikipedia.org/wiki/Nationalarenan",
+    "revision": 1385853057
+   },
+   "capacity": 50000,
+   "capacityText": "* formatnum: 50000 (national capacity) * formatnum: 65000 (concerts)",
+   "capacityCite": {
+    "url": "http://stadiumdb.com/stadiums/swe/friends_arena",
+    "title": "Friends Arena –",
+    "work": "Stadiumdb.com",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Sweden",
+   "city": "Stockholm",
+   "usedBy": [
+    "uel-2017"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "U.S. Bank Stadium",
+   "name": "U.S. Bank Stadium",
+   "source": {
+    "title": "U.S. Bank Stadium",
+    "url": "https://en.wikipedia.org/wiki/U.S._Bank_Stadium",
+    "revision": 1386292905
+   },
+   "capacity": 66202,
+   "capacityText": "66,202 (expandable to 73,000) Former capacity: collapsible list * 66,467 (Football; 2019–2021) * 66,860 (Football; 2017–2018) * 66,200 (Football; 2016)",
+   "capacityCite": {
+    "url": "https://static.clubs.nfl.com/image/upload/vikings/basfjo3vggnuukwhmbkf",
+    "title": "2022 Minnesota Vikings Media Guide",
+    "work": "Minnesota Vikings",
+    "date": "",
+    "archive": "https://web.archive.org/web/20250525151438/https://static.clubs.nfl.com/image/upload/vikings/basfjo3vggnuukwhmbkf"
+   },
+   "country": "U.S.",
+   "city": "Minnesota",
+   "usedBy": [
+    "sb-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Ullevaal Stadion",
+   "name": "Ullevaal Stadion",
+   "source": {
+    "title": "Ullevaal Stadion",
+    "url": "https://en.wikipedia.org/wiki/Ullevaal_Stadion",
+    "revision": 1381690319
+   },
+   "capacity": 27182,
+   "capacityText": "27,182",
+   "capacityCite": {
+    "url": "https://ullevaal-stadion.no/om-ullevaal-stadion/teknisk-info/",
+    "title": "Teknisk-info",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Norway",
+   "city": "Oslo",
+   "usedBy": [
+    "uwcl-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Valeriy Lobanovskyi Dynamo Stadium",
+   "name": "Valeriy Lobanovskyi Dynamo Stadium",
+   "source": {
+    "title": "Valeriy Lobanovskyi Dynamo Stadium",
+    "url": "https://en.wikipedia.org/wiki/Valeriy_Lobanovskyi_Dynamo_Stadium",
+    "revision": 1383218201
+   },
+   "capacity": 16873,
+   "capacityText": "16,873 (Association football football)",
+   "capacityCite": null,
+   "country": "Ukraine",
+   "city": "Kyiv",
+   "usedBy": [
+    "uwcl-2018"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Verona Arena",
+   "name": "Verona Arena",
+   "source": {
+    "title": "Verona Arena",
+    "url": "https://en.wikipedia.org/wiki/Verona_Arena",
+    "revision": 1382818771
+   },
+   "capacity": null,
+   "capacityText": null,
+   "capacityCite": null,
+   "country": "Italy",
+   "city": "Verona",
+   "usedBy": [
+    "wpara-2026"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Waldstadion (Frankfurt)",
+   "name": "Waldstadion (Frankfurt)",
+   "source": {
+    "title": "Waldstadion (Frankfurt)",
+    "url": "https://en.wikipedia.org/wiki/Waldstadion_%28Frankfurt%29",
+    "revision": 1380205476
+   },
+   "capacity": 60100,
+   "capacityText": "Association football: 60,100 (20,000 standing for league matches)53,800 (International matches)American football: 48,000Concerts: 44,000–65,000",
+   "capacityCite": {
+    "url": "https://www.deutschebankpark.de/der-dbp/daten-und-fakten/",
+    "title": "deutschebankpark.de",
+    "work": "(44,000 in end-stage setup, \"up to 65,000 spectators depending on usage\")",
+    "date": "",
+    "archive": "https://web.archive.org/web/20231020062236/https://www.deutschebankpark.de/der-dbp/daten-und-fakten/"
+   },
+   "country": "Germany",
+   "city": "Frankfurt",
+   "usedBy": [
+    "uel-2027"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Wembley Stadium",
+   "name": "Wembley Stadium",
+   "source": {
+    "title": "Wembley Stadium",
+    "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
+    "revision": 1384136752
+   },
+   "capacity": 90000,
+   "capacityText": "90,000 (association football, rugby union, rugby league, boxing) 75,000 to 90,000 seated and 25,000 standing (concerts) 86,000 to 87,000 (UEFA capacity) 86,000 ",
+   "capacityCite": {
+    "url": "http://www.wembleystadium.com/about/stadium-facts-and-features",
+    "title": "Stadium Facts",
+    "work": "www.wembleystadium.com",
+    "date": "",
+    "archive": ""
+   },
+   "country": "United Kingdom",
+   "city": "London",
+   "usedBy": [
+    "ucl-2024"
+   ],
+   "venueType": "Stadium"
+  },
+  {
+   "key": "Wiener Stadthalle",
+   "name": "Wiener Stadthalle",
+   "source": {
+    "title": "Wiener Stadthalle",
+    "url": "https://en.wikipedia.org/wiki/Wiener_Stadthalle",
+    "revision": 1375766997
+   },
+   "capacity": 16083,
+   "capacityText": "16,083 with standing (Hall D)1,482 (Hall E)2,036 (Hall F)",
+   "capacityCite": null,
+   "country": "Austria",
+   "city": "Vienna",
+   "usedBy": [
+    "esc-2015",
+    "esc-2026"
+   ],
+   "venueType": "Arena"
+  },
+  {
+   "key": "Wrocław Stadium",
+   "name": "Wrocław Stadium",
+   "source": {
+    "title": "Wrocław Stadium",
+    "url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium",
+    "revision": 1385454870
+   },
+   "capacity": 42771,
+   "capacityText": "42,771",
+   "capacityCite": {
+    "url": "https://stadionwroclaw.pl/stadion/fakty-i-liczby/",
+    "title": "Fakty i liczby",
+    "work": "",
+    "date": "",
+    "archive": ""
+   },
+   "country": "Poland",
+   "city": null,
+   "usedBy": [
+    "uecl-2025"
+   ],
+   "venueType": "Stadium"
+  }
+ ],
  "currencyByCountry": {
   "Malta": [
    "EUR"
@@ -6810,6 +8875,238 @@
   "Senegal": [
    "XOF"
   ],
+  "North Korea": [
+   "KPW"
+  ],
+  "Canada": [
+   "CAD"
+  ],
+  "Sweden": [
+   "SEK"
+  ],
+  "Poland": [
+   "PLN"
+  ],
+  "Albania": [
+   "ALL"
+  ],
+  "Armenia": [
+   "AMD"
+  ],
+  "Czech Republic": [
+   "CZK"
+  ],
+  "Israel": [
+   "ILS"
+  ],
+  "Palestine": [
+   "EGP",
+   "ILS",
+   "JOD"
+  ],
+  "Iceland": [
+   "ISK"
+  ],
+  "Romania": [
+   "RON"
+  ],
+  "Norway": [
+   "NOK"
+  ],
+  "Cook Islands": [
+   "NZD"
+  ],
+  "Niue": [
+   "NZD"
+  ],
+  "New Zealand": [
+   "NZD"
+  ],
+  "Chile": [
+   "CLF",
+   "CLP"
+  ],
+  "Malaysia": [
+   "MYR"
+  ],
+  "Eritrea": [
+   "ERN"
+  ],
+  "Philippines": [
+   "PHP"
+  ],
+  "Serbia": [
+   "RSD"
+  ],
+  "Northern Cyprus": [
+   "TRL",
+   "TRY"
+  ],
+  "Turkey": [
+   "TRL",
+   "TRY"
+  ],
+  "Brazil": [
+   "BRL"
+  ],
+  "Kazakhstan": [
+   "KZT"
+  ],
+  "North Macedonia": [
+   "MKD"
+  ],
+  "Thailand": [
+   "THB"
+  ],
+  "Bosnia and Herzegovina": [
+   "BAM"
+  ],
+  "Moldova": [
+   "MDL"
+  ],
+  "Lesotho": [
+   "LSL",
+   "ZAR"
+  ],
+  "Namibia": [
+   "NAD",
+   "ZAR"
+  ],
+  "South Africa": [
+   "ZAR"
+  ],
+  "Mongolia": [
+   "MNT"
+  ],
+  "Ghana": [
+   "GHS"
+  ],
+  "Botswana": [
+   "BWP"
+  ],
+  "Pakistan": [
+   "PKR"
+  ],
+  "Pahlavi Iran": [
+   "IRR"
+  ],
+  "Iran": [
+   "IRR"
+  ],
+  "Libya": [
+   "LYD"
+  ],
+  "Singapore": [
+   "SGD"
+  ],
+  "Vietnam": [
+   "VND"
+  ],
+  "Iraq": [
+   "IQD"
+  ],
+  "Kuwait": [
+   "KWD"
+  ],
+  "São Tomé and Príncipe": [
+   "STN"
+  ],
+  "The Bahamas": [
+   "BSD"
+  ],
+  "Barbados": [
+   "BBD"
+  ],
+  "Bangladesh": [
+   "BDT"
+  ],
+  "Egypt": [
+   "EGP"
+  ],
+  "Afghanistan": [
+   "AFN"
+  ],
+  "Argentina": [
+   "ARS"
+  ],
+  "Algeria": [
+   "DZD"
+  ],
+  "Saudi Arabia": [
+   "SAR"
+  ],
+  "Tajikistan": [
+   "TJS"
+  ],
+  "Laos": [
+   "LAK"
+  ],
+  "Morocco": [
+   "MAD"
+  ],
+  "United Arab Emirates": [
+   "AED"
+  ],
+  "Angola": [
+   "AOA"
+  ],
+  "Bolivia": [
+   "BOB"
+  ],
+  "Mozambique": [
+   "MZN"
+  ],
+  "Papua New Guinea": [
+   "PGK"
+  ],
+  "Bhutan": [
+   "BTN"
+  ],
+  "Bahrain": [
+   "BHD"
+  ],
+  "Myanmar": [
+   "MMK"
+  ],
+  "Lebanon": [
+   "LBP"
+  ],
+  "Suriname": [
+   "SRD"
+  ],
+  "South Korea": [
+   "KRW"
+  ],
+  "Kenya": [
+   "KES"
+  ],
+  "The Gambia": [
+   "GMD"
+  ],
+  "Nepal": [
+   "NPR"
+  ],
+  "Nigeria": [
+   "NGN"
+  ],
+  "Jordan": [
+   "JOD"
+  ],
+  "Haiti": [
+   "HTG"
+  ],
+  "Peru": [
+   "PEN"
+  ],
+  "Cambodia": [
+   "KHR"
+  ],
+  "Ethiopia": [
+   "ETB"
+  ],
+  "Brunei": [
+   "BND"
+  ],
   "Qatar": [
    "QAR"
   ],
@@ -6830,10 +9127,6 @@
   ],
   "Vanuatu": [
    "VUV"
-  ],
-  "Lesotho": [
-   "LSL",
-   "ZAR"
   ],
   "Uruguay": [
    "UYU"
@@ -7081,234 +9374,6 @@
   ],
   "Cyprus": [
    "EUR"
-  ],
-  "North Korea": [
-   "KPW"
-  ],
-  "Canada": [
-   "CAD"
-  ],
-  "Sweden": [
-   "SEK"
-  ],
-  "Poland": [
-   "PLN"
-  ],
-  "Albania": [
-   "ALL"
-  ],
-  "Armenia": [
-   "AMD"
-  ],
-  "Czech Republic": [
-   "CZK"
-  ],
-  "Israel": [
-   "ILS"
-  ],
-  "Palestine": [
-   "EGP",
-   "ILS",
-   "JOD"
-  ],
-  "Iceland": [
-   "ISK"
-  ],
-  "Romania": [
-   "RON"
-  ],
-  "Norway": [
-   "NOK"
-  ],
-  "Cook Islands": [
-   "NZD"
-  ],
-  "Niue": [
-   "NZD"
-  ],
-  "New Zealand": [
-   "NZD"
-  ],
-  "Chile": [
-   "CLF",
-   "CLP"
-  ],
-  "Malaysia": [
-   "MYR"
-  ],
-  "Eritrea": [
-   "ERN"
-  ],
-  "Philippines": [
-   "PHP"
-  ],
-  "Serbia": [
-   "RSD"
-  ],
-  "Northern Cyprus": [
-   "TRL",
-   "TRY"
-  ],
-  "Turkey": [
-   "TRL",
-   "TRY"
-  ],
-  "Brazil": [
-   "BRL"
-  ],
-  "Kazakhstan": [
-   "KZT"
-  ],
-  "North Macedonia": [
-   "MKD"
-  ],
-  "Thailand": [
-   "THB"
-  ],
-  "Bosnia and Herzegovina": [
-   "BAM"
-  ],
-  "Moldova": [
-   "MDL"
-  ],
-  "Namibia": [
-   "NAD",
-   "ZAR"
-  ],
-  "South Africa": [
-   "ZAR"
-  ],
-  "Mongolia": [
-   "MNT"
-  ],
-  "Ghana": [
-   "GHS"
-  ],
-  "Botswana": [
-   "BWP"
-  ],
-  "Pakistan": [
-   "PKR"
-  ],
-  "Pahlavi Iran": [
-   "IRR"
-  ],
-  "Iran": [
-   "IRR"
-  ],
-  "Libya": [
-   "LYD"
-  ],
-  "Singapore": [
-   "SGD"
-  ],
-  "Vietnam": [
-   "VND"
-  ],
-  "Iraq": [
-   "IQD"
-  ],
-  "Kuwait": [
-   "KWD"
-  ],
-  "São Tomé and Príncipe": [
-   "STN"
-  ],
-  "The Bahamas": [
-   "BSD"
-  ],
-  "Barbados": [
-   "BBD"
-  ],
-  "Bangladesh": [
-   "BDT"
-  ],
-  "Egypt": [
-   "EGP"
-  ],
-  "Afghanistan": [
-   "AFN"
-  ],
-  "Argentina": [
-   "ARS"
-  ],
-  "Algeria": [
-   "DZD"
-  ],
-  "Saudi Arabia": [
-   "SAR"
-  ],
-  "Tajikistan": [
-   "TJS"
-  ],
-  "Laos": [
-   "LAK"
-  ],
-  "Morocco": [
-   "MAD"
-  ],
-  "United Arab Emirates": [
-   "AED"
-  ],
-  "Angola": [
-   "AOA"
-  ],
-  "Bolivia": [
-   "BOB"
-  ],
-  "Mozambique": [
-   "MZN"
-  ],
-  "Papua New Guinea": [
-   "PGK"
-  ],
-  "Bhutan": [
-   "BTN"
-  ],
-  "Bahrain": [
-   "BHD"
-  ],
-  "Myanmar": [
-   "MMK"
-  ],
-  "Lebanon": [
-   "LBP"
-  ],
-  "Suriname": [
-   "SRD"
-  ],
-  "South Korea": [
-   "KRW"
-  ],
-  "Kenya": [
-   "KES"
-  ],
-  "The Gambia": [
-   "GMD"
-  ],
-  "Nepal": [
-   "NPR"
-  ],
-  "Nigeria": [
-   "NGN"
-  ],
-  "Jordan": [
-   "JOD"
-  ],
-  "Haiti": [
-   "HTG"
-  ],
-  "Peru": [
-   "PEN"
-  ],
-  "Cambodia": [
-   "KHR"
-  ],
-  "Ethiopia": [
-   "ETB"
-  ],
-  "Brunei": [
-   "BND"
   ]
  },
  "currencySource": "Wikidata: sovereign states (Q6256) with currency (P38) and ISO 4217 code (P498); currencies or ISO codes with an end time, and abolished currencies (P576), excluded"

@@ -253,6 +253,9 @@ def main():
         'source': 'wikipedia-en', 'license': 'Wikipedia text CC BY-SA 4.0; Wikidata CC0', 'builtAt': now(),
         'series': [{'key': k, 'name': n, 'eventType': t[0], 'venueType': t[1]} for k, n, _, _, t in SERIES],
         'events': events,
+        'venues': [{'key': k, **v, 'usedBy': [e['id'] for e in events if e.get('venueRef') == k],
+                    'venueType': max(({e['venueType'] for e in events if e.get('venueRef') == k} or {''}), key=lambda t: sum(1 for e in events if e.get('venueRef') == k and e['venueType'] == t))}
+                   for k, v in sorted(venues.items()) if v.get('source')],
         'currencyByCountry': currency,
         'currencySource': 'Wikidata: sovereign states (Q6256) with currency (P38) and ISO 4217 code (P498); currencies or ISO codes with an end time, and abolished currencies (P576), excluded',
     }

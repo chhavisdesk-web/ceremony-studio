@@ -328,6 +328,16 @@ td a{color:var(--ink)}
 .sug .m{font-size:12px;color:var(--muted)}
 .sug mark{background:none;color:var(--tally);font-weight:600}
 .sug .h{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 10px 2px;cursor:default}
+.field .tag{display:inline-block;margin-left:6px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;padding:0 6px;border-radius:99px;vertical-align:1px}
+.field.auto .tag{color:var(--ok);background:var(--ok-soft)}
+.field.need .tag{color:var(--bad);background:var(--bad-soft)}
+.field.auto input,.field.auto select,.field.auto textarea{background:var(--ok-soft);border-color:color-mix(in srgb,var(--ok) 50%,var(--line))}
+.field.need input,.field.need select,.field.need textarea{border:1.5px dashed var(--bad);background:var(--surface)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px}
+.legend .a{background:var(--ok-soft);border:1px solid color-mix(in srgb,var(--ok) 50%,var(--line))}
+.legend .n{border:1.5px dashed var(--bad)}
+.legend .u{background:var(--surface-2);border:1px solid var(--line)}
 .start-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px 18px}
 .start-steps .n{font-family:var(--font-mono);font-size:11px;color:var(--tally);margin-right:6px}
 </style>
@@ -2204,7 +2214,12 @@ function subscribePlans() {
 /* ------------------------------------------------------------------ */
 function go(s) { step = s; pending = pending && ['design','budget','production','sustainability'].includes(s) ? pending : null; try { history.replaceState(null, '', '#' + s); } catch {} render(); window.scrollTo({ top: 0 }); }
 
+let rendering = false;
 function render() {
+  rendering = true;
+  try { renderNow(); } finally { rendering = false; }
+}
+function renderNow() {
   $('#plan-name').value = plan.name;
   renderTop(); renderNav();
   const views = { brief: vBrief, research: vResearch, concept: vConcept, design: vDesign, look: vLook, budget: vBudget, production: vProduction, sustainability: vSustainability, export: vExport };
@@ -2270,10 +2285,29 @@ function briefSrcNote(bind) {
   if (!x || x.b !== 'published') return '';
   return `<span class="fsrc">From ${x.url ? `<a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.r)}</a>` : esc(x.r)}${x.cite ? ' · cites ' + cerRef(x.cite) : ''}</span>`;
 }
+// Brief fields the plan needs. Empty ones are marked "Needed"; ones filled from a published record are marked "Auto-filled".
+const NEEDED_BRIEF = ['eventType', 'eventName', 'date', 'showMinutes', 'city', 'country', 'venue', 'venueType', 'capacity', 'currency', 'budgetCap'];
+function fieldState(bind, v) {
+  if (!bind.startsWith('brief.')) return '';
+  const k = bind.slice(6);
+  if (plan.brief.src?.[k]?.b === 'published' && String(v ?? '').trim() !== '') return 'auto';
+  const empty = v == null || String(v).trim() === '' || (typeof v === 'number' && v <= 0);
+  return empty && NEEDED_BRIEF.includes(k) ? 'need' : '';
+}
+const stateTag = st => st === 'auto' ? '<span class="tag">Auto-filled</span>' : st === 'need' ? '<span class="tag">Needed</span>' : '';
+function refreshFieldState(el) {
+  const wrap = el.closest('.field'); if (!wrap || !el.dataset.bind) return;
+  const v = el.dataset.bind.split('.').reduce((o, k) => o?.[k], plan) ?? '', st = fieldState(el.dataset.bind, v);
+  wrap.classList.toggle('auto', st === 'auto'); wrap.classList.toggle('need', st === 'need');
+  const label = wrap.querySelector('label'); label?.querySelector('.tag')?.remove(); if (st) label?.insertAdjacentHTML('beforeend', stateTag(st));
+  if (st !== 'auto') wrap.querySelector('.fsrc')?.remove();
+}
 function field(label, bind, opts = {}) {
   const v = bind.split('.').reduce((o, k) => o?.[k], plan) ?? '';
   const id = 'f-' + bind.replace(/\./g, '-');
-  const cls = opts.wide ? 'field wide' : 'field';
+  const st = fieldState(bind, v);
+  const cls = (opts.wide ? 'field wide' : 'field') + (st ? ' ' + st : '');
+  label += stateTag(st);
   if (opts.suggest) return `<div class="${cls}"><label for="${id}">${label}</label><div class="combo"><input id="${id}" data-bind="${bind}" data-suggest="${opts.suggest}" value="${esc(v)}" placeholder="${esc(opts.ph || '')}" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sug-${opts.suggest}"><ul class="sug" id="sug-${opts.suggest}" role="listbox" hidden></ul></div>${opts.hint ? `<span class="note">${opts.hint}</span>` : ''}${briefSrcNote(bind)}</div>`;
   if (opts.textarea) return `<div class="${cls}"><label for="${id}">${label}</label><textarea id="${id}" data-bind="${bind}" placeholder="${esc(opts.ph || '')}" rows="${opts.rows || 2}">${esc(v)}</textarea></div>`;
   if (opts.options) return `<div class="${cls}"><label for="${id}">${label}</label><select id="${id}" data-bind="${bind}">${opts.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>${briefSrcNote(bind)}</div>`;
@@ -2357,23 +2391,50 @@ function catalogCities() {
   CITY_PACKS.forEach(p => { if (!m.has(p.city.toLowerCase())) m.set(p.city.toLowerCase(), { city: p.city, country: '', pack: true }); });
   return [...m.values()];
 }
+// Venues: city and country from the events held there (event articles), else from the venue's own article.
+function venueList() {
+  const byId = Object.fromEntries(catalogEvents().map(e => [e.id, e]));
+  return (CATALOG?.venues || []).map(v => {
+    const ev = v.usedBy.map(id => byId[id]).find(e => e?.fields.city);
+    const label = ev?.fields.venue?.value || v.name;
+    return { name: v.name, label, city: ev?.fields.city?.value || v.city || '', country: ev?.fields.country?.value || v.country || '', placeFrom: ev ? ev.source : v.source,
+      capacity: v.capacity, capacityCite: v.capacityCite, source: v.source, venueType: v.venueType, events: v.usedBy.map(id => byId[id]?.name).filter(Boolean) };
+  });
+}
+function suggestVenues(q) {
+  if (q.trim().length < 2) return [];
+  const b = plan.brief, near = v => (b.city && v.city.toLowerCase() === b.city.toLowerCase() ? 0 : 1) + (b.country && countryKey(v.country) === countryKey(b.country) ? 0 : 1);
+  return venueList().filter(v => wordPrefixMatch(`${v.name} ${v.label} ${v.city} ${v.country}`, q)).sort((a, b2) => near(a) - near(b2) || a.name.localeCompare(b2.name)).slice(0, 8);
+}
+// Countries: every country that has a currency (Wikidata), a grid factor (Ember) or a hotel factor (DESNZ).
+function countryList() {
+  const m = new Map(), add = (name, k) => { const key = countryKey(name); if (!m.has(key)) m.set(key, { name, cur: null, grid: null, hotel: null }); const x = m.get(key); x[k] = true; };
+  Object.keys(CATALOG?.currencyByCountry || {}).forEach(n => add(n, 'cur'));
+  Object.keys(REFDATA?.['grid-intensity']?.byCountry || {}).forEach(n => add(n, 'grid'));
+  Object.keys(REFDATA?.['emission-factors']?.hotel?.byCountry || {}).filter(n => !/\(/.test(n)).forEach(n => add(n, 'hotel'));
+  return [...m.values()].map(x => ({ ...x, codes: (lookupCountry(Object.fromEntries(Object.entries(CATALOG?.currencyByCountry || {}).map(([k, v]) => [k, { codes: v }])), x.name) || {}).codes || [],
+    gridV: lookupCountry(REFDATA?.['grid-intensity']?.byCountry, x.name)?.value, hotelV: lookupCountry(REFDATA?.['emission-factors']?.hotel?.byCountry, x.name)?.value }));
+}
+function suggestCountries(q) { if (q.trim().length < 2) return []; return countryList().filter(c => wordPrefixMatch(c.name, q)).sort((a, b) => (b.gridV != null) - (a.gridV != null) || a.name.localeCompare(b.name)).slice(0, 8); }
 function suggestCities(q) { if (q.trim().length < 2) return []; return catalogCities().filter(c => wordPrefixMatch(c.city, q)).slice(0, 8); }
 function hl(text, q) { const toks = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); return esc(text).replace(/[A-Za-z0-9À-ÿ]+/g, w => { const t = toks.find(t => w.toLowerCase().startsWith(t)); return t ? `<mark>${w.slice(0, t.length)}</mark>${w.slice(t.length)}` : w; }); }
 let sugState = { kind: null, items: [], i: -1 };
 function showSuggest(el) {
   const kind = el.dataset.suggest, q = el.value, box = $('#sug-' + kind); if (!box) return;
-  const items = kind === 'event' ? suggestEvents(q) : suggestCities(q);
+  const items = kind === 'event' ? suggestEvents(q) : kind === 'venue' ? suggestVenues(q) : kind === 'country' ? suggestCountries(q) : suggestCities(q);
   sugState = { kind, items, i: items.length ? 0 : -1 };
   if (!items.length) { box.hidden = true; el.setAttribute('aria-expanded', 'false'); return; }
   const fmtDate = d => { try { return new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch { return d; } };
   box.innerHTML = (kind === 'event' ? '<li class="h" aria-hidden="true">Real events, from published records</li>' : '') + items.map((x, i) => kind === 'event'
     ? `<li role="option" id="sug-event-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.name, q)}</span><span class="m">${[x.fields.date ? fmtDate(x.fields.date.value) : '', x.fields.venue?.value, x.fields.city?.value, x.hosts ? x.hosts.join(', ') : x.fields.country?.value].filter(Boolean).map(esc).join(' · ')}${x.eventType !== plan.brief.eventType ? ` · <i>${esc(x.eventType)}</i>` : ''}</span></li>`
+    : kind === 'venue' ? `<li role="option" id="sug-venue-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.label, q)}${x.label !== x.name ? ` <span class="m">(${esc(x.name)})</span>` : ''}</span><span class="m">${[x.city, x.country, x.capacity ? 'capacity ' + x.capacity.toLocaleString('en') : 'no published capacity'].filter(Boolean).map(esc).join(' · ')}</span></li>`
+    : kind === 'country' ? `<li role="option" id="sug-country-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.name, q)}</span><span class="m">${[x.codes.length ? x.codes.join(' or ') : 'no currency on record', x.gridV != null ? `grid ${x.gridV} kg/kWh` : 'no grid factor', x.hotelV != null ? `hotel ${x.hotelV} kg/night` : ''].filter(Boolean).map(esc).join(' · ')}</span></li>`
     : `<li role="option" id="sug-city-${i}" data-sug="${i}" aria-selected="${i === 0}"><span>${hl(x.city, q)}</span><span class="m">${esc(x.country || 'City profile')}</span></li>`).join('');
   box.hidden = false; el.setAttribute('aria-expanded', 'true'); el.setAttribute('aria-activedescendant', `sug-${kind}-0`);
 }
 function hideSuggest(kind) { const box = $('#sug-' + kind); if (box) box.hidden = true; const el = $(`[data-suggest="${kind}"]`); if (el) el.setAttribute('aria-expanded', 'false'); sugState = { kind: null, items: [], i: -1 }; }
 function moveSuggest(d) { const { kind, items } = sugState; if (!items.length) return; sugState.i = (sugState.i + d + items.length) % items.length; document.querySelectorAll(`#sug-${kind} [role=option]`).forEach((li, i) => li.setAttribute('aria-selected', i === sugState.i)); const el = $(`[data-suggest="${kind}"]`); el?.setAttribute('aria-activedescendant', `sug-${kind}-${sugState.i}`); $(`#sug-${kind}-${sugState.i}`)?.scrollIntoView({ block: 'nearest' }); }
-function chooseSuggest(i) { const { kind, items } = sugState, x = items[i]; if (!x) return; hideSuggest(kind); if (kind === 'event') applyCatalogEvent(x); else applyCity(x); }
+function chooseSuggest(i) { const { kind, items } = sugState, x = items[i]; if (!x) return; hideSuggest(kind); if (kind === 'event') applyCatalogEvent(x); else if (kind === 'venue') applyVenue(x); else if (kind === 'country') applyCountry(x); else applyCity(x); }
 // Fill only fields that are empty or were themselves filled from a published record; never overwrite what the user typed.
 function canFill(b, k) { const v = b[k]; return v == null || String(v).trim() === '' || +v === 0 && typeof v === 'number' || b.src?.[k]?.b === 'published'; }
 function currencyOptions(country) { const map = CATALOG?.currencyByCountry || {}; const hit = lookupCountry(Object.fromEntries(Object.entries(map).map(([k, v]) => [k, { codes: v }])), country); return hit && hit.codes.length > 1 ? hit.codes : null; }
@@ -2403,6 +2464,29 @@ function applyCatalogEvent(ev) {
   toast((filled.length ? `Filled ${filled.join(', ')} from published records. Each shows its source; change any of them.` : `${ev.name} chosen. Your own entries were kept.`)
     + (ev.hosts ? ` Hosts: ${ev.hosts.join(', ')}. Enter the country where your ceremony takes place.` : '')
     + (multi && !filled.includes('currency') ? ` Wikidata lists ${multi.join(' and ')} for ${plan.brief.country}: choose the currency.` : ''));
+}
+function applyVenue(v) {
+  const filled = [];
+  const perm = src => src?.revision ? `https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(src.title.replace(/ /g, '_'))}&oldid=${src.revision}` : src?.url;
+  mutate(p => {
+    const b = p.brief; b.src ||= {};
+    b.venue = v.label; b.src.venue = { b: 'published', r: `Wikipedia: ${v.source.title}`, url: perm(v.source) };
+    const placeSrc = { b: 'published', r: `Wikipedia: ${v.placeFrom.title}`, url: perm(v.placeFrom) };
+    if (v.city && canFill(b, 'city')) { b.city = v.city; b.src.city = { ...placeSrc }; filled.push('city'); }
+    if (v.country && canFill(b, 'country')) { b.country = /^(U\.S\.|US|USA)$/.test(v.country) ? 'United States' : v.country; b.src.country = { ...placeSrc }; filled.push('country'); }
+    if (v.capacity && canFill(b, 'capacity')) { b.capacity = v.capacity; b.src.capacity = { b: 'published', r: `Wikipedia: ${v.source.title} (venue capacity)`, url: perm(v.source), cite: v.capacityCite || null }; filled.push('capacity'); }
+    if (v.venueType && canFill(b, 'venueType')) { b.venueType = v.venueType; b.src.venueType = { b: 'published', r: `Venue of ${v.events.slice(0, 2).join(', ')}`, url: v.source.url }; filled.push('venue type'); }
+    const c = fillCurrency(b); if (c) filled.push(c);
+    if (localEmpty(p.local)) { const pk = findPack(b.city, b.venue); if (pk) { p.local = localFromPack(pk); filled.push('local profile'); } }
+  }, { log: `Venue set to ${v.label}` });
+  toast(filled.length ? `Filled ${filled.join(', ')} from published records. Each shows its source.` : `${v.label} chosen. Your own entries were kept.`);
+}
+function applyCountry(c) {
+  let cur = null;
+  mutate(p => { const b = p.brief; b.src ||= {}; b.country = c.name; delete b.src.country; cur = fillCurrency(b); });
+  const multi = currencyOptions(c.name);
+  toast([cur ? `Currency set to ${plan.brief.currency} (Wikidata).` : multi ? `Wikidata lists ${multi.join(' and ')} for ${c.name}: choose the currency.` : '',
+    c.gridV == null ? `No published grid factor for ${c.name}: grid electricity will need a supplier figure.` : `Grid factor ${c.gridV} kg CO₂e/kWh (Ember).`].filter(Boolean).join(' '));
 }
 function applyCity(c) {
   const filled = [];
@@ -2436,7 +2520,8 @@ function vBrief() {
   const types = [...new Set([plan.brief.eventType, ...TEMPLATES.map(t => t.eventType), ...(CATALOG?.series || []).map(x => x.eventType)].filter(Boolean))];
   const curs = [...new Set(['EUR', 'USD', 'GBP', 'CHF', 'AED', 'SAR', 'QAR', 'INR', 'BRL', 'AUD', 'JPY', 'CAD', ...Object.keys(REFDATA?.currency?.perUSD || {}), plan.brief.currency].filter(Boolean))].sort();
   return `${head('The brief', 'Where, what and for whom. Everything downstream (research, concepts, show design and the sustainability review) is built from this.', `${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}`)}
-  <section class="panel" id="brief-start"><h2>Start here</h2><p class="note" style="margin:-8px 0 14px">Choose the type, then start typing the event's name or city. Suggestions are real events from published records; picking one fills the date, venue, city, country, capacity and currency, each with its source. Change anything afterwards.</p>
+  <section class="panel" id="brief-start"><h2>Start here</h2><p class="note" style="margin:-8px 0 14px">Choose the type, then start typing the event's name, city, venue or country. Suggestions come from published records; picking one fills the related fields, each with its source. Change anything afterwards.</p>
+    <div class="legend"><span><i class="a"></i>Auto-filled from a published record</span><span><i class="n"></i>Needed: fill this in</span><span><i class="u"></i>Entered by you</span></div>
     <div class="start-steps">
       ${field('<span class="n">1</span>Event type', 'brief.eventType', { options: types })}
       ${field('<span class="n">2</span>Event name', 'brief.eventName', { suggest: 'event', ph: 'Start typing: UEFA, Olympics, Super Bowl…' })}
@@ -2451,8 +2536,8 @@ function vBrief() {
     ${field('Show light', 'brief.showLight', { options: ['Night', 'Dusk', 'Daylight'] })}
   </div></section>
   <section class="panel"><h2>Place</h2><div class="form">
-    ${field('Country', 'brief.country', { ph: 'e.g. Germany' })}
-    ${field('Venue', 'brief.venue', { ph: 'e.g. national stadium' })}
+    ${field('Country', 'brief.country', { suggest: 'country', ph: 'Start typing a country' })}
+    ${field('Venue', 'brief.venue', { suggest: 'venue', ph: 'Start typing a stadium or arena' })}
     ${field('Venue type', 'brief.venueType', { ph: 'Stadium, arena, outdoor…' })}
     ${field('Capacity', 'brief.capacity', { type: 'number' })}
   </div></section>
@@ -3396,6 +3481,7 @@ document.addEventListener('input', ev => {
     o[path.at(-1)] = el.type === 'number' ? num(el.value) : el.value;
     if (path[0] === 'brief' && plan.brief.src?.[path[1]]) { delete plan.brief.src[path[1]]; el.parentElement.querySelector(':scope > .fsrc, :scope ~ .fsrc')?.remove(); } // typed by the user now
     if (el.dataset.suggest) showSuggest(el);
+    refreshFieldState(el);
     touched(); renderTop(); renderNav(); return;
   }
   if (el.dataset.local) { plan.local[el.dataset.local] = el.value; touched(); return; }
@@ -3405,7 +3491,10 @@ document.addEventListener('input', ev => {
   if (el.dataset.pal) { const l = ensureLook(); l.palette[+el.dataset.pal] = el.value; const sp = el.parentElement.querySelector('.mono'); if (sp) sp.textContent = el.value; touched(); paintCanvases(); return; }
   if (el.dataset.prio) { plan.priorities[el.dataset.prio] = +el.value; $('#pv-' + el.dataset.prio).textContent = el.value + '/5'; touched(); return; }
 });
-document.addEventListener('change', ev => {
+// A change can fire while render() is replacing the page (the focused field blurs as it is removed).
+// Apply it right after that render instead, so nothing typed is lost.
+document.addEventListener('change', ev => { if (rendering) { const t = ev.target; setTimeout(() => onChange({ target: t }), 0); return; } onChange(ev); });
+function onChange(ev) {
   const el = ev.target;
   if (el.dataset.bind && el.tagName === 'SELECT') { render(); return; }
   if (el.dataset.bind === 'brief.country') { const c = fillCurrency(plan.brief); if (c) { touched(); render(); toast(`Currency set to ${plan.brief.currency} for ${plan.brief.country} (Wikidata). Change it if quotes come in another currency.`); return; } const m = currencyOptions(plan.brief.country); if (m) toast(`Wikidata lists ${m.join(' and ')} for ${plan.brief.country}: choose the currency.`); }
@@ -3436,7 +3525,7 @@ document.addEventListener('change', ev => {
   if (el.dataset.oh) { mutate(p => { const o = p.overheads.find(x => x.id === el.dataset.oh); if (o) o[el.dataset.k] = el.dataset.k === 'pct' ? Math.max(0, num(el.value)) : el.value; }); return; }
   if (el.dataset.inc) { mutate(p => { const e = p.elements.find(x => x.id === el.dataset.inc); if (e) e.included = el.checked; }); return; }
   if (el.dataset.tiersel) { mutate(p => { const e = p.elements.find(x => x.id === el.dataset.tiersel); if (e) e.tier = el.value; }); return; }
-});
+}
 
 /* ------------------------------------------------------------------ */
 /* Boot                                                                */

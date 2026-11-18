@@ -21,14 +21,14 @@ Anything without a source is marked **No source**. The Budget step lists it, and
 
 ## Starting a brief
 
-Choose the event type, then start typing the event's name (for example "uef" or "super bowl") or its city. The suggestions are real events from `reference/catalog.json`.
+Choose the event type, then start typing the event's name (for example "uef" or "super bowl"), its city, venue ("wemb") or country. The suggestions come from `reference/catalog.json`: real events, the venues they used, and countries with their currency and emission factors.
 
 Picking one fills these fields from published records:
 - date, venue, city and country, from the event's Wikipedia article
 - capacity, from the venue's Wikipedia article
 - currency, from Wikidata
 
-Each auto-filled field shows its source. Typing over a field replaces the source with your own value. Choosing another event never overwrites what you typed. Budget, show length and the written brief are always yours to fill in.
+Auto-filled fields are tinted green and tagged "Auto-filled", with their source under them. Empty fields the plan needs have a red dashed outline and a "Needed" tag. Fields you filled yourself look normal. Typing over a field replaces the source with your own value. Choosing another event never overwrites what you typed. Budget, show length and the written brief are always yours to fill in.
 
 ## How it works
 
