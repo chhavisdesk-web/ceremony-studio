@@ -442,6 +442,13 @@ def check():
             cap = e['fields'].get('capacity')
             if cap and not (cap.get('from') or {}).get('url'):
                 problems.append(f'catalog.{e["id"]}.capacity: no venue article')
+    pl = load('places.json')
+    if pl:
+        need('places.json', pl.get('source'))
+        for kind in ('cities', 'venues'):
+            for name, e in pl[kind].items():
+                if not e.get('permalink'):
+                    problems.append(f'places.{kind}.{name}: no article link')
     if problems:
         print('Reference check FAILED:')
         for p in problems:

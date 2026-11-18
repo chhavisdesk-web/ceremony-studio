@@ -1,0 +1,1150 @@
+{
+ "_about": "Opening sentences (and, for cities, the start of the Culture section) of English Wikipedia articles for the catalogue's cities and venues. Quoted, not rewritten; each entry links to the article revision.",
+ "source": "wikipedia-en",
+ "license": "Text quoted from Wikipedia, CC BY-SA 4.0",
+ "builtAt": "2026-11-18",
+ "cities": {
+  "Berlin": {
+   "title": "Berlin",
+   "url": "https://en.wikipedia.org/wiki/Berlin",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Berlin&oldid=1385834833",
+   "summary": "Berlin is the capital and largest city of Germany. With 3.7 million inhabitants, it has the highest population within its city limits of any city in the European Union (EU). The metropolis is also one of the states of Germany, being the third-smallest state in the country by area.",
+   "culture": "Berlin is known for its numerous cultural institutions, many of which enjoy international reputation. The diversity and vivacity of the metropolis led to a trendsetting atmosphere. An innovative music, dance and art scene has developed in the 21st century.",
+   "country": "Germany"
+  },
+  "Milan": {
+   "title": "Milan",
+   "url": "https://en.wikipedia.org/wiki/Milan",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Milan&oldid=1385784515",
+   "summary": "Milan is the capital and largest city of the region of Lombardy, in northern Italy, and the seat of the Metropolitan City of Milan. It is the second-largest city in Italy after the country's capital, Rome, with a population of 1,362,863 in 2026. The city's wider metropolitan area is the largest in Italy, and the fourth-largest in the European Union, with an estimated population of 6.55 million.",
+   "culture": "Milan is home to many cultural institutions, museums and art galleries, that account for about a tenth of the national total of visitors and receipts. The Pinacoteca di Brera is one of Milan's most important art galleries. It contains one of the foremost collections of Italian painting, including masterpieces such as the Brera Madonna by Piero della Francesca.",
+   "country": "Italy"
+  },
+  "Cardiff": {
+   "title": "Cardiff",
+   "url": "https://en.wikipedia.org/wiki/Cardiff",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Cardiff&oldid=1384245635",
+   "summary": "Cardiff is the capital and largest city of Wales. Cardiff had a population of in and forms a principal area officially known as the City and County of Cardiff. The city is the eleventh largest in the United Kingdom.",
+   "culture": "",
+   "country": "CF10 1NS"
+  },
+  "Kyiv": {
+   "title": "Kyiv",
+   "url": "https://en.wikipedia.org/wiki/Kyiv",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Kyiv&oldid=1384972107",
+   "summary": "Kyiv, also spelt Kiev, is the capital and most populous city of Ukraine. Located in the north-central part of the country, it straddles both banks of the Dnieper River. As of January 2022, the population of Kyiv was 2,952,301, making it the seventh-most populous city in Europe.",
+   "culture": "Kyiv was the historic cultural centre of the East Slavic civilization and a major cradle for the Christianization of Kievan Rus. Kyiv retained through centuries its cultural importance and even at times of relative decay, it remained the centre of primary importance of Eastern Orthodox Christianity. Its sacred sites of Kyiv Pechersk Lavra (the Monastery of the Caves) and the Saint Sophia Cathedral are attracting pilgrims for centuries and recognized as a UNESCO World Heritage Site, remaining the primary religious centres as well as major tourist attractions.",
+   "country": "Ukraine"
+  },
+  "Madrid": {
+   "title": "Madrid",
+   "url": "https://en.wikipedia.org/wiki/Madrid",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Madrid&oldid=1385634474",
+   "summary": "Madrid is the capital and largest city of Spain. It had a population of over 3.4 million in the city proper in 2025, and a metropolitan area population of approximately 6.8 million. Madrid is the second-largest city in the European Union (EU), after Berlin, and its metropolitan area is the second-largest in the EU, after Paris.",
+   "culture": "Little medieval architecture is preserved in Madrid, mostly in the Almendra Central, including the San Nicolás and San Pedro el Viejo church towers, the church of San Jerónimo el Real, and the Bishop's Chapel. Nor has Madrid retained much Renaissance architecture, other than the Bridge of Segovia and the Convent of Las Descalzas Reales.",
+   "country": "Spain"
+  },
+  "Lisbon": {
+   "title": "Lisbon",
+   "url": "https://en.wikipedia.org/wiki/Lisbon",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Lisbon&oldid=1386250801",
+   "summary": "Lisbon is the capital and most populous city of Portugal, with an estimated population of 658,236 as of 2025, within its administrative limits and 3,353,000 within the metropolis, as of 2025. The city lies in the western part of the Iberian Peninsula, fronting the northern shore of the River Tagus. Lisbon is one of the oldest cities in the world and the second-oldest European capital city (after Athens), predating other modern European capitals by centuries.",
+   "culture": "The city of Lisbon is rich in architecture; Romanesque, Gothic, Manueline, Baroque, Modern and Postmodern constructions can be found all over Lisbon. The city is also crossed by historical boulevards and monuments along the main thoroughfares, particularly in the upper districts; notable among these are the Avenida da Liberdade (Avenue of Liberty), Avenida Fontes Pereira de Melo, Avenida Almirante Reis and Avenida da República (Avenue of the Republic).",
+   "country": "Portugal"
+  },
+  "Porto": {
+   "title": "Porto",
+   "url": "https://en.wikipedia.org/wiki/Porto",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Porto&oldid=1386098141",
+   "summary": "Porto, also known in English as Oporto, is the second largest city in Portugal, after Lisbon. It is the capital of the Porto District and one of the Iberian Peninsula's major urban areas. Porto city proper, which is the entire municipality of Porto, is small compared to its metropolitan area, with an estimated population of 273,476 people in a municipal area of 41.42 km2., the Porto metropolitan area has around 1.9 million people in an area of 2395 km2, making it the second-largest urban area in Portugal.",
+   "culture": "In 2001, Porto shared the designation European Culture Capital with Rotterdam. As part of this, construction of the major concert hall space Casa da Música, designed by the Dutch architect Rem Koolhaas, was started, finishing in 2005.",
+   "country": "Portugal"
+  },
+  "Saint-Denis": {
+   "title": "Saint-Denis, Seine-Saint-Denis",
+   "url": "https://en.wikipedia.org/wiki/Saint-Denis%2C_Seine-Saint-Denis",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Saint-Denis%2C_Seine-Saint-Denis&oldid=1382273289",
+   "summary": "Saint-Denis is a commune in the northern suburbs of Paris, France. It is located 9.4 km from the centre of Paris. Saint-Denis is the most populated suburb of Paris, with a population of 149,077 as of 2023.",
+   "culture": "",
+   "country": "France"
+  },
+  "Istanbul": {
+   "title": "Istanbul",
+   "url": "https://en.wikipedia.org/wiki/Istanbul",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Istanbul&oldid=1385549367",
+   "summary": "Istanbul, historically known as Constantinople, is the largest city in Turkey, a megacity, constituting the country's economic, cultural, and historical center. With a population of over 15 million, it is home to 18% of the population of Turkey. Istanbul is among the largest cities in Europe and in the world by population.",
+   "culture": "Istanbul was historically known as a cultural hub, but its cultural scene stagnated after the Turkish Republic shifted its focus toward Ankara. The new national government established programs that served to orient Turks toward musical traditions, especially those originating in Europe, but musical institutions and visits by foreign classical artists were primarily centered in the new capital.",
+   "country": "Turkey"
+  },
+  "London": {
+   "title": "London",
+   "url": "https://en.wikipedia.org/wiki/London",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=London&oldid=1386236716",
+   "summary": "London is the capital and largest city of England and the United Kingdom, with a population of 4 million people in 2025. Its wider metropolitan area is the largest in Western Europe, with a population of 15.4 million. London stands on the River Thames in southeast England, at the head of a 50 mi tidal estuary down to the North Sea, and has been a major settlement for nearly 2,000 years.",
+   "culture": "According to a 2003 report, London has a quarter of the UK's leisure economy. The city is one of the four fashion capitals of the world, is the world's third-busiest film production centre, presents more live comedy than any other city, and has the biggest theatre audience of any city in the world. Alongside New York, London has been described as the cultural capital of the world.",
+   "country": "United Kingdom"
+  },
+  "Munich": {
+   "title": "Munich",
+   "url": "https://en.wikipedia.org/wiki/Munich",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Munich&oldid=1386104552",
+   "summary": "Munich is the capital and most populous city of the German state of Bavaria. As of 31 December 2025, Munich had a population of 1,505,036 according to the Bavarian State Office for Statistics, making it the third most-populous city in Germany after Berlin and Hamburg. Munich is the largest city in Germany that is not a state of its own, and it ranks as the 11th-largest city in the European Union (EU).",
+   "culture": "German is spoken and understood in and around Munich. While the German language has many dialects, so-called \"Standard German\" or \"High German\" is learned in schools and spoken among Germans, Austrians and in some parts of Switzerland. A speaker of a Low German dialect in Hamburg may find it difficult to understand the dialect of a Bavarian mountaineer.",
+   "country": "Germany"
+  },
+  "Budapest": {
+   "title": "Budapest",
+   "url": "https://en.wikipedia.org/wiki/Budapest",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Budapest&oldid=1384547566",
+   "summary": "Budapest is the capital and largest city of Hungary. It is Hungary's primate city with 1.7 million inhabitants and its greater metro area has a population of about 3.3 million, representing one-third of the country's population and producing more than 40% of the country's economic output. Budapest is the political, economic, and cultural center of the country, among the ten largest cities in the European Union and the second largest urban area in Central and Eastern Europe.",
+   "culture": "The culture of Budapest is reflected by Budapest's size and variety. Most Hungarian cultural movements first emerged in the city. Budapest is an important centre for music, film, theatre, dance and visual art.",
+   "country": "Hungary"
+  },
+  "Barcelona": {
+   "title": "Barcelona",
+   "url": "https://en.wikipedia.org/wiki/Barcelona",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Barcelona&oldid=1385433556",
+   "summary": "Barcelona is a city on the northeastern coast of Spain. It is the capital and largest city of the autonomous community of Catalonia, as well as the second-most populous municipality of Spain after Madrid. With a population of 1.7 million within city limits, its urban area extends to numerous neighbouring municipalities within the province of Barcelona and is home to around 5.7 million people, making it the fifth most populous urban area of the European Union after Paris, the Ruhr area, Madrid, and Milan.",
+   "culture": "Barcelona's cultural roots go back 2000 years. Since the arrival of democracy, the Catalan language (very much repressed during the dictatorship of Franco) has been promoted, both by recovering works from the past and by stimulating the creation of new works. Barcelona is designated as a world-class city by the Globalization and World Cities Study Group and Network.",
+   "country": "Spain"
+  },
+  "Warsaw": {
+   "title": "Warsaw",
+   "url": "https://en.wikipedia.org/wiki/Warsaw",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Warsaw&oldid=1385748672",
+   "summary": "Warsaw, officially the Capital City of Warsaw, is the capital and most populous city of Poland. The metropolis stands on the river Vistula in east-central Poland. Its population is officially estimated at 1.87 million residents within a greater metropolitan area of around 3.5 million residents, which makes Warsaw the 7th most populous city in the European Union.",
+   "culture": "Thanks to numerous musical venues, including the Teatr Wielki, the Polish National Opera, the Chamber Opera, the National Philharmonic Hall and the National Theatre, as well as the Roma and Buffo music theatres and the Congress Hall in the Palace of Culture and Science, Warsaw hosts many events and festivals.",
+   "country": "Poland"
+  },
+  "Basel": {
+   "title": "Basel",
+   "url": "https://en.wikipedia.org/wiki/Basel",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Basel&oldid=1385386940",
+   "summary": "Basel or Basle is a city in northwestern Switzerland on the river Rhine, at the transition from the High Rhine to the Upper Rhine. Basel is Switzerland's third most populous city (after Zurich and Geneva), with 177,595 inhabitants within the city municipality limits.",
+   "culture": "The red sandstone Münster, one of the foremost late-Romanesque/early Gothic buildings in the Upper Rhine, was badly damaged in the great earthquake of 1356, rebuilt in the 14th and 15th century, extensively reconstructed in the mid-19th century and further restored in the late 20th century. A memorial to Erasmus lies inside the Münster. The City Hall from the 16th century is located on the Market Square and is decorated with fine murals on the outer walls and on the walls of the inner court.",
+   "country": "Switzerland"
+  },
+  "Solna": {
+   "title": "Solna",
+   "url": "https://en.wikipedia.org/wiki/Solna",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Solna&oldid=1383036572",
+   "summary": "Solna ( or, ), also known as Solna Municipality, is a municipality in central Stockholm County, Sweden, located just north of Stockholm City Centre. Its seat is located in the town of Solna, which is a part of the Stockholm urban area. Solna is one of the wealthiest municipalities in Sweden.",
+   "culture": "",
+   "country": "Sweden"
+  },
+  "Décines-Charpieu": {
+   "title": "Décines-Charpieu",
+   "url": "https://en.wikipedia.org/wiki/D%C3%A9cines-Charpieu",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=D%C3%A9cines-Charpieu&oldid=1381969515",
+   "summary": "Décines-Charpieu is a commune in the Metropolis of Lyon in the Auvergne-Rhône-Alpes region in central-eastern France. The name of the city is often shortened and simply called Décines.",
+   "culture": "",
+   "country": "France"
+  },
+  "Baku": {
+   "title": "Baku",
+   "url": "https://en.wikipedia.org/wiki/Baku",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Baku&oldid=1385923337",
+   "summary": "Baku is the capital and largest city of Azerbaijan, as well as the largest city on the Caspian Sea and in the Caucasus region. Baku is 28 m below sea level, which makes it the lowest lying national capital in the world and the largest city in the world below sea level. Baku lies on the southern shore of the Absheron Peninsula, along the Bay of Baku.",
+   "culture": "Baku is often referred to as the \"Paris of the East\". The city's historic center, known as Icheri Sheher, the Inner City, or the Old City, has various landmarks dating back to at least the 12th century. Among these are the Maiden Tower and the Shirvanshahs' Palace.",
+   "country": "Azerbaijan"
+  },
+  "Cologne": {
+   "title": "Cologne",
+   "url": "https://en.wikipedia.org/wiki/Cologne",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Cologne&oldid=1381586369",
+   "summary": "Cologne is the fourth-most populous city of Germany and the largest city of the German state of North Rhine-Westphalia with over one million inhabitants in the city proper and over 3.1 million people in the Cologne Bonn urban region. Cologne is also part of the Rhine-Ruhr metropolitan region, the second biggest metropolitan region by GDP in the European Union. Centred on the left bank of the Rhine, Cologne is located on the River Rhine (Lower Rhine), about 35 km southeast of the North Rhine-Westphalia state capital Düsseldorf and 22 km northwest of Bonn, the former capital of West Germany.",
+   "culture": "Cologne has numerous museums. The famous Roman-Germanic Museum features art and architecture from the city's distant past; the Museum Ludwig houses one of the most important collections of modern art in Europe, including a Picasso collection matched only by the museums in Barcelona and Paris. The Museum Schnütgen of religious art is partly housed in St Cecilia, one of Cologne's Twelve Romanesque churches.",
+   "country": null
+  },
+  "Gdańsk": {
+   "title": "Gdańsk",
+   "url": "https://en.wikipedia.org/wiki/Gda%C5%84sk",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gda%C5%84sk&oldid=1385719788",
+   "summary": "Gdańsk, historically known in English as Danzig, is a city on the Baltic coast of northern Poland, and the capital of the Pomeranian Voivodeship. With a population of 486,492, it is Poland's sixth-largest city and its major seaport. Gdańsk lies at the mouth of the Motława River and is situated at the southern edge of Gdańsk Bay, close to the city of Gdynia and the resort town of Sopot; these form a metropolitan area called the Tricity (Trójmiasto), with a population of approximately 1.5 million.",
+   "culture": "",
+   "country": "Poland"
+  },
+  "Seville": {
+   "title": "Seville",
+   "url": "https://en.wikipedia.org/wiki/Seville",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Seville&oldid=1386328457",
+   "summary": "Seville is the capital and largest city of the autonomous community of Andalusia and the province of Seville in Spain. It is situated on the lower reaches of the River Guadalquivir, in the southwest of the Iberian Peninsula. Seville has a municipal population of about 688,714 as of 2025, and a metropolitan population of about 1.5 million, making it the largest city in Andalusia and the 5th-largest city in Spain.",
+   "culture": "The Teatro Lope de Vega is located on Avenida de María Luisa avenue (next to Parque de María Luisa). A small Baroque Revival theatre, it was designed by the architect Vicente Traver y Tomás and is housed in the Pabellón de Sevilla (Pavilion of Seville) built for the Ibero-American Exposition of 1929. The theatre was entered through a casino, the Casino de la Exposición.",
+   "country": "Spain"
+  },
+  "Dublin": {
+   "title": "Dublin",
+   "url": "https://en.wikipedia.org/wiki/Dublin",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Dublin&oldid=1385915671",
+   "summary": "Dublin is the capital and largest city of Ireland. Situated on Dublin Bay at the mouth of the River Liffey, it is in the province of Leinster, and is bordered on the south by the Dublin Mountains, part of the Wicklow Mountains range. Dublin is the largest city by population on the island of Ireland; at the 2022 census, the city council area had a population of 592,713, while the city, including suburbs, had a population of 1,263,219, and County Dublin had a population of 1,501,500.",
+   "culture": "Dublin has a significant literary history and produced many literary figures, including Nobel laureates William Butler Yeats, George Bernard Shaw, and Samuel Beckett. Other influential writers and playwrights include Oscar Wilde, Jonathan Swift and the creator of Dracula, Bram Stoker. It is also the location of key and notable works of James Joyce, including Ulysses, which is set in Dublin and includes much topical detail.",
+   "country": null
+  },
+  "Bilbao": {
+   "title": "Bilbao",
+   "url": "https://en.wikipedia.org/wiki/Bilbao",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Bilbao&oldid=1384322677",
+   "summary": "Bilbao is a city in northern Spain, the largest city in the province of Biscay and in the autonomous community of the Basque Country. With a population of 347,342 as of 2024, it is the 11th most populous city in Spain, and the most populous in northern Spain. The Bilbao metropolitan area has 1,037,847 inhabitants, making it the most populous metropolitan area in northern Spain.",
+   "culture": "Bilbao was appointed a \"City of Design\" by UNESCO in 2014 and has been part of the Creative Cities Network since then.",
+   "country": "Spain"
+  },
+  "Frankfurt": {
+   "title": "Frankfurt",
+   "url": "https://en.wikipedia.org/wiki/Frankfurt",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Frankfurt&oldid=1386294603",
+   "summary": "Frankfurt am Main, usually shortened to Frankfurt, is the most populous city in the German state of Hesse. Its 778,589 inhabitants as of 2025 make it the fifth-most populous city in Germany. Located in the foreland of the Taunus on its namesake river Main, the city forms a continuous conurbation with Offenbach; its urban area has a population of more than 2.7 million.",
+   "culture": "With more than 30 museums, Frankfurt has one of the largest variety of museums in Europe. Most museums are part of the Museumsufer, located on the front row of both sides of the Main riverbank or nearby, which was created on an initiative by cultural politician Hilmar Hoffmann.",
+   "country": "Germany"
+  },
+  "Bucharest": {
+   "title": "Bucharest",
+   "url": "https://en.wikipedia.org/wiki/Bucharest",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Bucharest&oldid=1386277840",
+   "summary": "Bucharest is the capital and largest city of Romania. The metropolis stands on the River Dâmbovița in south-eastern Romania. Its population is officially estimated at 1.71 million residents within a greater metropolitan area of 2.33 million residents, which makes Bucharest the fifteenth-largest city in Europe.",
+   "culture": "Bucharest has a growing cultural scene, in fields including the visual arts, performing arts, and nightlife. Unlike other parts of Romania, such as the Black Sea coast or Transylvania, Bucharest's cultural scene has no defined style, and instead incorporates elements of Romanian and international culture.",
+   "country": "Romania"
+  },
+  "Belgrade": {
+   "title": "Belgrade",
+   "url": "https://en.wikipedia.org/wiki/Belgrade",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Belgrade&oldid=1386227556",
+   "summary": "Belgrade ( or;, ) is the capital and largest city of Serbia. It is located at the confluence of the Sava and Danube rivers and at the crossroads of the Pannonian Plain and the Balkan Peninsula., the population of Belgrade city proper stands at 1,197,114, its contiguous urban area has 1,298,661 inhabitants, while the population of the city's administrative area (which roughly corresponds to its metro area) totals 1,682,720 people. It is one of the major cities of Southeast Europe and the third-most populous city on the river Danube.",
+   "culture": "According to the BBC, Belgrade is one of the five most creative cities in the world. Belgrade hosts many annual international cultural events, including the Film Festival, Theatre Festival, Summer Festival, BEMUS, Belgrade Early Music Festival, Book Fair, Belgrade Choir Festival, Eurovision Song Contest 2008, and the Beer Fest. In 2022 Belgrade was also home to the Europride event, even though the Serbian president, Aleksandar Vučić, tried to cancel it.",
+   "country": null
+  },
+  "Tirana": {
+   "title": "Tirana",
+   "url": "https://en.wikipedia.org/wiki/Tirana",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Tirana&oldid=1383962817",
+   "summary": "Tirana is the capital and largest city of Albania. It is located in the centre of the country, enclosed by mountains and hills, with Dajti rising to the east and a slight valley to the northwest overlooking the Adriatic Sea in the distance. It is among the wettest and sunniest cities in Europe, with 2,544 hours of sun per year.",
+   "culture": "Tirana offers a blend of traditional and modern lifestyle with a variety of arts, food, entertainment, music and night life. Its population celebrates a wide range of religious and other festivals including Christmas, Eid, Hanukkah and Nowruz. Another festival is Dita e Verës taking place every year on 14 March, during which the Albanians celebrate the end of winter and the arrival of spring.",
+   "country": "Albania"
+  },
+  "Prague": {
+   "title": "Prague",
+   "url": "https://en.wikipedia.org/wiki/Prague",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Prague&oldid=1384753359",
+   "summary": "Prague is the capital and largest city of the Czech Republic and the historical capital of Bohemia. Located on the Vltava River, the city has a population of about 1.4 million, making it the twelfth-largest city in the European Union. Its metropolitan area is home to approximately 2.3 million people.",
+   "culture": "The city is traditionally one of the cultural centres of Europe, hosting many cultural events. Some of the significant cultural institutions include the National Theatre (Národní Divadlo) and the Estates Theatre (Stavovské or Tylovo or Nosticovo divadlo), where the premières of Mozart's Don Giovanni and La clemenza di Tito were held. Other major cultural institutions are the Rudolfinum, which is home to the Czech Philharmonic Orchestra, and the Municipal House, which is home to the Prague Symphony Orchestra.",
+   "country": "100 00"
+  },
+  "Athens": {
+   "title": "Athens",
+   "url": "https://en.wikipedia.org/wiki/Athens",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Athens&oldid=1385560646",
+   "summary": "Athens is the capital and largest city of Greece. A significant coastal urban area in the Mediterranean, Athens is also the capital of the Attica region and is the southernmost capital on the European mainland. With its urban area's population numbering over 3.6 million, it is the eighth-largest urban area in the European Union (EU).",
+   "culture": "The city is a world centre of archaeological research. Alongside national academic institutions, such as the Athens University and the Archaeological Society, it is home to multiple archaeological museums, taking in the National Archaeological Museum, the Cycladic Museum, the Epigraphic Museum, the Byzantine & Christian Museum, as well as museums at the ancient Agora, Acropolis, Kerameikos, and the Kerameikos Archaeological Museum.",
+   "country": "Greece"
+  },
+  "Wrocław": {
+   "title": "Wrocław",
+   "url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Wroc%C5%82aw&oldid=1385753868",
+   "summary": "Wrocław (; also known by other names) is a city in southwestern Poland, and the capital of the Lower Silesian Voivodeship. It is the largest city and historical capital of the regions of Silesia and Lower Silesia. It lies on the banks of the Oder (Odra) River in the Silesian Lowlands.",
+   "culture": "",
+   "country": "Poland"
+  },
+  "Leipzig": {
+   "title": "Leipzig",
+   "url": "https://en.wikipedia.org/wiki/Leipzig",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Leipzig&oldid=1386105629",
+   "summary": "Leipzig is the most populous city in the German state of Saxony. The city has a population of 633,592 residents as of 31 December 2025. It is the eighth-largest city in Germany and is part of the Central German Metropolitan Region.",
+   "culture": "",
+   "country": null
+  },
+  "Turin": {
+   "title": "Turin",
+   "url": "https://en.wikipedia.org/wiki/Turin",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Turin&oldid=1385950491",
+   "summary": "Turin is a city and a business and cultural centre in northern Italy. It is the capital and largest city of Piedmont and of the Metropolitan City of Turin. From 1861 to 1865, it was the first capital of the Kingdom of Italy.",
+   "culture": "Turin, as the former capital of the Kingdom of Sardinia and the Kingdom of Italy, is home of the Savoy Residences. In addition to the 17th-century Royal Palace, built for Madama Reale Christine Marie of France (the official residence of the Savoys until 1865) there are many palaces, residences and castles in the city centre and in the surrounding towns. Turin is home to Palazzo Chiablese, the Royal Armoury, the Royal Library, Palazzo Madama, Palazzo Carignano, Villa della Regina, and the Valentino Castle.",
+   "country": "Italy"
+  },
+  "Reggio Emilia": {
+   "title": "Reggio Emilia",
+   "url": "https://en.wikipedia.org/wiki/Reggio_Emilia",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Reggio_Emilia&oldid=1383439716",
+   "summary": "Reggio nell'Emilia, usually referred to as Reggio Emilia, or simply Reggio by its inhabitants, and known until 1861 as Reggio di Lombardia, is a city in the region of Emilia-Romagna in northeast Italy. With a population of 172,921, it is the 4th-largest city in Emilia-Romagna and the 21st-largest in Italy. The inhabitants of Reggio nell'Emilia are called Reggiani, while the inhabitants of Reggio di Calabria, in the southwest of the country, are called Reggini.",
+   "culture": "",
+   "country": "42122 Reggio Emilia (RE)"
+  },
+  "San Sebastián": {
+   "title": "San Sebastián",
+   "url": "https://en.wikipedia.org/wiki/San_Sebasti%C3%A1n",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=San_Sebasti%C3%A1n&oldid=1384963195",
+   "summary": "San Sebastián or Donostia, officially known by the bilingual name Donostia / San Sebastián, is a city and municipality located in the Basque Autonomous Community in Spain. It lies on the coast of the Bay of Biscay, 20 km from the Spain–France border. The capital city of the province of Gipuzkoa, it has a population of 188,487 as of 2024, with its metropolitan area being 436,500 in 2010.",
+   "culture": "San Sebastián has a dynamic cultural scene, and was selected as European Capital of Culture for 2016 (shared with Wrocław, Poland) with the motto, \"Waves of people's energy\".",
+   "country": "Spain"
+  },
+  "Gothenburg": {
+   "title": "Gothenburg",
+   "url": "https://en.wikipedia.org/wiki/Gothenburg",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gothenburg&oldid=1385508269",
+   "summary": "Gothenburg is the second-largest city in Sweden, after the capital Stockholm, and the fifth-largest in the Nordic countries. Situated by the Kattegat on the west coast of Sweden 400 km from the capital, it is the gubernatorial seat of Västra Götaland County, with a population of approximately 600,000 in the city proper and about 1.1 million inhabitants in the metropolitan area. King Gustavus Adolphus founded Gothenburg by royal charter in 1621 as a heavily fortified, primarily Dutch, trading colony.",
+   "culture": "The sea, trade, and industrial history of the city are evident in the cultural life of Gothenburg. It is also a popular destination for tourists on the Swedish west coast.",
+   "country": "Sweden"
+  },
+  "Eindhoven": {
+   "title": "Eindhoven",
+   "url": "https://en.wikipedia.org/wiki/Eindhoven",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Eindhoven&oldid=1386107215",
+   "summary": "Eindhoven is a city and municipality in the Netherlands. It is the largest city in the southern province of North Brabant, and is located in the Dutch part of the Campine natural region. With a population of 249,054 (1 January 2025) on a territory of 88.92 km2, it is the fifth-largest city of the Netherlands and the largest outside the Randstad conurbation.",
+   "culture": "",
+   "country": "Netherlands"
+  },
+  "Oslo": {
+   "title": "Oslo",
+   "url": "https://en.wikipedia.org/wiki/Oslo",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Oslo&oldid=1385966479",
+   "summary": "Oslo is the capital and largest city of Norway. It constitutes both a county and a municipality. The municipality of Oslo had a population of in 2025, while the city's greater urban area had a population of 1,110,887 in 2025, and the metropolitan area had an estimated population of in 2021.",
+   "culture": "Oslo has a large and varied number of cultural attractions, which include several buildings containing artwork from Edvard Munch and various other international artists but also several Norwegian artists. Several world-famous writers have either lived or been born in Oslo. Examples are Knut Hamsun and Henrik Ibsen.",
+   "country": "Norway"
+  },
+  "Rio de Janeiro": {
+   "title": "Rio de Janeiro",
+   "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Rio_de_Janeiro&oldid=1385651685",
+   "summary": "Rio de Janeiro, also known simply as Rio, is the capital and largest city of the state of Rio de Janeiro. It is the second-largest city in Brazil after São Paulo, and the largest by number of international tourists. It has a population of 6 million in the city proper, and 13 million in its metropolitan area as of 2025.",
+   "culture": "Rio de Janeiro is a main cultural hub in Brazil. Its architecture embraces churches and buildings dating from the 16th to the 19th centuries, blending with the world-renowned designs of the 20th century. Rio was home to the Portuguese Imperial family and capital of the country for many years, and was influenced by Portuguese, English, and French architecture.",
+   "country": "Brazil"
+  },
+  "Tokyo": {
+   "title": "Tokyo",
+   "url": "https://en.wikipedia.org/wiki/Tokyo",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Tokyo&oldid=1386294178",
+   "summary": "Tokyo, officially the is the capital and most populous city of Japan. The population of the city proper was over 14 million as of 2023. The Greater Tokyo Area, which includes Tokyo and parts of six neighboring prefectures, is the third-most populous metropolitan area in the world, with 33 million residents.",
+   "culture": "Tokyo is home to a wide array of museums, art galleries, and libraries, catering to various interests. Ueno Park has the Tokyo National Museum, the country's largest museum specializing in traditional Japanese art, the National Museum of Western Art, whose building designed by Le Corbusier is a world heritage site, and the National Museum of Nature and Science. Ueno Zoo is also located within the park, near the Shinobazu Pond.",
+   "country": "Japan"
+  },
+  "Paris": {
+   "title": "Paris",
+   "url": "https://en.wikipedia.org/wiki/Paris",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Paris&oldid=1385351351",
+   "summary": "Paris is the capital and largest city of France, with an estimated city population of 2.04 million in an area of 105.4 km2, and a metropolitan population of 13.3 million (2023). Located on the Seine in the centre of the Île-de-France region, it is the largest metropolitan area and fourth-most populous city in the European Union (EU). Paris is nicknamed the \"City of Light\" mainly due to its leading role in the Age of Enlightenment.",
+   "culture": "For centuries, Paris has attracted artists from around the world. As a result, Paris has acquired a reputation as the \"City of Art\". Italian artists were a profound influence on the development of art in Paris in the 16th and 17th centuries, particularly in sculpture and reliefs.",
+   "country": "France"
+  },
+  "Los Angeles": {
+   "title": "Los Angeles",
+   "url": "https://en.wikipedia.org/wiki/Los_Angeles",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Los_Angeles&oldid=1385050673",
+   "summary": "Los Angeles (often shortened as LA or L.A.) is the most populous city in the U.S. state of California, and the commercial, financial, and cultural center of Southern California. With an estimated 3.87 million residents within the city limits, it is the second-most populous city in the United States, behind New York City, and the largest city in the Western United States. The city has an ethnically and culturally diverse population, and is the principal city of a metropolitan area of 12.9 million people (2024).",
+   "culture": "Los Angeles is often billed as the creative capital of the world because one in every six of its residents works in a creative industry and there are more artists, writers, filmmakers, actors, dancers and musicians living and working in Los Angeles than any other city at any other time in world history. Los Angeles is influenced by Mexican American culture due to California formerly being part of Mexico and, previously, the Spanish Empire. The city is also known for its prolific murals.",
+   "country": "United States"
+  },
+  "Brisbane": {
+   "title": "Brisbane",
+   "url": "https://en.wikipedia.org/wiki/Brisbane",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Brisbane&oldid=1385926254",
+   "summary": "Brisbane is the capital and most populous city of the Australian state of Queensland and the third-most populous city in Australia, with a population of about 2.8 million. Brisbane lies at the centre of South East Queensland, a bio-geographical and urban region with an estimated population of 4.1 million as of 2024. The central business district is situated within a peninsula of the Brisbane River approximately 15 km from its mouth at Moreton Bay.",
+   "culture": "",
+   "country": "Australia"
+  },
+  "Sochi": {
+   "title": "Sochi",
+   "url": "https://en.wikipedia.org/wiki/Sochi",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Sochi&oldid=1386300172",
+   "summary": "Sochi (from – seaside) is the largest resort city in Russia. The city is situated on the Sochi River, along the Black Sea in the North Caucasus of Southern Russia, with a population of 466,078 residents, and up to 600,000 residents in the urban area. The city covers an area of 176.77 km2, while the Greater Sochi Area covers over 3502 km2.",
+   "culture": "",
+   "country": "Russia"
+  },
+  "Pyeongchang": {
+   "title": "Pyeongchang County",
+   "url": "https://en.wikipedia.org/wiki/Pyeongchang_County",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Pyeongchang_County&oldid=1377385903",
+   "summary": "Pyeongchang (; in full, Pyeongchang-gun ) is a county in the state of Gangwon, South Korea, located in the Taebaek Mountains region. It is home to several Buddhist temples, including Woljeongsa. It is about 180 km east southeast of Seoul, the capital of South Korea, and connected by expressways and high-speed passenger railways.",
+   "culture": "",
+   "country": "South Korea"
+  },
+  "Beijing": {
+   "title": "Beijing",
+   "url": "https://en.wikipedia.org/wiki/Beijing",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Beijing&oldid=1385363010",
+   "summary": "Beijing, previously romanized as Peking, is the capital city of China. With more than 21.8 million residents, it is the world's most populous national capital city, as well as China's second-largest city by urban area, after Shanghai. It is located in Northern China and is governed as a provincial-level direct-administered municipality with 16 municipal districts.",
+   "culture": "People native to urban Beijing speak the Beijing dialect, which belongs to the Mandarin variety of spoken Chinese. This speech is the basis for putonghua, the standard spoken language used in mainland China and Taiwan, and one of the four official languages of Singapore. Rural areas of Beijing Municipality have their own dialects akin to those of Hebei province, which surrounds Beijing Municipality.",
+   "country": "China"
+  },
+  "French Alps": {
+   "title": "French Alps",
+   "url": "https://en.wikipedia.org/wiki/French_Alps",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=French_Alps&oldid=1385917944",
+   "summary": "The French Alps are the portions of the Alps mountain range that stand within France, located in the Auvergne-Rhône-Alpes and Provence-Alpes-Côte d'Azur regions. While some of the ranges of the French Alps are entirely in France, others, such as the Mont Blanc massif, are shared with Switzerland and Italy. At 4808 m, Mont Blanc, on the France–Italy border, is the highest mountain in the Alps, and the highest Western European mountain.",
+   "culture": "",
+   "country": "France"
+  },
+  "Utah": {
+   "title": "Utah",
+   "url": "https://en.wikipedia.org/wiki/Utah",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Utah&oldid=1385913784",
+   "summary": "Utah is a landlocked state in the Mountain West subregion of the Western United States. It is one of the Four Corners states, sharing a border with Arizona, Colorado, and New Mexico. It also borders Wyoming to the northeast, Idaho to the north, and Nevada to the west.",
+   "culture": "Utah is the second-least populous U.S. state to have a major professional sports league franchise after the Vegas Golden Knights joined the National Hockey League in 2017. The Utah Jazz of the National Basketball Association play at the Delta Center in Salt Lake City. The team moved to the city from New Orleans in 1979 and has been one of the most consistently successful teams in the league (although they have yet to win a championship).",
+   "country": "United States"
+  },
+  "Glasgow": {
+   "title": "Glasgow",
+   "url": "https://en.wikipedia.org/wiki/Glasgow",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Glasgow&oldid=1386302971",
+   "summary": "Glasgow is the most populous city in Scotland, located on the banks of the River Clyde in west central Scotland. It is the third-most populous city in the United Kingdom and comprises 23 wards which represent the areas within the city boundaries. Glasgow is a leading city in Scotland for university education and research, finance, industry, commerce, shopping, culture and fashion, and was commonly referred to as the \"second city of the British Empire\" for much of the Victorian and Edwardian eras.",
+   "culture": "Glasgow has many amenities for a wide range of cultural activities, from curling to opera and ballet and from football to art appreciation; it also has a large selection of museums and art galleries noted in the following section. Many of the city's cultural sites were celebrated in 1990 when Glasgow was designated European Capital of Culture.",
+   "country": "Scotland"
+  },
+  "Gold Coast": {
+   "title": "Gold Coast, Queensland",
+   "url": "https://en.wikipedia.org/wiki/Gold_Coast%2C_Queensland",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gold_Coast%2C_Queensland&oldid=1383999544",
+   "summary": "The Gold Coast, also known by its initials, GC, is a coastal city and region in the state of Queensland, Australia, located approximately 66 km south-southeast of the centre of the state capital, Brisbane. It is on the central eastern coast of Australia adjoining the Pacific Ocean. It is Queensland's second-largest city after Brisbane, as well as Australia's sixth-largest city and the most populous non-capital city.",
+   "culture": "The Gold Coast's culture has been affected by rapid development and traditional marketing programs orbiting around 'sun, sand, surf and sex.'",
+   "country": "Queensland"
+  },
+  "Ahmedabad": {
+   "title": "Ahmedabad",
+   "url": "https://en.wikipedia.org/wiki/Ahmedabad",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Ahmedabad&oldid=1384901021",
+   "summary": "Ahmedabad, also spelt Amdavad and historically known as Karnavati, is the most populous city in the Indian state of Gujarat. It is the administrative headquarters of the Ahmedabad district and the seat of the Gujarat High Court. Ahmedabad's population of 5,570,585 (per the 2011 population census) makes it the sixth-most populous city in India, and the encompassing urban area population estimated at 8,854,444 (as of 2024) is the seventh-most populous in India.",
+   "culture": "Ahmedabad is known for its rich architecture, traditional housing designs, community-oriented settlement patterns, urban structure, as well as its unique crafts and mercantile culture. The people of Ahmedabad celebrate a vast range of festivals. Celebrations and observances include Uttarayan, a harvest festival which involves kite-flying on 14 and 15 January.",
+   "country": "India"
+  },
+  "Incheon": {
+   "title": "Incheon",
+   "url": "https://en.wikipedia.org/wiki/Incheon",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Incheon&oldid=1385620094",
+   "summary": "Incheon is a city located in northwestern South Korea, bordering Seoul and Gyeonggi Province to the east. Inhabited since the Neolithic, Incheon was home to just 4,700 people when it became an international port in 1883. As of February 2020, about 3 million people live in the city, making it South Korea's third-most-populous city after Seoul and Busan.",
+   "culture": "",
+   "country": "South Korea"
+  },
+  "Hangzhou": {
+   "title": "Hangzhou",
+   "url": "https://en.wikipedia.org/wiki/Hangzhou",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Hangzhou&oldid=1386209217",
+   "summary": "Hangzhou is the capital and most populous city of Zhejiang province, China, situated at the intersection of the southern terminus of the Grand Canal and the head of Hangzhou Bay. Renowned as one of the Eight Ancient Capitals of China, Hangzhou is celebrated for its cultural heritage and its West Lake. Established as a county seat in 221 BC, Hangzhou later served as the capital of the Wuyue Kingdom (923–997) and the Southern Song dynasty (1138–1276).",
+   "culture": "The native residents of Hangzhou, including those of Zhejiang and southern Jiangsu, speak the Hangzhou dialect, a Wu dialect unique to the area. Hangzhou's dialect differs from those of regions in southern Zhejiang and southern Jiangsu. As the official language defined by China's central government, Mandarin is the dominant spoken language, though it is mutually unintelligible with the Hangzhou dialect.",
+   "country": "China"
+  },
+  "Doha": {
+   "title": "Doha",
+   "url": "https://en.wikipedia.org/wiki/Doha",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Doha&oldid=1385447488",
+   "summary": "Doha is the capital and largest city, and main financial hub of Qatar. Located on the Persian Gulf coast in the east of the country, north of Al Wakrah and south of Al Khor and Lusail, it is home to most of the country's population. It is also Qatar's fastest growing city and over 80% of the nation's population live in Doha or its surrounding suburbs, which are known collectively as the Doha Metropolitan Area.",
+   "culture": "Doha was chosen as the Arab Capital of Culture in 2010. Cultural weeks organized by the Ministry of Culture, which featured both Arab and non-Arab cultures, were held in Doha from April to June to celebrate the city's selection.",
+   "country": "Qatar"
+  },
+  "Toronto": {
+   "title": "Toronto",
+   "url": "https://en.wikipedia.org/wiki/Toronto",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Toronto&oldid=1385996970",
+   "summary": "Toronto is the most populous city in Canada and the capital city of the Canadian province of Ontario. It is located on a harbour at the northwestern shore of Lake Ontario. The city is the fourth-most populous city in North America, behind Mexico City, New York City, and Los Angeles, with a census population of 2,794,356 as of 2021.",
+   "culture": "Toronto's theatre and performing arts scene has more than fifty ballet and dance companies, six opera companies, two symphony orchestras, many music venues, and a host of theatres. The city is home to the National Ballet of Canada, the Canadian Opera Company, the Toronto Symphony Orchestra, the Canadian Electronic Ensemble, and the Canadian Stage Company.",
+   "country": "Canada"
+  },
+  "Lima": {
+   "title": "Lima",
+   "url": "https://en.wikipedia.org/wiki/Lima",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Lima&oldid=1385350016",
+   "summary": "Lima is the capital and largest city of Peru, as well as a primate city. It is located in the valleys of the Chillón, Rímac and Lurín Rivers, in the desert zone of the central coastal part of the country, overlooking the Pacific Ocean. The city is considered the political, cultural, financial and commercial center of Peru.",
+   "culture": "",
+   "country": "Peru"
+  },
+  "Santiago": {
+   "title": "Santiago",
+   "url": "https://en.wikipedia.org/wiki/Santiago",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Santiago&oldid=1384966845",
+   "summary": "Santiago, also known as Santiago de Chile, is the capital and largest city of Chile and one of the largest cities in the Americas. Located in the Chilean Central Valley within the Santiago Basin, between the Andes to the east and the Chilean Coastal Range to the west, it anchors the Santiago Metropolitan Region and its conurbation of Greater Santiago, which comprises more than forty communes and concentrates over a third of the national population and around 45% of Chile's GDP. Most of the city lies between 500 and above sea level, with recent urban growth extending into the Andean foothills.",
+   "culture": "Only a few historical buildings from the Spanish colonial period remain in the city, because – like the rest of the country – Santiago is regularly hit by earthquakes. Extant buildings include the Casa Colorada (1769), the San Francisco Church (1586), and Posada del Corregidor (1750).",
+   "country": "Chile"
+  },
+  "Glendale": {
+   "title": "Glendale, Arizona",
+   "url": "https://en.wikipedia.org/wiki/Glendale%2C_Arizona",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Glendale%2C_Arizona&oldid=1383606501",
+   "summary": "Glendale is a city in Maricopa County, Arizona, United States. Bordering the state capital, as a suburb of Phoenix, Glendale is known for State Farm Stadium, which is the home of the Arizona Cardinals football team. The city also contains the Arrowhead Towne Center shopping mall.",
+   "culture": "* Adobe Mountain Desert Park * Cerreta Candy Co. factory tour * Camelback Ranch * Elsie McCarthy Sensory Garden * Desert Diamond Arena * Glendale Chocolate Festival (every February) * Glendale Folk & Heritage Festival * Glendale Glitters (every December) * Glendale Jazz and Blues Festival * Manistee Ranch * Mattel Adventure Park (opening 2027) * Sahuaro Ranch * State Farm Stadium * Westgate Entertainment District",
+   "country": "United States"
+  },
+  "Santa Clara": {
+   "title": "Santa Clara, California",
+   "url": "https://en.wikipedia.org/wiki/Santa_Clara%2C_California",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Santa_Clara%2C_California&oldid=1386345121",
+   "summary": "Santa Clara (Spanish for 'Saint Clare') is a city in Santa Clara County, California, United States. Located in the southern San Francisco Bay Area, it was founded by the Spanish in 1777 with the establishment of Mission Santa Clara de Asís under the leadership of Junípero Serra. The city's population was 127,647 at the 2020 census, making it the eighth-most populous city in the Bay Area.",
+   "culture": "Santa Clara is also home to California's Great America, an amusement park currently operated by Six Flags.",
+   "country": "United States"
+  },
+  "Houston": {
+   "title": "Houston",
+   "url": "https://en.wikipedia.org/wiki/Houston",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Houston&oldid=1384843694",
+   "summary": "Houston is the most populous city in the U.S. state of Texas and the Southern United States. It is the fourth-most populous city in the United States, with a population of 2.3 million at the 2020 census. The Greater Houston metropolitan area, at 7.8 million residents, is the fifth-most populous metropolitan area in the nation and second-most populous in Texas.",
+   "culture": "Located in the American South, Houston is a diverse city with a large and growing international community. The Greater Houston metropolitan area is home to an estimated 1.1 million (21.4 percent) residents who were born outside the United States, with nearly two-thirds of the area's foreign-born population from south of the United States–Mexico border since 2009. Additionally, more than one in five foreign-born residents are from Asia.",
+   "country": "United States"
+  },
+  "Minneapolis": {
+   "title": "Minneapolis",
+   "url": "https://en.wikipedia.org/wiki/Minneapolis",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Minneapolis&oldid=1385859409",
+   "summary": "Minneapolis is a city in Hennepin County, Minnesota, United States, and its county seat. With a population of 429,954 as of the 2020 census, it is the state's most populous city. Located in the state's center near the eastern border, it occupies both banks of the Upper Mississippi River and adjoins Saint Paul, the state capital of Minnesota.",
+   "culture": "During the Gilded Age, the Walker Art Center began as a private art collection in the home of lumberman T. B. Walker, who extended free admission to the public.",
+   "country": "United States"
+  },
+  "Atlanta": {
+   "title": "Atlanta",
+   "url": "https://en.wikipedia.org/wiki/Atlanta",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Atlanta&oldid=1385420556",
+   "summary": "Atlanta is the capital and most populous city of the U.S. state of Georgia. It is the county seat of Fulton County and extends into neighboring DeKalb County. With a population of 498,715 at the 2020 census and an estimated 529,110 in 2025, Atlanta is the eighth-most populous city in the Southeast and the 36th-most populous city in the United States.",
+   "culture": "Atlanta has drawn residents from many other parts of the U.S., in addition to many recent immigrants to the U.S. who have made the metropolitan area their home, establishing Atlanta as the cultural and economic hub of an increasingly multi-cultural metropolitan area. This unique cultural combination reveals itself in the arts district of Midtown, the quirky neighborhoods on the city's eastside, and the multi-ethnic enclaves found along Buford Highway.",
+   "country": "United States"
+  },
+  "Miami Gardens": {
+   "title": "Miami Gardens, Florida",
+   "url": "https://en.wikipedia.org/wiki/Miami_Gardens%2C_Florida",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Miami_Gardens%2C_Florida&oldid=1385123087",
+   "summary": "Miami Gardens is a city in north-central Miami-Dade County, Florida, United States. It is a suburb of Miami and located 16 mi north of downtown Miami with city boundaries that stretch from I-95 and Northeast 2nd Avenue to its east to Northwest 47th and Northwest 57th Avenues to its west, and from the Broward County line to its north to 151st Street to its south. The city's name originated from Florida State Road 860, a major roadway through the area also known as Miami Gardens Drive.",
+   "culture": "",
+   "country": "United States"
+  },
+  "Tampa": {
+   "title": "Tampa, Florida",
+   "url": "https://en.wikipedia.org/wiki/Tampa%2C_Florida",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Tampa%2C_Florida&oldid=1384981796",
+   "summary": "Tampa is a city on the Gulf Coast of the U.S. state of Florida and the county seat of Hillsborough County. Tampa's borders include the north shore of Tampa Bay and the east shore of Old Tampa Bay. It is the third-most populous city in Florida (after Jacksonville and Miami) and the 49th-most populous city in the U.S., with a population of 403,364 at the 2020 census.",
+   "culture": "Tampa is home to a variety of stage and performing arts venues and theaters, including the David A. Straz Jr. Center for the Performing Arts, Tampa Theatre, Gorilla Theatre, and the MidFlorida Credit Union Amphitheatre next to the Florida State Fairgrounds.",
+   "country": "United States"
+  },
+  "Inglewood": {
+   "title": "Inglewood, California",
+   "url": "https://en.wikipedia.org/wiki/Inglewood%2C_California",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Inglewood%2C_California&oldid=1385554067",
+   "summary": "Inglewood is a city in southwestern Los Angeles County, California, United States, in the Greater Los Angeles metropolitan area. In the 2020 U.S. census, Inglewood had a population of 107,762. It is in the South Bay region of Los Angeles County, just east of Los Angeles International Airport.",
+   "culture": "The Forum was built in 1967 and designed by architect Charles Luckman, who also designed Madison Square Garden. The Forum was intended to evoke the Roman Forum in Rome. For decades, the Forum was one of LA's biggest concert venues; Elvis Presley, Led Zeppelin, Earth, Wind & Fire, Prince and the The Jackson 5 were among the superstars to headline the arena",
+   "country": "United States"
+  },
+  "Paradise": {
+   "title": "Paradise, Nevada",
+   "url": "https://en.wikipedia.org/wiki/Paradise%2C_Nevada",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Paradise%2C_Nevada&oldid=1384909863",
+   "summary": "Paradise is an unincorporated town and census-designated place (CDP) in Clark County, Nevada, United States, adjacent to the city of Las Vegas. It was formed on December 8, 1950. Its population was 191,238 at the 2020 census, making it the fifth-most-populous CDP in the United States; if it were an incorporated city, it would be the fifth-largest in Nevada.",
+   "culture": "",
+   "country": "United States"
+  },
+  "New Orleans": {
+   "title": "New Orleans",
+   "url": "https://en.wikipedia.org/wiki/New_Orleans",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=New_Orleans&oldid=1385852377",
+   "summary": "New Orleans (commonly known as NOLA or The Big Easy, among other nicknames) is a consolidated city-parish located along the Mississippi River in the U.S. state of Louisiana. With a population of 383,997 at the 2020 census, New Orleans is the most populous city in Louisiana, the second-most populous in the Deep South (after Atlanta), and the twelfth-most populous in the Southeastern United States; the New Orleans metropolitan area, with about 1 million residents, is the 59th-most populous metropolitan area in the United States.",
+   "culture": "",
+   "country": "United States"
+  },
+  "Las Vegas": {
+   "title": "Las Vegas",
+   "url": "https://en.wikipedia.org/wiki/Las_Vegas",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Las_Vegas&oldid=1384981972",
+   "summary": "Las Vegas, colloquially shortened to Vegas, is the most populous city in the U.S. state of Nevada and the county seat of Clark County. It is the 24th-most populous city in the United States, with 641,903 residents at the 2020 census. The Las Vegas metropolitan area has an estimated 2.4 million residents and is the 29th-largest metropolitan area in the country.",
+   "culture": "The city is home to several museums, including the Neon Museum (the location for many of the historical signs from Las Vegas's mid-20th century heyday), The Mob Museum, the Las Vegas Natural History Museum, the Discovery Children's Museum, the Nevada State Museum and the Old Las Vegas Mormon Fort State Historic Park.",
+   "country": "United States"
+  },
+  "Nashville": {
+   "title": "Nashville, Tennessee",
+   "url": "https://en.wikipedia.org/wiki/Nashville%2C_Tennessee",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Nashville%2C_Tennessee&oldid=1385668400",
+   "summary": "Nashville is the capital and most populous city in the U.S. state of Tennessee. It is the seat of Davidson County in Middle Tennessee, located on the Cumberland River. It is the 20th-most populous city in the United States and fourth-most populous city in the Southeast, with a population of 689,447 at the 2020 census (estimated at 721,074 in 2025).",
+   "culture": "Much of the city's cultural life has revolved around its large university community. Particularly significant in this respect were two groups of critics and writers who were associated with Vanderbilt University in the early 20th century: the Fugitives and the Agrarians.",
+   "country": "United States"
+  },
+  "Vienna": {
+   "title": "Vienna",
+   "url": "https://en.wikipedia.org/wiki/Vienna",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Vienna&oldid=1382136598",
+   "summary": "Vienna is the capital, most populous city, and one of the nine states of Austria. It is Austria's primate city, with just over two million inhabitants. Its larger metropolitan area has a population of nearly 2.9 million, representing nearly one-third of the country's population.",
+   "culture": "Vienna has a long-standing tradition of art and culture, encompassing theatre, opera, classical music, and fine arts. The Burgtheater is considered one of the premier theatres in the German-speaking world alongside its branch, the Akademietheater. The Volkstheater and the Theater in der Josefstadt also enjoy good reputations.",
+   "country": "Austria"
+  },
+  "Stockholm": {
+   "title": "Stockholm",
+   "url": "https://en.wikipedia.org/wiki/Stockholm",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Stockholm&oldid=1386086632",
+   "summary": "Stockholm is the capital and most populous city of Sweden, as well as the largest urban area in the Nordic countries. Approximately 1 million people live in the municipality, with 1.6 million in the urban area, and 2.5 million in the metropolitan area. The city stretches across fourteen islands where Lake Mälaren flows into the Baltic Sea.",
+   "culture": "As the capital and largest city of Sweden, Stockholm is the primary centre for the country's cultural life. The Swedish Royal Academies, founded by various monarchs after the sixteenth century, award several prestigious awards and serve as intellectual institutions for the country's leading figures. The city also hosts several of Sweden's architectural masterpieces; the Stockholm region is home to three World Heritage Sites – spots judged as invaluable places that belong to all of humanity: Drottningholm Palace, Skogskyrkogården (The Woodland Cemetery) and Birka.",
+   "country": "Sweden"
+  },
+  "Tel Aviv": {
+   "title": "Expo Tel Aviv",
+   "url": "https://en.wikipedia.org/wiki/Expo_Tel_Aviv",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Expo_Tel_Aviv&oldid=1368569718",
+   "summary": "Expo Tel Aviv (formerly the Israel Trade Fairs and Convention Center and later the Tel Aviv Convention Center, commonly referred to as Ganei HaTaarucha (lit. \"Exhibition Gardens\") or the Tel Aviv Fairgrounds, is a fairground complex on Rokach Boulevard in northern Tel Aviv, Israel, used as a venue for concerts, exhibitions, trade fairs, and conferences. Established in 1932 as Yerid HaMizrach at the site of the Levant Fair, near the Tel Aviv Port, the fairgrounds moved to their present location at 101 Rokach Boulevard (near the Yarkon Park and Tel Aviv University) in 1959.",
+   "culture": "",
+   "country": "Israel"
+  },
+  "Rotterdam": {
+   "title": "Rotterdam Ahoy",
+   "url": "https://en.wikipedia.org/wiki/Rotterdam_Ahoy",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Rotterdam_Ahoy&oldid=1381499488",
+   "summary": "Rotterdam Ahoy (formerly known as Ahoy Rotterdam or simply as Ahoy) is a multi-purpose complex with a convention centre and an indoor arena located in Rotterdam, Netherlands. Opened originally in 1950, the current complex consists of three main venues: a fairs and events hall, a congress and conference centre, and the main venue the Ahoy Arena. The latter (informally known as the, ) opened on 15 January 1971 and is the largest multi-purpose venue in the Netherlands, with a capacity of 16,426 as of May 2019.",
+   "culture": "",
+   "country": "Netherlands"
+  },
+  "Liverpool": {
+   "title": "Liverpool Arena",
+   "url": "https://en.wikipedia.org/wiki/Liverpool_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Liverpool_Arena&oldid=1383188974",
+   "summary": "Liverpool Arena (currently known for sponsorship reasons as the M&S Bank Arena and previously the Echo Arena) is a multi-purpose indoor arena in the city centre of Liverpool, England. The venue hosts live music, comedy performances and sporting events, and forms part of Liverpool event campus ACC Liverpool – an interconnected arena, exhibition and convention centre. The venue serves a regional population of 2.5 million people and over 6.6 million across England's North West.",
+   "culture": "",
+   "country": "England"
+  },
+  "Malmö": {
+   "title": "Malmö Arena",
+   "url": "https://en.wikipedia.org/wiki/Malm%C3%B6_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Malm%C3%B6_Arena&oldid=1372083586",
+   "summary": "Malmö Arena is a multi-purpose indoor arena in Malmö, Sweden, and the venue for home games of the Swedish Hockey League team Malmö Redhawks. It is the largest arena in the SHL, and the second-largest indoor arena in Sweden. Apart from hosting Redhawks hockey matches, the arena is a significant venue for team handball, floorball, concerts, and other events.",
+   "culture": "",
+   "country": "Sweden"
+  },
+  "Burgas": {
+   "title": "Arena Burgas",
+   "url": "https://en.wikipedia.org/wiki/Arena_Burgas",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Arena_Burgas&oldid=1385429541",
+   "summary": "Arena Burgas is a multifunctional indoor arena located in Burgas, Bulgaria. After several years of delay, the arena opened on 18 May 2023. It has a fixed capacity of 4,100 for sports events, which is expandable up to 6,100 with telescopic stands, and can reach up to 15,000 for concerts when additional floor seating is combined with a standing audience.",
+   "culture": "",
+   "country": "Bulgaria"
+  }
+ },
+ "venues": {
+  "Agia Sophia Stadium": {
+   "title": "Agia Sophia Stadium",
+   "url": "https://en.wikipedia.org/wiki/Agia_Sophia_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Agia_Sophia_Stadium&oldid=1385647999",
+   "summary": "Agia Sophia Stadium, also known as Allwyn Arena for sponsorship reasons and as AEK Arena for UEFA competitions, is the home stadium of AEK Athens. With an all-seater capacity of 32,500 it is the third largest football stadium overall in Greece. It is located in Nea Filadelfeia, a northwestern suburb of Athens, Greece."
+  },
+  "Alexander Stadium": {
+   "title": "Alexander Stadium",
+   "url": "https://en.wikipedia.org/wiki/Alexander_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Alexander_Stadium&oldid=1381706913",
+   "summary": "Alexander Stadium is an athletics stadium in Perry Barr, Birmingham, United Kingdom. It is the largest athletics stadium in the United Kingdom. The stadium has four stands with a total seated capacity of 18,000."
+  },
+  "Allegiant Stadium": {
+   "title": "Allegiant Stadium",
+   "url": "https://en.wikipedia.org/wiki/Allegiant_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Allegiant_Stadium&oldid=1385129867",
+   "summary": "Allegiant Stadium is a multi-purpose indoor stadium in the western United States, located in Paradise, Nevada, southwest of adjacent Las Vegas. Opened in 2020, it is the home field of the Las Vegas Raiders of the National Football League (NFL) and the University of Nevada, Las Vegas (UNLV) Rebels. The stadium also hosts the Vegas Kickoff Classic in early September and the Las Vegas Bowl in December."
+  },
+  "Allianz Arena": {
+   "title": "Allianz Arena",
+   "url": "https://en.wikipedia.org/wiki/Allianz_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Allianz_Arena&oldid=1385867579",
+   "summary": "Allianz Arena (known as Munich Football Arena for UEFA competitions) is a football stadium in Munich, Germany, with a 70,000 seating capacity for international matches and 75,000 for domestic matches. Widely known for its exterior of inflated ETFE plastic panels, it is the first stadium in the world with a full colour changing exterior. Located at Franz-Beckenbauer-Platz 5 at the northern edge of Munich's Schwabing-Freimann borough on the Fröttmaning Heath, it is the second-largest stadium in Germany behind the Westfalenstadion in Dortmund."
+  },
+  "Anoeta Stadium": {
+   "title": "Anoeta Stadium",
+   "url": "https://en.wikipedia.org/wiki/Anoeta_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Anoeta_Stadium&oldid=1384161826",
+   "summary": "The Anoeta Stadium is a football stadium in San Sebastián, Basque Country, Spain that was inaugurated in 1993. The stadium lies at the Anoeta Sports Complex, and is mostly used for football matches where La Liga side Real Sociedad contest their home games."
+  },
+  "Arena Burgas": {
+   "title": "Arena Burgas",
+   "url": "https://en.wikipedia.org/wiki/Arena_Burgas",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Arena_Burgas&oldid=1385429541",
+   "summary": "Arena Burgas is a multifunctional indoor arena located in Burgas, Bulgaria. After several years of delay, the arena opened on 18 May 2023. It has a fixed capacity of 4,100 for sports events, which is expandable up to 6,100 with telescopic stands, and can reach up to 15,000 for concerts when additional floor seating is combined with a standing audience."
+  },
+  "Arena Kombëtare": {
+   "title": "Arena Kombëtare",
+   "url": "https://en.wikipedia.org/wiki/Arena_Komb%C3%ABtare",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Arena_Komb%C3%ABtare&oldid=1377821527",
+   "summary": "Arena Kombëtare (known as the Air Albania Stadium for sponsorship reasons) is an all-seater, multi-purpose football stadium located in the Albanian capital city of Tirana which was built on the ground of the former Qemal Stafa Stadium. The stadium has a seating capacity of 22,500 constituting the largest stadium in Albania. The stadium is owned by the governing body of Albanian football, the Albanian Football Association (FSHF) and the Albanian State through Shoqëria Sportive Kuq e Zi Sh.A, a subsidiary established for the purpose of building, managing and maintaining the structure."
+  },
+  "Arena Națională": {
+   "title": "Arena Națională",
+   "url": "https://en.wikipedia.org/wiki/Arena_Na%C8%9Bional%C4%83",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Arena_Na%C8%9Bional%C4%83&oldid=1385016270",
+   "summary": "The National Arena is a retractable roof football stadium in Bucharest, Romania. It opened in 2011 on the site of the original National Stadium, which was demolished between 2007 and 2008. The stadium hosts major football matches including home matches of the Romania National Football Team, and usually Romanian Cup Final."
+  },
+  "Atatürk Olympic Stadium": {
+   "title": "Atatürk Olympic Stadium",
+   "url": "https://en.wikipedia.org/wiki/Atat%C3%BCrk_Olympic_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Atat%C3%BCrk_Olympic_Stadium&oldid=1381689706",
+   "summary": "The Atatürk Olympic Stadium is a stadium in Istanbul, Turkey. Located in the western district of Başakşehir, it is the largest-capacity stadium in the country, and largest permanent track and field stadium outside Africa and Asia by capacity. The stadium is named after Mustafa Kemal Atatürk, the founder and first President of the Republic of Turkey."
+  },
+  "Avicii Arena": {
+   "title": "Avicii Arena",
+   "url": "https://en.wikipedia.org/wiki/Avicii_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Avicii_Arena&oldid=1377046752",
+   "summary": "Avicii Arena is a multi-purpose arena in Stockholm Globe City, Johanneshov district of Stockholm, Sweden near the Globen metro station. The arena was previously named Stockholm Globe Arena and Ericsson Globe and is referred to in Swedish simply as Globen, as it is shaped like a globe and represents the Sun in the Sweden Solar System, the world's largest scale model of the Solar System. Avicii Arena is the second largest spherical building on Earth (overtaken by the Las Vegas Sphere in 2023) and took two and a half years to build."
+  },
+  "Aviva Stadium": {
+   "title": "Aviva Stadium",
+   "url": "https://en.wikipedia.org/wiki/Aviva_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Aviva_Stadium&oldid=1385969435",
+   "summary": "Aviva Stadium, also known as the Dublin Arena (during UEFA competitions), is a sports stadium located in Dublin, Ireland. It has a capacity of 51,711 (all seated). It is built on the site of the former Lansdowne Road Stadium, which was demolished in 2007, and replaced it as home to its chief tenants: the Ireland national rugby union team and the Republic of Ireland football team."
+  },
+  "Baku Olympic Stadium": {
+   "title": "Baku Olympic Stadium",
+   "url": "https://en.wikipedia.org/wiki/Baku_Olympic_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Baku_Olympic_Stadium&oldid=1380324542",
+   "summary": "Baku Olympic Stadium is a stadium, designed and constructed to meet the international standards for stadiums set by the Union of European Football Associations (UEFA), the International Federation of Association Football (FIFA) and the World Athletics. Having seating capacity for 69,870 people, it is the largest stadium in Azerbaijan. Despite the name, it has never hosted and is not scheduled to host any competition of the Olympic Games."
+  },
+  "Beijing National Stadium": {
+   "title": "Beijing National Stadium",
+   "url": "https://en.wikipedia.org/wiki/Beijing_National_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Beijing_National_Stadium&oldid=1383816290",
+   "summary": "The National Stadium (Guójiā Tǐyùchǎng), the Bird's Nest, is a stadium at Olympic Green in Chaoyang, Beijing, China. The National Stadium, covering an area of 204,000 square meters with an 80,000 person capacity (91,000 with temporary seating), broke ground in December 2003, officially started construction in March 2004, and was completed in June 2008. The National Stadium is owned and operated by a partnership company between Beijing Municipal State-owned Assets Management Co Ltd (58%) and CITIC Group (42%)."
+  },
+  "Belgrade": {
+   "title": "Belgrade",
+   "url": "https://en.wikipedia.org/wiki/Belgrade",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Belgrade&oldid=1386227556",
+   "summary": "Belgrade ( or;, ) is the capital and largest city of Serbia. It is located at the confluence of the Sava and Danube rivers and at the crossroads of the Pannonian Plain and the Balkan Peninsula., the population of Belgrade city proper stands at 1,197,114, its contiguous urban area has 1,298,661 inhabitants, while the population of the city's administrative area (which roughly corresponds to its metro area) totals 1,682,720 people. It is one of the major cities of Southeast Europe and the third-most populous city on the river Danube."
+  },
+  "Beşiktaş Stadium": {
+   "title": "Beşiktaş Stadium",
+   "url": "https://en.wikipedia.org/wiki/Be%C5%9Fikta%C5%9F_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Be%C5%9Fikta%C5%9F_Stadium&oldid=1372219790",
+   "summary": "Beşiktaş Stadyumu (currently known as the Tüpraş Stadyumu for sponsorship reasons) or Beşiktaş Park (during UEFA events) is an all-seater, multi-purpose stadium in the Beşiktaş district of Istanbul, Turkey. It is the home ground of Beşiktaş. The stadium was built on the site of Beşiktaş's former home, BJK İnönü Stadium."
+  },
+  "Brisbane Stadium": {
+   "title": "Brisbane Stadium",
+   "url": "https://en.wikipedia.org/wiki/Brisbane_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Brisbane_Stadium&oldid=1385990876",
+   "summary": "Brisbane Stadium is a planned multi-purpose stadium to be built in Victoria Park, in the Brisbane suburb of Herston. It will serve as the main stadium for the 2032 Summer Olympic and Paralympic Games. The 63,000-seat stadium is expected to host the opening and closing ceremonies, as well as the athletics events during the games."
+  },
+  "Caesars Superdome": {
+   "title": "Caesars Superdome",
+   "url": "https://en.wikipedia.org/wiki/Caesars_Superdome",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Caesars_Superdome&oldid=1386069144",
+   "summary": "Caesars Superdome commonly known as the Superdome, is an indoor stadium in New Orleans, Louisiana, U.S. It has served as the home venue of the New Orleans Saints of the National Football League (NFL) since its opening in 1975. Plans to build the Superdome were drawn up in 1967 by the New Orleans modernist architectural firm of Curtis and Davis and the building opened as the Louisiana Superdome in 1975."
+  },
+  "Camp Nou": {
+   "title": "Camp Nou",
+   "url": "https://en.wikipedia.org/wiki/Camp_Nou",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Camp_Nou&oldid=1381738003",
+   "summary": "Camp Nou ('New Field'), officially Spotify Camp Nou for sponsorship reasons, and often referred to in English as the Nou Camp, is a stadium in Barcelona and the home of La Liga club FC Barcelona since its opening in 1957. It is currently undergoing renovation, and with a planned increased seating capacity of 105,000 it will retain its position as the largest stadium in terms of seating capacity in Spain and Europe, as well as the second largest association football stadium, while becoming the fifth-largest overall stadium in the world."
+  },
+  "Cardiff City Stadium": {
+   "title": "Cardiff City Stadium",
+   "url": "https://en.wikipedia.org/wiki/Cardiff_City_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Cardiff_City_Stadium&oldid=1381740089",
+   "summary": "Cardiff City Stadium is a stadium in the Leckwith area of Cardiff, Wales. It is the home of Cardiff City and the Wales national team. Following expansion of the Ninian Stand in July 2014, the stadium officially holds 33,280 supporters."
+  },
+  "Carrara Stadium": {
+   "title": "Carrara Stadium",
+   "url": "https://en.wikipedia.org/wiki/Carrara_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Carrara_Stadium&oldid=1385969335",
+   "summary": "Carrara Stadium (known under naming rights as People First Stadium) is a stadium located in the Gold Coast suburb of Carrara. It is primarily used for Australian rules football as the home ground of the Gold Coast Suns, in the Australian Football League (AFL) and AFL Women's (AFLW). The stadium's origins lie in the entry of the Brisbane Bears to the VFL/AFL in 1987, but following the Bears' relocation to the Gabba in 1993, it was used for other sports including rugby league, rugby union and baseball."
+  },
+  "Celtic Park": {
+   "title": "Celtic Park",
+   "url": "https://en.wikipedia.org/wiki/Celtic_Park",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Celtic_Park&oldid=1385795820",
+   "summary": "Celtic Park is a football stadium and the home of Scottish Premiership team Celtic, in the Parkhead area of Glasgow, Scotland. With a capacity of 60,411, it is the largest football stadium in Scotland, and the eighth-largest football stadium in the United Kingdom. It is often known as Parkhead, and nicknamed Paradise."
+  },
+  "Julio Martínez Prádanos National Stadium": {
+   "title": "Julio Martínez Prádanos National Stadium",
+   "url": "https://en.wikipedia.org/wiki/Julio_Mart%C3%ADnez_Pr%C3%A1danos_National_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Julio_Mart%C3%ADnez_Pr%C3%A1danos_National_Stadium&oldid=1383906115",
+   "summary": "The Julio Martínez Prádanos National Stadium is an association football stadium in Santiago, Chile. Located in the Ñuñoa commune, it is part of the National Stadium Sports Park, a 62 hectare sporting complex which also features tennis courts, an aquatics center, a modern gymnasium, a velodrome, a BMX circuit, and an assistant ground/warmup athletics track. Construction began in February 1937 and the stadium was inaugurated on 3 December 1938."
+  },
+  "Estádio José Alvalade": {
+   "title": "Estádio José Alvalade",
+   "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Jos%C3%A9_Alvalade",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Est%C3%A1dio_Jos%C3%A9_Alvalade&oldid=1385859221",
+   "summary": "The Estádio José Alvalade is a football stadium in Lisbon, Portugal, and is the home of Sporting CP. It was built adjacent to the site of the older stadium. The stadium is named after José Alvalade (1885–1918), the founder and first club member of Sporting CP in the early 20th century."
+  },
+  "Estádio da Luz": {
+   "title": "Estádio da Luz",
+   "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_da_Luz",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Est%C3%A1dio_da_Luz&oldid=1385859337",
+   "summary": "The Estádio da Luz, officially named Estádio do Sport Lisboa e Benfica, is a multi-purpose stadium located in Lisbon, Portugal. It is owned by association football club Sport Lisboa e Benfica, and hosts the club's home matches. Opened on 25 October 2003 with an exhibition match between Benfica and Uruguayan club Nacional, it replaced the original Estádio da Luz, which between 1985 and 1994 had a capacity of 120,000 seats."
+  },
+  "Estádio do Dragão": {
+   "title": "Estádio do Dragão",
+   "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_do_Drag%C3%A3o",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Est%C3%A1dio_do_Drag%C3%A3o&oldid=1385729563",
+   "summary": "The Estádio do Dragão is an all-seater football stadium in Porto, Portugal, and the home ground of FC Porto since 2003. It has a seating capacity of 50,033, making it the third-largest football stadium in Portugal. Designed by Portuguese architect Manuel Salgado, the stadium was constructed to replace Porto's former ground, the Estádio das Antas, along with becoming one of the host venues for the UEFA Euro 2004 final tournament."
+  },
+  "Maracanã Stadium": {
+   "title": "Maracanã Stadium",
+   "url": "https://en.wikipedia.org/wiki/Maracan%C3%A3_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Maracan%C3%A3_Stadium&oldid=1385584231",
+   "summary": "Estádio do Maracanã, officially known as Estádio Jornalista Mário Filho, is an association football stadium in Rio de Janeiro, Brazil. Located in the Maracanã neighborhood, it is owned by the Rio de Janeiro state government and managed by the clubs Flamengo and Fluminense. It is part of a complex that includes an arena known by the name of Maracanãzinho, which is mostly used for volleyball events."
+  },
+  "Expo Tel Aviv": {
+   "title": "Expo Tel Aviv",
+   "url": "https://en.wikipedia.org/wiki/Expo_Tel_Aviv",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Expo_Tel_Aviv&oldid=1368569718",
+   "summary": "Expo Tel Aviv (formerly the Israel Trade Fairs and Convention Center and later the Tel Aviv Convention Center, commonly referred to as Ganei HaTaarucha (lit. \"Exhibition Gardens\") or the Tel Aviv Fairgrounds, is a fairground complex on Rokach Boulevard in northern Tel Aviv, Israel, used as a venue for concerts, exhibitions, trade fairs, and conferences. Established in 1932 as Yerid HaMizrach at the site of the Levant Fair, near the Tel Aviv Port, the fairgrounds moved to their present location at 101 Rokach Boulevard (near the Yarkon Park and Tel Aviv University) in 1959."
+  },
+  "Fisht Olympic Stadium": {
+   "title": "Fisht Olympic Stadium",
+   "url": "https://en.wikipedia.org/wiki/Fisht_Olympic_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Fisht_Olympic_Stadium&oldid=1381756906",
+   "summary": "Fisht Olympic Stadium is an outdoor stadium in Sochi, Russia. Located in Sochi Olympic Park and named after Mount Fisht, the 45,994-capacity stadium was constructed for the 2014 Winter Olympics and Paralympics, where it served as the venue for their opening and closing ceremonies. The stadium was originally built as an enclosed facility; it was re-opened in 2016 as an open-air football stadium, initially hosting matches during the 2017 FIFA Confederations Cup and 2018 FIFA World Cup, and currently serving as the home pitch for PFC Sochi of the Russian Premier League."
+  },
+  "Fortuna Arena": {
+   "title": "Fortuna Arena",
+   "url": "https://en.wikipedia.org/wiki/Fortuna_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Fortuna_Arena&oldid=1385206399",
+   "summary": "Fortuna Arena is a football stadium, in Prague-Vršovice, Czech Republic. The stadium has a capacity of 19,370 people and it is the biggest and the most modern football stadium in the Czech Republic. It is the home venue of Slavia Prague and occasionally the Czech Republic national football team."
+  },
+  "Friedrich-Ludwig-Jahn-Sportpark": {
+   "title": "Friedrich-Ludwig-Jahn-Sportpark",
+   "url": "https://en.wikipedia.org/wiki/Friedrich-Ludwig-Jahn-Sportpark",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Friedrich-Ludwig-Jahn-Sportpark&oldid=1382887812",
+   "summary": "The Friedrich-Ludwig-Jahn-Sportpark is a multi-purpose sports complex in Berlin, Germany. It is located in the western part of the locality of Prenzlauer Berg in the borough of Pankow. Opened in 1952, the sports complex covers an area of approximately 22 hectares and comprises several facilities."
+  },
+  "Gamla Ullevi": {
+   "title": "Gamla Ullevi",
+   "url": "https://en.wikipedia.org/wiki/Gamla_Ullevi",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gamla_Ullevi&oldid=1372181574",
+   "summary": "Gamla Ullevi is a football stadium in Gothenburg, Sweden, that opened on 5 April 2009. The stadium replaced the city's previous main football stadium, also called Gamla Ullevi, and is the home ground of GAIS, IFK Göteborg and Örgryte IS. It is also the national stadium for the Sweden women's national football team."
+  },
+  "Gdańsk Stadium": {
+   "title": "Gdańsk Stadium",
+   "url": "https://en.wikipedia.org/wiki/Gda%C5%84sk_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gda%C5%84sk_Stadium&oldid=1381744490",
+   "summary": "The Gdańsk Stadium, known for sponsorship reasons as the Polsat Plus Arena Gdańsk since May 2021, is a football stadium in Gdańsk, Pomeranian Voivodeship, Poland. It is used mostly for football matches and is the home stadium of Lechia Gdańsk, which competes in the I liga, and the Poland women's national football team. The stadium is located at the 1 Pokoleń Lechii Gdańsk Street in the northern part of the city (Letnica district)."
+  },
+  "Gelora Bung Karno Stadium": {
+   "title": "Gelora Bung Karno Stadium",
+   "url": "https://en.wikipedia.org/wiki/Gelora_Bung_Karno_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Gelora_Bung_Karno_Stadium&oldid=1385335160",
+   "summary": "Gelora Bung Karno Main Stadium (abbreviated as SUGBK or GBK), formerly Senayan Main Stadium and Gelora Senayan Main Stadium, is a multi-purpose stadium located at the center of the Gelora Bung Karno Sports Complex in Central Jakarta, Indonesia. It is mostly used for football matches, and usually used by the Indonesia national football team and Super League club Persija Jakarta. The stadium is named after Sukarno, the first president of Indonesia, who sparked the idea of building the sports complex."
+  },
+  "Ferencváros Stadion": {
+   "title": "Ferencváros Stadion",
+   "url": "https://en.wikipedia.org/wiki/Ferencv%C3%A1ros_Stadion",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Ferencv%C3%A1ros_Stadion&oldid=1385395210",
+   "summary": "The Ferencváros Stadion, also known as the Groupama Aréna for sponsorship purposes, is a multi-purpose stadium in Ferencváros, Budapest, Hungary and the home of Ferencvárosi TC. With a capacity of 22,000, it was for a time the largest stadium in Hungary (between the demolition of the larger Ferenc Puskás Stadium in 2017 and the opening of the Puskás Aréna in November 2019). It was built on the site of the former Flórián Albert Stadium, the club's previous home, which was demolished in 2013."
+  },
+  "Hangzhou Olympic Expo Center": {
+   "title": "Hangzhou Olympic Expo Center",
+   "url": "https://en.wikipedia.org/wiki/Hangzhou_Olympic_Expo_Center",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Hangzhou_Olympic_Expo_Center&oldid=1377787678",
+   "summary": "The Hangzhou Olympic Expo Center or Hangzhou Olympic Sports Center is a multi-purpose sports complex in Hangzhou, Zhejiang Province, China. It was completed in 2018, and it is used mostly for football matches. The main stadium was designed with a capacity of 80,000 spectators."
+  },
+  "Hard Rock Stadium": {
+   "title": "Hard Rock Stadium",
+   "url": "https://en.wikipedia.org/wiki/Hard_Rock_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Hard_Rock_Stadium&oldid=1385366599",
+   "summary": "Hard Rock Stadium is a multi-purpose stadium in Miami Gardens, Florida, United States. The stadium is the home field for the Miami Dolphins of the National Football League (NFL) and the Miami Hurricanes, the University of Miami's NCAA Division I college football team. The stadium has hosted six Super Bowls (XXIII, XXIX, XXXIII, XLI, XLIV, LIV), the 2010 Pro Bowl, two World Series, four BCS National Championship Games (2001, 2005, 2009, 2013), two CFP National Championships (2021, 2026), one Copa América final (2024), the second round of the 2009 World Baseball Classic, and WrestleMania XXVIII."
+  },
+  "Inalpi Arena": {
+   "title": "Inalpi Arena",
+   "url": "https://en.wikipedia.org/wiki/Inalpi_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Inalpi_Arena&oldid=1381709270",
+   "summary": "Palasport Olimpico, officially operating with the sponsored name Inalpi Arena except during events prohibiting sponsorship names when it is usually known as simply PalaOlimpico, or occasionally PalaIsozaki after its architect, is a multi-purpose indoor arena located within Torino Olympic Park in the Santa Rita district of Turin, Italy. Opened in December 2005, the arena has a seating capacity of 16,600 when it is configured for basketball, and it is the largest indoor sporting arena in Italy."
+  },
+  "Incheon Asiad Main Stadium": {
+   "title": "Incheon Asiad Main Stadium",
+   "url": "https://en.wikipedia.org/wiki/Incheon_Asiad_Main_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Incheon_Asiad_Main_Stadium&oldid=1381783359",
+   "summary": "The Incheon Stadium, commonly known as the Incheon Asiad Main Stadium, is a stadium located in Incheon, South Korea. Completed in July 2014, it is used mostly for athletics and was the main venue of the 2014 Asian Games. The stadium has been designed with an initial capacity of roughly 60,000 spectators."
+  },
+  "International Exhibition Centre": {
+   "title": "International Exhibition Centre",
+   "url": "https://en.wikipedia.org/wiki/International_Exhibition_Centre",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=International_Exhibition_Centre&oldid=1376380267",
+   "summary": "The International Exhibition Centre in Kyiv is the largest exhibition centre in Ukraine. Located in the western portion of Livoberezhnyi microdistrict, the center was opened in October 2002, and the head of the center since its construction was Anatoliy Tkachenko. In May 2017 IEC was the host venue of the Eurovision Song Contest 2017."
+  },
+  "Japan National Stadium": {
+   "title": "Japan National Stadium",
+   "url": "https://en.wikipedia.org/wiki/Japan_National_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Japan_National_Stadium&oldid=1378899630",
+   "summary": "The, alternatively, currently known as for sponsorship reasons, and formerly known as, is a multipurpose stadium in Tokyo, Japan. Opened in 2019 and originally constructed for the 2020 Summer Olympics and Paralympics, it hosted the ceremonies and track and field events. Since the Games, the stadium has primarily been used for association football and rugby union events."
+  },
+  "Jardins du Trocadéro": {
+   "title": "Jardins du Trocadéro",
+   "url": "https://en.wikipedia.org/wiki/Jardins_du_Trocad%C3%A9ro",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Jardins_du_Trocad%C3%A9ro&oldid=1373728880",
+   "summary": "The Jardins du Trocadéro is a public space in the 16th arrondissement of Paris, France. It is bounded to the northwest by the wings of the Palais de Chaillot and to the southeast by the Seine and the Pont d'Iéna at the Place de Varsovie, with the Eiffel Tower on the opposite bank of the Seine."
+  },
+  "Juventus Stadium": {
+   "title": "Juventus Stadium",
+   "url": "https://en.wikipedia.org/wiki/Juventus_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Juventus_Stadium&oldid=1386097269",
+   "summary": "Juventus Stadium, known for sponsorship reasons as the Allianz Stadium since July 2017, sometimes simply known in Italy as the Stadium, is an all-seater football stadium in the Vallette borough of Turin, Italy, and the home of Juventus. The stadium was built on the site of its former ground, the Stadio delle Alpi in the latter 2000s, and is the first club-owned football modern venue in the country."
+  },
+  "Khalifa International Stadium": {
+   "title": "Khalifa International Stadium",
+   "url": "https://en.wikipedia.org/wiki/Khalifa_International_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Khalifa_International_Stadium&oldid=1372210129",
+   "summary": "Khalifa International Stadium is a multi-purpose stadium located in Al Rayyan, Qatar, around 9 km west from the centre of Doha. Its ground comprises a running track and a grass pitch. Opened in 1976, the stadium was named after then Emir of Qatar Khalifa bin Hamad Al Thani."
+  },
+  "Levi's Stadium": {
+   "title": "Levi's Stadium",
+   "url": "https://en.wikipedia.org/wiki/Levi%27s_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Levi%27s_Stadium&oldid=1385932644",
+   "summary": "Levi's Stadium is an outdoor stadium near the West Coast of the United States, located in Santa Clara, California, just west of San Jose in the San Francisco Bay Area. It has served as the home venue for the San Francisco 49ers of the National Football League (NFL) since 2014. Located approximately 40 mi south of San Francisco, it is named after Levi Strauss & Co., which purchased naming rights in 2013."
+  },
+  "Liverpool Arena": {
+   "title": "Liverpool Arena",
+   "url": "https://en.wikipedia.org/wiki/Liverpool_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Liverpool_Arena&oldid=1383188974",
+   "summary": "Liverpool Arena (currently known for sponsorship reasons as the M&S Bank Arena and previously the Echo Arena) is a multi-purpose indoor arena in the city centre of Liverpool, England. The venue hosts live music, comedy performances and sporting events, and forms part of Liverpool event campus ACC Liverpool – an interconnected arena, exhibition and convention centre. The venue serves a regional population of 2.5 million people and over 6.6 million across England's North West."
+  },
+  "London Stadium": {
+   "title": "London Stadium",
+   "url": "https://en.wikipedia.org/wiki/London_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=London_Stadium&oldid=1385930381",
+   "summary": "London Stadium (formerly and also known as the Olympic Stadium and the Stadium at Queen Elizabeth Olympic Park) is a multi-purpose outdoor stadium at Queen Elizabeth Olympic Park in the Stratford district of London. It is located in the Lower Lea Valley, 6 mi east of central London. The stadium was originally constructed for the 2012 Summer Olympics and 2012 Summer Paralympics, serving as the athletics venue and as the site of their opening and closing ceremonies."
+  },
+  "Los Angeles Memorial Coliseum": {
+   "title": "Los Angeles Memorial Coliseum",
+   "url": "https://en.wikipedia.org/wiki/Los_Angeles_Memorial_Coliseum",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Los_Angeles_Memorial_Coliseum&oldid=1386294329",
+   "summary": "The Los Angeles Memorial Coliseum (also known as the Los Angeles Coliseum or L.A. Coliseum) is a multi-purpose stadium in the Exposition Park neighborhood of Los Angeles, California, United States. The Coliseum was commissioned in 1921 and completed in 1923 as a memorial to Los Angeles veterans of World War I."
+  },
+  "MEO Arena": {
+   "title": "MEO Arena",
+   "url": "https://en.wikipedia.org/wiki/MEO_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=MEO_Arena&oldid=1381783875",
+   "summary": "MEO Arena (formerly Altice Arena; also referred to by its former name, Pavilhão Atlântico) is a multi-purpose indoor arena in Lisbon, Portugal. The arena is among the largest indoor arenas in Europe and the largest in Portugal with a capacity of 20,000 people and was built in 1998 for Expo '98."
+  },
+  "Malmö Arena": {
+   "title": "Malmö Arena",
+   "url": "https://en.wikipedia.org/wiki/Malm%C3%B6_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Malm%C3%B6_Arena&oldid=1372083586",
+   "summary": "Malmö Arena is a multi-purpose indoor arena in Malmö, Sweden, and the venue for home games of the Swedish Hockey League team Malmö Redhawks. It is the largest arena in the SHL, and the second-largest indoor arena in Sweden. Apart from hosting Redhawks hockey matches, the arena is a significant venue for team handball, floorball, concerts, and other events."
+  },
+  "Mapei Stadium – Città del Tricolore": {
+   "title": "Mapei Stadium – Città del Tricolore",
+   "url": "https://en.wikipedia.org/wiki/Mapei_Stadium_%E2%80%93_Citt%C3%A0_del_Tricolore",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Mapei_Stadium_%E2%80%93_Citt%C3%A0_del_Tricolore&oldid=1377074329",
+   "summary": "Mapei Stadium – Città del Tricolore (with the first half officially written in all caps) is a multi-purpose stadium in Reggio Emilia, Italy. It is the home ground of US Sassuolo and AC Reggiana, the former playing in Serie A, the latter in Serie C. The stadium holds 21,525 and was built in 1995, replacing the Stadio Mirabello."
+  },
+  "Mercedes-Benz Stadium": {
+   "title": "Mercedes-Benz Stadium",
+   "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Mercedes-Benz_Stadium&oldid=1385306999",
+   "summary": "Mercedes-Benz Stadium is a retractable roof stadium in Atlanta, Georgia, United States. Opened in 2017 as a replacement for the Georgia Dome, it is the home to the Atlanta Falcons of the National Football League (NFL), Atlanta United FC of Major League Soccer (MLS), and Atlanta City FC of the National Women's Soccer League (NWSL) in 2028. The stadium is owned by the state of Georgia through the Georgia World Congress Center Authority, and operated by AMB Group, the parent organization of the Falcons and Atlanta United FC."
+  },
+  "Metropolitano Stadium": {
+   "title": "Metropolitano Stadium",
+   "url": "https://en.wikipedia.org/wiki/Metropolitano_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Metropolitano_Stadium&oldid=1385994982",
+   "summary": "The Metropolitano Stadium, officially referred to as Riyadh Air Metropolitano Stadium due to sponsorship, is a football stadium in Madrid, located in the Rosas neighbourhood in the San Blas-Canillejas district. It has been the home stadium of Atlético Madrid since 2017. The original stadium was built as part of Madrid's unsuccessful bid to host the 1997 World Athletics Championships, and was opened on 6 September 1994 by the Community of Madrid."
+  },
+  "Millennium Stadium": {
+   "title": "Millennium Stadium",
+   "url": "https://en.wikipedia.org/wiki/Millennium_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Millennium_Stadium&oldid=1382713366",
+   "summary": "The Millennium Stadium, known since 2016 as the Principality Stadium for sponsorship reasons, is the national stadium of Wales in Cardiff. It has a retractable roof and a usual capacity of 73,931. It is the home of the Wales national rugby union team."
+  },
+  "Reliant Stadium": {
+   "title": "Reliant Stadium",
+   "url": "https://en.wikipedia.org/wiki/Reliant_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Reliant_Stadium&oldid=1383923742",
+   "summary": "Reliant Stadium, previously known as NRG Stadium, is a retractable roof stadium in Houston, Texas, U.S. It opened in 2002 at a cost of $352 million and has a seating capacity of 72,220. It was the first NFL facility to have a retractable roof."
+  },
+  "Narendra Modi Stadium": {
+   "title": "Narendra Modi Stadium",
+   "url": "https://en.wikipedia.org/wiki/Narendra_Modi_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Narendra_Modi_Stadium&oldid=1381737562",
+   "summary": "Narendra Modi Stadium is an international cricket stadium in Motera, Ahmedabad, Gujarat, India. With a total capacity of 132,000, it is the world's largest cricket stadium and the largest overall stadium in the world by capacity. It is owned by the Gujarat Cricket Association, and hosts both domestic and international cricket matches."
+  },
+  "National Stadium of Peru": {
+   "title": "National Stadium of Peru",
+   "url": "https://en.wikipedia.org/wiki/National_Stadium_of_Peru",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=National_Stadium_of_Peru&oldid=1384432290",
+   "summary": "The National Stadium of Peru is a multi-purpose stadium in Lima, Peru. Its current capacity is 40,272 seats as stated by the Peruvian Football Federation and Instituto Peruano del Deporte. An additional 3,509 spectators can be seated in the box suites that stand above the four main stands."
+  },
+  "Stadion Narodowy": {
+   "title": "Stadion Narodowy",
+   "url": "https://en.wikipedia.org/wiki/Stadion_Narodowy",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Stadion_Narodowy&oldid=1381750791",
+   "summary": "The Stadion Narodowy, known for sponsorship reasons as the PGE Narodowy since 2015 (with patron Kazimierz Górski being added in 2021), is a retractable roof football stadium located in Warsaw, Poland. It is used mostly for concerts and football matches and is the home stadium of the Poland national team. With a seating capacity of 58,580, the stadium is the largest association football arena in Poland."
+  },
+  "Nissan Stadium (2027)": {
+   "title": "Nissan Stadium (2027)",
+   "url": "https://en.wikipedia.org/wiki/Nissan_Stadium_%282027%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Nissan_Stadium_%282027%29&oldid=1384037091",
+   "summary": "Nissan Stadium is an indoor stadium in Nashville, Tennessee, U.S., scheduled to open in 2027. It will replace the existing Nissan Stadium as the home venue for the Tennessee Titans of the National Football League (NFL). The 60,000-seat stadium is projected to cost $2.1 billion, including $1.26 billion of public money—the largest stadium subsidy in U.S. history."
+  },
+  "OVO Hydro": {
+   "title": "OVO Hydro",
+   "url": "https://en.wikipedia.org/wiki/OVO_Hydro",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=OVO_Hydro&oldid=1382925450",
+   "summary": "The OVO Hydro is a multi-purpose indoor arena located within the Scottish Event Campus (SEC) in Glasgow, Scotland. Designed by the architectural practice Foster + Partners, the arena opened on 30 September 2013 and hosts concerts, sporting competitions, comedy performances, award ceremonies and other large-scale entertainment events. With a maximum capacity of approximately 14,700, the arena forms part of a wider events complex alongside the SEC Centre and the SEC Armadillo."
+  },
+  "Olympic Stadium (Kyiv)": {
+   "title": "Olympic Stadium (Kyiv)",
+   "url": "https://en.wikipedia.org/wiki/Olympic_Stadium_%28Kyiv%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Olympic_Stadium_%28Kyiv%29&oldid=1372222762",
+   "summary": "The Olympic Stadium (also known as Olimpiyskiy National Sports Complex;, ) is a multi-use sports and recreation facility in Kyiv, Ukraine, located on the slopes of the city's central Cherepanova Hora (Cherepanov Hill), Pecherskyi District. The Olympic National Sports Complex Stadium is the premier sports venue in Ukraine and the sixteenth largest venue of this type in Europe. Although it is often used by FC Dynamo Kyiv for football matches, it is technically not the football club's home stadium."
+  },
+  "Olympiastadion (Berlin)": {
+   "title": "Olympiastadion (Berlin)",
+   "url": "https://en.wikipedia.org/wiki/Olympiastadion_%28Berlin%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Olympiastadion_%28Berlin%29&oldid=1386081636",
+   "summary": "Olympiastadion, also known in English as the Berlin Olympic Stadium or simply the Olympic Stadium, is a sports stadium at Olympiapark Berlin in Berlin, Germany. It was originally designed by Werner March for the 1936 Summer Olympics. During the Olympics, the record attendance was thought to be over 100,000."
+  },
+  "Paloma Mizuho Stadium (2026)": {
+   "title": "Paloma Mizuho Stadium (2026)",
+   "url": "https://en.wikipedia.org/wiki/Paloma_Mizuho_Stadium_%282026%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Paloma_Mizuho_Stadium_%282026%29&oldid=1381810415",
+   "summary": "The is a multi-purpose stadium in Nagoya, Aichi, Japan. The stadium replaced the former stadium in the same ground, and was used for athletics and ceremonies for the 2026 Asian Games and 2026 Asian Para Games."
+  },
+  "Parc Olympique Lyonnais": {
+   "title": "Parc Olympique Lyonnais",
+   "url": "https://en.wikipedia.org/wiki/Parc_Olympique_Lyonnais",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Parc_Olympique_Lyonnais&oldid=1374907290",
+   "summary": "Parc Olympique Lyonnais, known for sponsorship reasons as Groupama Stadium, is a 59,186-seater stadium in Décines-Charpieu, a commune situated in the Metropolis of Lyon. It is the third largest stadium in France, behind Stade de France in Saint-Denis (Paris) and Orange Velodrome in Marseille. The home of French football club Olympique Lyonnais, it replaced their previous stadium, the Stade de Gerland, in January 2016."
+  },
+  "Philips Stadion": {
+   "title": "Philips Stadion",
+   "url": "https://en.wikipedia.org/wiki/Philips_Stadion",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Philips_Stadion&oldid=1372214207",
+   "summary": "The Philips Stadion is a football stadium in Eindhoven, Netherlands. As the home of PSV Eindhoven (Philips Sport Vereniging), it is also known as PSV Stadion. With a capacity of 35,119, it is the third-largest football stadium in the country."
+  },
+  "Place de la Concorde": {
+   "title": "Place de la Concorde",
+   "url": "https://en.wikipedia.org/wiki/Place_de_la_Concorde",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Place_de_la_Concorde&oldid=1368423900",
+   "summary": "The Place de la Concorde (\"Harmony Square\"), originally the Place Louis XV (Louis XV Square), and later the Place Louis XVI (Louis XVI Square), is a public square in Paris. Measuring 7.6 ha in area, it is the largest square in the city. It is located in the 8th arrondissement, at the eastern end of the Champs-Élysées."
+  },
+  "Puskás Aréna": {
+   "title": "Puskás Aréna",
+   "url": "https://en.wikipedia.org/wiki/Pusk%C3%A1s_Ar%C3%A9na",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Pusk%C3%A1s_Ar%C3%A9na&oldid=1381786180",
+   "summary": "Puskás Aréna is a football stadium in the 14th district (Zugló) of Budapest, Hungary, which primarily serves as the home stadium of the Hungary national football team. The stadium's construction started in 2017 and was finished before the end of 2019. It is an all-seater stadium with a capacity of 67,215."
+  },
+  "Pyeongchang Olympic Stadium": {
+   "title": "Pyeongchang Olympic Stadium",
+   "url": "https://en.wikipedia.org/wiki/Pyeongchang_Olympic_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Pyeongchang_Olympic_Stadium&oldid=1372222379",
+   "summary": "The Pyeongchang Olympic Stadium was a temporary venue for the opening and closing ceremonies of the 2018 Winter Olympics and Paralympics in Pyeongchang County, Gangwon Province, South Korea. The stadium was demolished after the Games."
+  },
+  "Ramón Sánchez-Pizjuán Stadium": {
+   "title": "Ramón Sánchez-Pizjuán Stadium",
+   "url": "https://en.wikipedia.org/wiki/Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Ram%C3%B3n_S%C3%A1nchez-Pizju%C3%A1n_Stadium&oldid=1374243072",
+   "summary": "The Ramón Sánchez-Pizjuán Stadium is a football stadium in Seville, Spain. It is the home stadium of Sevilla, and is named after the club's former president, Ramón Sánchez-Pizjuán (1900–1956). It was the venue for the 1986 European Cup Final between Steaua București and Barcelona and the 1982 World Cup semi-final game between West Germany and France."
+  },
+  "Raymond James Stadium": {
+   "title": "Raymond James Stadium",
+   "url": "https://en.wikipedia.org/wiki/Raymond_James_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Raymond_James_Stadium&oldid=1383818412",
+   "summary": "Raymond James Stadium is a multi-purpose stadium in Tampa, Florida, United States. It opened in 1998 and is home to the Tampa Bay Buccaneers of the National Football League (NFL) and the University of South Florida (USF) Bulls college football program. The seating capacity for most sporting events is 69,218, though it can be expanded to about 75,000 for special events with the addition of temporary seating."
+  },
+  "Red Bull Arena (Leipzig)": {
+   "title": "Red Bull Arena (Leipzig)",
+   "url": "https://en.wikipedia.org/wiki/Red_Bull_Arena_%28Leipzig%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Red_Bull_Arena_%28Leipzig%29&oldid=1386009742",
+   "summary": "Red Bull Arena (formerly Zentralstadion ) is a football stadium located in Leipzig, Saxony, Germany, in the Zentrum-Nordwest locality. It is the largest football stadium in Eastern Germany, and has also hosted music concerts as well as football. Opened in 2004, it is currently the home stadium for Bundesliga club RB Leipzig, with FC Sachsen Leipzig having previously used the stadium from its opening until 2009."
+  },
+  "RheinEnergieStadion": {
+   "title": "RheinEnergieStadion",
+   "url": "https://en.wikipedia.org/wiki/RheinEnergieStadion",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=RheinEnergieStadion&oldid=1375754601",
+   "summary": "RheinEnergieStadion, formerly Müngersdorfer Stadion or Müngersdorfer Stadium, is a German football stadium in Cologne. It was built on the site of the two previous Müngersdorfer stadiums. It is the home of the local 1."
+  },
+  "Rice–Eccles Stadium": {
+   "title": "Rice–Eccles Stadium",
+   "url": "https://en.wikipedia.org/wiki/Rice%E2%80%93Eccles_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Rice%E2%80%93Eccles_Stadium&oldid=1385311114",
+   "summary": "Rice–Eccles Stadium is an outdoor college football stadium located on the campus of the University of Utah in Salt Lake City, Utah. It is the home field of the Utah Utes of the Big 12 Conference. It was built to serve as the stadium for the opening and closing ceremonies of 2002 Winter Olympics, a role it is expected to reprise for the 2034 Winter Olympics."
+  },
+  "Rogers Centre": {
+   "title": "Rogers Centre",
+   "url": "https://en.wikipedia.org/wiki/Rogers_Centre",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Rogers_Centre&oldid=1385928528",
+   "summary": "Rogers Centre (originally SkyDome) is a retractable roof stadium in downtown Toronto, Ontario, Canada, situated at the base of the CN Tower near the northern shore of Lake Ontario. Opened in 1989 on the former Railway Lands, it is home to the Toronto Blue Jays of Major League Baseball (MLB). As well as being improved over the decades, during the MLB offseasons of 2022–24, the stadium was renovated by upgrading the sports facilities and hospitality whilst reducing the capacity for baseball games."
+  },
+  "Rotterdam Ahoy": {
+   "title": "Rotterdam Ahoy",
+   "url": "https://en.wikipedia.org/wiki/Rotterdam_Ahoy",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Rotterdam_Ahoy&oldid=1381499488",
+   "summary": "Rotterdam Ahoy (formerly known as Ahoy Rotterdam or simply as Ahoy) is a multi-purpose complex with a convention centre and an indoor arena located in Rotterdam, Netherlands. Opened originally in 1950, the current complex consists of three main venues: a fairs and events hall, a congress and conference centre, and the main venue the Ahoy Arena. The latter (informally known as the, ) opened on 15 January 1971 and is the largest multi-purpose venue in the Netherlands, with a capacity of 16,426 as of May 2019."
+  },
+  "San Mamés Stadium (2013)": {
+   "title": "San Mamés Stadium (2013)",
+   "url": "https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium_%282013%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=San_Mam%C3%A9s_Stadium_%282013%29&oldid=1381759671",
+   "summary": "The San Mamés Stadium (also known as Nuevo San Mamés or San Mames Barria) is an all-seater football stadium in Rafael Moreno Pitxitxi Kalea, Bilbao, Basque Country, Spain. Inaugurated on 16 September 2013, the stadium replaced the \"old\" San Mamés as the home of Athletic Bilbao. With a capacity of 53,331 seats, San Mamés is the seventh-largest stadium in Spain and the largest in the Basque Country."
+  },
+  "San Siro": {
+   "title": "San Siro",
+   "url": "https://en.wikipedia.org/wiki/San_Siro",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=San_Siro&oldid=1384793549",
+   "summary": "The Stadio Giuseppe Meazza, commonly known as the San Siro, is a football stadium in the San Siro district of Milan, Italy. Nicknamed, it has a seating capacity of 75,817, making it the largest stadium in Italy and one of the largest stadiums in Europe. It is the home stadium of the city's principal professional football clubs, AC Milan and Inter Milan, who contest the Derby della Madonnina."
+  },
+  "SoFi Stadium": {
+   "title": "SoFi Stadium",
+   "url": "https://en.wikipedia.org/wiki/SoFi_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=SoFi_Stadium&oldid=1385953459",
+   "summary": "SoFi Stadium is a multi-purpose indoor stadium in Inglewood, California, United States, a suburb of Los Angeles. SoFi occupies the former site of the Hollywood Park Racetrack and neighbors the Kia Forum and Intuit Dome. Opened in September 2020, the stadium has a capacity of 70,240, expandable to over 100,000 for major events, and a translucent roof made of ETFE panels allowing for sunlight and climate control."
+  },
+  "St. Jakob-Park": {
+   "title": "St. Jakob-Park",
+   "url": "https://en.wikipedia.org/wiki/St._Jakob-Park",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=St._Jakob-Park&oldid=1382438671",
+   "summary": "St. Jakob-Park is a Swiss sports stadium in Basel. It is the largest football venue in Switzerland and home to FC Basel. \"Joggeli\", as the venue is nicknamed by the locals, was originally built with a capacity of 33,433 seats."
+  },
+  "St. Jakobshalle": {
+   "title": "St. Jakobshalle",
+   "url": "https://en.wikipedia.org/wiki/St._Jakobshalle",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=St._Jakobshalle&oldid=1372232449",
+   "summary": "St. Jakobshalle is a multi-purpose indoor arena in the municipality of Münchenstein in Basel-Landschaft, right by the border with Basel-Stadt. Officially opened in September 1976, it is primarily used for hosting indoor sports and concert events."
+  },
+  "Stade de France": {
+   "title": "Stade de France",
+   "url": "https://en.wikipedia.org/wiki/Stade_de_France",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Stade_de_France&oldid=1385619266",
+   "summary": "Stade de France is the national stadium of France, located just north of Paris in the commune of Saint-Denis. Its seating capacity of 81,338 makes it the largest stadium in France. The stadium is used by the French national football team and rugby union teams for international competitions."
+  },
+  "State Farm Stadium": {
+   "title": "State Farm Stadium",
+   "url": "https://en.wikipedia.org/wiki/State_Farm_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=State_Farm_Stadium&oldid=1385888712",
+   "summary": "State Farm Stadium is a retractable roof stadium in Glendale, Arizona, U.S., a suburb west of Phoenix. It is the home of the Arizona Cardinals of the National Football League (NFL) and the annual Fiesta Bowl. Opened in 2006, the venue replaced Sun Devil Stadium in Tempe as the home of the Cardinals, and is adjacent to Desert Diamond Arena, former home of the Arizona Coyotes of the National Hockey League."
+  },
+  "Nationalarenan": {
+   "title": "Nationalarenan",
+   "url": "https://en.wikipedia.org/wiki/Nationalarenan",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Nationalarenan&oldid=1385853057",
+   "summary": "Nationalarenan, known as Strawberry Arena since 2024 for sponsorship reasons, is a retractable roof multi-purpose stadium in Stockholm, Sweden. Located next to the lake Råstasjön in Solna, just north of the City Centre, it is the largest stadium in Scandinavia. Since its opening, the venue has served as Sweden's national stadium for men's football, hence the name Nationalarenan."
+  },
+  "U.S. Bank Stadium": {
+   "title": "U.S. Bank Stadium",
+   "url": "https://en.wikipedia.org/wiki/U.S._Bank_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=U.S._Bank_Stadium&oldid=1386292905",
+   "summary": "U.S. Bank Stadium is an indoor stadium in Minneapolis, Minnesota, U.S. Opened in 2016, the stadium was built on the former site of the Hubert H."
+  },
+  "Ullevaal Stadion": {
+   "title": "Ullevaal Stadion",
+   "url": "https://en.wikipedia.org/wiki/Ullevaal_Stadion",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Ullevaal_Stadion&oldid=1381690319",
+   "summary": "Ullevaal Stadion is an all-seater football stadium located in Oslo, Norway. It is the home ground of the Norway national football team, and the site of the Norwegian Cup Final. From its opening in 1926 to 2009 it was the home ground of FK Lyn and from 1999 to 2017 was a home ground of Vålerenga IF."
+  },
+  "Valeriy Lobanovskyi Dynamo Stadium": {
+   "title": "Valeriy Lobanovskyi Dynamo Stadium",
+   "url": "https://en.wikipedia.org/wiki/Valeriy_Lobanovskyi_Dynamo_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Valeriy_Lobanovskyi_Dynamo_Stadium&oldid=1383218201",
+   "summary": "The Valeriy Lobanovskyi Dynamo Stadium is a multi-functional stadium in Kyiv, Ukraine that is modified for football use only. It is the home stadium of Dynamo Kyiv yet not the main stadium, for which Dynamo uses the bigger NSC Olympiyskiy. The Dynamo Stadium is also a major alternative stadium for the Ukraine national football team that often plays its exhibition games."
+  },
+  "Verona Arena": {
+   "title": "Verona Arena",
+   "url": "https://en.wikipedia.org/wiki/Verona_Arena",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Verona_Arena&oldid=1382818771",
+   "summary": "The Verona Arena is a Roman amphitheatre located in the historic center of Verona, Italy. It is among the best-preserved ancient amphitheatres to have survived into the modern era. This remarkable state of preservation is largely due to systematic restoration efforts that began in the 16th century."
+  },
+  "Waldstadion (Frankfurt)": {
+   "title": "Waldstadion (Frankfurt)",
+   "url": "https://en.wikipedia.org/wiki/Waldstadion_%28Frankfurt%29",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Waldstadion_%28Frankfurt%29&oldid=1380205476",
+   "summary": "Waldstadion (Forest Stadium), currently known as Deutsche Bank Park for sponsorship purposes, is a retractable roof sports stadium in Frankfurt, Germany. The home stadium of the football club Eintracht Frankfurt, it was opened in 1925. The stadium has been upgraded several times since then; the most recent remodelling was its redevelopment as a football-only stadium in preparation for the 2005 FIFA Confederations Cup and 2006 FIFA World Cup."
+  },
+  "Wembley Stadium": {
+   "title": "Wembley Stadium",
+   "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Wembley_Stadium&oldid=1384136752",
+   "summary": "Wembley Stadium, branded as Wembley Stadium connected by EE for sponsorship reasons, is an association football stadium in Wembley, London, England. It opened in 2007 on the site of the original Wembley Stadium, which had stood from 1923 until 2000. The stadium is England's national football stadium, and thus hosts the majority of the England national team home matches and the FA Cup Final – the final of England's primary domestic club football competition."
+  },
+  "Wiener Stadthalle": {
+   "title": "Wiener Stadthalle",
+   "url": "https://en.wikipedia.org/wiki/Wiener_Stadthalle",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Wiener_Stadthalle&oldid=1375766997",
+   "summary": "Wiener Stadthalle (English: Viennese City Hall) is a multi-purpose indoor arena and convention center located in the 15th district of Vienna, Austria. The Austrian architect Roland Rainer designed the original halls, which were constructed between 1953 and 1958 and later expanded in 1974, 1994 and 2006. The main hall, a flexible multi-purpose venue, is Austria's largest indoor arena and can hold up to approximately 16,083 people."
+  },
+  "Wrocław Stadium": {
+   "title": "Wrocław Stadium",
+   "url": "https://en.wikipedia.org/wiki/Wroc%C5%82aw_Stadium",
+   "permalink": "https://en.wikipedia.org/w/index.php?title=Wroc%C5%82aw_Stadium&oldid=1385454870",
+   "summary": "The Wrocław Stadium, known for sponsorship reasons as Tarczyński Arena Wrocław since 2021, is a UEFA Category Four association football stadium built for the 2012 UEFA European Football Championship. The Stadium is located on aleja Śląska in the district of Fabryczna, Wrocław. It is the home stadium of the Śląsk Wrocław football team playing in the Polish Ekstraklasa."
+  }
+ }
+}

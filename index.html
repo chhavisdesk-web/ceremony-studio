@@ -854,16 +854,55 @@ function findPack(city, venue) {
 const LOCAL_KEYS = ['storyTitle', 'story', 'symbols', 'music', 'dance', 'places', 'community', 'sensitivities', 'artists', 'sound', 'danceShort', 'club'];
 function blankLocal() { return { source: '', sound: '', danceShort: '', club: '', storyTitle: '', story: '', symbols: '', music: '', dance: '', places: '', community: '', sensitivities: '', artists: '', colors: null, motif: 'rays', climate: null, transport: '' }; }
 function localFromPack(pk) { const sh = PACK_SHORT[pk.k] || []; return { source: pk.k, sound: sh[0] || '', danceShort: sh[1] || '', club: sh[2] || '', storyTitle: pk.storyTitle, story: pk.story, symbols: pk.symbols, music: pk.music, dance: pk.dance, places: pk.places, community: pk.community, sensitivities: pk.sensitivities, artists: pk.artists, colors: [...pk.colors], motif: pk.motif, climate: [...pk.climate], transport: pk.transport }; }
+function localFromPlace(city) {
+  const pc = placeOf(PLACES?.cities, city); if (!pc) return null;
+  const first = (pc.summary.match(/^.*?[.!?](?=\s|$)/) || [pc.summary])[0];
+  return { ...blankLocal(), source: 'wikipedia', sourceUrl: pc.permalink, storyTitle: city, story: first, music: '', dance: '', sound: '', danceShort: '', club: '' };
+}
 function localEmpty(L) { return !L || LOCAL_KEYS.every(k => !String(L[k] || '').trim()); }
 function parseTitled(text) { return String(text || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const i = l.indexOf(':'); return i > 0 && i < 60 ? { title: l.slice(0, i).trim(), detail: l.slice(i + 1).trim() } : { title: l.length > 40 ? l.slice(0, 40) + '…' : l, detail: l }; }); }
 const splitList = s => String(s || '').split(/,|\n/).map(x => x.trim()).filter(Boolean);
 const lines = s => String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
-function eventKind(b) { const t = String(b.eventType || '').toLowerCase(); return /final|kickoff|kick-off|match|cup|halftime|half-time/.test(t) ? 'final' : /contest/.test(t) ? 'awards' : /opening|tournament|games|olymp/.test(t) ? 'opening' : /festival/.test(t) ? 'festival' : /award|gala/.test(t) ? 'awards' : /launch|product|brand/.test(t) ? 'launch' : 'celebration'; }
+function eventKind(b) { const t = String(b.eventType || '').toLowerCase(); return /festival/.test(t) ? 'festival' : /final|kickoff|kick-off|match|cup|halftime|half-time/.test(t) ? 'final' : /contest/.test(t) ? 'awards' : /opening|tournament|games|olymp/.test(t) ? 'opening' : /festival/.test(t) ? 'festival' : /award|gala/.test(t) ? 'awards' : /launch|product|brand/.test(t) ? 'launch' : 'celebration'; }
 function lightOf(b) { const l = String(b.showLight || 'Night').toLowerCase(); return l.startsWith('day') ? 'day' : l.startsWith('dusk') ? 'dusk' : 'night'; }
 
+function placeOf(map, name) { if (!map || !name) return null; const k = normCity(name); return Object.entries(map).find(([n]) => normCity(n) === k)?.[1] || null; }
+// Past ceremonies from reference/ceremonies.json ranked by how close they are to this brief: same venue, city, country, then type.
+function pastCeremonies(p, n = 6) {
+  const C = CEREMONIES?.ceremonies || [], b = p.brief, types = CER_SIMILAR[eventKind(b)] || [];
+  const has = (hay, needle) => { const n = normCity(needle || ''); return n.length > 2 && normCity(hay || '').includes(n); };
+  return C.map(c => {
+    const where = `${c.title} ${c.facts?.venue || ''} ${c.facts?.location || ''}`;
+    const f = { venue: !!(b.venue && has(where, b.venue)), city: !!(b.city && has(where, b.city)), country: !!(b.country && has(c.facts?.location, countryKey(b.country) === 'united kingdom' ? 'United Kingdom' : b.country)), type: types.includes(c.type) };
+    const sc = (f.venue ? 4 : 0) + (f.city ? 3 : 0) + (f.country ? 1 : 0) + (f.type ? 2 : 0) + (c.statements.some(s => s.scope !== 'context') ? 1 : 0);
+    return { c, sc, f };
+  }).filter(x => x.f.venue || x.f.city || x.f.type || (x.f.country && x.sc >= 2)).sort((a, b2) => b2.sc - a.sc || b2.c.year - a.c.year).slice(0, n).map(({ c, f }) => {
+    const why = [f.venue ? 'Same venue' : f.city ? 'Same city' : f.country ? 'Same country' : '', f.type ? 'similar ceremony' : ''].filter(Boolean).join(', ');
+    const st = c.statements.find(s => s.scope !== 'context' && !s.otherEvent && s.metric !== 'budget') || c.statements.find(s => s.scope !== 'context' && !s.otherEvent);
+    const where = [c.facts?.venue, c.facts?.location].filter(Boolean).join(', ');
+    return { event: c.title, year: String(c.year), highlight: st ? st.text : `${where || 'Venue not recorded'}${c.facts?.date ? ' · ' + c.facts.date : ''}.`,
+      takeaway: st ? `Cited: ${st.refs.map(r => r.work || r.title).filter(Boolean).slice(0, 2).join('; ')}` : 'No cited figures in the article.', url: c.permalink || c.url, why: why.charAt(0).toUpperCase() + why.slice(1) };
+  });
+}
+// Earlier editions of the same event (when the event name matches the catalogue), with their published venue, city, date and attendance.
+function pastEditions(p, n = 3) {
+  const evs = catalogEvents(), raw = String(p.brief.eventName || '').trim().toLowerCase(), name = normCity(raw);
+  const me = evs.find(e => e.name.toLowerCase() === raw) || evs.filter(e => name && name.includes(normCity(e.seriesName))).sort((a, b) => b.year - a.year)[0];
+  if (!me) return [];
+  return evs.filter(e => e.series === me.series && e.year < me.year && e.fields.venue).sort((a, b) => b.year - a.year).slice(0, n).map(e => {
+    const F = e.fields;
+    return { event: e.name, year: String(e.year), why: 'Earlier edition', url: e.source.revision ? `https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(e.source.title.replace(/ /g, '_'))}&oldid=${e.source.revision}` : e.source.url,
+      highlight: [F.venue?.value, F.city?.value, F.country?.value].filter(Boolean).join(', ') + (F.date ? `, ${F.date.value}` : '') + (F.attendance ? `. Attendance ${F.attendance.value}` : '') + (F.capacity ? `. Venue capacity ${F.capacity.value.toLocaleString('en')}` : '') + '.',
+      takeaway: `Wikipedia: ${e.source.title}` };
+  });
+}
 function libraryResearch(p) {
   const b = p.brief, L = p.local || blankLocal(), kind = eventKind(b), light = lightOf(b), vt = String(b.venueType || '').toLowerCase(), m = +b.showMinutes || 12, city = b.city || 'the host city';
   const localContext = [];
+  const pc = placeOf(PLACES?.cities, b.city), pv = placeOf(PLACES?.venues, b.venue) || (CATALOG ? placeOf(PLACES?.venues, venueList().find(v => normCity(v.label) === normCity(b.venue))?.name) : null);
+  if (pc?.summary) localContext.push({ title: `About ${b.city}`, detail: pc.summary, url: pc.permalink, src: 'Wikipedia' });
+  if (pc?.culture) localContext.push({ title: `Culture in ${b.city}`, detail: pc.culture, url: pc.permalink, src: 'Wikipedia' });
+  if (pv?.summary) localContext.push({ title: b.venue, detail: pv.summary, url: pv.permalink, src: 'Wikipedia' });
   if (L.story) localContext.push({ title: L.storyTitle || 'The city story', detail: L.story });
   parseTitled(L.symbols).forEach(x => localContext.push(x));
   if (L.music) localContext.push({ title: 'Music', detail: L.music });
@@ -891,7 +930,12 @@ function libraryResearch(p) {
   if (kind === 'final' || kind === 'opening') broadcast.push({ title: 'Clear the pitch fast', detail: 'Treat a sub-2-minute rollout on pitch-safe wheels as the benchmark, and protect the turf.' });
   const want = new Set([kind === 'final' ? 'final' : kind === 'opening' ? 'opening' : 'olympics', 'football', light === 'day' ? 'day' : 'night']);
   if (p.priorities.green >= 4) { want.add('green'); want.add('reuse'); }
-  const references = REFS.map(r => ({ r, s: r.tags.filter(t => want.has(t)).length + (r.tags.includes('risk') ? .5 : 0) + (+r.year > 2017 ? .3 : 0) })).sort((a, b) => b.s - a.s).slice(0, 6).map(({ r }) => ({ event: r.event, year: r.year, highlight: r.highlight, takeaway: r.takeaway }));
+  // Past ceremonies with cited sources first; the built-in notes only fill any gap, and say so.
+  const editions = pastEditions(p, 3), sourced = [...editions, ...pastCeremonies(p, 6 - editions.length)];
+  const sportLike = ['final', 'opening', 'celebration'].includes(kind); // the built-in notes are about sport ceremonies only
+  const references = [...sourced, ...(sportLike ? REFS : []).map(r => ({ r, s: r.tags.filter(t => want.has(t)).length + (r.tags.includes('risk') ? .5 : 0) + (+r.year > 2017 ? .3 : 0) })).sort((a, b) => b.s - a.s)
+    .filter(({ r }) => !sourced.some(x => x.year === r.year && normCity(x.event).split(' ').some(w => w.length > 4 && normCity(r.event).includes(w))))
+    .slice(0, Math.max(0, 6 - sourced.length)).map(({ r }) => ({ event: r.event, year: r.year, highlight: r.highlight, takeaway: r.takeaway, why: 'Built-in note (unsourced)' }))];
   const watchouts = [...lines(L.sensitivities)];
   const mo = b.date ? new Date(b.date).getMonth() : null;
   if (Array.isArray(L.climate) && mo != null && !Number.isNaN(mo)) {
@@ -956,29 +1000,50 @@ function libraryArtists(p) {
 /* ------------------------------------------------------------------ */
 // Show library: element ideas and tier specifications only. No prices: costs come from vendor quotes.
 const LIB_ACTS = [['Opening', .15, 'Set the scene and give the cameras their first big image.'], ['Build', .35, 'Cast, music and set build the story.'], ['Peak', .3, 'Headline performance and effects.'], ['Finale', .2, 'The reveal, the crowd moment and the handover.']];
+// Show library: element ideas and tier specifications only, chosen to fit the brief. No prices: costs come from vendor quotes.
+// when(ctx) decides if an element suits this brief. ctx: kind (final|opening|festival|awards|launch|celebration), light (day|dusk|night), venue (stadium|arena|outdoor|indoor).
 const LIB = [
-  ['Headline performance',2,'Performance','A headline act at the peak of the show.',[5,2,5],['Global star with a large dance company'],['Established international act with dancers'],['Leading national act with a small dance group'],null,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer acts already touring nearby.'],
-  ['Main stage & set',1,'Stage & set','The main stage and scenic pieces the show is built around.',[4,4,3],['Bespoke kinetic stages with automation'],['Modular stage with scenic cladding on rented deck'],['Rental stage with printed scenic panels'],null,'Regional stage builders; rent decks and build only the unique parts.',3,'Rent decks and plan a second life for bespoke parts.'],
-  ['Projection & screen content',0,'Projection','Projection mapping or screen content that sets the scene.',[5,3,4],['Full-surface laser projection mapping'],['Partial mapping plus big-screen content'],['Big-screen content only'],null,'Projection hire plus a content studio.',4,'Efficient lasers; content can be reused in the broadcast package.'],
-  ['Live music & original score',1,'Music','An original score played live by local musicians.',[3,5,3],['Large ensemble with a producer, original score'],['Mid-size ensemble with a producer'],['Small ensemble over playback'],null,'Local musicians and a local producer; commission the score early.',5,'Local musicians, minimal travel.'],
-  ['Community cast',1,'Cast & community','Local volunteers perform choreography and carry the story.',[3,5,3],['800 volunteers, 6 rehearsals'],['500 volunteers, 4 rehearsals'],['250 volunteers, 3 rehearsals'],null,'Recruit through clubs, schools and cultural groups.',4,'A local cast means low travel. Issue public transport passes.'],
-  ['Crowd participation',3,'Crowd participation','The whole audience becomes part of the picture.',[4,5,3],['LED wristbands for every guest'],['Recycled-paper card mosaic'],['Phone-light moment cued on the screens'],null,'Wristband supplier or a local printer.',3,'Wristbands create e-waste unless collected; cards can be recycled.'],
-  ['Special effects',2,'Special effects','Pyro or effects at the peak of the show.',[4,2,4],['Pyro, flame units and confetti'],['Cold sparks and flame units'],['Cold sparks only'],null,'Licensed effects company; permits through local authorities.',2,'Flame and confetti add fuel burn and waste; cold sparks are cleaner.'],
-  ['Lighting show',3,'Lighting','Venue lights plus added fixtures, synced to the music.',[5,2,4],['Full light show plus 300 moving heads'],['Light show plus 120 moving heads'],['Light show with the house rig'],null,'Regional lighting hire, programmed by the show lighting designer.',3,'Use the house rig first; add hire only where it shows on camera.'],
-  ['Signature reveal',3,'Stage & set','One oversized object or reveal that becomes the defining image.',[5,3,5],['Large kinetic sculpture'],['Large inflatable with internal light'],['Human reveal: performers carry it in'],null,'Fabrication workshop or specialist inflatable makers.',3,'Inflatables are light to transport and reusable.'],
-  ['Broadcast specials',0,'Broadcast','Special cameras and graphics so the show reads on screen.',[5,1,5],['Cablecam, FPV drones and AR graphics'],['Cablecam and AR graphics'],['AR graphics through the host broadcaster'],null,'Agreed with the host broadcaster; specialist camera hire.',4,'Mostly digital, with a small footprint.'],
-  ['Show audio',2,'Sound','Show PA plus a dedicated broadcast mix.',[4,1,4],['Delay ring and a dedicated TV mix truck'],['Show PA and a TV mix position'],['House PA with a feed from front of house'],null,'Regional audio hire.',3,'Right-size the rig and avoid extra trucks.'],
-  ['Costumes',1,'Costume','Costumes for the cast and dancers.',[3,4,3],['Custom pieces made with a local design school'],['Custom tops over hired base garments'],['Printed tops on recycled cotton'],null,'Local makers and design schools.',4,'Donate costumes to local groups afterwards.']
+  { name: 'Headline performance', act: 2, category: 'Performance', desc: 'A headline act at the peak of the show.', scores: [5, 2, 5], tiers: ['Global star with a large dance company', 'Established international act with dancers', 'Leading national act with a small dance group'], sourcing: 'Booked through agencies; fees usually exclude travel and rider.', green: [2, 'Artist travel dominates. Prefer acts already touring nearby.'], when: c => c.kind !== 'launch' },
+  { name: 'Host and presenters', act: 0, category: 'Performance', desc: 'The people who guide the audience and the broadcast through the show.', scores: [4, 4, 3], tiers: ['Well-known host with a co-presenter and live scripted segments', 'Experienced live host with an autocue', 'Venue announcer with screen captions'], sourcing: 'Talent agencies; the broadcaster usually approves the host.', green: [4, 'Local talent keeps travel low.'], when: c => ['awards', 'launch', 'celebration'].includes(c.kind) },
+  { name: 'Main stage & set', act: 1, category: 'Stage & set', desc: 'The main stage and scenic pieces the show is built around.', scores: [4, 4, 3], tiers: ['Bespoke kinetic stages with automation', 'Modular stage with scenic cladding on rented deck', 'Rental stage with printed scenic panels'], sourcing: 'Regional stage builders; rent decks and build only the unique parts.', green: [3, 'Rent decks and plan a second life for bespoke parts.'], when: () => true },
+  { name: 'Roll-on pitch stage', act: 1, category: 'Stage & set', desc: 'A stage that rolls onto the field of play and clears it within the time the match operator allows.', scores: [4, 3, 3], tiers: ['Automated stage on pitch-certified wheels with a lift', 'Modular stage cart on pitch-certified wheels', 'Ground-level performance area marked on turf protection'], sourcing: 'Stage builders with pitch-certified rolling systems; confirm turf load limits with the groundsman.', green: [3, 'Reuse an existing rolling deck where one exists.'], when: c => c.venue === 'stadium' && ['final', 'opening'].includes(c.kind) },
+  { name: 'Projection & screen content', act: 0, category: 'Projection', desc: 'Projection mapping or screen content that sets the scene.', scores: [5, 3, 4], tiers: ['Full-surface laser projection mapping', 'Partial mapping plus big-screen content', 'Big-screen content only'], sourcing: 'Projection hire plus a content studio.', green: [4, 'Efficient lasers; content can be reused in the broadcast package.'], when: c => c.light !== 'day' },
+  { name: 'Screen and LED ribbon content', act: 0, category: 'Lighting', desc: 'Content for the venue\'s own screens and LED ribbons, the light sources that still read in daylight.', scores: [4, 3, 4], tiers: ['Custom content for every screen and LED ribbon, synced to the music', 'Custom content for the main screens', 'Adapted graphics on the screens'], sourcing: 'Content studio working with the venue\'s screen operator.', green: [5, 'Uses the venue\'s own hardware.'], when: c => c.light === 'day' },
+  { name: 'Field artwork', act: 2, category: 'Pitch art', desc: 'A large printed fabric or card image laid across the field, the hero image from above.', scores: [5, 4, 4], tiers: ['Full-field fabric artwork unfurled by a large cast', 'Half-field fabric artwork', 'Centre-circle artwork'], sourcing: 'Large-format textile printers; rehearse the fold and unfurl offsite.', green: [3, 'Agree a second life for the fabric before printing.'], when: c => c.venue === 'stadium' && c.light !== 'night' },
+  { name: 'Live music & original score', act: 1, category: 'Music', desc: 'An original score played live by local musicians.', scores: [3, 5, 3], tiers: ['Large ensemble with a producer, original score', 'Mid-size ensemble with a producer', 'Small ensemble over playback'], sourcing: 'Local musicians and a local producer; commission the score early.', green: [5, 'Local musicians, minimal travel.'], when: c => c.kind !== 'launch' },
+  { name: 'Community cast', act: 1, category: 'Cast & community', desc: 'Local volunteers perform choreography and carry the story.', scores: [3, 5, 3], tiers: ['800 volunteers, 6 rehearsals', '500 volunteers, 4 rehearsals', '250 volunteers, 3 rehearsals'], sourcing: 'Recruit through clubs, schools and cultural groups.', green: [4, 'A local cast means low travel. Issue public transport passes.'], when: c => ['final', 'opening', 'celebration', 'festival'].includes(c.kind) && c.venue !== 'indoor', castContext: true },
+  { name: 'Teams and flags parade', act: 0, category: 'Cast & community', desc: 'The teams or delegations enter behind their flags, with the protocol the organiser requires.', scores: [4, 4, 5], tiers: ['Parade with a choreographed flag cast and music for each region', 'Parade with flag bearers and a music bed', 'Flag line-up at the side of the field'], sourcing: 'Agreed with the organiser\'s protocol team; volunteers as flag bearers.', green: [5, 'People and flags; almost no materials.'], when: c => c.kind === 'opening' },
+  { name: 'Crowd participation', act: 3, category: 'Crowd participation', desc: 'The whole audience becomes part of the picture.', scores: [4, 5, 3], tiers: ['LED wristbands for every guest', 'Recycled-paper card mosaic', 'Phone-light moment cued on the screens'], sourcing: 'Wristband supplier or a local printer.', green: [3, 'Wristbands create e-waste unless collected; cards can be recycled.'], when: c => c.light !== 'day' && c.kind !== 'launch' },
+  { name: 'Card mosaic', act: 3, category: 'Crowd participation', desc: 'Every seat holds a card; together they form an image that reads in daylight.', scores: [5, 5, 3], tiers: ['Full-bowl card mosaic with two images', 'Full-bowl card mosaic', 'Mosaic in one stand'], sourcing: 'Local printer and a seat-by-seat placement crew.', green: [4, 'Recycled paper; collect and recycle the cards.'], when: c => c.light === 'day' && ['stadium', 'arena'].includes(c.venue) },
+  { name: 'Special effects', act: 2, category: 'Special effects', desc: 'Pyro or effects at the peak of the show.', scores: [4, 2, 4], tiers: ['Pyro, flame units and confetti', 'Cold sparks and flame units', 'Cold sparks only'], sourcing: 'Licensed effects company; permits through local authorities.', green: [2, 'Flame and confetti add fuel burn and waste; cold sparks are cleaner.'], when: c => c.light !== 'day' },
+  { name: 'Daylight effects', act: 2, category: 'Special effects', desc: 'Effects that read in sunlight: coloured smoke, streamers and flags.', scores: [4, 2, 4], tiers: ['Coloured smoke plumes, CO₂ jets and streamers', 'Coloured smoke and streamers', 'Biodegradable streamer cannons'], sourcing: 'Licensed effects company; city permits and noise checks.', green: [2, 'Smoke adds emissions; streamers must be biodegradable and collected.'], when: c => c.light === 'day' },
+  { name: 'Drone light show', act: 3, category: 'Special effects', desc: 'A formation of lit drones drawing images above the venue.', scores: [5, 3, 5], tiers: ['Large formation with animated sequences', 'Medium formation with static images', 'Small formation with one logo-free image'], sourcing: 'Licensed drone show operator; aviation authority approval needed well ahead.', green: [4, 'Battery powered; replaces fireworks.'], when: c => c.light === 'night' && c.venue !== 'indoor' && c.venue !== 'arena' },
+  { name: 'Lighting show', act: 3, category: 'Lighting', desc: 'Venue lights plus added fixtures, synced to the music.', scores: [5, 2, 4], tiers: ['Full light show plus 300 moving heads', 'Light show plus 120 moving heads', 'Light show with the house rig'], sourcing: 'Regional lighting hire, programmed by the show lighting designer.', green: [3, 'Use the house rig first; add hire only where it shows on camera.'], when: c => c.light !== 'day' },
+  { name: 'Trophy moment', act: 3, category: 'Stage & set', desc: 'The trophy arrives on the field before the teams walk out.', scores: [5, 4, 5], tiers: ['Trophy rises on a kinetic plinth at the centre spot', 'Trophy carried in by former players along a cast corridor', 'Trophy on a plinth with a camera moment'], sourcing: 'Agreed with the competition organiser; automation specialist for the kinetic version.', green: [4, 'The carried version has almost no footprint.'], when: c => c.kind === 'final' },
+  { name: 'Signature reveal', act: 3, category: 'Stage & set', desc: 'One oversized object or reveal that becomes the defining image.', scores: [5, 3, 5], tiers: ['Large kinetic sculpture', 'Large inflatable with internal light', 'Human reveal: performers carry it in'], sourcing: 'Fabrication workshop or specialist inflatable makers.', green: [3, 'Inflatables are light to transport and reusable.'], when: c => c.kind !== 'final' },
+  { name: 'Award moments', act: 2, category: 'Stage & set', desc: 'Staging, music stings and camera cues for each award or recognition.', scores: [4, 3, 4], tiers: ['Bespoke reveal for each category with walk-up video', 'Shared reveal staging with walk-up video', 'Lectern presentation with screen graphics'], sourcing: 'Show designer with the broadcaster\'s director.', green: [4, 'Mostly content; reuse staging across categories.'], when: c => c.kind === 'awards' },
+  { name: 'Product reveal', act: 3, category: 'Stage & set', desc: 'The moment the product appears, built to work on stage and as a short clip.', scores: [5, 3, 5], tiers: ['Kinetic reveal with projection and a live demo', 'Turntable reveal with lighting cue', 'Drape drop with a single lighting cue'], sourcing: 'Scenic fabricator and the product team.', green: [3, 'Plan the reveal set for reuse at later launches.'], when: c => c.kind === 'launch' },
+  { name: 'Public screens in the city', act: 0, category: 'Broadcast', desc: 'Live screens in a fan zone or square so the city shares the show.', scores: [3, 5, 2], tiers: ['Several fan zones with stages and screens', 'One fan zone with a screen', 'Screen feed offered to existing venues'], sourcing: 'City events office and a screen hire company.', green: [3, 'Run screens on grid power; promote walking and public transport.'], when: c => ['final', 'opening', 'celebration'].includes(c.kind) },
+  { name: 'Broadcast specials', act: 0, category: 'Broadcast', desc: 'Special cameras and graphics so the show reads on screen.', scores: [5, 1, 5], tiers: ['Cablecam, FPV drones and AR graphics', 'Cablecam and AR graphics', 'AR graphics through the host broadcaster'], sourcing: 'Agreed with the host broadcaster; specialist camera hire.', green: [4, 'Mostly digital, with a small footprint.'], when: c => c.kind !== 'festival' },
+  { name: 'Show audio', act: 2, category: 'Sound', desc: 'Show PA plus a dedicated broadcast mix.', scores: [4, 1, 4], tiers: ['Delay ring and a dedicated TV mix truck', 'Show PA and a TV mix position', 'House PA with a feed from front of house'], sourcing: 'Regional audio hire.', green: [3, 'Right-size the rig and avoid extra trucks.'], when: () => true },
+  { name: 'Costumes', act: 1, category: 'Costume', desc: 'Costumes for the cast and dancers.', scores: [3, 4, 3], tiers: ['Custom pieces made with a local design school', 'Custom tops over hired base garments', 'Printed tops on recycled cotton'], sourcing: 'Local makers and design schools.', green: [4, 'Donate costumes to local groups afterwards.'], when: c => c.kind !== 'launch' }
 ];
+function libraryContext(p) {
+  const b = p.brief, vt = String(b.venueType || '').toLowerCase();
+  const venue = /stadium/.test(vt) ? 'stadium' : /arena/.test(vt) ? 'arena' : /indoor|hall|theatre|theater|conference/.test(vt) ? 'indoor' : /outdoor|park|street|public|square|beach|field|site/.test(vt) ? 'outdoor' : 'stadium';
+  return { kind: eventKind(b), light: lightOf(b), venue };
+}
 function libraryDesign(p) {
-  const m = +p.brief.showMinutes || 12;
+  const m = +p.brief.showMinutes || 12, ctx = libraryContext(p);
   const acts = LIB_ACTS.map(([name, share, description]) => ({ id: uid(), name, minutes: Math.max(0.5, Math.round(m * share * 2) / 2), description }));
   acts[3].minutes = Math.max(0.5, acts[3].minutes + m - acts.reduce((a, b) => a + b.minutes, 0));
-  const tier = t => blankTier(t[0]);
-  const elements = LIB.map(x => ({ id: uid(), name: x[0], act: acts[x[1]].name, category: x[2], description: x[3],
-    scores: { broadcast: x[4][0], local: x[4][1], global: x[4][2] }, tiers: { signature: tier(x[5]), standard: tier(x[6]), lean: tier(x[7]) },
-    tier: 'standard', included: true, locked: false, leadWeeks: x[8], sourcing: x[9], green: { score: x[10], note: x[11] } }));
-  return { acts, elements };
+  // Cast sizes on record at comparable ceremonies, quoted with their source, as context for the community cast.
+  const castFacts = similarFigures(p, 'cast', 2).map(({ c, st }) => `${st.figures[0]} at ${c.title}${st.refs[0]?.work ? ' (' + st.refs[0].work + ')' : ''}`);
+  const elements = LIB.filter(x => x.when(ctx)).map(x => ({ id: uid(), name: x.name, act: acts[x.act].name, category: x.category,
+    description: x.desc + (x.castContext && castFacts.length ? ` On record at comparable ceremonies: ${castFacts.join('; ')}.` : ''),
+    scores: { broadcast: x.scores[0], local: x.scores[1], global: x.scores[2] }, tiers: { signature: blankTier(x.tiers[0]), standard: blankTier(x.tiers[1]), lean: blankTier(x.tiers[2]) },
+    tier: 'standard', included: true, locked: false, leadWeeks: null, sourcing: x.sourcing, green: { score: x.green[0], note: x.green[1] } }));
+  return { acts, elements, ctx };
 }
 function libraryProduction(p) {
   const notes = {};
@@ -1046,11 +1111,13 @@ function linesTotals(p) {
 let REFDATA = null, refState = 'loading'; // loading | ready | missing
 let CEREMONIES = null; // reference/ceremonies.json: published ceremony figures with their citations
 let CATALOG = null; // reference/catalog.json: real events for Brief autocomplete, each field with its source
+let PLACES = null; // reference/places.json: Wikipedia summaries of catalogue cities and venues
 async function loadReference() {
   try { const r = await fetch('reference/bundle.json', { cache: 'no-cache' }); if (!r.ok) throw new Error(String(r.status)); REFDATA = await r.json(); refState = 'ready'; }
   catch { REFDATA = null; refState = 'missing'; }
   try { const r = await fetch('reference/ceremonies.json', { cache: 'no-cache' }); if (r.ok) CEREMONIES = await r.json(); } catch { CEREMONIES = null; }
   try { const r = await fetch('reference/catalog.json', { cache: 'no-cache' }); if (r.ok) CATALOG = await r.json(); } catch { CATALOG = null; }
+  try { const r = await fetch('reference/places.json', { cache: 'no-cache' }); if (r.ok) PLACES = await r.json(); } catch { PLACES = null; }
   render();
 }
 // How a planner-entered number is backed. A number counts as sourced only with a basis AND a reference (quote no., invoice, meter log, report).
@@ -2267,7 +2334,7 @@ function refBanner() {
 }
 function claudeBanner() {
   if (claudeState !== 'off') return '';
-  return `<div class="banner"><span><b>Claude is off in this view.</b> Research and written suggestions need a Claude sign-in. The built-in library still covers show design, production and sustainability, the reference library still calculates CO₂e, and you can edit, rebalance and export everything.</span></div>`;
+  return `<div class="banner"><span><b>Claude is off in this view.</b> Everything still works: research is built from Wikipedia and cited records of past ceremonies, the show design is chosen from the library to fit your brief, and CO₂e is calculated from the reference library. Claude only adds original writing (concepts, the command bar, sketches) where you have a Claude sign-in.</span></div>`;
 }
 function claudeBtn(act, label, extra = '') {
   if (claudeState === 'off') return '';
@@ -2562,7 +2629,7 @@ function localPanel() {
   const L = plan.local, pk = findPack(plan.brief.city, plan.brief.venue), cur = CITY_PACKS.find(x => x.k === L.source);
   const cols = Array.isArray(L.colors) && L.colors.length === 5 ? L.colors : lookOf(plan).palette;
   const f = (label, key, rows, ph) => `<div class="field ${rows ? 'wide' : ''}"><label for="lc-${key}">${label}</label>${rows ? `<textarea id="lc-${key}" rows="${rows}" data-local="${key}" placeholder="${esc(ph)}">${esc(L[key] || '')}</textarea>` : `<input id="lc-${key}" data-local="${key}" value="${esc(L[key] || '')}" placeholder="${esc(ph)}">`}</div>`;
-  const status = cur ? `Using the built-in profile for <b>${esc(cur.city)}</b>. Edit anything below.` : pk ? `A built-in profile for <b>${esc(pk.city)}</b> is available.` : `No built-in profile for <b>${esc(plan.brief.city || 'this city')}</b> yet. Fill in what you know. Every field feeds the research and the concepts.`;
+  const status = cur ? `Using the built-in profile for <b>${esc(cur.city)}</b>. Edit anything below.` : L.source === 'wikipedia' ? `Started from <a href="${esc(safeUrl(L.sourceUrl))}" target="_blank" rel="noopener">Wikipedia's article on ${esc(plan.brief.city)}</a>. Add music, dance and local groups you know.` : pk ? `A built-in profile for <b>${esc(pk.city)}</b> is available.` : `No built-in profile for <b>${esc(plan.brief.city || 'this city')}</b> yet. Fill in what you know. Every field feeds the research and the concepts.`;
   return `<section class="panel"><div class="head2"><div><h2>Local profile</h2><p class="note" style="margin-top:4px">${status}</p></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">${pk && (!cur || cur.k !== pk.k) ? `<button class="btn sm" data-act="load-pack" data-k="${pk.k}">Load ${esc(pk.city)} profile</button>` : ''}<button class="btn sm ghost" data-act="clear-local">Clear</button></div></div>
     <div class="form" style="margin-top:14px">
@@ -2598,19 +2665,19 @@ function vResearch() {
     </ul></section>`;
   const actions = libBtn('lib-research', R ? 'Rebuild research' : 'Build research') + claudeBtn('research', 'Deep research') + (R ? libBtn('lib-concepts', 'Generate concepts →') : '');
   if (!R) return `${head('Research', 'Local culture, global story hooks, what works on broadcast, and lessons from past ceremonies.', actions)}
-    <div class="empty"><h2>No research yet</h2><p><b>Build research</b> uses the local profile below, a library of past ceremonies and broadcast rules for your brief. It needs no Claude account. <b>Deep research</b> asks Claude for more.</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}</div></div>
+    <div class="empty"><h2>No research yet</h2><p><b>Build research</b> uses Wikipedia summaries of the city and venue, cited records of past ceremonies, the local profile below and broadcast rules for your brief. It needs no Claude account. <b>Deep research</b> asks Claude for more.</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">${libBtn('lib-research', 'Build research')}${claudeBtn('research', 'Deep research')}</div></div>
     ${ceremonyPanel()}${localPanel()}${checklist}`;
-  const src = R.source === 'library' ? 'Built from the local profile, the reference library and broadcast rules for your brief. No Claude credits used.' : R.source === 'web' ? 'Compiled from public web sources in September 2026. Check facts before they go into a client document.' : 'From Claude\'s own knowledge, without live web search. Check facts before they go into a client document.';
-  const list = xs => xs.map(x => `<div class="item"><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p></div>`).join('');
+  const src = R.source === 'library' ? 'Built from Wikipedia summaries of the city and venue, cited records of past ceremonies, your local profile and broadcast rules for your brief. No Claude account needed.' : R.source === 'web' ? 'Compiled from public web sources in September 2026. Check facts before they go into a client document.' : 'From Claude\'s own knowledge, without live web search. Check facts before they go into a client document.';
+  const list = xs => xs.map(x => `<div class="item"><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p>${x.url ? `<p class="fsrc"><a href="${esc(safeUrl(x.url))}" target="_blank" rel="noopener">${esc(x.src || 'Source')}</a></p>` : ''}</div>`).join('');
   return `${head('Research', src, actions)}
   <div class="grid g3">
     <section class="panel"><div class="eyebrow">For the people in the stands</div><h2 style="margin:4px 0 14px">Local connection</h2><div class="list">${list(R.localContext) || '<p class="muted">Fill in the local profile below, then rebuild.</p>'}</div></section>
     <section class="panel"><div class="eyebrow">For the world watching</div><h2 style="margin:4px 0 14px">Global hooks</h2><div class="list">${list(R.globalHooks)}</div></section>
     <section class="panel"><div class="eyebrow">For the cameras</div><h2 style="margin:4px 0 14px">On broadcast</h2><div class="list">${list(R.broadcast)}</div></section>
   </div>
-  <section class="panel"><h2>Lessons from past ceremonies</h2><div class="refs">${R.references.map(r => `
-    <div class="ref"><div><div class="ev">${esc(r.event)}</div><div class="yr">${esc(r.year)}</div></div>
-    <div class="tk"><b>What happened</b>${esc(r.highlight)}</div><div class="tk"><b>Takeaway</b>${esc(r.takeaway)}</div></div>`).join('')}</div></section>
+  <section class="panel"><h2>Lessons from past ceremonies</h2>${R.references.length ? '' : '<p class="muted">No comparable ceremonies on record for this kind of event yet. Close-out files from your own past shows will appear here once committed.</p>'}<div class="refs">${R.references.map(r => `
+    <div class="ref"><div><div class="ev">${r.url ? `<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.event)}</a>` : esc(r.event)}</div><div class="yr">${esc(r.year)}${r.why ? ' · ' + esc(r.why) : ''}</div></div>
+    <div class="tk"><b>${r.url ? 'On record' : 'What happened'}</b>${esc(r.highlight)}</div><div class="tk"><b>${r.url ? 'Source' : 'Takeaway'}</b>${esc(r.takeaway)}</div></div>`).join('')}</div></section>
   ${R.watchouts.length ? `<section class="panel"><h2>Watch out for</h2><ul class="watch">${R.watchouts.map(w => `<li>${esc(w)}</li>`).join('')}</ul></section>` : ''}
   ${ceremonyPanel()}
   ${localPanel()}`;
@@ -3351,13 +3418,13 @@ const actions = {
       <div class="mf"><button class="btn" data-act="close">Cancel</button><button class="btn primary" data-act="save-artist">Add artist</button></div>`),
   'save-artist': () => { const g = id => $('#' + id)?.value || ''; if (!g('ar-name').trim()) { toast('Add a name first.'); return; } mutate(p => p.artists.push({ id: uid(), manual: true, name: g('ar-name').trim(), origin: g('ar-origin'), role: g('ar-role'), why: g('ar-why'), audience: '', feeBand: g('ar-fee'), act: '', risks: '' }), { log: 'Artist added' }); closeModal(); },
   'lib-design': () => {
-    const run = () => { mutate(p => { const d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS(); }, { log: 'Show design started from the built-in library' }); go('design'); toast('Twelve elements from the library, each specified in three tiers. Add vendor quotes to price them.'); };
+    const run = () => { mutate(p => { const d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS(); }, { log: 'Show design started from the built-in library' }); go('design'); const c = libraryContext(plan); toast(`${plan.elements.length} elements chosen for a ${c.light} ${c.venue} ${({ final: 'final or kickoff show', opening: 'opening ceremony', festival: 'festival', awards: 'awards show', launch: 'launch', celebration: 'celebration' })[c.kind]}, each specified in three tiers. Add vendor quotes to price them.`); };
     if (plan.elements.length) confirmBox('Replace the current show design with the built-in library?', 'Replace', run); else run();
   },
   'lib-research': () => {
     let loaded = null;
     mutate(p => {
-      if (localEmpty(p.local)) { const pk = findPack(p.brief.city, p.brief.venue); if (pk) { p.local = localFromPack(pk); loaded = pk.city; } }
+      if (localEmpty(p.local)) { const pk = findPack(p.brief.city, p.brief.venue); if (pk) { p.local = localFromPack(pk); loaded = pk.city; } else { const w = localFromPlace(p.brief.city); if (w) { p.local = w; loaded = p.brief.city + ' (from Wikipedia)'; } } }
       p.research = libraryResearch(p);
       if (!validLook(p.look) && Array.isArray(p.local.colors)) p.look = { ...(p.look || {}), palette: [...p.local.colors], motif: p.local.motif };
     }, { log: 'Research built from the library' });
