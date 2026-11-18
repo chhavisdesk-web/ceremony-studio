@@ -503,7 +503,7 @@ function examplePlan() {
       { id:'c2', title:'Del Barrio a la Final', logline:'One kid from a Madrid neighbourhood club walks from a dusty local pitch into the final, followed by 600 young players.', story:'A short film on the screens follows a child through the city on match day. They appear on the pitch as youth teams pour in behind them, dancing a reworked chotis. The headliner sings a song about beginnings, and the child places the match ball on the centre spot.', acts:[{name:'Prólogo',minutes:3,description:'Film on the screens.'},{name:'El Barrio',minutes:3,description:'Youth cast.'},{name:'La Canción',minutes:4,description:'Headliner.'},{name:'El Balón',minutes:2,description:'Ball handover and anthem.'}], localTie:'Real neighbourhoods and clubs.', globalTie:'Every fan remembers their first pitch.', broadcastMoment:'A close-up of the child placing the ball on the centre spot.', look:{ palette:['#0E1A2B','#D7263D','#2DC653','#F9C80E','#F4F1EA'], motif:'waves' } },
       { id:'c3', title:'Kilómetro Cero', logline:'Every road in Spain starts at Km 0 in Puerta del Sol; tonight every road in Europe ends in Madrid. A daylight show under the sun, built from fabric, rhythm and 70,000 cards.', story:'Runners carry fabric roads in from the four corners while the Sky Ribbon counts kilometres. A cast from Madrid\'s neighbourhood clubs unrolls them to the centre to flamenco percussion. The headliner performs as a 100-metre fabric sun opens across the pitch, and the stands turn into its rays. The trophy arrives at Km 0, the centre spot.', acts: acts.map(a => ({ name:a.name, minutes:a.minutes, description:a.description })), localTie:'Km 0, Puerta del Sol, flamenco, chotis and neighbourhood clubs.', globalTie:'All roads lead to the final: a journey every travelling fan has made.', broadcastMoment:'Top-down: the pitch sun and the card rays in the stands form one sun across the whole stadium.', look:{ palette: look.palette, motif:'rays' } }
     ],
-    conceptId: 'c3', acts, look,
+    conceptId: 'c3', designFor: 'c3', acts, look,
     elements: [
       E('e1','Headline performance','El Sol','Performance','The headline set at the peak of the show, with a Spanish guest.',[5,3,5],['Global superstar plus a Spanish star duet, 40 dancers'],['International star with 16 dancers'],['Leading Spanish artist with 8 dancers'],'standard',null,'Booked through agencies; fees usually exclude travel and rider.',2,'Artist travel dominates. Prefer an act already touring in Europe in early June.'),
       E('e2','Roll-on centre stage','El Sol','Stage & set','A mirrored centre stage that reflects the sky and rolls off in under two minutes.',[4,3,3],['New kinetic stage with a rising sun disc'],['Reused modular stage, re-skinned with a mirror finish'],['Rental stage cart with a printed skin'],'signature',null,'Stage builders with pitch-certified wheels; reuse precedent from the 2026 show.',4,'The 2026 show reused the 2025 stage. Reuse again and publish it.'),
@@ -1031,21 +1031,21 @@ function libraryConcepts(p) {
   const goal = kind === 'final' ? 'the Final' : kind === 'opening' ? 'the Opening' : 'the Stage';
   const rot = [pal[0], pal[3], pal[1], pal[2], pal[4]];
   return [
-    { id: uid(), title: L.storyTitle || `${city} Rising`,
+    { id: uid(), style: 'image', title: L.storyTitle || `${city} Rising`,
       logline: `${L.story ? L.story.replace(/\.$/, '') + '. ' : ''}A ${light === 'day' ? 'daylight' : light === 'dusk' ? 'golden-hour' : 'night-time'} spectacle built around one giant image: ${hero}.`,
       story: `The show opens with ${sym1} on the screens and the field. A large cast builds the image piece by piece to live ${sound}. The headliner performs at the peak as the ${pat} pattern fills the field. It ends as the whole venue becomes one picture.`,
       acts: mk(['Arrival', 'The Build', 'The Peak', end], [.15, .3, .35, .2], [`${cap(sym1)} appears on every screen.`, `The cast builds the image to live ${sound}.`, 'Headline performance as the image completes.', endDesc]),
       localTie: `${L.storyTitle ? L.storyTitle + ', ' : ''}${sym1}, ${place1} and ${sound}.`, globalTie: 'One huge, simple image that reads in any language.',
       broadcastMoment: light === 'day' ? `Top-down: the field artwork and the stands form one ${pat} pattern in ${city}'s colours.` : `Top-down: ${place1} projected across the field while beams rise from the roof.`,
       look: { palette: pal, motif } },
-    { id: uid(), title: `From ${city}'s Streets to ${goal}`,
+    { id: uid(), style: 'journey', title: `From ${city}'s Streets to ${goal}`,
       logline: `One young person from a ${city} ${club} makes the journey to ${b.venue || 'the stadium'}, and hundreds follow them onto the field.`,
       story: `A short film follows one young person through ${places.slice(0, 3).join(', ') || city} on the day. They walk out live, and the field fills behind them with a cast from ${community}, dancing a reworked ${dance}. The headliner sings to them at the peak. The young person carries the last object (ball, flag or trophy) to the centre.`,
       acts: mk(['Prologue', 'The Streets', 'The Song', end], [.25, .3, .3, .15], [`Film through ${places[0] || city} on the screens.`, `Cast from ${community} pours onto the field.`, 'Headliner performs to the cast.', endDesc]),
       localTie: `Real people from ${city}'s ${community}, dancing ${dance}.`, globalTie: 'Everyone remembers where they started.',
       broadcastMoment: 'A close-up of the young person placing the last object at the centre, then a crane up to reveal the whole cast.',
       look: { palette: rot, motif: 'waves' } },
-    { id: uid(), title: `The Sound of ${city}`,
+    { id: uid(), style: 'sound', title: `The Sound of ${city}`,
       logline: `A low-footprint show carried by people, not hardware: live ${sound}, ${dance} reworked for a mass cast, and a crowd mosaic in ${city}'s colours.`,
       story: `Musicians from ${city} open from the stands, not a stage. A cast in ${pat}-patterned costumes forms shapes on the field. The headliner joins the local musicians for one song. The crowd finishes the picture with cards or flags, which are collected and reused afterwards.`,
       acts: mk(['From the Stands', 'Rhythm', 'Together', end], [.2, .3, .3, .2], ['Local musicians start among the crowd.', `${cap(dance)} reworked for the field.`, 'Headliner with local musicians.', kind === 'final' ? 'Crowd mosaic, then the handover.' : 'Crowd mosaic and the send-off.']),
@@ -1097,17 +1097,65 @@ function libraryContext(p) {
   const venue = /stadium/.test(vt) ? 'stadium' : /arena/.test(vt) ? 'arena' : /indoor|hall|theatre|theater|conference/.test(vt) ? 'indoor' : /outdoor|park|street|public|square|beach|field|site/.test(vt) ? 'outdoor' : 'stadium';
   return { kind: eventKind(b), light: lightOf(b), venue };
 }
+// Which kind of show a concept is: one giant image, a hero's journey, or a people-and-music show.
+function conceptStyle(c) {
+  if (!c) return null; if (c.style) return c.style;
+  const t = `${c.title} ${c.logline} ${c.story}`.toLowerCase();
+  return /low-footprint|musicians|rhythm|sound of|carried by people/.test(t) ? 'sound' : /journey|young person|walks? out|streets|film follows|child/.test(t) ? 'journey' : 'image';
+}
 function libraryDesign(p) {
-  const m = +p.brief.showMinutes || 12, ctx = libraryContext(p);
-  const acts = LIB_ACTS.map(([name, share, description]) => ({ id: uid(), name, minutes: Math.max(0.5, Math.round(m * share * 2) / 2), description }));
-  acts[3].minutes = Math.max(0.5, acts[3].minutes + m - acts.reduce((a, b) => a + b.minutes, 0));
+  const m = +p.brief.showMinutes || 12, ctx = libraryContext(p), c = p.concepts.find(x => x.id === p.conceptId) || null, style = conceptStyle(c);
+  const L = p.local || blankLocal(), city = p.brief.city || 'the host city';
+  // Acts: the chosen concept's own acts, otherwise four generic ones
+  let acts;
+  if (c?.acts?.length) acts = c.acts.map(a => ({ id: uid(), name: a.name, minutes: +a.minutes || 1, description: a.description || '' }));
+  else { acts = LIB_ACTS.map(([name, share, description]) => ({ id: uid(), name, minutes: Math.max(0.5, Math.round(m * share * 2) / 2), description })); acts[3].minutes = Math.max(0.5, acts[3].minutes + m - acts.reduce((a, b) => a + b.minutes, 0)); }
+  const actAt = i => acts[Math.min(acts.length - 1, Math.round(i * (acts.length - 1) / 3))].name;
   // Cast sizes on record at comparable ceremonies, quoted with their source, as context for the community cast.
   const castFacts = similarFigures(p, 'cast', 2).map(({ c, st }) => `${st.figures[0]} at ${c.title}${st.refs[0]?.work ? ' (' + st.refs[0].work + ')' : ''}`);
-  const elements = LIB.filter(x => x.when(ctx)).map(x => ({ id: uid(), name: x.name, act: acts[x.act].name, category: x.category,
-    description: x.desc + (x.castContext && castFacts.length ? ` On record at comparable ceremonies: ${castFacts.join('; ')}.` : ''),
+  const mk = (x, extra = {}) => ({ id: uid(), name: x.name, act: actAt(x.act), category: x.category, description: x.desc,
     scores: { broadcast: x.scores[0], local: x.scores[1], global: x.scores[2] }, tiers: { signature: blankTier(x.tiers[0]), standard: blankTier(x.tiers[1]), lean: blankTier(x.tiers[2]) },
-    tier: 'standard', included: true, locked: false, leadWeeks: null, sourcing: x.sourcing, green: { score: x.green[0], note: x.green[1] } }));
-  return { acts, elements, ctx };
+    tier: 'standard', included: true, locked: false, leadWeeks: null, sourcing: x.sourcing, green: { score: x.green[0], note: x.green[1] }, ...extra });
+  const elements = LIB.filter(x => x.when(ctx)).map(x => mk(x, x.castContext && castFacts.length ? { description: x.desc + ` On record at comparable ceremonies: ${castFacts.join('; ')}.` } : {}));
+  const find = n => elements.find(e => e.name === n), drop = n => { const i = elements.findIndex(e => e.name === n); if (i >= 0) elements.splice(i, 1); };
+  // Local profile: its music, dance and community go into the matching elements
+  const music = find('Live music & original score'); if (music && (L.music || L.sound)) music.description += ` Local sound: ${L.music || L.sound}.`;
+  const castEl = find('Community cast'); if (castEl && (L.dance || L.community)) castEl.description += `${L.dance ? ` Dance: ${L.dance}.` : ''}${L.community ? ` Recruit from ${L.community}.` : ''}`;
+  const sym1 = parseTitled(L.symbols)[0], places = splitList(L.places);
+  // The concept's signature pieces
+  const add = (x, i = elements.length) => { if (!find(x.name)) elements.splice(i, 0, mk(x)); };
+  if (c && style === 'image') {
+    const night = ctx.light !== 'day';
+    add({ name: `Hero image: ${c.style && sym1?.title ? sym1.title : c.title}`, act: 2, category: night ? 'Projection' : 'Pitch art', desc: `The concept's one giant image. ${c.broadcastMoment || ''}`.trim(), scores: [5, 4, 5],
+      tiers: night ? ['Full-field projection plus mapped stands', 'Full-field projection', 'Half-field projection with screen content'] : ['Full-field fabric artwork plus card mosaic', 'Full-field fabric artwork', 'Half-field fabric artwork'],
+      sourcing: night ? 'Projection designer and laser or projector rental; content made locally.' : 'Print on recyclable fabric with a regional printer; unfurled by the cast.', green: [3, night ? 'Rent projectors; reuse the content online.' : 'Print on recyclable fabric and give it a second life.'] }, 0);
+    const fa = find('Field artwork'); if (fa) fa.tier = 'signature';
+  }
+  if (c && style === 'journey') {
+    add({ name: 'Hero film', act: 0, category: 'Broadcast', desc: `A short film following one young person through ${places.slice(0, 3).join(', ') || city} on the day, played on the venue screens and the broadcast feed.`, scores: [5, 5, 4],
+      tiers: ['Filmed over several days with a drone unit and original score', 'One-day shoot with a small crew', 'Phone-shot documentary style, edited locally'], sourcing: 'A local film crew and editor.', green: [4, 'Shoot locally; no set builds.'] }, 0);
+    add({ name: 'The walk-out', act: 1, category: 'Cast & community', desc: `The young person from the film walks out live and the field fills behind them${L.community ? ' with a cast from ' + L.community : ''}${L.danceShort || L.dance ? ', dancing ' + (L.danceShort || short(L.dance)) : ''}.`, scores: [5, 5, 4],
+      tiers: ['Large cast with choreographer and rehearsal camp', 'Mid-size cast with choreographer', 'Small cast from one club or school'], sourcing: 'Recruit through local clubs and schools; safeguarding checks for young performers.', green: [5, 'People, not hardware: a local cast travels least.'] }, 1);
+    add({ name: 'The last object to the centre', act: 3, category: 'Stage & set', desc: 'The young person carries the final object (ball, flag or trophy) to the centre spot. The defining close-up, then a crane shot reveals the whole cast.', scores: [5, 4, 5],
+      tiers: ['Object rises on a plinth as it arrives, with a light cue', 'Carried along a cast corridor with a light cue', 'Carried in with a follow spot'], sourcing: 'Stage manager and the rights holder\'s protocol team.', green: [5, 'No build needed.'] });
+    drop('Signature reveal');
+  }
+  if (c && style === 'sound') {
+    add({ name: 'Musicians in the stands', act: 0, category: 'Music', desc: `The show opens with ${L.sound || short(L.music) || 'local musicians'} playing from among the crowd, not from a stage.`, scores: [4, 5, 3],
+      tiers: ['Several ensembles around the bowl with radio mics and a conductor on the screens', 'Two ensembles with radio mics', 'One ensemble with radio mics'], sourcing: `Musicians from ${city}'s music schools, bands and clubs.`, green: [5, 'Acoustic and local: little equipment and little travel.'] }, 0);
+    add({ name: `Mass dance${L.danceShort || L.dance ? ': ' + (L.danceShort || short(L.dance)) : ''}`, act: 1, category: 'Cast & community', desc: `${L.danceShort || L.dance ? cap(L.danceShort || short(L.dance)) : 'A local dance'} reworked for a mass cast in patterned costumes.`, scores: [4, 5, 4],
+      tiers: ['Large cast with a choreographer and costume makers', 'Mid-size cast with a choreographer', 'Small cast from local dance schools'], sourcing: 'Local dance schools and cultural associations.', green: [5, 'People, not hardware.'] }, 1);
+    // A low-footprint show: hardware effects drop to their lightest tier, pyro is cut
+    elements.forEach(e => { if (e.category === 'Special effects' || e.name === 'Lighting show') e.tier = 'lean'; if (e.name === 'Special effects') e.included = false; });
+  }
+  // The host's own living traditions (UNESCO lists) as cast ideas, unpriced
+  // Only traditions a show can stage (dance, music, festivals, processions, theatre); crafts and food stay in the symbols panel.
+  const PERFORMABLE = /danc|music|song|sing|chant|festiv|carnival|carnaval|procession|parade|ride|theat|drama|play\b|drum|tamborrada|fire|bonfire|ritual|fiesta|fest\b|puppet|mask|tower|castell|flamenco|fado|tango|polyphon|choir|percussion|horsemanship|falles|patum|epic|storytell|circus|acrobat/i;
+  const S = symbolsFor(p), trad = [];
+  [S?.city, S?.country].forEach(e => (e?.traditions || []).forEach(t => { if (!t.sharedWith && PERFORMABLE.test(`${t.name} ${t.description}`) && !trad.some(x => x.wikidata === t.wikidata)) trad.push(t); }));
+  trad.slice(0, 2).forEach(t => add({ name: cap(t.name), act: 1, category: 'Cast & community', desc: `${t.description ? cap(t.description) + '. ' : ''}On UNESCO's ${t.list}${t.year ? ' since ' + t.year : ''}. A local tradition the show can feature, shaped with the people who keep it.`, scores: [3, 5, 3],
+    tiers: ['Full company of tradition bearers', 'Core company', 'Small ensemble'], sourcing: `Work with the community that keeps this tradition. UNESCO listing: ${t.unesco || t.wikidata}`, green: [4, 'Local performers travel less.'] }));
+  return { acts, elements, ctx, concept: c, style, traditions: trad.slice(0, 2) };
 }
 /* ------------------------------------------------------------------ */
 /* Local symbols & traditions: reference/symbols.json                  */
@@ -2401,7 +2449,7 @@ Rules:
   if (!els.length) { toast('No elements came back. Try again.'); return; }
   mutate(p => {
     p.acts = c.acts.map(a => ({ id: uid(), ...a }));
-    p.elements = els.map(x => normEl(x, p));
+    p.elements = els.map(x => normEl(x, p)); p.designFor = c.id;
     p.production = null; p.sustainability = null;
   }, { log: `Show designed from concept “${c.title}”` });
   go('design');
@@ -3140,7 +3188,9 @@ function vDesign() {
   const ros = plan.acts.map(a => { const s = at; at += a.minutes; return `<div class="act" style="flex:${Math.max(1, a.minutes)}"><div class="render" style="margin-bottom:8px"><canvas data-render="act:${esc(a.name)}" width="1280" height="720" role="img" aria-label="Render of ${esc(a.name)}"></canvas></div><div class="tc">${timecode(s)}–${timecode(at)}</div><div class="an">${esc(a.name)}</div><div class="ad">${esc(a.description)}</div></div>`; }).join('');
   const groups = [...plan.acts.map(a => a.name), ...new Set(plan.elements.map(e => e.act).filter(n => !plan.acts.some(a => a.name === n)))];
   const meters = [['broadcast', 'Broadcast impact'], ['local', 'Local connection'], ['global', 'Global appeal']].map(([k, l]) => `<div class="meter"><div class="row"><span>${l}</span><span class="mono">${t.meters[k]}%</span></div><div class="t"><i style="width:${t.meters[k]}%"></i></div></div>`).join('');
+  const chosen = plan.concepts.find(c => c.id === plan.conceptId), staleDesign = chosen && plan.designFor !== chosen.id;
   return `${head('Show design', 'Pick a tier for each element, cut or lock it, or tell Claude what to change. Impact meters show how much of the show\'s full potential you are keeping.', `<button class="btn" data-act="edit-acts">Edit acts</button><button class="btn" data-act="add-el">Add element</button>`)}
+  ${staleDesign ? `<div class="banner warn" role="status"><span>This show design was not built from your chosen concept, <b>${esc(chosen.title)}</b>.</span><span style="display:flex;gap:8px;flex-wrap:wrap">${libBtn('lib-design', 'Rebuild from this concept')}${claudeBtn('design', 'Rebuild with Claude')}</span></div>` : ''}
   ${cmdBar()}
   <section class="panel"><div class="head2" style="margin-bottom:14px"><h2>Run of show · ${plan.acts.reduce((s, a) => s + a.minutes, 0)} min</h2><button class="btn sm" data-act="go" data-step="look">Open the minute-by-minute storyboard →</button></div><div class="ros">${ros || '<p class="muted">No acts yet. Use “Edit acts”.</p>'}</div>
     <div class="meters" style="margin-top:18px">${meters}<div class="meter"><div class="row"><span>Budget used</span><span class="mono">${t.cap ? Math.round(t.total / t.cap * 100) : 0}%</span></div><div class="t"><i style="width:${t.cap ? Math.min(100, t.total / t.cap * 100) : 0}%;background:${t.total > t.cap ? 'var(--bad)' : 'var(--ok)'}"></i></div></div></div>
@@ -3779,7 +3829,13 @@ const actions = {
       <div class="mf"><button class="btn" data-act="close">Cancel</button><button class="btn primary" data-act="save-artist">Add artist</button></div>`),
   'save-artist': () => { const g = id => $('#' + id)?.value || ''; if (!g('ar-name').trim()) { toast('Add a name first.'); return; } mutate(p => p.artists.push({ id: uid(), manual: true, name: g('ar-name').trim(), origin: g('ar-origin'), role: g('ar-role'), why: g('ar-why'), audience: '', feeBand: g('ar-fee'), act: '', risks: '' }), { log: 'Artist added' }); closeModal(); },
   'lib-design': () => {
-    const run = () => { mutate(p => { const d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS(); }, { log: 'Show design started from the built-in library' }); go('design'); const c = libraryContext(plan); toast(`${plan.elements.length} elements chosen for a ${c.light} ${c.venue} ${({ final: 'final or kickoff show', opening: 'opening ceremony', festival: 'festival', awards: 'awards show', launch: 'launch', celebration: 'celebration' })[c.kind]}, each specified in three tiers. Add vendor quotes to price them.`); };
+    let d = null;
+    const run = () => { mutate(p => { ensureLocal(p); d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.designFor = p.conceptId || null; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS();
+        if (d.concept && validLook(d.concept.look)) p.look = { ...(p.look || {}), palette: [...d.concept.look.palette], motif: d.concept.look.motif };
+        (d.traditions || []).forEach(t => { const k = 'tradition:' + t.wikidata; if (!(p.symbols ||= []).some(x => x.key === k)) p.symbols.push({ key: k, name: t.name, label: `${t.list}${t.year ? ', ' + t.year : ''}`, kind: 'tradition', url: t.unesco || t.wikidata, note: t.description || '' }); });
+      }, { log: d?.concept ? `Show design built from concept “${d.concept.title}”` : 'Show design started from the built-in library' });
+      go('design'); const c = libraryContext(plan);
+      toast(`${plan.elements.length} elements${d?.concept ? ` for “${d.concept.title}”, in its ${plan.acts.length} acts` : ''}, for a ${c.light} ${c.venue} ${({ final: 'final or kickoff show', opening: 'opening ceremony', festival: 'festival', awards: 'awards show', launch: 'launch', celebration: 'celebration' })[c.kind]}${d?.traditions?.length ? `, including ${d.traditions.map(t => t.name).join(' and ')} from UNESCO's lists` : ''}. Add vendor quotes to price them.`); };
     if (plan.elements.length) confirmBox('Replace the current show design with the built-in library?', 'Replace', run); else run();
   },
   'lib-research': () => {
@@ -3833,7 +3889,7 @@ const actions = {
   'lib-production': () => { if (!plan.elements.some(e => e.included)) { toast('Add show elements first.'); return; } mutate(p => { p.production = libraryProduction(p); }, { log: 'Standard production template applied' }); },
   'lib-green': () => { if (!plan.elements.some(e => e.included)) { toast('Add show elements first.'); return; } mutate(p => { p.sustainability = libraryGreen(p); }, { log: 'Quick sustainability check' }); },
   'confirm-yes': () => { const f = confirmFn; confirmFn = null; closeModal(); f?.(); },
-  choose: b => mutate(p => { p.conceptId = b.dataset.id; }, { log: 'Concept chosen' }),
+  choose: b => { mutate(p => { p.conceptId = b.dataset.id; }, { log: 'Concept chosen' }); toast(plan.elements.length ? 'Concept chosen. The show design is still the old one: use “Rebuild from library” here or the banner on Show design.' : 'Concept chosen. Build the show design from it.'); },
   tier: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e && !e.locked) e.tier = b.dataset.tier; }),
   toggle: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e && !e.locked) e.included = !e.included; }),
   lock: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e) e.locked = !e.locked; }),
