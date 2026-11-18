@@ -1054,6 +1054,31 @@ function libraryConcepts(p) {
       look: { palette: [pal[0], pal[2], pal[1], pal[4], pal[3]], motif: 'stripes' } }
   ];
 }
+// Build the show design from the chosen concept with the library, keeping what you entered:
+// quotes and lead times carry over to elements with the same name and spec, and locked elements stay.
+function applyLibraryDesign(p) {
+  ensureLocal(p);
+  const d = libraryDesign(p), old = p.elements || [];
+  d.elements.forEach(e => {
+    const o = old.find(x => x.name === e.name); if (!o) return;
+    TIERS.forEach(t => { if (o.tiers?.[t] && o.tiers[t].desc === e.tiers[t].desc) e.tiers[t] = o.tiers[t]; });
+    if (o.leadWeeks != null) e.leadWeeks = o.leadWeeks;
+    if (o.locked) { e.locked = true; e.tier = o.tier; e.included = o.included; }
+  });
+  old.filter(o => o.locked && !d.elements.some(e => e.name === o.name)).forEach(o => d.elements.push({ ...o, act: d.acts.some(a => a.name === o.act) ? o.act : d.acts[0].name }));
+  p.acts = d.acts; p.elements = d.elements; p.designFor = p.conceptId || null; p.production = null; p.sustainability = null;
+  if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS();
+  if (d.concept && validLook(d.concept.look)) p.look = { ...(p.look || {}), palette: [...d.concept.look.palette], motif: d.concept.look.motif };
+  (d.traditions || []).forEach(t => { const k = 'tradition:' + t.wikidata; if (!(p.symbols ||= []).some(x => x.key === k)) p.symbols.push({ key: k, name: t.name, label: `${t.list}${t.year ? ', ' + t.year : ''}`, kind: 'tradition', url: t.unesco || t.wikidata, note: t.description || '' }); });
+  return d;
+}
+// What a concept's render shows: the design it would get, so each card looks like its own show
+const conceptFxCache = new Map();
+function conceptFeatures(p, c) {
+  const key = JSON.stringify([c, p.brief.showLight, p.brief.venueType, p.brief.eventType, p.brief.showMinutes]);
+  if (!conceptFxCache.has(key)) { const d = libraryDesign({ ...p, conceptId: c.id }); conceptFxCache.set(key, featureSet(d.elements.filter(e => e.included))); }
+  return conceptFxCache.get(key);
+}
 function libraryArtists(p) {
   const band = r => /global/i.test(r) ? 'signature' : /choir|ensemble/i.test(r) ? 'lean' : 'standard';
   return lines(p.local?.artists).map(l => { const [name, origin, role, why] = l.split('|').map(x => (x || '').trim()); return name ? { id: uid(), name, origin: origin || '', role: role || 'Local hero', why: why || '', audience: '', feeBand: band(role || ''), act: '', risks: 'Availability and fee unconfirmed.', library: true } : null; }).filter(Boolean);
@@ -1098,10 +1123,69 @@ function libraryContext(p) {
   return { kind: eventKind(b), light: lightOf(b), venue };
 }
 // Which kind of show a concept is: one giant image, a hero's journey, or a people-and-music show.
-function conceptStyle(c) {
-  if (!c) return null; if (c.style) return c.style;
-  const t = `${c.title} ${c.logline} ${c.story}`.toLowerCase();
-  return /low-footprint|musicians|rhythm|sound of|carried by people/.test(t) ? 'sound' : /journey|young person|walks? out|streets|film follows|child/.test(t) ? 'journey' : 'image';
+// Only the built-in concepts carry a style. Any other concept (Claude-written or your own) is read from its own words instead.
+function conceptStyle(c) { return c?.style || null; }
+// Words in a concept that call for each library element. The design is matched against the concept's own text,
+// so every concept, built-in, Claude-written or your own, gets its own show design.
+const CONCEPT_CUES = {
+  'Headline performance': /headlin|superstar|\bstar\b|pop act|artist|\bduet|\bdiva|rapper|\bdj\b/i,
+  'Host and presenters': /\bhost|presenter|\bmc\b|announcer|narrat/i,
+  'Main stage & set': /\bstages?\b|\bset piece|scenic|platform|catwalk|runway|tower|structure/i,
+  'Roll-on pitch stage': /\bstages?\b|platform|catwalk|runway/i,
+  'Projection & screen content': /project|mapping|\bfilm|video|screens?\b|hologra/i,
+  'Screen and LED ribbon content': /screens?\b|\bled\b|ribbon|video/i,
+  'Field artwork': /artwork|fabric|canvas|unfurl|banner|tifo|textile|painted|\bmap\b|field image|giant image|carpet/i,
+  'Live music & original score': /music|score|orchestra|musician|choir|drum|rhythm|\bsongs?\b|\bband\b|guitar|percussion|anthem|\bsound\b/i,
+  'Community cast': /\bcast\b|volunteer|dancer|\bdanc|children|\bkids?\b|young|communit|school|\bclubs?\b|players|performers|people|neighbou?rhood/i,
+  'Teams and flags parade': /parade|\bflags?\b|delegation|procession/i,
+  'Crowd participation': /crowd|audience|\bfans?\b|wristband|phone|torch|sing-?along|stands\b/i,
+  'Card mosaic': /mosaic|\bcards?\b/i,
+  'Special effects': /pyro|firework|flames?\b|sparks?\b|confetti|explosi/i,
+  'Daylight effects': /smoke|streamer|confetti|flares?\b/i,
+  'Drone light show': /drone/i,
+  'Lighting show': /\blights?\b|lighting|beams?\b|laser|glow|spotlight|neon|blackout/i,
+  'Trophy moment': /trophy|\bcup\b/i,
+  'Signature reveal': /reveal|sculpture|inflatable|puppet|giant (?:object|figure|head|heart)|unveil|kinetic/i,
+  'Award moments': /award|winners?\b|honou?r/i,
+  'Product reveal': /product|launch/i,
+  'Public screens in the city': /fan ?zone|city square|public screen|across the city|in the streets|squares?\b/i,
+  'Broadcast specials': /camera|cablecam|crane|aerial|top-down|close-up|overhead|\bshot\b|\bar\b graphics/i,
+  'Costumes': /costume|dress|outfit|fashion|colour-blocked|patterned|wear/i
+};
+// Kept whatever the concept says (protocol, sound, broadcast); kept at the lean tier when the concept doesn't mention them; everything else is switched off.
+const CORE_ELS = ['Show audio', 'Host and presenters', 'Teams and flags parade', 'Trophy moment', 'Award moments', 'Product reveal', 'Broadcast specials'];
+const BASE_ELS = ['Headline performance', 'Main stage & set', 'Lighting show', 'Live music & original score', 'Community cast', 'Screen and LED ribbon content', 'Costumes'];
+const NEG_CUE = /\b(?:no|not|without|instead of|rather than|avoid|never|free of|cuts?|skip|nor)\b[^.;:]{0,40}$/i;
+function conceptLines(c) {
+  const out = [], push = (t, act, key) => String(t || '').split(/(?<=[.!?])\s+/).forEach(x => { x = x.trim(); if (x) out.push({ s: x, act, key }); });
+  push(c.title, null, true); push(c.broadcastMoment, null, true); push(c.logline); push(c.story);
+  (c.acts || []).forEach(a => push(`${a.name}. ${a.description || ''}`, a.name));
+  return out;
+}
+// The first place the concept mentions an element: its sentence, its act, whether it is the key image, or whether the concept rules it out.
+function conceptHit(lines, re) {
+  let neg = null;
+  for (const l of lines) {
+    const m = re.exec(l.s); if (!m) continue;
+    if (NEG_CUE.test(l.s.slice(0, m.index))) { neg ||= { ...l, neg: true }; continue; }
+    const act = l.act || lines.find(x => x.act && re.test(x.s))?.act || null;
+    return { ...l, act, key: l.key || lines.some(x => x.key && re.test(x.s) && !NEG_CUE.test(x.s.slice(0, re.exec(x.s).index))) };
+  }
+  return neg;
+}
+function keyImageEl(c, ctx) {
+  const t = `${c.broadcastMoment} ${c.title}`.toLowerCase(), night = ctx.light !== 'day';
+  const k = /drone/.test(t) ? 'drones' : /mosaic|\bcards?\b|crowd|stands|audience|phone|wristband|torch/.test(t) ? 'crowd' : /trophy|object|reveal|sculpture|puppet|inflatable|giant/.test(t) ? 'reveal'
+    : /project|screen|film|mapping|beam|laser|light/.test(t) ? 'projection' : /artwork|fabric|tifo|unfurl|map|field|pitch|carpet/.test(t) ? 'artwork' : /cast|dancer|people|young|children|players|walk/.test(t) ? 'cast' : night ? 'projection' : 'artwork';
+  const K = {
+    drones: ['Lighting', ['Large drone formation drawing the image, with animated sequences', 'Medium drone formation with static images', 'Small drone formation with one image'], 'Licensed drone show operator; aviation authority approval needed well ahead.', [4, 'Battery powered; charge on grid power.']],
+    crowd: ['Crowd participation', ['Full-bowl mosaic with two images', 'Full-bowl mosaic', 'Mosaic in one stand'], 'Local printer or wristband supplier, and a seat-by-seat placement crew.', [4, 'Recycled cards, collected after the show.']],
+    reveal: ['Stage & set', ['Kinetic reveal with automation and a light cue', 'Large inflatable or built piece with internal light', 'Carried in by performers with a follow spot'], 'Fabrication workshop or inflatable maker.', [3, 'Build it to be reused or given a second life.']],
+    projection: ['Projection', ['Full-field projection plus mapped stands', 'Full-field projection', 'Half-field projection with screen content'], 'Projection designer and laser or projector rental; content made locally.', [3, 'Rent projectors; reuse the content online.']],
+    artwork: ['Pitch art', ['Full-field fabric artwork plus card mosaic', 'Full-field fabric artwork', 'Half-field fabric artwork'], 'Print on recyclable fabric with a regional printer; unfurled by the cast.', [3, 'Print on recyclable fabric and give it a second life.']],
+    cast: ['Cast & community', ['Large cast forming the image, with a choreographer and rehearsal camp', 'Mid-size cast with a choreographer', 'Small cast from local clubs and schools'], 'Recruit through local clubs and schools.', [5, 'People, not hardware.']]
+  }[k];
+  return { name: `The shot: ${c.title}${k === 'reveal' ? ' (reveal)' : ''}`, act: 2, category: K[0], desc: `The concept's defining image. ${c.broadcastMoment}`.trim(), scores: [5, 4, 5], tiers: K[1], sourcing: K[2], green: K[3] };
 }
 function libraryDesign(p) {
   const m = +p.brief.showMinutes || 12, ctx = libraryContext(p), c = p.concepts.find(x => x.id === p.conceptId) || null, style = conceptStyle(c);
@@ -1122,14 +1206,27 @@ function libraryDesign(p) {
   const music = find('Live music & original score'); if (music && (L.music || L.sound)) music.description += ` Local sound: ${L.music || L.sound}.`;
   const castEl = find('Community cast'); if (castEl && (L.dance || L.community)) castEl.description += `${L.dance ? ` Dance: ${L.dance}.` : ''}${L.community ? ` Recruit from ${L.community}.` : ''}`;
   const sym1 = parseTitled(L.symbols)[0], places = splitList(L.places);
-  // The concept's signature pieces
+  // The concept's own words decide what is in the show, where it sits and how big it is
   const add = (x, i = elements.length) => { if (!find(x.name)) elements.splice(i, 0, mk(x)); };
-  if (c && style === 'image') {
-    const night = ctx.light !== 'day';
-    add({ name: `Hero image: ${c.style && sym1?.title ? sym1.title : c.title}`, act: 2, category: night ? 'Projection' : 'Pitch art', desc: `The concept's one giant image. ${c.broadcastMoment || ''}`.trim(), scores: [5, 4, 5],
-      tiers: night ? ['Full-field projection plus mapped stands', 'Full-field projection', 'Half-field projection with screen content'] : ['Full-field fabric artwork plus card mosaic', 'Full-field fabric artwork', 'Half-field fabric artwork'],
-      sourcing: night ? 'Projection designer and laser or projector rental; content made locally.' : 'Print on recyclable fabric with a regional printer; unfurled by the cast.', green: [3, night ? 'Rent projectors; reuse the content online.' : 'Print on recyclable fabric and give it a second life.'] }, 0);
-    const fa = find('Field artwork'); if (fa) fa.tier = 'signature';
+  if (c) {
+    const lines = conceptLines(c), q = s => `“${s.length > 160 ? s.slice(0, 157).replace(/\s+\S*$/, '') + '…' : s}”`;
+    elements.forEach(e => {
+      const re = CONCEPT_CUES[e.name], h = re && conceptHit(lines, re);
+      if (h?.neg) { e.included = false; e.tier = 'lean'; e.description += ` Left out: the concept says ${q(h.s)}`; return; }
+      if (h) { e.tier = h.key ? 'signature' : 'standard'; if (h.act && acts.some(a => a.name === h.act)) e.act = h.act; e.description += ` In this concept: ${q(h.s)}`; return; }
+      if (CORE_ELS.includes(e.name)) return;
+      e.tier = 'lean';
+      if (!BASE_ELS.includes(e.name)) { e.included = false; e.description += ' Not part of this concept. Switch it on if you want it.'; }
+    });
+    // One element per concept: its defining image, the shot the world shares
+    if (c.broadcastMoment) {
+      const k = keyImageEl(c, ctx); add(k, 0); const ke = find(k.name); ke.tier = 'signature';
+      // It sits in the act whose description shares most words with the shot; otherwise in the peak act
+      const words = new Set((c.broadcastMoment.toLowerCase().match(/[a-zà-ÿ]{5,}/g) || []));
+      const score = a => (`${a.name} ${a.description}`.toLowerCase().match(/[a-zà-ÿ]{5,}/g) || []).filter(w => words.has(w)).length;
+      const best = acts.reduce((m, a) => score(a) > score(m) ? a : m, acts[Math.max(0, acts.length - 2)]);
+      ke.act = best.name;
+    }
   }
   if (c && style === 'journey') {
     add({ name: 'Hero film', act: 0, category: 'Broadcast', desc: `A short film following one young person through ${places.slice(0, 3).join(', ') || city} on the day, played on the venue screens and the broadcast feed.`, scores: [5, 5, 4],
@@ -1139,6 +1236,7 @@ function libraryDesign(p) {
     add({ name: 'The last object to the centre', act: 3, category: 'Stage & set', desc: 'The young person carries the final object (ball, flag or trophy) to the centre spot. The defining close-up, then a crane shot reveals the whole cast.', scores: [5, 4, 5],
       tiers: ['Object rises on a plinth as it arrives, with a light cue', 'Carried along a cast corridor with a light cue', 'Carried in with a follow spot'], sourcing: 'Stage manager and the rights holder\'s protocol team.', green: [5, 'No build needed.'] });
     drop('Signature reveal');
+    ['Hero film', 'The walk-out', 'The last object to the centre'].forEach(n => { const e = find(n); if (e) e.description += ' Part of this concept.'; });
   }
   if (c && style === 'sound') {
     add({ name: 'Musicians in the stands', act: 0, category: 'Music', desc: `The show opens with ${L.sound || short(L.music) || 'local musicians'} playing from among the crowd, not from a stage.`, scores: [4, 5, 3],
@@ -1146,7 +1244,7 @@ function libraryDesign(p) {
     add({ name: `Mass dance${L.danceShort || L.dance ? ': ' + (L.danceShort || short(L.dance)) : ''}`, act: 1, category: 'Cast & community', desc: `${L.danceShort || L.dance ? cap(L.danceShort || short(L.dance)) : 'A local dance'} reworked for a mass cast in patterned costumes.`, scores: [4, 5, 4],
       tiers: ['Large cast with a choreographer and costume makers', 'Mid-size cast with a choreographer', 'Small cast from local dance schools'], sourcing: 'Local dance schools and cultural associations.', green: [5, 'People, not hardware.'] }, 1);
     // A low-footprint show: hardware effects drop to their lightest tier, pyro is cut
-    elements.forEach(e => { if (e.category === 'Special effects' || e.name === 'Lighting show') e.tier = 'lean'; if (e.name === 'Special effects') e.included = false; });
+    elements.forEach(e => { if (e.category === 'Special effects' || e.name === 'Lighting show') e.tier = 'lean'; if (e.name === 'Special effects' && e.included) { e.included = false; e.description += ' Left out: this is a low-footprint concept.'; } });
   }
   // The host's own living traditions (UNESCO lists) as cast ideas, unpriced
   // Only traditions a show can stage (dance, music, festivals, processions, theatre); crafts and food stay in the symbols panel.
@@ -1795,7 +1893,8 @@ function validLook(l) { return l && Array.isArray(l.palette) && l.palette.length
 function lookOf(p, concept) {
   const l = concept ? concept.look : p.look;
   if (validLook(l)) return { ...l, motif: MOTIFS.includes(l.motif) ? l.motif : 'lozenge' };
-  if (concept && validLook(p.look) && concept.id === p.conceptId) return lookOf(p);
+  if (concept && validLook(p.look)) return lookOf(p); // a concept without its own colours shows the plan's look
+  if (Array.isArray(p.local?.colors) && p.local.colors.length === 5 && validLook({ palette: p.local.colors })) return { palette: p.local.colors, motif: MOTIFS.includes(p.local.motif) ? p.local.motif : 'lozenge' };
   const h = hash(concept ? concept.id : p.id);
   return { palette: PALETTES[h % PALETTES.length].colors, motif: MOTIFS[h % MOTIFS.length] };
 }
@@ -3137,7 +3236,7 @@ function vConcept() {
       </div>
     </article>`;
   }).join('');
-  return `${head('Concept', 'Choose a direction. Building the show design turns it into elements, each specified in three tiers for vendors to quote.', libBtn('lib-concepts', 'New concepts') + claudeBtn('concepts', 'Write with Claude') + '<button class="btn" data-act="new-concept">Write your own</button>')}
+  return `${head('Concept', 'Choose a direction. Choosing one rebuilds the show design from it: its acts, the elements it mentions and its key image, each specified in three tiers for vendors to quote. Undo brings back the previous design.', libBtn('lib-concepts', 'New concepts') + claudeBtn('concepts', 'Write with Claude') + '<button class="btn" data-act="new-concept">Write your own</button>')}
     <div class="grid g3">${cards}</div>`;
 }
 
@@ -3291,7 +3390,7 @@ function paintCanvases() {
     try {
       if (k === 'main') drawShow(cv, plan, { act: renderFrame === 'final' ? null : renderFrame });
       else if (k.startsWith('act:')) drawShow(cv, plan, { act: k.slice(4) });
-      else if (k.startsWith('concept:')) { const c = plan.concepts.find(x => x.id === k.slice(8)); if (c) drawShow(cv, plan, { look: lookOf(plan, c), features: c.id === plan.conceptId && plan.elements.length ? null : DEFAULT_FEATURES, act: 'concept' + c.id }); }
+      else if (k.startsWith('concept:')) { const c = plan.concepts.find(x => x.id === k.slice(8)); if (c) drawShow(cv, plan, { look: lookOf(plan, c), features: c.id === plan.designFor && plan.elements.length ? null : conceptFeatures(plan, c), act: 'concept' + c.id }); }
       else if (k.startsWith('sb:')) { const t = +k.slice(3); drawShow(cv, plan, { features: storyFeatures(plan, t + (plan.sbStep || 1) * .8), cam: sbCam, act: 'sb' + t }); }
       else if (k.startsWith('el:')) { const e = plan.elements.find(x => x.id === k.slice(3)); if (e) drawShow(cv, plan, { features: elFeatures(e), act: 'el' + e.id }); }
     } catch (err) { /* a failed render leaves the dark frame */ }
@@ -3835,10 +3934,7 @@ const actions = {
   'save-artist': () => { const g = id => $('#' + id)?.value || ''; if (!g('ar-name').trim()) { toast('Add a name first.'); return; } mutate(p => p.artists.push({ id: uid(), manual: true, name: g('ar-name').trim(), origin: g('ar-origin'), role: g('ar-role'), why: g('ar-why'), audience: '', feeBand: g('ar-fee'), act: '', risks: '' }), { log: 'Artist added' }); closeModal(); },
   'lib-design': () => {
     let d = null;
-    const run = () => { mutate(p => { ensureLocal(p); d = libraryDesign(p); p.acts = d.acts; p.elements = d.elements; p.designFor = p.conceptId || null; p.production = null; p.sustainability = null; if (!p.overheads.length) p.overheads = DEFAULT_OVERHEADS();
-        if (d.concept && validLook(d.concept.look)) p.look = { ...(p.look || {}), palette: [...d.concept.look.palette], motif: d.concept.look.motif };
-        (d.traditions || []).forEach(t => { const k = 'tradition:' + t.wikidata; if (!(p.symbols ||= []).some(x => x.key === k)) p.symbols.push({ key: k, name: t.name, label: `${t.list}${t.year ? ', ' + t.year : ''}`, kind: 'tradition', url: t.unesco || t.wikidata, note: t.description || '' }); });
-      }, { log: d?.concept ? `Show design built from concept “${d.concept.title}”` : 'Show design started from the built-in library' });
+    const run = () => { mutate(p => { d = applyLibraryDesign(p); }, { log: d?.concept ? `Show design built from concept “${d.concept.title}”` : 'Show design started from the built-in library' });
       go('design'); const c = libraryContext(plan);
       toast(`${plan.elements.length} elements${d?.concept ? ` for “${d.concept.title}”, in its ${plan.acts.length} acts` : ''}, for a ${c.light} ${c.venue} ${({ final: 'final or kickoff show', opening: 'opening ceremony', festival: 'festival', awards: 'awards show', launch: 'launch', celebration: 'celebration' })[c.kind]}${d?.traditions?.length ? `, including ${d.traditions.map(t => t.name).join(' and ')} from UNESCO's lists` : ''}. Add vendor quotes to price them.`); };
     if (plan.elements.length) confirmBox('Replace the current show design with the built-in library?', 'Replace', run); else run();
@@ -3894,7 +3990,12 @@ const actions = {
   'lib-production': () => { if (!plan.elements.some(e => e.included)) { toast('Add show elements first.'); return; } mutate(p => { p.production = libraryProduction(p); }, { log: 'Standard production template applied' }); },
   'lib-green': () => { if (!plan.elements.some(e => e.included)) { toast('Add show elements first.'); return; } mutate(p => { p.sustainability = libraryGreen(p); }, { log: 'Quick sustainability check' }); },
   'confirm-yes': () => { const f = confirmFn; confirmFn = null; closeModal(); f?.(); },
-  choose: b => { mutate(p => { p.conceptId = b.dataset.id; }, { log: 'Concept chosen' }); toast(plan.elements.length ? 'Concept chosen. The show design is still the old one: use “Rebuild from library” here or the banner on Show design.' : 'Concept chosen. Build the show design from it.'); },
+  choose: b => {
+    let d = null; const had = plan.elements.length;
+    mutate(p => { p.conceptId = b.dataset.id; d = applyLibraryDesign(p); }, { log: 'Concept chosen and show design rebuilt' });
+    const off = plan.elements.filter(e => !e.included).length;
+    toast(`Show design rebuilt for “${d.concept?.title}”: ${plan.elements.length - off} elements in its ${plan.acts.length} acts${off ? `, ${off} switched off as not part of it` : ''}.${had ? ' Undo brings back the previous design.' : ''}${claudeState === 'ready' ? ' “Rebuild with Claude” writes an original version.' : ''}`);
+  },
   tier: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e && !e.locked) e.tier = b.dataset.tier; }),
   toggle: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e && !e.locked) e.included = !e.included; }),
   lock: b => mutate(p => { const e = p.elements.find(x => x.id === b.dataset.id); if (e) e.locked = !e.locked; }),
